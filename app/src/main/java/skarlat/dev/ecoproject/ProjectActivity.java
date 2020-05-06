@@ -21,7 +21,7 @@ public class ProjectActivity extends AppCompatActivity {
 		this.savedInstanceState = savedInstanceState;
 	}
 	
-	protected void openCard(View view){
+	public void openCard(View view){
 		Intent intent = new Intent(ProjectActivity.this, EcoCardActivity.class);
 		startActivity(intent, savedInstanceState);
 	}
