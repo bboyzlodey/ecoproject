@@ -6,15 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toolbar;
+
+import com.jackandphantom.customtogglebutton.CustomToggle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +34,19 @@ public class EcoCardActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_eco_cards);
+		TextView textView = new TextView(this);
+		textView.setText("Hello");
+//		;
+		TextDrawable textDrawable = new TextDrawable(getApplicationContext());
+		textDrawable.setText("Как?");
+		textDrawable.setTextAlign(Layout.Alignment.ALIGN_CENTER);
+		
+		CustomToggle customToggle = (CustomToggle) findViewById(R.id.custom);
+//		Drawable drawable = new BitmapDrawable(textView.getDrawingCache());
+		customToggle.addFirstIcon(textDrawable);
+		customToggle.addSecondIcon(textDrawable);
 		
 		initiList();
-		
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //		setSupportActionBar(myToolbar);
 		setActionBar(myToolbar);
@@ -43,7 +58,10 @@ public class EcoCardActivity extends AppCompatActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
 		actionBar.setTitle("Экономим водные ресурсы");
-		recyclerView= (RecyclerView) findViewById(R.id.recycle_soviets);
+		
+		
+		
+		recyclerView = (RecyclerView) findViewById(R.id.recycle_soviets);
 		DataAdapter dataAdapter = new DataAdapter(EcoCardActivity.this, ecoSoviets);
 		recyclerView.setAdapter(dataAdapter);
 		

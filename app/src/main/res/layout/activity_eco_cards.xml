@@ -26,6 +26,14 @@
 		android:layout_weight="1"
 		/>
 
+	<com.jackandphantom.customtogglebutton.CustomToggle
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:id="@+id/custom"
+		app:ctg_addAnimationType="jack_animation"
+		app:ctg_addSlideBackgroundColor="#6c817a"
+		app:ctg_addSlideColor="#ff67" />
+
 	<Switch
 		android:id="@+id/switch1"
 		android:layout_width="match_parent"
