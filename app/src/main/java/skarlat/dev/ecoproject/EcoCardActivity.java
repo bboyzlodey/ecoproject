@@ -34,17 +34,7 @@ public class EcoCardActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_eco_cards);
-		TextView textView = new TextView(this);
-		textView.setText("Hello");
-//		;
-		TextDrawable textDrawable = new TextDrawable(getApplicationContext());
-		textDrawable.setText("Как?");
-		textDrawable.setTextAlign(Layout.Alignment.ALIGN_CENTER);
 		
-		CustomToggle customToggle = (CustomToggle) findViewById(R.id.custom);
-//		Drawable drawable = new BitmapDrawable(textView.getDrawingCache());
-		customToggle.addFirstIcon(textDrawable);
-		customToggle.addSecondIcon(textDrawable);
 		
 		initiList();
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);

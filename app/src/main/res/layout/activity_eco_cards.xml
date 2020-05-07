@@ -26,26 +26,30 @@
 		android:layout_weight="1"
 		/>
 
-	<com.jackandphantom.customtogglebutton.CustomToggle
-		android:layout_width="30dp"
-		android:layout_height="30dp"
-		android:id="@+id/custom"
-		app:ctg_addAnimationType="jack_animation"
-		app:ctg_addSlideBackgroundColor="#6c817a"
-		app:ctg_addSlideColor="#ff67" />
+	<androidx.appcompat.widget.SwitchCompat
+		android:id="@+id/switch_compat"
+		android:layout_width="wrap_content"
+		android:layout_height="70dp"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="50dp"
+		android:checked="false"
+		android:text="SwitchCompat"
+		android:textOff="OFF"
+		android:textOn="ON"
+		app:showText="true"/>
 
 	<Switch
 		android:id="@+id/switch1"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/switch_compat"
 		android:layout_centerHorizontal="true"
-		android:layout_marginLeft="16dp"
-		android:layout_marginRight="16dp"
+		android:layout_marginTop="55dp"
 		android:checked="false"
-		android:textOff="Как?"
-		android:textOn="Зачеем?"
-		android:layout_weight="0"/>
+		android:text="Switch"
+		android:textOff="Кошка"
+		android:textOn="Кот"/>
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:layout_width="match_parent"
