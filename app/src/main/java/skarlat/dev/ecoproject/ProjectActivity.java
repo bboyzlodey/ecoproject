@@ -53,14 +53,14 @@ public class ProjectActivity extends AppCompatActivity {
 	public void onBackPressed() {
 		saveStatusBar();
 	}
-
+	
+	public void openCard(View view){
+		Intent intent = new Intent(ProjectActivity.this, EcoCardActivity.class);
+		startActivity(intent, savedInstanceState);
 	public void saveStatusBar(){
 		Intent intent = new Intent();
 		intent.putExtra("progressBar", progress);
 		setResult(RESULT_OK, intent);
 		finish();
 	}
-
-
 }
-
