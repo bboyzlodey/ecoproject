@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".ProjectActivity"
+	android:orientation="vertical"
+	>
+
+	<TextView
+		android:id="@+id/test_text_view"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:textColor="#000000"
+		android:text="Курс 1"
+		android:textSize="24sp"
+		/>
+	<ProgressBar
+		android:id="@+id/pb_horizontal"
+		style="@android:style/Widget.ProgressBar.Horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:max="100" />
+	<TextView
+		android:id="@+id/tv_progress_horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@id/pb_horizontal"
+		android:background="@android:color/transparent"
+		android:gravity="center" />
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textSize="48sp"
+		android:text="progress"
+		android:onClick="onClick"/>
+
+</LinearLayout>
