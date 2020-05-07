@@ -9,16 +9,17 @@
 	android:layout_marginBottom="16dp"
 	android:padding="16dp"
 	android:orientation="vertical"
-	android:background="#D2D2D2">
+	android:background="@drawable/text_view_rounded"
+	>
+
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		tools:text="Header"
-		android:capitalize="sentences"
+		tools:textAllCaps="true"
 		android:id="@+id/header_card"
-		android:textColor="@color/colorBlack"
-		android:textStyle="bold"
-		android:textSize="20sp"/>
+		style="@style/nameOfSoviet"/>
+
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
