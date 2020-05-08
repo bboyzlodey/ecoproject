@@ -95,4 +95,5 @@ public class EcoCardActivity extends AppCompatActivity {
 				"Поставить на кран водо-сберегающую насадку-аэратор. " +
 						"Она стоит от 100 рублей в магазинах сантехники.", false));
 	}
+
 }

@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.includes;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
  * каждая переменная - поле в таблице
  */
 @Entity
-public class CursCard {
+public class СoursesDB {
     @PrimaryKey
     @NonNull
     public String cursID;
@@ -20,3 +20,4 @@ public class CursCard {
 
     public String checkList;
 }
+

@@ -1,12 +1,14 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.includes;
 
 import android.util.ArrayMap;
+
+import androidx.room.Query;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @Class - помошник в обработке данных для добавления\взятия данных
@@ -14,12 +16,13 @@ import java.util.Iterator;
 public class DatabaseHelper {
 
     private AppDatabase db = App.getInstance().getDatabase();
-    private CursCardDao cursCardDao = db.cursCardDao();
+    private CoursesDao coursesDao = db.cursCardDao();
+    private CardsDao cardsDao = db.cardsDao();
 
     /**
      * Список добавленных курсов
      */
-    DatabaseHelper(){
+    public DatabaseHelper(){
         init("firstStep");
     }
 
@@ -29,8 +32,28 @@ public class DatabaseHelper {
      * @return int 0-100%
      */
     public int getCursProgressBar(String cursName) {
-        CursCard curs = cursCardDao.getByCursID(cursName);
+        СoursesDB curs = coursesDao.getByCursID(cursName);
         return curs.progressBar;
+    }
+
+    public int getCountActiveCards(String cursName){
+        List<CardsDB> cardsDB = cardsDao.getAllActive(cursName);
+        return cardsDB.size();
+    }
+
+
+    public List getAllCards(String cursName){
+        List<CardsDB> cards = cardsDao.getAllByCurs(cursName);
+
+        return cards;
+    }
+
+    public boolean isActive(String cardName){
+        CardsDB card = cardsDao.getByCardID(cardName);
+        if (card.isActive == 0)
+            return false;
+        else
+            return true;
     }
 
     /**
@@ -39,10 +62,18 @@ public class DatabaseHelper {
      * @param progressBar - данные для обновления
      * @param checkList - данные для обновления
      */
-    public void upDateCurs(String cursName, int progressBar, String checkList){
-        CursCard curs = cursCardDao.getByCursID(cursName);
+    public void upDateCourse(String cursName, int progressBar, String checkList){
+        СoursesDB curs = coursesDao.getByCursID(cursName);
         curs.progressBar = progressBar;
-        cursCardDao.update(curs);
+        coursesDao.update(curs);
+    }
+
+    public void upDateCard(String cardName, boolean isActive){
+        CardsDB cardsDB = cardsDao.getByCardID(cardName);
+        if (isActive == false)
+            cardsDB.isActive = 0;
+        else
+            cardsDB.isActive = 1;
     }
 
     /**
@@ -51,15 +82,15 @@ public class DatabaseHelper {
      */
     public void init(String cursName){
 
-        CursCard curs = cursCardDao.getByCursID(cursName);
+        СoursesDB curs = coursesDao.getByCursID(cursName);
 
         if (curs == null){
-            CursCard initCurs = new CursCard();
+            СoursesDB initCurs = new СoursesDB();
             initCurs.id = 1;
             initCurs.cursID = cursName;
             initCurs.progressBar = 0;
             initCurs.checkList = null;
-            cursCardDao.insert(initCurs);
+            coursesDao.insert(initCurs);
         } else
             curs = null;
 
