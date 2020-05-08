@@ -8,24 +8,28 @@ package skarlat.dev.ecoproject;
 *
  */
 public class AbstractEco implements EcoInterface{
-	private final String name;
+	private final String title;
 	private final String desription;
 	boolean status;
 	
-	public AbstractEco(String name, String desription, boolean status){
-		this.name = name;
+	public AbstractEco(String title, String desription, boolean status){
+		this.title = title;
 		this.desription = desription;
 		this.status = status;
 	}
-	
+
+//	public AbstractEco(String title, String desription){
+//
+//	}
+
 	@Override
 	public boolean getStatus() {
 		return status;
 	}
-	
+
 	@Override
 	public String getName() {
-		return name;
+		return title;
 	}
 	
 	@Override
