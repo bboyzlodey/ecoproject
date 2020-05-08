@@ -54,9 +54,10 @@ public class ProjectActivity extends AppCompatActivity {
 		saveStatusBar();
 	}
 	
-	public void openCard(View view){
+	public void openCard(View view) {
 		Intent intent = new Intent(ProjectActivity.this, EcoCardActivity.class);
-		startActivity(intent, savedInstanceState);
+		startActivity(intent);
+	}
 	public void saveStatusBar(){
 		Intent intent = new Intent();
 		intent.putExtra("progressBar", progress);

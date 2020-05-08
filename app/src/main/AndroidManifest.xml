@@ -10,14 +10,14 @@
 		android:supportsRtl="true"
 		android:largeHeap="true"
 		android:theme="@style/AppTheme">
+
 		<activity android:name=".EcoCardActivity"
 			android:parentActivityName=".ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".ProjectActivity" />
 		</activity>
-		<activity android:name=".ProjectActivity"
-			android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
+		<activity android:name=".ProjectActivity" />
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

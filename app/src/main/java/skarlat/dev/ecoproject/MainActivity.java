@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
 		count = findViewById(R.id.countBtn);
 
-		db = new DatabaseHelper();
-
-		int val = db.getCursProgressBar("firstStep");
-
-		count.setText(String.valueOf(val));
+//		db = new DatabaseHelper();
+//
+//		int val = db.getCursProgressBar("firstStep");
+//
+//		count.setText(String.valueOf(val));
 
 	}
 
