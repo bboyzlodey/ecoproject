@@ -5,6 +5,7 @@
 	android:layout_width="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_height="match_parent">
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -17,7 +18,7 @@
 		android:layout_height="wrap_content"
 		android:textColor="@color/colorBlack"
 		android:text="Текущий курс"
-		android:textSize="20sp"
+		android:textSize="24sp"
 		android:layout_marginTop="27dp"
 		android:layout_marginBottom="17dp"
 		android:layout_weight="0"/>
@@ -28,7 +29,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="126dp"
 		app:cardCornerRadius="8dp"
-		android:background="@color/colorGray"
+
 		android:onClick="openCourse"
 		tools:tag="firstStep"
 		android:layout_weight="0">
@@ -36,6 +37,7 @@
 		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:background="@color/colorGray"
 			android:id="@+id/relative"
 			>
 
@@ -45,7 +47,7 @@
 				android:layout_above="@id/current_small_description"
 				android:textColor="@color/colorWhite"
 				android:textSize="16sp"
-				tools:text="Первые шаги"
+				android:text="Первые шаги"
 				tools:textColor="@color/colorBlack"
 				android:layout_marginLeft="16dp"
 				android:layout_marginBottom="2dp"
@@ -57,7 +59,7 @@
 				android:textColor="@color/colorWhite"
 				android:textSize="12sp"
 				android:id="@+id/current_small_description"
-				tools:text="Изи"
+				android:text="Изи"
 				tools:tag="firstStep"
 				android:paddingLeft="16dp"
 				android:layout_gravity="bottom"
@@ -69,11 +71,18 @@
 		</RelativeLayout>
 	</androidx.cardview.widget.CardView>
 
+		<skarlat.dev.ecoproject.customView.ProgressBarView
+			android:id="@+id/pb_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="7dp"
+			android:background="@drawable/progress_bar2"
+			android:layout_marginTop="8dp" />
+
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:textColor="@color/colorBlack"
-		android:text="Доступные курсы"
+		android:text="Осталось"
 		android:textSize="12sp"
 		android:layout_marginTop="8dp"
 		android:layout_weight="0"/>
@@ -93,8 +102,6 @@
 		android:id="@+id/recycle_courses"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_marginLeft="16dp"
-		android:layout_marginRight="16dp"
 		android:layout_weight="1"
 		app:layoutManager="LinearLayoutManager"
 		tools:visibility="visible"/>

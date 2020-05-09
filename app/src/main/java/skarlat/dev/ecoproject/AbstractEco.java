@@ -18,17 +18,13 @@ public class AbstractEco implements EcoInterface{
 		this.status = status;
 	}
 
-//	public AbstractEco(String title, String desription){
-//
-//	}
-
 	@Override
 	public boolean getStatus() {
 		return status;
 	}
 
 	@Override
-	public String getName() {
+	public String getTitle() {
 		return title;
 	}
 	

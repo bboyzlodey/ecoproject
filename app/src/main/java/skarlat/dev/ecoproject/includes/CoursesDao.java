@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.includes;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
 /**
  * Подключение к базе данных
  *
@@ -16,24 +17,24 @@ import java.util.List;
  *          Update - обновление данных существующей таблицы
  */
 @Dao
-public interface CursCardDao {
+public interface CoursesDao {
 
-    @Query("SELECT * FROM CursCard")
-    List<CursCard> getAll();
+    @Query("SELECT * FROM СoursesDB")
+    List<СoursesDB> getAll();
 
-    @Query("SELECT * FROM CursCard WHERE id = :id")
-    CursCard getById(long id);
+    @Query("SELECT * FROM СoursesDB WHERE id = :id")
+    СoursesDB getById(long id);
 
-    @Query("SELECT * FROM CursCard WHERE cursID = :cursID")
-    CursCard getByCursID(String cursID);
+    @Query("SELECT * FROM СoursesDB WHERE cursID = :cursID")
+    СoursesDB getByCursID(String cursID);
 
     @Insert
-    void insert(CursCard cursCard);
+    void insert(СoursesDB сoursesDB);
 
     @Update
-    void update(CursCard cursCard);
+    void update(СoursesDB сoursesDB);
 
     @Delete
-    void delete(CursCard cursCard);
+    void delete(СoursesDB сoursesDB);
 
 }

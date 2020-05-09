@@ -87,8 +87,13 @@ public class EcoCardActivity extends AppCompatActivity {
 		actionBar.setTitle("Экономим водные ресурсы");
 		
 		
-		recyclerView = (RecyclerView) findViewById(R.id.recycle_soviets);
+		
 		scrollView = (ScrollView) findViewById(R.id.scroll_description);
+		/**
+		 *
+		 *      Добавляем лист объектов в recycleView;
+		 */
+		recyclerView = (RecyclerView) findViewById(R.id.recycle_soviets);
 		DataAdapter dataAdapter = new DataAdapter(EcoCardActivity.this, ecoSoviets);
 		recyclerView.setAdapter(dataAdapter);
 
@@ -121,4 +126,5 @@ public class EcoCardActivity extends AppCompatActivity {
 			recyclerView.setVisibility(View.VISIBLE);
 		}
 	}
+
 }

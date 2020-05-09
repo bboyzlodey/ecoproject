@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	>
+
+	<androidx.cardview.widget.CardView
+		android:layout_marginBottom="8dp"
+		android:id="@+id/current_course"
+		android:layout_width="match_parent"
+		android:layout_height="126dp"
+		app:cardCornerRadius="8dp"
+		android:onClick="openCourse"
+		tools:tag="firstStep"
+		android:layout_weight="0">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/relative"
+			android:background="@color/colorGray"
+			>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_above="@id/current_small_description"
+				android:id="@+id/current_title"
+				android:textColor="@color/colorWhite"
+				android:textSize="16sp"
+				tools:text="Первые шаги"
+				tools:textColor="@color/colorBlack"
+				android:layout_marginLeft="16dp"
+				android:layout_marginBottom="2dp"
+				/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorWhite"
+				android:textSize="12sp"
+				android:id="@+id/current_small_description"
+				tools:text="Изи"
+				tools:tag="firstStep"
+				android:paddingLeft="16dp"
+				android:layout_gravity="bottom"
+				android:layout_marginBottom="12dp"
+				android:layout_alignParentBottom="true"
+				tools:textColor="@color/colorBlack"
+				/>
+
+		</RelativeLayout>
+	</androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -10,14 +11,16 @@ import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class HomeActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class HomeActivity extends AppCompatActivity {
+	private List<Course> courses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        
-        tabView();
+        tabView(); // Иницилизация TabView
     }
     
     protected void tabView(){
@@ -29,8 +32,7 @@ public class HomeActivity extends AppCompatActivity {
 	    // Передаём ViewPager в TabLayout
 	    TabLayout tabLayout = findViewById(R.id.sliding_tabs);
 	    tabLayout.setupWithViewPager(viewPager);
-	
-//	    CardView cardView = (CardView) findViewById(R.id.cardView);
+	    
     }
 	
 	/**

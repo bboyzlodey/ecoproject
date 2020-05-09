@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import skarlat.dev.ecoproject.includes.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
 	private TextView count;
@@ -18,20 +20,15 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		count = findViewById(R.id.countBtn);
 
-//		db = new DatabaseHelper();
-//
-//		int val = db.getCursProgressBar("firstStep");
-//
-//		count.setText(String.valueOf(val));
+		db = new DatabaseHelper();
 
 	}
 
 	public void next(View view) {
-		Intent intent = new Intent(this, ProjectActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 
-		intent.putExtra("progressBar", 0);
+//		intent.putExtra("progressBar", 0);
 
 		startActivityForResult(intent, PROGRESS_BAR); // или так можно
 	}
@@ -42,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
 		if (requestCode == PROGRESS_BAR){
 			if (resultCode == RESULT_OK){
-				int countBar = data.getIntExtra("progressBar", 0);
-				count.setText(String.valueOf(countBar));
+//				int countBar = data.getIntExtra("progressBar", 0);
+//				count.setText(String.valueOf(countBar));
 
-				db.upDateCurs("firstStep", countBar, null);
+//				db.upDateCourse("firstStep", countBar);
 			}
 		}
 	}
