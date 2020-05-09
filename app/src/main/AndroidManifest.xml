@@ -9,16 +9,16 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:largeHeap="true"
-		android:theme="@style/AppTheme">
-		<activity android:name=".HomeActivity"/>
+		android:theme="@style/AppTheme"
+		android:name=".includes.App">
 		<activity android:name=".EcoCardActivity"
 			android:parentActivityName=".ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".ProjectActivity" />
 		</activity>
-		<activity android:name=".ProjectActivity"
-			android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
+		<activity android:name=".ProjectActivity" />
+		<activity android:name=".CourseCardActivity" />
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
