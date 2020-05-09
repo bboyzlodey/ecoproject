@@ -60,9 +60,8 @@ public class DatabaseHelper {
      * Обновление данных курса
      * @param cursName - имя нужного курса
      * @param progressBar - данные для обновления
-     * @param checkList - данные для обновления
      */
-    public void upDateCourse(String cursName, int progressBar, String checkList){
+    public void upDateCourse(String cursName, int progressBar){
         СoursesDB curs = coursesDao.getByCursID(cursName);
         curs.progressBar = progressBar;
         coursesDao.update(curs);

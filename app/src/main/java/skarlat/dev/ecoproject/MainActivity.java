@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
 		if (requestCode == PROGRESS_BAR){
 			if (resultCode == RESULT_OK){
-				int countBar = data.getIntExtra("progressBar", 0);
-				count.setText(String.valueOf(countBar));
+//				int countBar = data.getIntExtra("progressBar", 0);
+//				count.setText(String.valueOf(countBar));
 
-				db.upDateCourse("firstStep", countBar, null);
+//				db.upDateCourse("firstStep", countBar);
 			}
 		}
 	}

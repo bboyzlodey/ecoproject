@@ -1,29 +1,38 @@
 package skarlat.dev.ecoproject;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import skarlat.dev.ecoproject.customView.ProgressBarView;
+import skarlat.dev.ecoproject.includes.DatabaseHelper;
+
 public class CourseCardActivity extends AppCompatActivity {
-    private int progress = 0;
-    private ProgressBar pbHorizontal;
-    private TextView tvProgressHorizontal;
-    Course course;
+    private ProgressBarView progressBarView;
+    private int progress;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_card);
 
-        course = new Course("firstStep", "new Course", true);
+//        progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
 
-        pbHorizontal = (ProgressBar) findViewById(R.id.pb_horizontal);
-        tvProgressHorizontal = (TextView) findViewById(R.id.tv_progress_horizontal);
+//        Course course = new Course("firstStep", "some descrip", true);
 
-        progress =  course.getProgressBar();
+//        DatabaseHelper databaseHelper = new DatabaseHelper();
 
-        postProgress(progress);
+//        progress = databaseHelper.getCursProgressBar(course.getTitle());
+
+//        postProgress(10);
+
+//        View progressTextView = (View) findViewById(R.id.progressTextView);
+//        progressTextView.setValue(49); // устанавливаем нужное значение
+
     }
 
     public void increase(View view) {
@@ -32,24 +41,12 @@ public class CourseCardActivity extends AppCompatActivity {
     }
 
     private void postProgress(int progress) {
-        String strProgress = String.valueOf(progress) + " %";
-        pbHorizontal.setProgress(progress);
-
-        if (progress == 0) {
-            pbHorizontal.setSecondaryProgress(0);
-        } else {
-            pbHorizontal.setSecondaryProgress(progress + 5);
-        }
-        tvProgressHorizontal.setText(strProgress);
+        progressBarView.setValue(progress);
     }
+//
+//    @Override
+//    public void onBackPressed() {
+//
+//    }
 
-    @Override
-    public void onBackPressed() {
-        saveStatusBar();
-    }
-
-    public void saveStatusBar(){
-        course.upDate(progress);
-        finish();
-    }
 }
