@@ -36,7 +36,7 @@ public class EcoCardActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_eco_cards);
 		
 		
-		initiList();
+//		initiList();
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //		setSupportActionBar(myToolbar);
 		setActionBar(myToolbar);
@@ -82,18 +82,18 @@ public class EcoCardActivity extends AppCompatActivity {
 	 private void log(String message){
 		Log.d(TAG, message);
 	}
-	protected void initiList(){
-		ecoSoviets.add(new EcoSoviet("Выключать воду",
-				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", true));
-		ecoSoviets.add(new EcoSoviet("Максимально загружать машинку",
-				"Загружать посудомоечную и стиральную машины больше чем на 80%.", false));
-		ecoSoviets.add(new EcoSoviet("Принять душ, а не ванну",
-				"В душе мы в среднем расходуем 100 литров, а при приеме ванны - около 200 литров.", false));
-		ecoSoviets.add(new EcoSoviet("Бдить и чинить!",
-				"Отслеживать состояние кранов, труб, бака унитаза и не допускать протечек.", false));
-		ecoSoviets.add(new EcoSoviet("Купить и успокоиться",
-				"Поставить на кран водо-сберегающую насадку-аэратор. " +
-						"Она стоит от 100 рублей в магазинах сантехники.", false));
-	}
+//	protected void initiList(){
+//		ecoSoviets.add(new EcoSoviet(null,"Выключать воду",
+//				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", null,true));
+//		ecoSoviets.add(new EcoSoviet("Максимально загружать машинку",
+//				"Загружать посудомоечную и стиральную машины больше чем на 80%.", false));
+//		ecoSoviets.add(new EcoSoviet("Принять душ, а не ванну",
+//				"В душе мы в среднем расходуем 100 литров, а при приеме ванны - около 200 литров.", false));
+//		ecoSoviets.add(new EcoSoviet("Бдить и чинить!",
+//				"Отслеживать состояние кранов, труб, бака унитаза и не допускать протечек.", false));
+//		ecoSoviets.add(new EcoSoviet("Купить и успокоиться",
+//				"Поставить на кран водо-сберегающую насадку-аэратор. " +
+//						"Она стоит от 100 рублей в магазинах сантехники.", false));
+//	}
 
 }

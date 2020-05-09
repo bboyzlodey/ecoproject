@@ -1,10 +1,12 @@
 package skarlat.dev.ecoproject;
 
+import java.io.Serializable;
+
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
-public class Course extends AbstractEco{
-    public Course(String title, String desription, boolean status) {
-        super(title, desription, status);
+public class Course extends AbstractEco implements Serializable {
+    public Course(String name,String title, String desription,String fullDescription, boolean status) {
+        super(name, title, desription,fullDescription, status);
     }
 
 }

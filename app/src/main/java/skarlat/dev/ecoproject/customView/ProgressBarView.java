@@ -2,7 +2,11 @@ package skarlat.dev.ecoproject.customView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -33,7 +37,7 @@ public class ProgressBarView extends TextView {
         // Установка значения
         public synchronized void setValue(int value) {
             // Установка новой надписи
-            this.setText(String.valueOf(value));
+//            this.setText(String.valueOf(value));
 
             // Drawable, отвечающий за фон
             LayerDrawable background = (LayerDrawable) this.getBackground();

@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
 		db = new DatabaseHelper();
 
 	}
@@ -28,9 +27,12 @@ public class MainActivity extends AppCompatActivity {
 	public void next(View view) {
 		Intent intent = new Intent(this, CourseCardActivity.class);
 
-//		intent.putExtra("progressBar", 0);
+		Course currentCourse = (Course) db.getListOfCourses().get("firstStep");
 
-		startActivityForResult(intent, PROGRESS_BAR); // или так можно
+		intent.putExtra(Course.class.getSimpleName(), currentCourse);
+		intent.putExtra(DatabaseHelper.class.getSimpleName(), db);
+
+		startActivityForResult(intent, PROGRESS_BAR);
 	}
 
 	@Override

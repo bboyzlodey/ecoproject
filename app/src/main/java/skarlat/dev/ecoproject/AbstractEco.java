@@ -10,12 +10,16 @@ package skarlat.dev.ecoproject;
 public class AbstractEco implements EcoInterface{
 	private final String title;
 	private final String desription;
+	private final String name;
+	private final String fullDescription;
 	boolean status;
 	
-	public AbstractEco(String title, String desription, boolean status){
+	public AbstractEco(String name, String title, String desription, String fullDescription, boolean status){
+		this.name = name;
 		this.title = title;
 		this.desription = desription;
 		this.status = status;
+		this.fullDescription = fullDescription;
 	}
 
 	@Override
@@ -31,5 +35,13 @@ public class AbstractEco implements EcoInterface{
 	@Override
 	public String getDescription() {
 		return desription;
+	}
+
+	@Override
+	public String getName(){ return name; }
+
+	@Override
+	public String getFullDescription() {
+		return fullDescription;
 	}
 }

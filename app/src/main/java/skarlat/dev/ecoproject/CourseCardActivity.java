@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +8,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 import skarlat.dev.ecoproject.customView.ProgressBarView;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
 public class CourseCardActivity extends AppCompatActivity {
     private ProgressBarView progressBarView;
+    private TextView leftCards;
+    private TextView cursTitle;
+    private TextView courseDesc;
     private int progress;
+    private DatabaseHelper db = null;
 
 
     @Override
@@ -20,18 +29,43 @@ public class CourseCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_card);
 
-//        progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
+        cursTitle = (TextView) findViewById(R.id.curs_title);
+        progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
+        leftCards = (TextView) findViewById(R.id.left_cards);
+        courseDesc = (TextView) findViewById(R.id.course_desc);
 
-//        Course course = new Course("firstStep", "some descrip", true);
+        Bundle curentCourse = getIntent().getExtras();
+        Course course = null;
 
-//        DatabaseHelper databaseHelper = new DatabaseHelper();
+        if (curentCourse != null){
+            course = (Course) curentCourse.getSerializable(Course.class.getSimpleName());
+            db = (DatabaseHelper) curentCourse.getSerializable(DatabaseHelper.class.getSimpleName());
 
-//        progress = databaseHelper.getCursProgressBar(course.getTitle());
+            assert db != null;
+            assert course != null;
+            db.initCards(course.getName());
 
-//        postProgress(10);
 
-//        View progressTextView = (View) findViewById(R.id.progressTextView);
-//        progressTextView.setValue(49); // устанавливаем нужное значение
+        }else{
+            Intent intent = new Intent(this, MainActivity.class);
+
+            startActivity(intent);
+        }
+
+
+        ArrayList<Object> ecoCard = db.getListOfCards();
+
+        int countCards = ecoCard.size();
+
+        TextView textView = findViewById(R.id.count_course);
+
+        textView.setText(String.valueOf(countCards));
+
+        assert course != null;
+        cursTitle.setText(course.getTitle());
+        progressBarView.setValue(db.getCursProgressBar(course.getName()));
+        leftCards.setText("Осталось" + countCards +" карточек");
+        courseDesc.setText(course.getDescription());
 
     }
 
@@ -40,13 +74,17 @@ public class CourseCardActivity extends AppCompatActivity {
         postProgress(progress);
     }
 
+    public void onBackBtn(View view){
+
+    }
+
     private void postProgress(int progress) {
         progressBarView.setValue(progress);
     }
-//
-//    @Override
-//    public void onBackPressed() {
-//
-//    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 
 }

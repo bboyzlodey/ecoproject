@@ -7,4 +7,6 @@ public interface EcoInterface {
 	boolean getStatus();
 	String getTitle();
 	String getDescription();
+	String getName();
+	String getFullDescription();
 }

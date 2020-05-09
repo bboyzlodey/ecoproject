@@ -4,4 +4,7 @@
 	<string name="course">Курс</string>
 	<string name="category_water_resorces">Ресурсосбережние</string>
 	<string name="first_card">Экономим водные ресурсы</string>
+    <string name="left_cards">Осталось карточек</string>
+    <string name="curs_title">Курс</string>
+	<string name="description">Описание</string>
 </resources>
