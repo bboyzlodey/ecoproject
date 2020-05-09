@@ -25,7 +25,7 @@ public class ProjectActivity extends AppCompatActivity {
 	}
 	
 	public void openCard(View view){
-		Intent intent = new Intent(ProjectActivity.this, EcoCardActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent, savedInstanceState);
 	}
 }

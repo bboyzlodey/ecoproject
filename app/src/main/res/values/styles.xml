@@ -5,6 +5,7 @@
 		<!-- Customize your theme here. -->
 		<item name="colorButtonNormal">@color/colorBlack</item>
 		<item name="android:statusBarColor">@color/colorBlack</item>
+		<item name="tabIndicatorColor">@color/colorWhite</item>
 	</style>
 	<style name="Home" parent="Widget.AppCompat.ButtonBar">
 		<item name="background">@color/colorWhite</item>
@@ -17,5 +18,10 @@
 	<style name="FullscreenCustom" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:windowContentOverlay">@null</item>
+	</style>
+
+
+	<style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+		<item name="tabIndicatorColor">#0000FF</item>
 	</style>
 </resources>

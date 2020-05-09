@@ -23,6 +23,10 @@ android {
 
 }
 
+ext {
+    supportLibrary = "27.0.2"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -34,4 +38,6 @@ dependencies {
 //    compile 'com.android.support:recyclerview-v7:25.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.jackandphantom.android:customtogglebutton:1.0.1'
+    implementation "com.android.support:design:${supportLibrary}"
+
 }
