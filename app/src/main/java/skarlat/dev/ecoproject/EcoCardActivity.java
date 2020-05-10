@@ -13,10 +13,12 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -37,6 +39,7 @@ public class EcoCardActivity extends AppCompatActivity {
 	Drawable howBackground;
 	ColorStateList whyColor;
 	ColorStateList howColor;
+	Toolbar myToolbar;
 	
 	
 	@Override
@@ -73,21 +76,8 @@ public class EcoCardActivity extends AppCompatActivity {
 		});
 		
 		initiList();
-		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//		setSupportActionBar(myToolbar);
-		
-		setActionBar(myToolbar);
-		myToolbar.setTitle("Экономим водные ресурсы");
-		myToolbar.setSubtitle("Ресурсосбережение");
-//		myToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlack));
-		
-		ActionBar actionBar = this.getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
-		actionBar.setTitle("Экономим водные ресурсы");
-		
-		
-		
+		myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		initActionBar();
 		scrollView = (ScrollView) findViewById(R.id.scroll_description);
 		/**
 		 *
@@ -99,10 +89,22 @@ public class EcoCardActivity extends AppCompatActivity {
 
 	}
 	
+	private void initActionBar(){
+		setActionBar(myToolbar);
+		myToolbar.setTitle("Экономим водные ресурсы");
+		myToolbar.setSubtitle("Ресурсосбережение");
+		ActionBar actionBar = this.getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
+		actionBar.setTitle("Экономим водные ресурсы");
+		actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back2);
+	}
+	
 	
 	 private void log(String message){
 		Log.d(TAG, message);
-	}
+	} // Для дебагинга и логинга
+	
 	protected void initiList(){
 		ecoSoviets.add(new EcoSoviet("Выключать воду",
 				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", true));

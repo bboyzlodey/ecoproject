@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 
-		db = new DatabaseHelper();
+//		db = new DatabaseHelper(); Вылетает эксепшн
 
 	}
 

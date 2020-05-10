@@ -8,13 +8,17 @@
 	android:orientation="vertical"
 	tools:context=".EcoCardActivity">
 
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1">
 	<Toolbar
 		android:id="@+id/my_toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="330dp"
 		android:layout_weight="1"
 		android:elevation="4dp"
-		android:gravity="bottom"
+		android:gravity="bottom|center_horizontal"
 		android:outlineSpotShadowColor="@color/colorBlack"
 		android:subtitleTextColor="@android:color/white"
 		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -23,6 +27,7 @@
 		tools:background="@drawable/original"
 		tools:subtitle="SUBTITLE"
 		tools:title="TITLE" />
+	</RelativeLayout>
 
 
 	<RelativeLayout
