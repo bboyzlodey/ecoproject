@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import skarlat.dev.ecoproject.adapter.CardsViewAdapter;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
@@ -72,8 +73,8 @@ public class CourseCardActivity extends AppCompatActivity {
          *      Добавляем лист объектов в recycleView;
          */
         recyclerView = (RecyclerView) findViewById(R.id.recycle_cards);
-        DataAdapter dataAdapter = new DataAdapter(CourseCardActivity.this, ecoCard);
-        recyclerView.setAdapter(dataAdapter);
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
+        recyclerView.setAdapter(adapter);
 
     }
 
