@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import skarlat.dev.ecoproject.customView.ProgressBarView;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
@@ -20,6 +22,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private TextView leftCards;
     private TextView cursTitle;
     private TextView courseDesc;
+    private RecyclerView recyclerView;
     private int progress;
     private DatabaseHelper db = new DatabaseHelper();
 
@@ -33,6 +36,8 @@ public class CourseCardActivity extends AppCompatActivity {
         progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
         leftCards = (TextView) findViewById(R.id.left_cards);
         courseDesc = (TextView) findViewById(R.id.course_desc);
+
+
 
         Bundle curentCourse = getIntent().getExtras();
         Course course = null;
@@ -53,13 +58,7 @@ public class CourseCardActivity extends AppCompatActivity {
         }
 
 
-        ArrayList<Object> ecoCard = db.getListOfCards();
-
-        int countCards = ecoCard.size();
-
-        TextView textView = findViewById(R.id.count_course);
-
-        textView.setText(String.valueOf(countCards));
+        List<Object> ecoCard = db.getListOfCards();
 
         assert course != null;
         cursTitle.setText(course.getTitle());
@@ -67,6 +66,14 @@ public class CourseCardActivity extends AppCompatActivity {
         progressBarView.setValue(progress);
         leftCards.setText(db.getLeftCards(course.getName()));
         courseDesc.setText(course.getDescription());
+
+        /**
+         *
+         *      Добавляем лист объектов в recycleView;
+         */
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_cards);
+        DataAdapter dataAdapter = new DataAdapter(CourseCardActivity.this, ecoCard);
+        recyclerView.setAdapter(dataAdapter);
 
     }
 

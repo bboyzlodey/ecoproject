@@ -15,12 +15,14 @@ import java.util.List;
 class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	
 	private LayoutInflater inflater;
-	private List<EcoSoviet> soviets;
+	private List<Object> soviets;
 	
-	DataAdapter(Context context, List<EcoSoviet> soviets) {
+	DataAdapter(Context context, List<Object> soviets) {
 		this.soviets = soviets;
 		this.inflater = LayoutInflater.from(context);
 	}
+
+
 	@Override
 	public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		
@@ -30,7 +32,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	
 	@Override
 	public void onBindViewHolder(DataAdapter.ViewHolder holder, int position) {
-		EcoSoviet ecoSoviet = soviets.get(position);
+		EcoSoviet ecoSoviet = (EcoSoviet) soviets.get(position);
 		holder.header.setText(ecoSoviet.getTitle());
 		holder.description.setText(ecoSoviet.getDescription());
 	}

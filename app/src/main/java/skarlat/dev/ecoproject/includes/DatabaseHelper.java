@@ -24,7 +24,7 @@ public class DatabaseHelper {
     private CoursesDao coursesDao = db.cursCardDao();
     private CardsDao cardsDao = db.cardsDao();
     private ArrayMap<String,Object> courses = new ArrayMap<>();
-    private ArrayList<Object> cards = new ArrayList<>();
+    private List<Object> cards = new ArrayList<>();
 
 
     public DatabaseHelper(){
@@ -55,7 +55,7 @@ public class DatabaseHelper {
         return this.courses;
     }
 
-    public ArrayList<Object> getListOfCards(){
+    public List<Object> getListOfCards(){
         return this.cards;
     }
 
