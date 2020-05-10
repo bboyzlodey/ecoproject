@@ -1,5 +1,7 @@
 package skarlat.dev.ecoproject;
 
+import java.io.Serializable;
+
 /*
 **
 * Абстрактный класс AbstractEco от которого можно наследоваться.
@@ -7,7 +9,7 @@ package skarlat.dev.ecoproject;
 * super(name, description, status);
 *
  */
-public class AbstractEco implements EcoInterface{
+public class AbstractEco implements EcoInterface, Serializable {
 	private final String title;
 	private final String desription;
 	private final String name;

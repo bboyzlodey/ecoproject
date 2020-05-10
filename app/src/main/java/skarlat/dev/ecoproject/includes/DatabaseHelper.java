@@ -18,7 +18,7 @@ import skarlat.dev.ecoproject.EcoCard;
 /**
  * @Class - помошник в обработке данных для добавления\взятия данных
  */
-public class DatabaseHelper implements Serializable {
+public class DatabaseHelper {
 
     private AppDatabase db = App.getInstance().getDatabase();
     private CoursesDao coursesDao = db.cursCardDao();
@@ -26,13 +26,20 @@ public class DatabaseHelper implements Serializable {
     private ArrayMap<String,Object> courses = new ArrayMap<>();
     private ArrayList<Object> cards = new ArrayList<>();
 
+
+    public DatabaseHelper(){
+    }
+
     /**
      * Список добавленных курсов
      */
-    public DatabaseHelper(){
-        initCourses();
-        initDB("firstStep");
+    public DatabaseHelper(boolean init){
+        if ( init ){
+            initCourses();
+            initDB("firstStep");
+        }
     }
+
 
     /**
      * Возвращает значение прогресс бара курса
@@ -108,6 +115,27 @@ public class DatabaseHelper implements Serializable {
             return false;
         else
             return true;
+    }
+
+    public String getLeftCards(String cursName){
+        List<CardsDB> cardDB = cardsDao.getAllActive(cursName);
+        int active = cardDB.size();
+        int allCards = cards.size();
+        int left = allCards - active;
+        String text = "Осталось " + left;
+
+        left = left % 100;
+        int left1 = left % 10;
+
+        if (left == 0)
+            return "Курс пройден";
+        if (left > 10 && left < 20)
+            return text + " карточек";
+        if (left1 > 1 && left1 < 5)
+            return text + " карточки";
+        if (left1 == 1)
+            return "Осталась " + left + " карточка";
+        return text + " карточек";
     }
 
     /**

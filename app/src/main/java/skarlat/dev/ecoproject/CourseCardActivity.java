@@ -21,7 +21,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private TextView cursTitle;
     private TextView courseDesc;
     private int progress;
-    private DatabaseHelper db = null;
+    private DatabaseHelper db = new DatabaseHelper();
 
 
     @Override
@@ -38,8 +38,8 @@ public class CourseCardActivity extends AppCompatActivity {
         Course course = null;
 
         if (curentCourse != null){
+
             course = (Course) curentCourse.getSerializable(Course.class.getSimpleName());
-            db = (DatabaseHelper) curentCourse.getSerializable(DatabaseHelper.class.getSimpleName());
 
             assert db != null;
             assert course != null;
@@ -63,8 +63,9 @@ public class CourseCardActivity extends AppCompatActivity {
 
         assert course != null;
         cursTitle.setText(course.getTitle());
-        progressBarView.setValue(db.getCursProgressBar(course.getName()));
-        leftCards.setText("Осталось" + countCards +" карточек");
+        progress = db.getCursProgressBar(course.getName());
+        progressBarView.setValue(progress);
+        leftCards.setText(db.getLeftCards(course.getName()));
         courseDesc.setText(course.getDescription());
 
     }

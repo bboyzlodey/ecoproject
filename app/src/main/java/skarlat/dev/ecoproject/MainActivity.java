@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		db = new DatabaseHelper();
+		db = new DatabaseHelper(true);
 
 	}
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 		Course currentCourse = (Course) db.getListOfCourses().get("firstStep");
 
 		intent.putExtra(Course.class.getSimpleName(), currentCourse);
-		intent.putExtra(DatabaseHelper.class.getSimpleName(), db);
+
 
 		startActivityForResult(intent, PROGRESS_BAR);
 	}

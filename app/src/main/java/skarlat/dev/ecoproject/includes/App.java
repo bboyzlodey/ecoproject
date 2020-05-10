@@ -29,6 +29,7 @@ public class App extends Application {
         return instance;
     }
 
+
     public AppDatabase getDatabase() {
         return database;
     }
