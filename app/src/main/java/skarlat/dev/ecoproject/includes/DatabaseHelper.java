@@ -146,18 +146,16 @@ public class DatabaseHelper {
      * @param cursName - имя нужного курса
      * @param progressBar - данные для обновления
      */
-    public void upDateCourse(String cursName, int progressBar){
+    public void upDateCourse(String cursName, int progressBar, int isActive){
         СoursesDB curs = coursesDao.getByCursID(cursName);
         curs.progressBar = progressBar;
         coursesDao.update(curs);
     }
 
-    public void upDateCard(String cardName, boolean isActive){
+    public void upDateCard(String cardName, int isActive){
         CardsDB cardsDB = cardsDao.getByCardID(cardName);
-        if (isActive == false)
-            cardsDB.isActive = 0;
-        else
-            cardsDB.isActive = 1;
+        cardsDB.isActive = isActive;
+        cardsDao.update(cardsDB);
     }
 
     /**
@@ -173,7 +171,7 @@ public class DatabaseHelper {
             initCurs.id = 1;
             initCurs.cursID = cursName;
             initCurs.progressBar = 0;
-            initCurs.checkList = null;
+            initCurs.isActive = 1;
             coursesDao.insert(initCurs);
         } else
             curs = null;

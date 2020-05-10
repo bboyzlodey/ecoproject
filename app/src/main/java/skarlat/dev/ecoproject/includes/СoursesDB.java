@@ -18,6 +18,6 @@ public class СoursesDB {
 
     public int progressBar;
 
-    public String checkList;
+    public int isActive;
 }
 

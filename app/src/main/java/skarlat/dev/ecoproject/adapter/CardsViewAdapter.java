@@ -3,12 +3,14 @@ package skarlat.dev.ecoproject.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,7 +57,8 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
             holder.cardClose.setText("");
             Drawable drawable = holder.backgroundCard.getBackground();
             drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-//            drawable.setColor(Color.WHITE);
+//            holder.backgroundCard.setTranslationZ(24);
+//            holder.backgroundCard.setElevation(0);
             holder.cardClose.setBackgroundResource(R.drawable.ic_play);
         }
         else if (status == 2 ){
@@ -70,7 +73,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
             holder.cardClose.setVisibility(View.GONE);
         }
 
-        if ( getItemCount() == position ){
+        if ( getItemCount() - 1 == position ){
             holder.nextCard.setVisibility(View.GONE);
         }
 

@@ -25,6 +25,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private TextView courseDesc;
     private RecyclerView recyclerView;
     private int progress;
+    private String courseName;
     private DatabaseHelper db = new DatabaseHelper();
 
 
@@ -46,10 +47,12 @@ public class CourseCardActivity extends AppCompatActivity {
         if (curentCourse != null){
 
             course = (Course) curentCourse.getSerializable(Course.class.getSimpleName());
+            assert course != null;
+            courseName = course.getName();
 
             assert db != null;
-            assert course != null;
-            db.initCards(course.getName());
+
+            db.initCards(courseName);
 
 
         }else{
@@ -63,9 +66,9 @@ public class CourseCardActivity extends AppCompatActivity {
 
         assert course != null;
         cursTitle.setText(course.getTitle());
-        progress = db.getCursProgressBar(course.getName());
+        progress = db.getCursProgressBar(courseName);
         progressBarView.setValue(progress);
-        leftCards.setText(db.getLeftCards(course.getName()));
+        leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(course.getDescription());
 
         /**
@@ -75,6 +78,8 @@ public class CourseCardActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycle_cards);
         CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
         recyclerView.setAdapter(adapter);
+
+        db.upDateCourse(courseName, db.getCursProgressBar(courseName), 2);
 
     }
 
