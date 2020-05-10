@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item>
-	<shape>
-		<corners android:radius="10dp"/>
-		<solid android:color="@color/colorGray"/>
-	</shape>
-</item>
-</selector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Bottom 2dp Shadow -->
+	<item>
+		<shape  android:shape="rectangle">
+			box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+			<solid android:color="#000" />
+			<corners android:radius="8dp" />
+
+		</shape>
+	</item>
+
+	<!-- White Top color -->
+	<item 	android:bottom="4px"
+		  	android:left="2px"
+			android:right="2px">
+
+		<shape  android:shape="rectangle">
+
+			<solid android:color="#D5D5D5" />
+			<corners android:radius="8dp" />
+
+
+		</shape>
+
+	</item>
+
+
+</layer-list>
+<!--<item>-->
+<!--	<shape>-->
+<!--		<corners android:radius="8dp"/>-->
+<!--		<solid android:color="#D5D5D5"/>-->
+<!--	</shape>-->
+
+<!--</item>-->

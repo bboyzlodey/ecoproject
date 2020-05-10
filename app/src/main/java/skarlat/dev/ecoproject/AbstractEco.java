@@ -14,9 +14,9 @@ public class AbstractEco implements EcoInterface, Serializable {
 	private final String desription;
 	private final String name;
 	private final String fullDescription;
-	boolean status;
+	private int status;
 	
-	public AbstractEco(String name, String title, String desription, String fullDescription, boolean status){
+	public AbstractEco(String name, String title, String desription, String fullDescription, int status){
 		this.name = name;
 		this.title = title;
 		this.desription = desription;
@@ -24,8 +24,12 @@ public class AbstractEco implements EcoInterface, Serializable {
 		this.fullDescription = fullDescription;
 	}
 
+	/**
+	 *
+	 * @return: 0 - закрытый курс, 1 - открытый курс, 2 - текущий посещенный курс
+	 */
 	@Override
-	public boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 

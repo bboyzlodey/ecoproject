@@ -78,23 +78,26 @@ public class DatabaseHelper {
                                             "что водные ресурсы не исчерпают себя очень быстро. " +
                                             "Плюс простыми действиями можно сократить сумму в счетах на " +
                                             "оплату — немного, но всё равно приятно!",
-                                        true));
+                                        1));
     }
 
     public void initCards(String cursName){
+        CardsDB cardsDB;
+
         switch (cursName){
             case "firstStep":
                 cards.clear();
-                cards.add(new EcoCard("resourceSaving","Экономим водные ресурсы", "Ресурсосбережение", null,true));
-                cards.add(new EcoCard("second",null, null, null,false));
-                cards.add(new EcoCard("Third",null, null, null,false));
+                cardsDB = intiCardDB(cursName,"resourceSaving");
+                cards.add(new EcoCard("resourceSaving","Экономим водные ресурсы", "Ресурсосбережение", null, 1));
+                cardsDB = intiCardDB(cursName,"second");
+                cards.add(new EcoCard("second",null, null, null,cardsDB.isActive));
+                cardsDB = intiCardDB(cursName,"Third");
+                cards.add(new EcoCard("Third",null, null, null,cardsDB.isActive));
                 break;
 
             default:
                 return;
         }
-
-        initCardsDB(cursName);
     }
 
     public int getCountActiveCards(String cursName){
@@ -177,6 +180,28 @@ public class DatabaseHelper {
 
     }
 
+
+    private CardsDB intiCardDB(String cursName, String cardName){
+
+        CardsDB cardsDB = cardsDao.getByCardID(cardName);
+        CardsDB initCard;
+
+        if (cardsDB == null){
+            initCard = new CardsDB();
+            initCard.cardID = cardName;
+            initCard.cursID = cursName;
+            initCard.isActive = 0;
+        }
+        else{
+            return cardsDB;
+        }
+        return initCard;
+    }
+
+    /**
+     * delete method
+     * @param cursName
+     */
     private void initCardsDB(String cursName){
 
         List<CardsDB> cardDB = cardsDao.getAllByCurs(cursName);
@@ -188,10 +213,10 @@ public class DatabaseHelper {
                 ecoCard = (EcoCard) cards.get(i);
                 initCard.cardID = ecoCard.getName();
                 initCard.cursID = cursName;
-                if ( ecoCard.getStatus() )
-                    initCard.isActive = 1;
-                else
-                    initCard.isActive = 0;
+//                if ( ecoCard.getStatus() )
+//                    initCard.isActive = 1;
+//                else
+//                    initCard.isActive = 0;
             }
         }else
             cardDB = null;
