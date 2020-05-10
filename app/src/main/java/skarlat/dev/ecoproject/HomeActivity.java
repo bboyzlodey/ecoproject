@@ -16,11 +16,46 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
+	private TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
+	    setIconsInTab();
+    }
+	
+	/**
+	 *      Эта функция устанавливает иконки для таб бара
+	 */
+	protected void setIconsInTab(){
+	    int[] imageResId = {
+	    		R.drawable.event,
+			    R.drawable.timeline,
+			    R.drawable.person};
+	
+	    for (int i = 0; i < imageResId.length; i++) {
+		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
+		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
+		    tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
+		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			    @Override
+			    public void onTabSelected(TabLayout.Tab tab) {
+					tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
+			    }
+
+			    @Override
+			    public void onTabUnselected(TabLayout.Tab tab) {
+				    tab.getIcon().setTint(getResources().getColor(R.color.colorGray));
+			    }
+
+			    @Override
+			    public void onTabReselected(TabLayout.Tab tab) {
+
+			    }
+		    });
+	    }
     }
     
     protected void tabView(){
@@ -30,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
 	
 	    // Передаём ViewPager в TabLayout
-	    TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+//	    TabLayout tabLayout = findViewById(R.id.home_tab);
 	    tabLayout.setupWithViewPager(viewPager);
 	    
     }

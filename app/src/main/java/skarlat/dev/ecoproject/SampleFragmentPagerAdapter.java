@@ -26,6 +26,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
 	
 	@Override public CharSequence getPageTitle(int position) {
 		// генерируем заголовок в зависимости от позиции
-		return tabTitles[position];
+		return null;
 	}
+	
 }
