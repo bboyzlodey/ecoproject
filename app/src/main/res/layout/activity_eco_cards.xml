@@ -80,12 +80,12 @@
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recycle_soviets"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_width="101dp"
+			android:layout_height="85dp"
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			app:layoutManager="LinearLayoutManager"
-			tools:visibility="gone"/>
+			tools:visibility="gone" />
 
 		<ScrollView
 			android:layout_width="match_parent"

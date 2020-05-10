@@ -32,7 +32,7 @@ public class EcoCardActivity extends AppCompatActivity {
 	public static String TAG = "EcoCardActivity";
 	private RecyclerView recyclerView;
 	private ScrollView scrollView;
-	List<Object> ecoSoviets = new ArrayList<>();
+	List<EcoSoviet> ecoSoviets = new ArrayList<>();
 	Drawable whyBackground;
 	Drawable howBackground;
 	ColorStateList whyColor;
