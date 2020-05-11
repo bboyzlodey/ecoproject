@@ -23,6 +23,13 @@ public class AbstractEco implements EcoInterface, Serializable {
 		this.status = status;
 		this.fullDescription = fullDescription;
 	}
+	
+	public AbstractEco(String name, String title){
+		this.name = name;
+		this.title = title;
+		desription = null;
+		fullDescription = null;
+	}
 
 	/**
 	 *

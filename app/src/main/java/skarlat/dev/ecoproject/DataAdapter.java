@@ -31,8 +31,10 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	@Override
 	public void onBindViewHolder(DataAdapter.ViewHolder holder, int position) {
 		EcoSoviet ecoSoviet = soviets.get(position);
-		holder.header.setText(ecoSoviet.getTitle());
-		holder.description.setText(ecoSoviet.getDescription());
+//		holder.header.setText(ecoSoviet.getTitle());
+//		holder.description.setText(ecoSoviet.getDescription());
+		holder.header.setText(ecoSoviet.getName());
+		holder.description.setText(ecoSoviet.getTitle());
 	}
 	
 	@Override

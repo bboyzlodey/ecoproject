@@ -41,35 +41,24 @@ public class CourseCardActivity extends AppCompatActivity {
 
 
 
-        Bundle curentCourse = getIntent().getExtras();
-        Course course = null;
-
-        if (curentCourse != null){
-
-            course = (Course) curentCourse.getSerializable(Course.class.getSimpleName());
-            assert course != null;
-            courseName = course.getName();
-
-            assert db != null;
-
-            db.initCards(courseName);
-
-
-        }else{
-            Intent intent = new Intent(this, MainActivity.class);
-
-            startActivity(intent);
-        }
-
-
-        List<Object> ecoCard = db.getListOfCards();
-
-        assert course != null;
-        cursTitle.setText(course.getTitle());
-        progress = db.getCursProgressBar(courseName);
-        progressBarView.setValue(progress);
-        leftCards.setText(db.getLeftCards(courseName));
-        courseDesc.setText(course.getDescription());
+//        Bundle curentCourse = getIntent().getExtras();
+//        Course course = null;
+//
+//
+//        List<Object> ecoCard = db.getListOfCards();
+//
+//        assert course != null;
+//        cursTitle.setText(course.getTitle());
+//        progress = db.getCursProgressBar(courseName);
+//        progressBarView.setValue(progress);
+//        leftCards.setText(db.getLeftCards(courseName));
+//        courseDesc.setText(course.getDescription());
+    
+        List<Course> ecoCard =  new ArrayList<>();
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 1));
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", -1));
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", -1));
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", -1));
 
         /**
          *
@@ -79,7 +68,7 @@ public class CourseCardActivity extends AppCompatActivity {
         CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
         recyclerView.setAdapter(adapter);
 
-        db.upDateCourse(courseName, db.getCursProgressBar(courseName), 2);
+//        db.upDateCourse(courseName, db.getCursProgressBar(courseName), 2);
 
     }
 
@@ -89,7 +78,7 @@ public class CourseCardActivity extends AppCompatActivity {
     }
 
     public void onBackBtn(View view){
-
+        onBackPressed();
     }
 
     private void postProgress(int progress) {
@@ -98,7 +87,12 @@ public class CourseCardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
+    }
+    
+    public void openCard(View view) {
+        Intent intent = new Intent(this, EcoCardActivity.class);
+        startActivity(intent);
     }
 
 }

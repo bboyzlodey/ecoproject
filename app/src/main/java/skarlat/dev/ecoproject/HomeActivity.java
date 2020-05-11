@@ -23,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
-	    setIconsInTab();
+	    setIconsInTab(); // устанавливаем иконки
     }
 	
 	/**
@@ -78,8 +78,7 @@ public class HomeActivity extends AppCompatActivity {
 	 */
 	public void openCourse(View v){
 		Intent open;  // интент, который сделает переключение в Активити с карточками
-		open = new Intent(this, EcoCardActivity.class);
-		
+		open = new Intent(this, CourseCardActivity.class);
 		/**
 		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
 		 *      String title;

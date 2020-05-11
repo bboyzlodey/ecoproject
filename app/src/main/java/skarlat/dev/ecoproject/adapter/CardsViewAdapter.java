@@ -20,14 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
 
 public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.ViewHolder>  {
     private LayoutInflater inflater;
-    private List<Object> card;
+    private List<Course> card;
 
-    public CardsViewAdapter(Context context, List<Object> card){
+    public CardsViewAdapter(Context context, List<Course> card){
         this.card = card;
         this.inflater = LayoutInflater.from(context);
     }
@@ -41,7 +42,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        EcoCard ecoCard = (EcoCard) card.get(position);
+        Course ecoCard = card.get(position);
         int status = ecoCard.getStatus();
         if (status == 0) {
             holder.header.setVisibility(View.GONE);
