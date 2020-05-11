@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,20 @@ public class PageFragment extends Fragment {
 		CourseAdapter courseAdapter = new CourseAdapter(getContext(), courses);
 		if(recyclerView != null)
 			recyclerView.setAdapter(courseAdapter);
+		/**
+		 *      Проблема в том, что запускается фрагмент, а там скролл не в начале
+		 *      Для этого нужен новый поток, что бы проскроллить в начало.
+		 *      Но он скролит грубо.
+		 *      Пусть будет пока что.
+		 */
+		final ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollEducation);
+		scrollView.scrollTo(0,scrollView.getTop());
+		scrollView.post(new Runnable() {
+			@Override
+			public void run() {
+				scrollView.fullScroll(ScrollView.FOCUS_UP);
+			}
+		});
 		return view;
 	}
 	
