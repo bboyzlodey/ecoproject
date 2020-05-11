@@ -9,7 +9,7 @@ import java.io.Serializable;
 * super(name, description, status);
 *
  */
-public class AbstractEco implements EcoInterface, Serializable {
+abstract public class AbstractEco implements EcoInterface, Serializable {
 	private final String title;
 	private final String desription;
 	private final String name;
@@ -18,6 +18,13 @@ public class AbstractEco implements EcoInterface, Serializable {
 	private int i;
 	
 	public AbstractEco(String name, String title, String desription, String fullDescription, int status){
+		this.name = name;
+		this.title = title;
+		this.desription = desription;
+		this.status = status;
+		this.fullDescription = fullDescription;
+	}
+	public AbstractEco(String name, String title, String desription, String fullDescription){
 		this.name = name;
 		this.title = title;
 		this.desription = desription;
@@ -35,11 +42,20 @@ public class AbstractEco implements EcoInterface, Serializable {
 	/**
 	 *
 	 * @return: 0 - закрытый курс, 1 - открытый курс, 2 - текущий посещенный курс
+	 * Смотри ниже метод с Enum
 	 */
+//	@Override
+//	public int getStatus() {
+//		return status;
+//	}
+	/**
+	 *
+	 * @return: Enum - объект перпечисления.
+	 * Метод переодпределяется в каждом классе
+	 */
+	
 	@Override
-	public int getStatus() {
-		return status;
-	}
+	abstract public Enum getStatus();
 
 	@Override
 	public String getTitle() {
