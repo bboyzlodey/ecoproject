@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class PageFragment extends Fragment {
 	public static final String ARG_PAGE = "ARG_PAGE";
 	
 	private int mPage;
+	private View view;
 	
 	public static PageFragment newInstance(int page) {
 		Bundle args = new Bundle();
@@ -37,18 +39,22 @@ public class PageFragment extends Fragment {
 			mPage = getArguments().getInt(ARG_PAGE);
 		}
 		this.savedInstanceState = savedInstanceState;
+		
 	}
 	
 	@Override public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                                   Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.education_tab, container, false);
+		this.view = view;
 		
 		initiList(); // создаем лист и заполняем его
 		/**
 		 *
 		 *      Заполнение RecyclerView;
 		 */
+		
+		
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_courses);
 		CourseAdapter courseAdapter = new CourseAdapter(getContext(), courses);
 		if(recyclerView != null)
@@ -60,7 +66,6 @@ public class PageFragment extends Fragment {
 		 *      Пусть будет пока что.
 		 */
 		final ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollEducation);
-		scrollView.scrollTo(0,scrollView.getTop());
 		scrollView.post(new Runnable() {
 			@Override
 			public void run() {

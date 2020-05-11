@@ -8,6 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
 	private TabLayout tabLayout;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +68,10 @@ public class HomeActivity extends AppCompatActivity {
 			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
 	
 	    // Передаём ViewPager в TabLayout
-//	    TabLayout tabLayout = findViewById(R.id.home_tab);
 	    tabLayout.setupWithViewPager(viewPager);
 	    
+	    //  Анимация для сглаживания программного скрола в PageFragment
+	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
 	
 	/**
