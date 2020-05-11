@@ -41,7 +41,8 @@ public class CourseCardActivity extends AppCompatActivity {
 
 
 
-//        Bundle curentCourse = getIntent().getExtras();
+        Bundle curentCourse = getIntent().getExtras();
+        
 //        Course course = null;
 //
 //

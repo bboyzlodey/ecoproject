@@ -39,6 +39,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
         View view = inflater.inflate(R.layout.card_courses_cards, parent, false);
         return new ViewHolder(view);
     }
+   
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
