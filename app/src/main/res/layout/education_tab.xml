@@ -29,8 +29,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="126dp"
 		app:cardCornerRadius="8dp"
-
 		android:onClick="openCourse"
+		android:elevation="6dp"
 		tools:tag="firstStep"
 		android:layout_weight="0">
 

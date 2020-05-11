@@ -37,7 +37,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
     @Override
     public CardsViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.card_courses_cards, parent, false);
-        return new ViewHolder(view);
+        return new CardsViewAdapter.ViewHolder(view);
     }
    
 
@@ -92,7 +92,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
         final RelativeLayout backgroundCard;
         ViewHolder(View view){
             super(view);
-            backgroundCard = view.findViewById(R.id.background_card);
+            backgroundCard = (RelativeLayout)view.findViewById(R.id.background_card);
             header = (TextView) view.findViewById(R.id.title_card);
             description = (TextView) view.findViewById(R.id.descr_card);
             countOpenCard = (TextView) view.findViewById(R.id.count_open_card);
