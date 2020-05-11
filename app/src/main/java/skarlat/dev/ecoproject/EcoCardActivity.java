@@ -13,10 +13,12 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -37,19 +39,20 @@ public class EcoCardActivity extends AppCompatActivity {
 	Drawable howBackground;
 	ColorStateList whyColor;
 	ColorStateList howColor;
-
-
+	Toolbar myToolbar;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_eco_cards);
-
+		
 		final TextView how = (TextView) findViewById(R.id.how_text);
 		final TextView why = (TextView) findViewById(R.id.why_text);
-
+		
 		whyColor = why.getTextColors();
 		howColor = how.getTextColors();
-
+		
 		whyBackground = why.getBackground();
 		howBackground = how.getBackground();
 		ToggleButton toggleButton = (ToggleButton) findViewById(R.id.toggleBtn);
@@ -59,11 +62,11 @@ public class EcoCardActivity extends AppCompatActivity {
 				Drawable tmp = whyBackground;
 				whyBackground = howBackground;
 				howBackground = tmp;
-
+				
 				ColorStateList tmpColor = whyColor;
 				whyColor = howColor;
 				howColor = tmpColor;
-
+				
 				how.setTextColor(howColor);
 				how.setBackground(howBackground);
 				why.setTextColor(whyColor);
@@ -71,23 +74,10 @@ public class EcoCardActivity extends AppCompatActivity {
 				changeVisibility();
 			}
 		});
-
+		
 		initiList();
-		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//		setSupportActionBar(myToolbar);
-
-		setActionBar(myToolbar);
-		myToolbar.setTitle("Экономим водные ресурсы");
-		myToolbar.setSubtitle("Ресурсосбережение");
-//		myToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlack));
-
-		ActionBar actionBar = this.getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
-		actionBar.setTitle("Экономим водные ресурсы");
-
-
-
+		myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		initActionBar();
 		scrollView = (ScrollView) findViewById(R.id.scroll_description);
 		/**
 		 *
@@ -98,25 +88,37 @@ public class EcoCardActivity extends AppCompatActivity {
 		recyclerView.setAdapter(dataAdapter);
 
 	}
-
-
-	private void log(String message){
+	
+	private void initActionBar(){
+		setActionBar(myToolbar);
+		myToolbar.setTitle("Экономим водные ресурсы");
+		myToolbar.setSubtitle("Ресурсосбережение");
+		ActionBar actionBar = this.getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
+		actionBar.setTitle("Экономим водные ресурсы");
+		actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back2);
+	}
+	
+	
+	 private void log(String message){
 		Log.d(TAG, message);
-	}
+	} // Для дебагинга и логинга
+	
 	protected void initiList(){
-//		ecoSoviets.add(new EcoSoviet("Выключать воду",
-//				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", true));
-//		ecoSoviets.add(new EcoSoviet("Максимально загружать машинку",
-//				"Загружать посудомоечную и стиральную машины больше чем на 80%.", false));
-//		ecoSoviets.add(new EcoSoviet("Принять душ, а не ванну",
-//				"В душе мы в среднем расходуем 100 литров, а при приеме ванны - около 200 литров.", false));
-//		ecoSoviets.add(new EcoSoviet("Бдить и чинить!",
-//				"Отслеживать состояние кранов, труб, бака унитаза и не допускать протечек.", false));
-//		ecoSoviets.add(new EcoSoviet("Купить и успокоиться",
-//				"Поставить на кран водо-сберегающую насадку-аэратор. " +
-//						"Она стоит от 100 рублей в магазинах сантехники.", false));
+		ecoSoviets.add(new EcoSoviet("Выключать воду",
+				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", true));
+		ecoSoviets.add(new EcoSoviet("Максимально загружать машинку",
+				"Загружать посудомоечную и стиральную машины больше чем на 80%.", false));
+		ecoSoviets.add(new EcoSoviet("Принять душ, а не ванну",
+				"В душе мы в среднем расходуем 100 литров, а при приеме ванны - около 200 литров.", false));
+		ecoSoviets.add(new EcoSoviet("Бдить и чинить!",
+				"Отслеживать состояние кранов, труб, бака унитаза и не допускать протечек.", false));
+		ecoSoviets.add(new EcoSoviet("Купить и успокоиться",
+				"Поставить на кран водо-сберегающую насадку-аэратор. " +
+						"Она стоит от 100 рублей в магазинах сантехники.", false));
 	}
-
+	
 	protected  void changeVisibility(){
 		if (recyclerView.getVisibility() == View.VISIBLE){
 			recyclerView.setVisibility(View.GONE);

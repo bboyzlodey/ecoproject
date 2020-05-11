@@ -3,7 +3,7 @@
 
     <item android:id="@+id/bar_background">
         <shape>
-            <corners android:radius="2dp" />
+            <corners android:radius="5dp" />
 
             <gradient
                 android:angle="270"
@@ -16,7 +16,7 @@
     <item android:id="@+id/bar_value">
         <clip>
             <shape>
-                <corners android:radius="2dp" />
+                <corners android:radius="5dp" />
 
                 <gradient
                     android:angle="270"

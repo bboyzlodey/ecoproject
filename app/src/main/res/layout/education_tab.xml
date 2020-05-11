@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:layout_marginLeft="16dp"
+		android:layout_marginRight="16dp">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorBlack"
+		android:text="Текущий курс"
+		android:textSize="24sp"
+		android:layout_marginTop="27dp"
+		android:layout_marginBottom="17dp"
+		android:layout_weight="0"/>
+
+<!--	CardView - Карточка текущего курса. Для демонстрации пойдет так-->
+	<androidx.cardview.widget.CardView
+		android:id="@+id/current_course"
+		android:layout_width="match_parent"
+		android:layout_height="126dp"
+		app:cardCornerRadius="8dp"
+
+		android:onClick="openCourse"
+		tools:tag="firstStep"
+		android:layout_weight="0">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/colorGray"
+			android:id="@+id/relative"
+			>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_above="@id/current_small_description"
+				android:textColor="@color/colorWhite"
+				android:textSize="16sp"
+				android:text="Первые шаги"
+				tools:textColor="@color/colorBlack"
+				android:layout_marginLeft="16dp"
+				android:layout_marginBottom="2dp"
+				/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorWhite"
+				android:textSize="12sp"
+				android:id="@+id/current_small_description"
+				android:text="Изи"
+				tools:tag="firstStep"
+				android:paddingLeft="16dp"
+				android:layout_gravity="bottom"
+				android:layout_marginBottom="12dp"
+				android:layout_alignParentBottom="true"
+				tools:textColor="@color/colorBlack"
+				/>
+
+		</RelativeLayout>
+	</androidx.cardview.widget.CardView>
+
+		<skarlat.dev.ecoproject.customView.ProgressBarView
+			android:id="@+id/pb_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="7dp"
+			android:background="@drawable/progress_bar2"
+			android:layout_marginTop="8dp" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorBlack"
+		android:text="Осталось 12 карточек"
+		android:textSize="12sp"
+		android:layout_marginTop="8dp"
+		android:layout_weight="0"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorBlack"
+		android:text="Доступные курсы"
+		android:textSize="20sp"
+		android:layout_marginTop="16dp"
+		android:layout_weight="0"
+		android:layout_marginBottom="16dp"/>
+
+<!--	RecycleView - пролистывание карточек доступных курсов-->
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycle_courses"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		app:layoutManager="LinearLayoutManager"
+		tools:visibility="visible"/>
+
+	</LinearLayout>
+
+</LinearLayout>

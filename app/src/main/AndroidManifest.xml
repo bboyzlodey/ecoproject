@@ -18,6 +18,7 @@
 				android:value=".ProjectActivity" />
 		</activity>
 		<activity android:name=".ProjectActivity" />
+		<activity android:name=".HomeActivity"/>
 		<activity android:name=".CourseCardActivity" />
 		<activity android:name=".MainActivity">
 			<intent-filter>

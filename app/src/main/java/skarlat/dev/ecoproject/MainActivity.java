@@ -20,19 +20,19 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		db = new DatabaseHelper(true);
+
 
 	}
 
 	public void next(View view) {
-		Intent intent = new Intent(this, CourseCardActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 
 		Course currentCourse = (Course) db.getListOfCourses().get("firstStep");
 
 		intent.putExtra(Course.class.getSimpleName(), currentCourse);
 
 
-		startActivityForResult(intent, PROGRESS_BAR);
+		startActivityForResult(intent, PROGRESS_BAR); // или так можно
 	}
 
 	@Override

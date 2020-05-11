@@ -1,31 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	tools:context=".EcoCardActivity"
-	android:layout_marginTop="16dp"
-	android:layout_marginBottom="16dp"
-	android:padding="16dp"
-	android:orientation="vertical"
-	android:background="@drawable/text_view_rounded"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
 	>
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="Header"
-		tools:textAllCaps="true"
-		android:id="@+id/header_card"
-		style="@style/nameOfSoviet"/>
+<androidx.cardview.widget.CardView
+	android:layout_marginBottom="8dp"
+	android:id="@+id/current_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:cardCornerRadius="8dp"
+	android:onClick="openCourse"
+	tools:tag="firstStep">
 
-	<TextView
-		android:layout_width="wrap_content"
+	<RelativeLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		tools:text="Big text"
-		android:capitalize="sentences"
-		android:id="@+id/descr_card"
-		android:layout_marginTop="8dp"
-		android:textColor="@color/colorBlack"/>
+		android:background="@color/colorGray">
+
+		<ToggleButton
+			android:id="@+id/toggle"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:background="@drawable/toggle_selector"
+			android:padding="0dp"
+			android:textOff=""
+			android:textOn=""
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="16dp"
+			android:layout_marginTop="16dp"
+			/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingLeft="16dp"
+			android:paddingTop="17dp"
+			android:paddingBottom="16dp">
+
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="40dp"
+				tools:text="Header"
+				tools:textAllCaps="true"
+				android:id="@+id/header_card"
+				style="@style/nameOfSoviet"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				tools:text="Big text"
+				android:capitalize="sentences"
+				android:id="@+id/descr_card"
+				android:layout_marginTop="8dp"
+				android:textColor="@color/colorBlack"/>
+		</LinearLayout>
+	</RelativeLayout>
+</androidx.cardview.widget.CardView>
 </LinearLayout>

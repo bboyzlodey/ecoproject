@@ -5,6 +5,13 @@
 		<!-- Customize your theme here. -->
 		<item name="colorButtonNormal">@color/colorBlack</item>
 		<item name="android:statusBarColor">@color/colorBlack</item>
+		<item name="tabIndicatorColor">@color/colorWhite</item>
+	</style>
+	<style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">
+		<item name="android:gravity">center_horizontal|bottom</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:textAlignment">center</item>
 	</style>
 	<style name="Home" parent="Widget.AppCompat.ButtonBar">
 		<item name="background">@color/colorWhite</item>
@@ -12,11 +19,15 @@
 	<style name="nameOfSoviet" parent="@style/Widget.AppCompat.TextView">
 		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">@color/colorBlack</item>
-		<item name="android:typeface">monospace</item>
 		<item name="android:textStyle">bold</item>
 	</style>
 	<style name="FullscreenCustom" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:windowContentOverlay">@null</item>
+	</style>
+
+
+	<style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+		<item name="tabIndicatorColor">#0000FF</item>
 	</style>
 </resources>
