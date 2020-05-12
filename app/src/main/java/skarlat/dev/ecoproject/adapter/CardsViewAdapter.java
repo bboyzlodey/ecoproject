@@ -87,7 +87,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
 //            holder.cardClose.setVisibility(View.VISIBLE);
 //            holder.cardClose.setText(String.valueOf(position));
 //        }
-        if ( getItemCount() - 1 == position ){
+        if ( getItemCount() - 1 == position ){ // Latest item
             holder.nextCard.setVisibility(View.GONE);
         }
     }

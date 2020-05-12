@@ -111,6 +111,7 @@
 				android:layout_weight="1"
 				android:nestedScrollingEnabled="false"
 				app:layoutManager="LinearLayoutManager"
+				android:paddingBottom="16dp"
 				tools:visibility="visible"/>
 
 		</LinearLayout>

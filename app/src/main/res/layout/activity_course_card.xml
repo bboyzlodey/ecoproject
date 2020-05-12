@@ -104,7 +104,8 @@
                     android:layout_marginRight="16dp"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="LinearLayoutManager"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    android:paddingBottom="60dp"/>
 
             </RelativeLayout>
 
