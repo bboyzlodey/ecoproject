@@ -13,7 +13,8 @@
 		android:layout_height="126dp"
 		app:cardCornerRadius="8dp"
 		android:onClick="openCourse"
-		tools:tag="firstStep"
+		android:tag="tag"
+		tools:tag="tag"
 		android:layout_weight="0">
 
 		<RelativeLayout

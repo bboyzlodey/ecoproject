@@ -1,23 +1,20 @@
 package skarlat.dev.ecoproject.includes;
 
 import android.util.ArrayMap;
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Query;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
+import static skarlat.dev.ecoproject.Course.Status.CLOSED;
+import static skarlat.dev.ecoproject.Course.Status.CURRENT;
+import static skarlat.dev.ecoproject.Course.Status.FINISHED;
 
 /**
  * @Class - помошник в обработке данных для добавления\взятия данных
@@ -32,7 +29,9 @@ public class DatabaseHelper {
     private List<Object> cards = new ArrayList<>();
 
 
-    public DatabaseHelper(){}
+    public DatabaseHelper(){
+        initCourses();
+    }
 
     /**
      * Список добавленных курсов
@@ -54,9 +53,25 @@ public class DatabaseHelper {
         return curs.progressBar;
     }
 
-    public ArrayMap<String,Object> getListOfCourses(){
+    public ArrayMap<String, Object> getAllCourses(){
         return this.courses;
     }
+
+    public Course getCurrentCourse(){
+
+        СoursesDB courseDB = coursesDao.getCurrentCurs();
+        if (courseDB == null)
+            return null;
+
+        String courseName = courseDB.cursID;
+
+        return (Course) courses.get(courseName);
+    }
+
+    public СoursesDB getCourseByName(String courseName){
+        return coursesDao.getByCursID(courseName);
+    }
+
 
     public List<Object> getListOfCards(){
         return this.cards;
@@ -64,7 +79,7 @@ public class DatabaseHelper {
 
     private void initCourses(){
         courses.put("lvl-1",new Course("lvl-1",
-                                            "Первые шаги",
+                                            "Первые шаги","Первые шаги",
                                         "Этот курс покажет, " +
                                                 "что помогать планете можно несложными действиями. " +
                                                 "Расскажет, как экономить воду, зачем спасать " +
@@ -80,18 +95,18 @@ public class DatabaseHelper {
                                             "Поэтому чем меньше воды мы расходуем в никуда, тем больше вероятность, " +
                                             "что водные ресурсы не исчерпают себя очень быстро. " +
                                             "Плюс простыми действиями можно сократить сумму в счетах на " +
-                                            "оплату — немного, но всё равно приятно!",
-                                        1));
+                                            "оплату — немного, но всё равно приятно!",0
+                                        ));
         courses.put("lvl-2",new Course("lvl-2","Продвинутый",
-                "Сложнее", "null",1));
+                "Сложнее","Сложнее", "null",0));
         courses.put("lvl-3",new Course("lvl-3","Профи",
-                "Очень сложно", "null",1));
+                "Очень сложно","Очень сложно", "null",0));
         courses.put("lvl-4",new Course("lvl-4","Гипер сложно",
-                "ну попробуй", "null",1));
+                "ну попробуй","ну попробуй", "null",0));
         courses.put("lvl-5",new Course("lvl-5","Ты не справишься!",
-                "Спорим?", "null",1));
+                "Спорим?","Спорим?", "null",0));
         courses.put("lvl-6",new Course("lvl-6","Успокойся парень",
-                "Почитать полезное", "null",1));
+                "Почитать полезное","Почитать полезное", "null",0));
     }
 
     public void initCards(String cursName){
@@ -206,7 +221,7 @@ public class DatabaseHelper {
                 initCurs.id = 1;
                 initCurs.cursID = key;
                 initCurs.progressBar = 0;
-                initCurs.isActive = 1;
+                initCurs.isActive = 0;
                 coursesDao.insert(initCurs);
             } else
                 curs = null;

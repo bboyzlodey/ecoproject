@@ -20,6 +20,7 @@
 			android:layout_marginRight="16dp">
 
 			<TextView
+				android:id="@+id/current_course_text_view"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/colorBlack"
@@ -27,6 +28,7 @@
 				android:textSize="24sp"
 				android:layout_marginTop="27dp"
 				android:layout_marginBottom="17dp"
+				android:visibility="visible"
 				android:layout_weight="0"/>
 
 			<!--	CardView - Карточка текущего курса. Для демонстрации пойдет так-->
@@ -37,7 +39,8 @@
 				app:cardCornerRadius="8dp"
 				android:onClick="openCourse"
 				android:elevation="6dp"
-				tools:tag="firstStep"
+				tools:tag="tag"
+				android:visibility="visible"
 				android:layout_weight="0">
 
 				<RelativeLayout
@@ -48,14 +51,15 @@
 					>
 
 					<TextView
+						android:id="@+id/course_title"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_above="@id/current_small_description"
 						android:textColor="@color/colorWhite"
 						android:textSize="16sp"
-						android:text="Первые шаги"
+						android:text="@string/curs_title"
 						tools:textColor="@color/colorBlack"
-						android:layout_marginLeft="16dp"
+						android:layout_marginStart="16dp"
 						android:layout_marginBottom="2dp"
 						/>
 
@@ -65,7 +69,7 @@
 						android:textColor="@color/colorWhite"
 						android:textSize="12sp"
 						android:id="@+id/current_small_description"
-						android:text="Изи"
+						android:text="@string/description"
 						tools:tag="firstStep"
 						android:paddingLeft="16dp"
 						android:layout_gravity="bottom"
@@ -82,15 +86,18 @@
 				android:layout_width="fill_parent"
 				android:layout_height="7dp"
 				android:background="@drawable/progress_bar2"
-				android:layout_marginTop="8dp" />
+				android:layout_marginTop="8dp"
+				android:visibility="visible"/>
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/colorBlack"
-				android:text="Осталось 12 карточек"
+				android:id="@+id/count_left_cards"
+				android:text="@string/count_card"
 				android:textSize="12sp"
 				android:layout_marginTop="8dp"
+				android:visibility="visible"
 				android:layout_weight="0"/>
 
 			<TextView

@@ -22,7 +22,7 @@ import skarlat.dev.ecoproject.includes.DatabaseHelper;
 public class CourseCardActivity extends AppCompatActivity {
 //    private ProgressBarView progressBarView;
 //    private TextView leftCards;
-//    private TextView cursTitle;
+    private TextView cursTitle;
 //    private TextView courseDesc;
 //    private RecyclerView recyclerView;
 //    private int progress;
@@ -35,7 +35,12 @@ public class CourseCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_card);
 
-//        cursTitle = (TextView) findViewById(R.id.curs_title);
+        Bundle tagView = getIntent().getExtras();
+
+        String tag = (String) tagView.get("tag");
+
+        cursTitle = (TextView) findViewById(R.id.curs_title);
+        cursTitle.setText(tag);
 //        progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
 //        leftCards = (TextView) findViewById(R.id.left_cards);
 //        courseDesc = (TextView) findViewById(R.id.course_desc);

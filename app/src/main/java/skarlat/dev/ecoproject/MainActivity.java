@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
 	private TextView count;
 	static final private int PROGRESS_BAR = 0;
-	public DatabaseHelper db = new DatabaseHelper();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

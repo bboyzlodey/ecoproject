@@ -8,6 +8,7 @@ import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
 public class Course extends AbstractEco implements Serializable {
     private static final String KEY_LOG= "Course";
+    private String lvl;
     
     public enum Status{
         CLOSED,
@@ -20,7 +21,26 @@ public class Course extends AbstractEco implements Serializable {
     public Course(String name, String title, boolean status){
         super(name, title);
     }
-    
+
+    public Course(String name,String title, String lvl, String desription, String fullDescription, int status) {
+        super(name, title, desription, fullDescription, status);
+        switch (status){
+            case 0:
+                this.status = Status.CLOSED;
+                break;
+            case 1:
+                this.status = Status.CURRENT;
+                break;
+            case 2:
+                this.status = Status.FINISHED;
+        }
+        this.lvl = lvl;
+    }
+
+    public String getLvl (){
+        return this.lvl;
+    }
+
     public Course(String name,String title, String desription,String fullDescription, int status) {
         super(name, title, desription,fullDescription, status);
         switch (status){

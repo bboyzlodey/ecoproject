@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
 	private LayoutInflater inflater;
 	private List<Course> courses;
-	
+
 	CourseAdapter(Context context, List<Course> courses) {
 		this.courses = courses;
 		this.inflater = LayoutInflater.from(context);
@@ -33,8 +34,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 	public void onBindViewHolder(CourseAdapter.ViewHolder holder, int position) {
 		Course course = courses.get(position);
 		holder.header.setText(course.getTitle());
-		holder.description.setText(course.getDescription());
-		holder.itemView.setTag(course); // присваиваем вьюхе "карточка" объект карточки(Course);
+		holder.lvl.setText(course.getLvl());
+		holder.tag.setTag(course); // присваиваем вьюхе "карточка" объект карточки(Course);
+
 	}
 	
 	@Override
@@ -43,11 +45,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 	}
 	
 	public class ViewHolder extends RecyclerView.ViewHolder {
-		final TextView header, description;
+		final TextView header, lvl;
+		final CardView tag;
 		ViewHolder(View view){
 			super(view);
 			header = (TextView) view.findViewById(R.id.current_title);
-			description = (TextView) view.findViewById(R.id.current_small_description);
+			lvl = (TextView) view.findViewById(R.id.current_small_description);
+			tag = view.findViewById(R.id.current_course);
 		}
 	}
 }

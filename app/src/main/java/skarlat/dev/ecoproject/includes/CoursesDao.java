@@ -28,6 +28,9 @@ public interface CoursesDao {
     @Query("SELECT * FROM СoursesDB WHERE cursID = :cursID")
     СoursesDB getByCursID(String cursID);
 
+    @Query("SELECT * FROM СoursesDB WHERE isActive = 1")
+    СoursesDB getCurrentCurs();
+
     @Insert
     void insert(СoursesDB сoursesDB);
 
