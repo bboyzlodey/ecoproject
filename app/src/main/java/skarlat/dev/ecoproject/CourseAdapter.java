@@ -9,8 +9,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Map;
 
-public class CourseAdapter<U> extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
 	private LayoutInflater inflater;
 	private List<Course> courses;
 	
@@ -18,6 +19,9 @@ public class CourseAdapter<U> extends RecyclerView.Adapter<CourseAdapter.ViewHol
 		this.courses = courses;
 		this.inflater = LayoutInflater.from(context);
 	}
+	CourseAdapter(Context context, Education education){}
+	CourseAdapter(Context context, Map<Course.Status, Course> map){}
+	
 	@Override
 	public CourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		
@@ -30,6 +34,7 @@ public class CourseAdapter<U> extends RecyclerView.Adapter<CourseAdapter.ViewHol
 		Course course = courses.get(position);
 		holder.header.setText(course.getTitle());
 		holder.description.setText(course.getDescription());
+		holder.itemView.setTag(course); // присваиваем вьюхе "карточка" объект карточки(Course);
 	}
 	
 	@Override
