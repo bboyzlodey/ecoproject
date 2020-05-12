@@ -78,6 +78,9 @@ public class DatabaseHelper {
     }
 
     private void initCourses(){
+        List<СoursesDB> courseDB = coursesDao.getAll();
+        СoursesDB status;
+        status = coursesDao.getByCursID("lvl-1");
         courses.put("lvl-1",new Course("lvl-1",
                                             "Первые шаги","Первые шаги",
                                         "Этот курс покажет, " +
@@ -95,18 +98,23 @@ public class DatabaseHelper {
                                             "Поэтому чем меньше воды мы расходуем в никуда, тем больше вероятность, " +
                                             "что водные ресурсы не исчерпают себя очень быстро. " +
                                             "Плюс простыми действиями можно сократить сумму в счетах на " +
-                                            "оплату — немного, но всё равно приятно!",0
+                                            "оплату — немного, но всё равно приятно!",status == null ? 0 : status.isActive
                                         ));
+        status = coursesDao.getByCursID("lvl-2");
         courses.put("lvl-2",new Course("lvl-2","Продвинутый",
-                "Сложнее","Сложнее", "null",0));
+                "Сложнее","Сложнее", "null",status == null ? 0 : status.isActive));
+        status = coursesDao.getByCursID("lvl-3");
         courses.put("lvl-3",new Course("lvl-3","Профи",
-                "Очень сложно","Очень сложно", "null",0));
+                "Очень сложно","Очень сложно", "null",status == null ? 0 : status.isActive));
+        status = coursesDao.getByCursID("lvl-4");
         courses.put("lvl-4",new Course("lvl-4","Гипер сложно",
-                "ну попробуй","ну попробуй", "null",0));
+                "ну попробуй","ну попробуй", "null",status == null ? 0 : status.isActive));
+        status = coursesDao.getByCursID("lvl-5");
         courses.put("lvl-5",new Course("lvl-5","Ты не справишься!",
-                "Спорим?","Спорим?", "null",0));
+                "Спорим?","Спорим?", "null",status == null ? 0 : status.isActive));
+        status = coursesDao.getByCursID("lvl-6");
         courses.put("lvl-6",new Course("lvl-6","Успокойся парень",
-                "Почитать полезное","Почитать полезное", "null",0));
+                "Почитать полезное","Почитать полезное", "null",status == null ? 0 : status.isActive));
     }
 
     public void initCards(String cursName){
@@ -199,6 +207,7 @@ public class DatabaseHelper {
     public void upDateCourse(String cursName, int progressBar, int isActive){
         СoursesDB curs = coursesDao.getByCursID(cursName);
         curs.progressBar = progressBar;
+        curs.isActive = isActive;
         coursesDao.update(curs);
     }
 

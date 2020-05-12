@@ -59,7 +59,7 @@ public class PageFragment extends Fragment {
 		this.view = view;
 
 		TextView currentCourseLvlView  = view.findViewById(R.id.current_small_description);
-		TextView currentCourseTitleView  = view.findViewById(R.id.current_title);
+		TextView currentCourseTitleView  = view.findViewById(R.id.current_course_title);
 		TextView currentCourseTextView = view.findViewById(R.id.current_course_text_view);
 		TextView countLeftCardView = view.findViewById(R.id.count_left_cards);
 		ProgressBarView progressBarView = view.findViewById(R.id.pb_horizontal);
