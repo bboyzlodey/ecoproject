@@ -1,96 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".activity.CourseCardActivity">
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="192sp"
-            android:background="@color/colorGray"
-            />
-        <View
-            android:id="@+id/back_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:onClick="onBackBtn"
-            android:background="@drawable/ic_arrow_back"/>
-    </FrameLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/curs_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/curs_title"
-        android:textColor="@color/colorBlack"
-        android:textSize="24sp"
-        />
-
-
-    <skarlat.dev.ecoproject.customView.ProgressBarView
-        android:id="@+id/pb_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="7dp"
-        android:background="@drawable/custom_progressbar"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
-
-    <TextView
-        android:id="@+id/left_cards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/colorBlack"
-        android:text="@string/left_cards"
-        />
-
-    <TextView
-        android:id="@+id/course_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/description"
-        android:textSize="14sp"
-        android:lineSpacingExtra="6sp"
-        android:textColor="@color/colorBlack"
-        />
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="#B6B6B6"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_cards"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager"
-            tools:visibility="gone" />
+            android:orientation="vertical"
+            tools:context=".CourseCardActivity">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="192sp"
+                    android:background="@color/colorGray"
+                    />
+                <View
+                    android:id="@+id/back_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="16dp"
+                    android:onClick="onBackBtn"
+                    android:background="@drawable/ic_arrow_back"/>
+            </FrameLayout>
 
+            <TextView
+                android:id="@+id/curs_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/curs_title"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                />
+
+
+            <skarlat.dev.ecoproject.customView.ProgressBarView
+                android:id="@+id/pb_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="7dp"
+                android:background="@drawable/custom_progressbar"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+            <TextView
+                android:id="@+id/left_cards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorBlack"
+                android:text="@string/left_cards"
+                />
+
+            <TextView
+                android:id="@+id/course_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/description"
+                android:textSize="14sp"
+                android:lineSpacingExtra="6sp"
+                android:textColor="@color/colorBlack"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="#B6B6B6"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/recycle_cards"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:visibility="visible"
+                    android:paddingBottom="60dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="progressBar"
+        android:layout_width="238dp"
+        android:layout_height="40dp"
+        android:textSize="14sp"
+        android:text="Начать обучение"
         android:textColor="@color/colorWhite"
-        android:onClick="increase"/>
+        android:textAllCaps="false"
+        android:background="@drawable/begin_button"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="openCard"
+        android:layout_marginBottom="10dp"/>
 
-</LinearLayout>
+</RelativeLayout>

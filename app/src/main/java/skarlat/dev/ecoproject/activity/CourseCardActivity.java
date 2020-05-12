@@ -102,4 +102,6 @@ public class CourseCardActivity extends AppCompatActivity {
 
     }
 
+    public void openCard(View view) {
+    }
 }

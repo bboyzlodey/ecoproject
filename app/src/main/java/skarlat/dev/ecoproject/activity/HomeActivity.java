@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -23,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
 	private TabLayout tabLayout;
 	private DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,9 +75,10 @@ public class HomeActivity extends AppCompatActivity {
 			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
 	
 	    // Передаём ViewPager в TabLayout
-//	    TabLayout tabLayout = findViewById(R.id.home_tab);
 	    tabLayout.setupWithViewPager(viewPager);
 	    
+	    //  Анимация для сглаживания программного скрола в PageFragment
+	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
 
     private void initDataBase(){
@@ -97,7 +101,8 @@ public class HomeActivity extends AppCompatActivity {
 	 */
 	public void openCourse(View v){
 		Intent open;  // интент, который сделает переключение в Активити с карточками
-		open = new Intent(this, EcoCardActivity.class);
+//		open = new Intent(this, EcoCardActivity.class);
+		open = new Intent(this, CourseCardActivity.class);
 		/**
 		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
 		 *      String title;

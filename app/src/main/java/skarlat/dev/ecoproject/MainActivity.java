@@ -31,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
 	public void next(View view) {
 		Intent intent = new Intent(this, HomeActivity.class);
-
-		Course currentCourse = (Course) db.getListOfCourses().get("firstStep");
-
-		intent.putExtra(Course.class.getSimpleName(), currentCourse);
-
-
-		startActivityForResult(intent, PROGRESS_BAR); // или так можно
+		startActivity(intent);
+		
+		/**
+		 *  Временно закоментировал. Вылетает эксепшн.
+		 */
+//		Course currentCourse = (Course) db.getListOfCourses().get("firstStep");
+//		intent.putExtra(Course.class.getSimpleName(), currentCourse);
+//		startActivityForResult(intent, PROGRESS_BAR); // или так можно
 	}
 
 	@Override
