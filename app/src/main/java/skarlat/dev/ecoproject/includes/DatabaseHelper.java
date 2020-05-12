@@ -211,6 +211,18 @@ public class DatabaseHelper {
         coursesDao.update(curs);
     }
 
+    public void upDateCurrentCourse(String courseName){
+        СoursesDB next = coursesDao.getByCursID(courseName);
+        СoursesDB last = coursesDao.getCurrentCurs();
+        if (last.isActive == 1){
+            last.isActive = 0;
+        }
+        next.isActive = 1;
+
+        coursesDao.update(next);
+        coursesDao.update(last);
+    }
+
     public void upDateCard(String cardName, int isActive){
         CardsDB cardsDB = cardsDao.getByCardID(cardName);
         cardsDB.isActive = isActive;
