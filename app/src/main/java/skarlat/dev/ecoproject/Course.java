@@ -9,7 +9,7 @@ import skarlat.dev.ecoproject.includes.DatabaseHelper;
 public class Course extends AbstractEco implements Serializable {
     private static final String KEY_LOG= "Course";
     
-    private enum Status{
+    public enum Status{
         CLOSED,
         CURRENT,
         FINISHED;
@@ -37,8 +37,8 @@ public class Course extends AbstractEco implements Serializable {
     }
     
     @Override
-    public Enum getStatus() {
-        return null;
+    public Enum<Status> getStatus() {
+        return status;
     }
     
 }

@@ -53,7 +53,6 @@ abstract public class AbstractEco implements EcoInterface, Serializable {
 	 * @return: Enum - объект перпечисления.
 	 * Метод переодпределяется в каждом классе
 	 */
-	
 	@Override
 	abstract public Enum getStatus();
 

@@ -44,41 +44,52 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Course ecoCard = card.get(position);
-        int status = ecoCard.getStatus();
-        if (status == 0) {
-            holder.header.setVisibility(View.GONE);
-            holder.description.setVisibility(View.GONE);
-            holder.countOpenCard.setVisibility(View.GONE);
-            holder.cardClose.setVisibility(View.VISIBLE);
-            holder.cardClose.setText(String.valueOf(position));
-        } else if( status == 1 ){
-            holder.header.setVisibility(View.GONE);
-            holder.description.setVisibility(View.GONE);
-            holder.countOpenCard.setVisibility(View.GONE);
-            holder.cardClose.setVisibility(View.VISIBLE);
-            holder.cardClose.setText("");
-            Drawable drawable = holder.backgroundCard.getBackground();
-            drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        Course.Status status = (Course.Status) ecoCard.getStatus();
+        switch (status){
+            case CLOSED:
+                holder.header.setVisibility(View.GONE);
+                holder.description.setVisibility(View.GONE);
+                holder.countOpenCard.setVisibility(View.GONE);
+                holder.cardClose.setVisibility(View.VISIBLE);
+                holder.cardClose.setText(String.valueOf(position));
+                break;
+            case CURRENT:
+                holder.header.setVisibility(View.GONE);
+                holder.description.setVisibility(View.GONE);
+                holder.countOpenCard.setVisibility(View.GONE);
+                holder.cardClose.setVisibility(View.VISIBLE);
+                holder.cardClose.setText("");
+                Drawable drawable = holder.backgroundCard.getBackground();
+                drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 //            holder.backgroundCard.setTranslationZ(24);
 //            holder.backgroundCard.setElevation(0);
-            holder.cardClose.setBackgroundResource(R.drawable.ic_play);
+                holder.cardClose.setBackgroundResource(R.drawable.ic_play);
+            case FINISHED:
+                holder.header.setVisibility(View.VISIBLE);
+                holder.header.setText( ecoCard.getTitle() );
+                holder.description.setVisibility(View.VISIBLE);
+                holder.description.setText(ecoCard.getDescription());
+                GradientDrawable gradientDrawable = (GradientDrawable) holder.backgroundCard.getBackground();
+                gradientDrawable.setColor(Color.WHITE);
+                holder.countOpenCard.setVisibility(View.VISIBLE);
+                holder.countOpenCard.setText(String.valueOf(position));
+                holder.cardClose.setVisibility(View.GONE);
         }
-        else if (status == 2 ){
-            holder.header.setVisibility(View.VISIBLE);
-            holder.header.setText( ecoCard.getTitle() );
-            holder.description.setVisibility(View.VISIBLE);
-            holder.description.setText(ecoCard.getDescription());
-            GradientDrawable drawable = (GradientDrawable) holder.backgroundCard.getBackground();
-            drawable.setColor(Color.WHITE);
-            holder.countOpenCard.setVisibility(View.VISIBLE);
-            holder.countOpenCard.setText(String.valueOf(position));
-            holder.cardClose.setVisibility(View.GONE);
-        }
-
+        
+        /**
+         *    Можно делать также через реализацию с if
+         *    В след коммите я это удалю
+         */
+//        if (ecoCard.getStatus() == Course.Status.CLOSED) {
+//            holder.header.setVisibility(View.GONE);
+//            holder.description.setVisibility(View.GONE);
+//            holder.countOpenCard.setVisibility(View.GONE);
+//            holder.cardClose.setVisibility(View.VISIBLE);
+//            holder.cardClose.setText(String.valueOf(position));
+//        }
         if ( getItemCount() - 1 == position ){
             holder.nextCard.setVisibility(View.GONE);
         }
-
     }
 
     @Override

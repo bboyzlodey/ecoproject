@@ -60,7 +60,11 @@ public class CourseCardActivity extends AppCompatActivity {
         ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 0));
         ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 1));
         ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 1));
-
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 1));
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 1));
+        ecoCard.add(new Course("hehe", "fdsf", "ppp", "poi", 2));
+    
+    
         /**
          *
          *      Добавляем лист объектов в recycleView;
