@@ -1,8 +1,6 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -11,18 +9,27 @@ import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import skarlat.dev.ecoproject.Course;
+import skarlat.dev.ecoproject.EcoCardActivity;
+import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.SampleFragmentPagerAdapter;
+import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
 public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
 	private TabLayout tabLayout;
+	private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
+		initDataBase(); // Иницилизация базы данных
 	    setIconsInTab();
     }
 	
@@ -69,6 +76,18 @@ public class HomeActivity extends AppCompatActivity {
 	    tabLayout.setupWithViewPager(viewPager);
 	    
     }
+
+    private void initDataBase(){
+		try {
+
+			InputStream inputStream = getResources().getAssets().open("soviets.csv"); //считывание списка советов из файла
+
+			db = new DatabaseHelper(inputStream); // Инициализация Базы данных
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 *
@@ -79,7 +98,6 @@ public class HomeActivity extends AppCompatActivity {
 	public void openCourse(View v){
 		Intent open;  // интент, который сделает переключение в Активити с карточками
 		open = new Intent(this, EcoCardActivity.class);
-		
 		/**
 		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
 		 *      String title;

@@ -58,16 +58,16 @@ public class PageFragment extends Fragment {
 	
 	protected void initiList(){
 		courses = new ArrayList<>();
-		courses.add(new Course("Продвинутый",
-				"Сложнее", true));
-		courses.add(new Course("Профи",
-				"Очень сложно", false));
-		courses.add(new Course("Гипер сложно",
-				"ну попробуй", false));
-		courses.add(new Course("Ты не справишься!",
-				"Спорим?", false));
-		courses.add(new Course("Успокойся парень",
-				"Почитать полезное", false));
+//		courses.add(new Course("","Продвинутый",
+//				"Сложнее", true));
+//		courses.add(new Course("Профи",
+//				"Очень сложно", false));
+//		courses.add(new Course("Гипер сложно",
+//				"ну попробуй", false));
+//		courses.add(new Course("Ты не справишься!",
+//				"Спорим?", false));
+//		courses.add(new Course("Успокойся парень",
+//				"Почитать полезное", false));
 	}
 	
 }

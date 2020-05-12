@@ -1,12 +1,16 @@
 package skarlat.dev.ecoproject.includes;
 
 import android.util.ArrayMap;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Query;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,21 +27,20 @@ public class DatabaseHelper {
     private AppDatabase db = App.getInstance().getDatabase();
     private CoursesDao coursesDao = db.cursCardDao();
     private CardsDao cardsDao = db.cardsDao();
+    private SovietsDao sovietsDao = db.sovietsDao();
     private ArrayMap<String,Object> courses = new ArrayMap<>();
     private List<Object> cards = new ArrayList<>();
 
 
-    public DatabaseHelper(){
-    }
+    public DatabaseHelper(){}
 
     /**
      * Список добавленных курсов
      */
-    public DatabaseHelper(boolean init){
-        if ( init ){
+    public DatabaseHelper(InputStream inputStream){
             initCourses();
-            initDB("firstStep");
-        }
+            initCoursesDB();
+            initSoviets(inputStream);
     }
 
 
@@ -60,7 +63,7 @@ public class DatabaseHelper {
     }
 
     private void initCourses(){
-        courses.put("firstStep",new Course("firstStep",
+        courses.put("lvl-1",new Course("lvl-1",
                                             "Первые шаги",
                                         "Этот курс покажет, " +
                                                 "что помогать планете можно несложными действиями. " +
@@ -79,6 +82,16 @@ public class DatabaseHelper {
                                             "Плюс простыми действиями можно сократить сумму в счетах на " +
                                             "оплату — немного, но всё равно приятно!",
                                         1));
+        courses.put("lvl-2",new Course("lvl-2","Продвинутый",
+                "Сложнее", "null",1));
+        courses.put("lvl-3",new Course("lvl-3","Профи",
+                "Очень сложно", "null",1));
+        courses.put("lvl-4",new Course("lvl-4","Гипер сложно",
+                "ну попробуй", "null",1));
+        courses.put("lvl-5",new Course("lvl-5","Ты не справишься!",
+                "Спорим?", "null",1));
+        courses.put("lvl-6",new Course("lvl-6","Успокойся парень",
+                "Почитать полезное", "null",1));
     }
 
     public void initCards(String cursName){
@@ -98,6 +111,28 @@ public class DatabaseHelper {
             default:
                 return;
         }
+    }
+
+    public void initSoviets(InputStream inputStream){
+
+        List<SovietsDB> sovietsDB = sovietsDao.getAll();
+
+        if (sovietsDB == null){
+            CSVFile csvFile = new CSVFile(inputStream);
+            List list = csvFile.read();
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (list.get(i) == null )
+                    continue;
+                String[] row = (String[]) list.get(i);
+                SovietsDB initSoviet = new SovietsDB();
+                initSoviet.cardID = row[0];
+                initSoviet.title = row[1];
+                initSoviet.description = row[2];
+                initSoviet.isFavorite = 0;
+                sovietsDao.insert(initSoviet);
+            }
+        }
+
     }
 
     public int getCountActiveCards(String cursName){
@@ -160,21 +195,23 @@ public class DatabaseHelper {
 
     /**
      * Создание таблицы в базе данных при первом подключении
-     * @param cursName - имя курса по которому будет вестись поиск таблицы
      */
-    private void initDB(String cursName){
+    private void initCoursesDB(){
 
-        СoursesDB curs = coursesDao.getByCursID(cursName);
+        for (int i = 0; i < courses.size(); i++) {
+            String key = courses.keyAt(i);
+            СoursesDB curs = coursesDao.getByCursID(key);
+            if (curs == null){
+                СoursesDB initCurs = new СoursesDB();
+                initCurs.id = 1;
+                initCurs.cursID = key;
+                initCurs.progressBar = 0;
+                initCurs.isActive = 1;
+                coursesDao.insert(initCurs);
+            } else
+                curs = null;
+        }
 
-        if (curs == null){
-            СoursesDB initCurs = new СoursesDB();
-            initCurs.id = 1;
-            initCurs.cursID = cursName;
-            initCurs.progressBar = 0;
-            initCurs.isActive = 1;
-            coursesDao.insert(initCurs);
-        } else
-            curs = null;
 
     }
 

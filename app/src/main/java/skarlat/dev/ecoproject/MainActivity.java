@@ -8,18 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import skarlat.dev.ecoproject.activity.HomeActivity;
+import skarlat.dev.ecoproject.includes.CSVFile;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
 	private TextView count;
 	static final private int PROGRESS_BAR = 0;
-	public DatabaseHelper db;
+	public DatabaseHelper db = new DatabaseHelper();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 
 
 	}
