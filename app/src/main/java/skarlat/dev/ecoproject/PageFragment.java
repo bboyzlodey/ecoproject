@@ -83,10 +83,11 @@ public class PageFragment extends Fragment {
 			progressBarView.setValue(progressBar);
 			currentCardView.setTag(currentCourse);
 		}
-		if (coursesDone == null){
-			TextView textViewDone = view.findViewById(R.id.course_done);
-			textViewDone.setVisibility(View.GONE);
-		}
+		TextView textViewDone = view.findViewById(R.id.course_done);
+//		if (coursesDone == null){
+//			textViewDone.setVisibility(View.GONE);
+//		}else
+//			textViewDone.setVisibility(View.VISIBLE);
 
 
 		initiList(); // создаем лист и заполняем его
@@ -102,28 +103,8 @@ public class PageFragment extends Fragment {
 		CourseAdapter courseAdapterDone = new CourseAdapter(getContext(), coursesDone);
 		if(recyclerView != null)
 			recyclerView.setAdapter(courseAdapter);
-//		if(recyclerViewDone != null)
-//			recyclerView.setAdapter(courseAdapterDone);
-		/**
-		 *      Проблема в том, что запускается фрагмент, а там скролл не в начале
-		 *      Для этого нужен новый поток, что бы проскроллить в начало.
-		 *      Но он скролит грубо.
-		 *      Пусть будет пока что.
-		 */
-		///////////////////////////////
-		/**
-		 * Проблема второго потока
-		 * скролив в середину
-		 * след коммитом удалю
-		 *
-		 */
-//		final ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollEducation);
-//		scrollView.post(new Runnable() {
-//			@Override
-//			public void run() {
-//				scrollView.fullScroll(ScrollView.FOCUS_UP);
-//			}
-//		});
+		if (recyclerViewDone != null)
+			recyclerViewDone.setAdapter(courseAdapterDone);
 		return view;
 	}
 	
