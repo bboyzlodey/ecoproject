@@ -33,8 +33,8 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 		EcoSoviet ecoSoviet = soviets.get(position);
 //		holder.header.setText(ecoSoviet.getTitle());
 //		holder.description.setText(ecoSoviet.getDescription());
-		holder.header.setText(ecoSoviet.getName());
-		holder.description.setText(ecoSoviet.getTitle());
+		holder.header.setText(ecoSoviet.getTitle());
+		holder.description.setText(ecoSoviet.getDescription());
 	}
 	
 	@Override

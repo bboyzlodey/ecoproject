@@ -12,7 +12,6 @@ xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	app:cardCornerRadius="8dp"
-	android:onClick="openCourse"
 	tools:tag="firstStep">
 
 	<RelativeLayout
