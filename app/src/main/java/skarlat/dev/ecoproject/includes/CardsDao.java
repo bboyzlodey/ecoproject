@@ -19,7 +19,7 @@ public interface CardsDao {
     @Query("SELECT * FROM CardsDB WHERE cardID = :cardID")
     CardsDB getByCardID(String cardID);
 
-    @Query("SELECT * FROM CardsDB WHERE cursID = :cursID AND isActive = 1")
+    @Query("SELECT * FROM CardsDB WHERE cursID = :cursID AND isActive = 2")
     List<CardsDB> getAllActive(String cursID);
 
     @Insert

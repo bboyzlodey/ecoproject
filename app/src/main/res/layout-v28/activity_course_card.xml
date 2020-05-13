@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".CourseCardActivity">
+            tools:context=".activity.CourseCardActivity">
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -89,19 +89,17 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:paddingBottom="80dp">
 
                 <androidx.recyclerview.widget.RecyclerView
 
                     android:id="@+id/recycle_cards"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="LinearLayoutManager"
-                    tools:visibility="visible"
-                    android:paddingBottom="60dp"/>
+                    tools:visibility="visible" />
 
             </RelativeLayout>
 
@@ -112,13 +110,14 @@
         android:layout_width="238dp"
         android:layout_height="40dp"
         android:textSize="14sp"
-        android:text="Начать обучение"
+        android:text="@string/start_course"
+        android:id="@+id/start_course"
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
         android:background="@drawable/begin_button"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:onClick="openCard"
+        android:onClick="startBtn"
         android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>

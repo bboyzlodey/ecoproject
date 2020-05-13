@@ -1,6 +1,8 @@
 package skarlat.dev.ecoproject.includes;
 
+import android.annotation.SuppressLint;
 import android.util.ArrayMap;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +28,7 @@ public class DatabaseHelper {
     private CardsDao cardsDao = db.cardsDao();
     private SovietsDao sovietsDao = db.sovietsDao();
     private ArrayMap<String,Object> courses = new ArrayMap<>();
-    private List<Object> cards = new ArrayList<>();
+    private List<EcoCard> cards = new ArrayList<>();
 
 
     public DatabaseHelper(){
@@ -73,7 +75,7 @@ public class DatabaseHelper {
     }
 
 
-    public List<Object> getListOfCards(){
+    public List<EcoCard> getListOfCards(){
         return this.cards;
     }
 
@@ -121,10 +123,10 @@ public class DatabaseHelper {
         CardsDB cardsDB;
 
         switch (cursName){
-            case "firstStep":
+            case "lvl-1":
                 cards.clear();
                 cardsDB = intiCardDB(cursName,"resourceSaving");
-                cards.add(new EcoCard("resourceSaving","Экономим водные ресурсы", "Ресурсосбережение", null, 1));
+                cards.add(new EcoCard("resourceSaving","Экономим водные ресурсы", "Ресурсосбережение", null, cardsDB.isActive == 2 ? 2 : 1));
                 cardsDB = intiCardDB(cursName,"second");
                 cards.add(new EcoCard("second",null, null, null,cardsDB.isActive));
                 cardsDB = intiCardDB(cursName,"Third");
@@ -180,8 +182,9 @@ public class DatabaseHelper {
 
     public String getLeftCards(String cursName){
         List<CardsDB> cardDB = cardsDao.getAllActive(cursName);
+        СoursesDB course = coursesDao.getByCursID(cursName);
         int active = cardDB.size();
-        int allCards = cards.size();
+        int allCards = course.countAllCards;
         int left = allCards - active;
         String text = "Осталось " + left;
 
@@ -214,17 +217,24 @@ public class DatabaseHelper {
     public void upDateCurrentCourse(String courseName){
         СoursesDB next = coursesDao.getByCursID(courseName);
         СoursesDB last = coursesDao.getCurrentCurs();
-        if (last.isActive == 1){
+
+        if (last != null && last.isActive == 1 ){
             last.isActive = 0;
         }
         next.isActive = 1;
 
         coursesDao.update(next);
-        coursesDao.update(last);
+        if (last != null)
+            coursesDao.update(last);
     }
 
+    @SuppressLint("WrongConstant")
     public void upDateCard(String cardName, int isActive){
         CardsDB cardsDB = cardsDao.getByCardID(cardName);
+        if (cardsDB == null) {
+            Log.println(1, "error", "Object CardsDB = null");
+            return;
+        }
         cardsDB.isActive = isActive;
         cardsDao.update(cardsDB);
     }
@@ -239,10 +249,13 @@ public class DatabaseHelper {
             СoursesDB curs = coursesDao.getByCursID(key);
             if (curs == null){
                 СoursesDB initCurs = new СoursesDB();
+                initCards(key);
+                int count = cards.size();
                 initCurs.id = 1;
                 initCurs.cursID = key;
                 initCurs.progressBar = 0;
                 initCurs.isActive = 0;
+                initCurs.countAllCards = count;
                 coursesDao.insert(initCurs);
             } else
                 curs = null;
@@ -262,6 +275,7 @@ public class DatabaseHelper {
             initCard.cardID = cardName;
             initCard.cursID = cursName;
             initCard.isActive = 0;
+            cardsDao.insert(initCard);
         }
         else{
             return cardsDB;

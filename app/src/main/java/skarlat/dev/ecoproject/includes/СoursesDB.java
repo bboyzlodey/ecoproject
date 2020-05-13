@@ -19,5 +19,7 @@ public class СoursesDB {
     public int progressBar;
 
     public int isActive;
+
+    public int countAllCards;
 }
 

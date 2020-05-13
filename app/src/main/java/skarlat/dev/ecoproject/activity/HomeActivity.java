@@ -133,8 +133,7 @@ public class HomeActivity extends AppCompatActivity {
 		open = new Intent(this, CourseCardActivity.class);
 		Course tag = (Course) v.getTag();
 
-		db.upDateCurrentCourse(tag.getName());
-		open.putExtra("tag", tag.getName());
+		open.putExtra("tag", tag);
 		/**
 		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
 		 *      String title;

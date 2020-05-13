@@ -85,7 +85,7 @@
 				android:id="@+id/pb_horizontal"
 				android:layout_width="fill_parent"
 				android:layout_height="7dp"
-				android:background="@drawable/progress_bar2"
+				android:background="@drawable/custom_progressbar"
 				android:layout_marginTop="8dp"
 				android:visibility="visible"/>
 
