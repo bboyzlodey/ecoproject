@@ -36,6 +36,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private String courseName;
     private DatabaseHelper db = new DatabaseHelper();
     private List<EcoCard> ecoCard;
+    boolean debug;
 
 
     @Override

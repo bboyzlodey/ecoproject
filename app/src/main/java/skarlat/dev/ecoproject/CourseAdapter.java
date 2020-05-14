@@ -16,7 +16,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 	private LayoutInflater inflater;
 	private List<Course> courses;
 
-	CourseAdapter(Context context, List<Course> courses) {
+	public CourseAdapter(Context context, List<Course> courses) {
 		this.courses = courses;
 		this.inflater = LayoutInflater.from(context);
 	}

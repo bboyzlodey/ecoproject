@@ -30,6 +30,11 @@ public class EcoCard extends AbstractEco implements Serializable {
 		this.status = (Status) status;
 	}
 	
+	public EcoCard(String name, String title, String desription, String fullDescription, Status status) {
+		super(name, title, desription, fullDescription);
+		this.status = (Status) status;
+	}
+	
 	@Override
 	public Enum getStatus() {
 		return status;

@@ -3,13 +3,21 @@ package skarlat.dev.ecoproject.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import skarlat.dev.ecoproject.EcoCard;
+import skarlat.dev.ecoproject.CourseAdapter;
+import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.PageFragment;
 import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.adapter.CategoryAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,8 @@ public class UserFragment extends Fragment {
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
+	
+	private List<EcoCard> cards;
 	
 	public UserFragment() {
 		// Required empty public constructor
@@ -60,6 +70,23 @@ public class UserFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_user, container, false);
+		View view = inflater.inflate(R.layout.fragment_user, container, false);
+		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.cards_by_category);
+		
+		cards = new ArrayList<>();
+		// @TODO: Заменить заполнение листа с ипользованием БД
+		cards.add(new EcoCard("name", "description", "description",
+				"description", EcoCard.Status.WATCHED));
+		cards.add(new EcoCard("name", "description", "description",
+				"description", EcoCard.Status.WATCHED));
+		cards.add(new EcoCard("name", "description", "description",
+				"description", EcoCard.Status.OPENED));
+		cards.add(new EcoCard("name", "description", "description",
+				"description", EcoCard.Status.CLOSED));
+		
+		CategoryAdapter adapter = new CategoryAdapter(getContext(), cards);
+		
+		recyclerView.setAdapter(adapter);
+		return view;
 	}
 }
