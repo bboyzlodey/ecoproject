@@ -70,13 +70,12 @@ public class HomeActivity extends AppCompatActivity {
 	protected void setIconsInTab(){
 	    int[] imageResId = {
 	    		R.drawable.event,
-			    R.drawable.timeline,
 			    R.drawable.person};
 	
 	    for (int i = 0; i < imageResId.length; i++) {
 		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
 		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
-		    tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
+		    
 		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			    @Override
 			    public void onTabSelected(TabLayout.Tab tab) {
@@ -94,6 +93,7 @@ public class HomeActivity extends AppCompatActivity {
 			    }
 		    });
 	    }
+		tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
     }
     
     protected void tabView(){
