@@ -3,6 +3,7 @@ package skarlat.dev.ecoproject.includes;
 import android.annotation.SuppressLint;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,9 +12,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
+import skarlat.dev.ecoproject.EcoSoviet;
+import skarlat.dev.ecoproject.R;
+
 import static skarlat.dev.ecoproject.Course.Status.CLOSED;
 import static skarlat.dev.ecoproject.Course.Status.CURRENT;
 import static skarlat.dev.ecoproject.Course.Status.FINISHED;
@@ -125,17 +131,47 @@ public class DatabaseHelper {
         switch (cursName){
             case "lvl-1":
                 cards.clear();
-                cardsDB = intiCardDB(cursName,"resourceSaving");
-                cards.add(new EcoCard("resourceSaving","Экономим водные ресурсы", "Ресурсосбережение", null, cardsDB.isActive == 2 ? 2 : 1));
-                cardsDB = intiCardDB(cursName,"second");
-                cards.add(new EcoCard("second",null, null, null,cardsDB.isActive));
-                cardsDB = intiCardDB(cursName,"Third");
-                cards.add(new EcoCard("Third",null, null, null,cardsDB.isActive));
+                cardsDB = intiCardDB(cursName,"lvl-1.1");
+                cards.add(new EcoCard("lvl-1.1",
+                                        "Сберегаем электроэнергию",
+                                        "В ладошках молния",
+                                        "Зачем экономить электроэнергию?\n<img name=nature_1>\n" +
+                                                "В России для производства электроэнергии используют теплоэлектростанции (ТЭС 67,7%)," +
+                                                " гидроэлектростанции (20%) и атомные станции (12%). На наиболее экологичную солнечную," +
+                                                " ветровую и гидротермальную энергетику, а также электростанции на биотопливе приходится" +
+                                                " всего около 0,1% в России (а, например, во Франции более 20%).\n" +
+                                                "ТЭС получают электроэнергию за счет сжигания газа, угля и нефти." +
+                                                " В год для производства электроэнергии на ТЭС нужно около 160 млрд" +
+                                                " м3 природного газа, около 110 млн тонн угля и 3 млн тонн нефти." +
+                                                " Представляешь какой сумасшедший расход ресурсов?\n" +
+                                                "При сжигании угля в атмосферу выбрасываются: оксиды азота, оксид углерода," +
+                                                " фтористые соединения, бензапирен, окисиды серы, сажа, неорганическая" +
+                                                " пыль и другие. После сжигания образуется большое количество" +
+                                                " золы с большим содержанием токсичных химических элементов. На ТЭС стоят" +
+                                                " специальные очистные конструкции, но они не способны работать со 100%-м " +
+                                                "улавливанием всех веществ, в то же время золу нужно куда-то девать.\n" +
+                                                "Поэтому на вопрос *зачем сберегать электроэнергию?*, ответ прост," +
+                                                " так мы бережем окружающую среду и уменьшаем негативное воздействие.\n" +
+                                                "Любое зарядное устройство даже при полном бездействии включенное" +
+                                                " в розетку продолжает расходовать электроэнергию. Некоторые зарядные устройства," +
+                                                " включенные в розетку, могут привести к возгоранию.\n" +
+                                                "При покупке бытовой техники обращайте внимание на модели с наименьшим энергопотреблением" +
+                                                " с маркировкой А+++, A++, A+, и далее A, B, C, D.\n<img><img>\n" +
+                                                "Правда такие приборы стоят дороже, но такой прибор себя точно окупит" +
+                                                " в будущем, как и аккумуляторные батарейки. Аккумуляторные батарейки можно" +
+                                                " использовать многократно, подзаряжая их через розетку.\n",
+                                        cardsDB.isActive == 2 ? 2 : 1));
+                cardsDB = intiCardDB(cursName,"lvl-1.2");
+                cards.add(new EcoCard("lvl-1.2","Экономим водные ресурсы", "В ладошках капелька воды", null,cardsDB.isActive));
+                cardsDB = intiCardDB(cursName,"lvl-1.3");
+                cards.add(new EcoCard("lvl-1.3","Сберегаем тепло", "В ладошках градусник", null,cardsDB.isActive));
+                cardsDB = intiCardDB(cursName,"lvl-1.4");
+                cards.add(new EcoCard("lvl-1.4","Сберегаем пищу", "В ладошках банан", null,cardsDB.isActive));
                 break;
             case "lvl-2":
                 cards.clear();
                 cardsDB = intiCardDB(cursName,"1");
-                cards.add(new EcoCard("1","Экономим водные ресурсы", "Ресурсосбережение", null, cardsDB.isActive == 2 ? 2 : 1));
+                cards.add(new EcoCard("1","title", "desc", null, cardsDB.isActive == 2 ? 2 : 1));
                 cardsDB = intiCardDB(cursName,"2");
                 cards.add(new EcoCard("2","title", "desc", null,cardsDB.isActive));
                 cardsDB = intiCardDB(cursName,"3");
@@ -151,7 +187,7 @@ public class DatabaseHelper {
 
         List<SovietsDB> sovietsDB = sovietsDao.getAll();
 
-        if (sovietsDB == null){
+        if (sovietsDB == null || sovietsDB.size() == 0){
             CSVFile csvFile = new CSVFile(inputStream);
             List list = csvFile.read();
             for (int i = 0; i < list.size() - 1; i++) {
@@ -209,6 +245,23 @@ public class DatabaseHelper {
         if (left1 == 1)
             return "Осталась " + left + " карточка";
         return text + " карточек";
+    }
+
+    public List<EcoSoviet> getAllByCardName(String cardName){
+        List<EcoSoviet> list = new ArrayList<>();
+        List<SovietsDB> tips = sovietsDao.getAllByCardID(cardName);
+        String name;
+        String title;
+        String desc;
+        int status;
+        for (int i = 0; i <tips.size() ; i++) {
+            name = tips.get(i).cardID;
+            title = tips.get(i).title;
+            desc = tips.get(i).description;
+            status = tips.get(i).isFavorite;
+            list.add(new EcoSoviet(name,title,desc,null,status));
+        }
+        return list;
     }
 
     /**
@@ -269,8 +322,6 @@ public class DatabaseHelper {
             } else
                 curs = null;
         }
-
-
     }
 
 

@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject.includes;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -21,5 +22,6 @@ public class СoursesDB {
     public int isActive;
 
     public int countAllCards;
+
 }
 

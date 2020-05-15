@@ -112,12 +112,13 @@ public class HomeActivity extends AppCompatActivity {
     private void initDataBase(){
 		try {
 
-			InputStream inputStream = getResources().getAssets().open("soviets.csv"); //считывание списка советов из файла
+			InputStream inputStream = getResources().getAssets().open("tis.csv"); //считывание списка советов из файла
 
 			db = new DatabaseHelper(inputStream); // Инициализация Базы данных
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			db = new DatabaseHelper();
 		}
 	}
 	
