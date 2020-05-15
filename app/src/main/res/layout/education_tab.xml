@@ -121,6 +121,28 @@
 				android:paddingBottom="16dp"
 				tools:visibility="visible"/>
 
+			<TextView
+				android:id="@+id/course_done"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorBlack"
+				android:text="@string/courses_done"
+				android:textSize="20sp"
+				android:visibility="visible"
+				android:layout_marginTop="16dp"
+				android:layout_weight="0"
+				android:layout_marginBottom="16dp"/>
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycle_courses_done"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:nestedScrollingEnabled="false"
+				app:layoutManager="LinearLayoutManager"
+				android:paddingBottom="16dp"
+				tools:visibility="visible"/>
+
 		</LinearLayout>
 
 	</ScrollView>

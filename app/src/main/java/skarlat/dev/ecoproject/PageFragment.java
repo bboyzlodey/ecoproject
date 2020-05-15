@@ -1,6 +1,7 @@
 package skarlat.dev.ecoproject;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
@@ -23,11 +24,12 @@ import java.util.List;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
-import static skarlat.dev.ecoproject.Course.Status.CLOSED;
+
 
 public class PageFragment extends Fragment {
 	Bundle savedInstanceState;
 	private List<Course> courses;
+	private List<Course> coursesDone;
 	private DatabaseHelper db = new DatabaseHelper();
 	
 	public static final String ARG_PAGE = "ARG_PAGE";
@@ -55,7 +57,7 @@ public class PageFragment extends Fragment {
 	@Override public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                                   Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.education_tab, container, false);
+		final View view = inflater.inflate(R.layout.education_tab, container, false);
 		this.view = view;
 
 		TextView currentCourseLvlView  = view.findViewById(R.id.current_small_description);
@@ -81,6 +83,11 @@ public class PageFragment extends Fragment {
 			progressBarView.setValue(progressBar);
 			currentCardView.setTag(currentCourse);
 		}
+		TextView textViewDone = view.findViewById(R.id.course_done);
+//		if (coursesDone == null){
+//			textViewDone.setVisibility(View.GONE);
+//		}else
+//			textViewDone.setVisibility(View.VISIBLE);
 
 
 		initiList(); // создаем лист и заполняем его
@@ -91,35 +98,28 @@ public class PageFragment extends Fragment {
 		
 		
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_courses);
+		RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.recycle_courses_done);
 		CourseAdapter courseAdapter = new CourseAdapter(getContext(), courses);
+		CourseAdapter courseAdapterDone = new CourseAdapter(getContext(), coursesDone);
 		if(recyclerView != null)
 			recyclerView.setAdapter(courseAdapter);
-		/**
-		 *      Проблема в том, что запускается фрагмент, а там скролл не в начале
-		 *      Для этого нужен новый поток, что бы проскроллить в начало.
-		 *      Но он скролит грубо.
-		 *      Пусть будет пока что.
-		 */
-		final ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollEducation);
-		scrollView.post(new Runnable() {
-			@Override
-			public void run() {
-				scrollView.fullScroll(ScrollView.FOCUS_UP);
-			}
-		});
+		if (recyclerViewDone != null)
+			recyclerViewDone.setAdapter(courseAdapterDone);
 		return view;
 	}
 	
 	
 	protected void initiList(){
 		courses = new ArrayList<>();
+		coursesDone = new ArrayList<>();
 		ArrayMap<String, Object> list = db.getAllCourses();
 		for (int i = 0; i < list.size(); i++) {
 			String key = list.keyAt(i);
 			Course course = (Course) list.get(key);
-			if (course.getStatus() == CLOSED){
+			if (course.getStatus() == Course.Status.CLOSED){
 				courses.add(course);
-			}
+			}else if (course.getStatus() == Course.Status.FINISHED)
+				coursesDone.add(course);
 		}
 	}
 	

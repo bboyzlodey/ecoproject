@@ -132,9 +132,18 @@ public class DatabaseHelper {
                 cardsDB = intiCardDB(cursName,"Third");
                 cards.add(new EcoCard("Third",null, null, null,cardsDB.isActive));
                 break;
-
+            case "lvl-2":
+                cards.clear();
+                cardsDB = intiCardDB(cursName,"1");
+                cards.add(new EcoCard("1","Экономим водные ресурсы", "Ресурсосбережение", null, cardsDB.isActive == 2 ? 2 : 1));
+                cardsDB = intiCardDB(cursName,"2");
+                cards.add(new EcoCard("2","title", "desc", null,cardsDB.isActive));
+                cardsDB = intiCardDB(cursName,"3");
+                cards.add(new EcoCard("3","title", "desc", null,cardsDB.isActive));
+                break;
             default:
-                return;
+                cards.clear();
+                break;
         }
     }
 

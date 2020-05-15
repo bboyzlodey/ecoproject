@@ -22,6 +22,7 @@ import skarlat.dev.ecoproject.EcoCardActivity;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
+import skarlat.dev.ecoproject.includes.CardsDB;
 import skarlat.dev.ecoproject.includes.DatabaseHelper;
 
 public class CourseCardActivity extends AppCompatActivity {
@@ -50,6 +51,7 @@ public class CourseCardActivity extends AppCompatActivity {
         courseName = (String) course.getName();
 
         db.initCards(courseName);
+
 
         cursTitle = (TextView) findViewById(R.id.curs_title);
         progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
