@@ -10,17 +10,17 @@
 		android:supportsRtl="true"
 		android:largeHeap="true"
 		android:theme="@style/AppTheme"
-		android:name=".includes.App">
-		<activity android:name=".EcoCardActivity"
-			android:parentActivityName=".ProjectActivity">
+		android:name=".includes.database.App">
+		<activity android:name=".activity.EcoCardActivity"
+			android:parentActivityName=".activity.ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value=".ProjectActivity" />
+				android:value=".activity.ProjectActivity" />
 		</activity>
-		<activity android:name=".ProjectActivity" />
+		<activity android:name=".activity.ProjectActivity" />
 		<activity android:name=".activity.HomeActivity"/>
 		<activity android:name=".activity.CourseCardActivity" />
-		<activity android:name=".MainActivity">
+		<activity android:name=".activity.MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 

@@ -1,30 +1,23 @@
 package skarlat.dev.ecoproject.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import skarlat.dev.ecoproject.Course;
-import skarlat.dev.ecoproject.EcoCardActivity;
 import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.SampleFragmentPagerAdapter;
-import skarlat.dev.ecoproject.customView.ProgressBarView;
-import skarlat.dev.ecoproject.includes.DatabaseHelper;
-import skarlat.dev.ecoproject.includes.СoursesDB;
+import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
+import skarlat.dev.ecoproject.includes.database.DataBaseWrapper;
+import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
@@ -37,30 +30,20 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        tabLayout = (TabLayout) findViewById(R.id.home_tab);
-//        currentCourseDescView = findViewById(R.id.current_small_description);
-//        currentCourseTitleView = findViewById(R.id.curs_title);
-//        countLeftCardView = findViewById(R.id.count_left_cards);
-//        progressBarView = findViewById(R.id.pb_horizontal);
-        tabView(); // Иницилизация TabView
-		initDataBase(); // Иницилизация базы данных
-	    setIconsInTab();
 
-//	    Course currentCourse = db.getCurrentCourse();
-////		ArrayMap<String, Object> courses = db.getAllCourses();
-//	    if (currentCourse == null){
-//	    	TextView currentCourseTextView = findViewById(R.id.current_course_text_view);
-//			CardView currentCardView = findViewById(R.id.current_course);
-//			currentCourseTextView.setVisibility(View.GONE);
-//			currentCardView.setVisibility(View.GONE);
-//		}else {
-//			String leftCards = db.getLeftCards(currentCourse.getName());
-//			int progressBar = db.getCursProgressBar(currentCourse.getName());
-//			currentCourseTitleView.setText(currentCourse.getTitle());
-//			currentCourseDescView.setText(currentCourse.getDescription());
-//			countLeftCardView.setText(leftCards);
-//			progressBarView.setValue(progressBar);
-//		}
+		/**
+		 * Копирование базы данных из папки assets
+		 */
+		DataBaseWrapper dataBaseWrapper = new DataBaseWrapper(this);
+		try {
+			dataBaseWrapper.createDataBase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		tabLayout = (TabLayout) findViewById(R.id.home_tab);
+        tabView(); // Иницилизация TabView
+	    setIconsInTab();
 
     }
 	
@@ -108,19 +91,6 @@ public class HomeActivity extends AppCompatActivity {
 	    //  Анимация для сглаживания программного скрола в PageFragment
 	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
-
-    private void initDataBase(){
-		try {
-
-			InputStream inputStream = getResources().getAssets().open("tis.csv"); //считывание списка советов из файла
-
-			db = new DatabaseHelper(inputStream); // Инициализация Базы данных
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			db = new DatabaseHelper();
-		}
-	}
 	
 	/**
 	 *
@@ -129,11 +99,8 @@ public class HomeActivity extends AppCompatActivity {
 	 *          (открыть курс)
 	 */
 	public void openCourse(View v){
-		Intent open;  // интент, который сделает переключение в Активити с карточками
-//		open = new Intent(this, EcoCardActivity.class);
-		open = new Intent(this, CourseCardActivity.class);
+		Intent open = new Intent(this, CourseCardActivity.class);
 		Course tag = (Course) v.getTag();
-
 		open.putExtra("tag", tag);
 		/**
 		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:

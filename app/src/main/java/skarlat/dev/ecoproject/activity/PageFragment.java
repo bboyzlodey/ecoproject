@@ -1,14 +1,9 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.activity;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,13 +11,14 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import skarlat.dev.ecoproject.Course;
+import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.adapter.CourseAdapter;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
-import skarlat.dev.ecoproject.includes.DatabaseHelper;
+import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 
 
@@ -31,7 +27,7 @@ public class PageFragment extends Fragment {
 	private List<Course> courses;
 	private List<Course> coursesDone;
 	private DatabaseHelper db = new DatabaseHelper();
-	
+
 	public static final String ARG_PAGE = "ARG_PAGE";
 	
 	private int mPage;
@@ -68,7 +64,6 @@ public class PageFragment extends Fragment {
 		CardView currentCardView = view.findViewById(R.id.current_course);
 
 		Course currentCourse = db.getCurrentCourse();
-//		ArrayMap<String, Object> courses = db.getAllCourses();
 		if (currentCourse == null){
 			currentCourseTextView.setVisibility(View.GONE);
 			currentCardView.setVisibility(View.GONE);
@@ -76,18 +71,18 @@ public class PageFragment extends Fragment {
 			countLeftCardView.setVisibility(View.GONE);
 		}else {
 			String leftCards = db.getLeftCards(currentCourse.getName());
-			int progressBar = db.getCursProgressBar(currentCourse.getName());
+			int progressBar = currentCourse.getProgressBar();
 			currentCourseTitleView.setText(currentCourse.getTitle());
-			currentCourseLvlView.setText(currentCourse.getLvl());
+			currentCourseLvlView.setText(currentCourse.getDescription());
 			countLeftCardView.setText(leftCards);
 			progressBarView.setValue(progressBar);
 			currentCardView.setTag(currentCourse);
 		}
 		TextView textViewDone = view.findViewById(R.id.course_done);
-//		if (coursesDone == null){
-//			textViewDone.setVisibility(View.GONE);
-//		}else
-//			textViewDone.setVisibility(View.VISIBLE);
+		if (coursesDone == null){
+			textViewDone.setVisibility(View.GONE);
+		}else
+			textViewDone.setVisibility(View.VISIBLE);
 
 
 		initiList(); // создаем лист и заполняем его
@@ -112,10 +107,9 @@ public class PageFragment extends Fragment {
 	protected void initiList(){
 		courses = new ArrayList<>();
 		coursesDone = new ArrayList<>();
-		ArrayMap<String, Object> list = db.getAllCourses();
+		List<Course> list = db.getAllCourses();
 		for (int i = 0; i < list.size(); i++) {
-			String key = list.keyAt(i);
-			Course course = (Course) list.get(key);
+			Course course = list.get(i);
 			if (course.getStatus() == Course.Status.CLOSED){
 				courses.add(course);
 			}else if (course.getStatus() == Course.Status.FINISHED)

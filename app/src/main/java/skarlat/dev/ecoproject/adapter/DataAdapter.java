@@ -1,23 +1,25 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.adapter;
 
 import android.content.Context;
 //import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+import skarlat.dev.ecoproject.EcoSoviet;
+import skarlat.dev.ecoproject.R;
+
+public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	
 	private LayoutInflater inflater;
 	private List<EcoSoviet> soviets;
 
-	DataAdapter(Context context, List<EcoSoviet> soviets) {
+	public DataAdapter(Context context, List<EcoSoviet> soviets) {
 		this.soviets = soviets;
 		this.inflater = LayoutInflater.from(context);
 	}

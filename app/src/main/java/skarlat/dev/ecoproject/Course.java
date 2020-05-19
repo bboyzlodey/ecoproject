@@ -1,64 +1,97 @@
 package skarlat.dev.ecoproject;
 
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-import skarlat.dev.ecoproject.includes.DatabaseHelper;
+import skarlat.dev.ecoproject.includes.database.App;
+import skarlat.dev.ecoproject.includes.database.AppDatabase;
+import skarlat.dev.ecoproject.includes.database.dao.CourseDao;
 
-public class Course extends AbstractEco implements Serializable {
-    private static final String KEY_LOG= "Course";
-    private String lvl;
-    
+@Entity
+public class Course implements EcoInterface, Serializable {
+
+    @PrimaryKey
+    @NonNull
+    public String courseNameID;
+
+    public String title;
+
+    public String description;
+
+    public String fullDescription;
+
+    public int progressBar;
+
+    public int isActive;
+
     public enum Status{
         CLOSED,
         CURRENT,
         FINISHED;
     }
-    
-    Course.Status status;
-    
-    public Course(String name, String title, boolean status){
-        super(name, title);
-    }
 
-    public Course(String name,String title, String lvl, String desription, String fullDescription, int status) {
-        super(name, title, desription, fullDescription, status);
-        switch (status){
-            case 0:
-                this.status = Status.CLOSED;
-                break;
-            case 1:
-                this.status = Status.CURRENT;
-                break;
-            case 2:
-                this.status = Status.FINISHED;
-        }
-        this.lvl = lvl;
-    }
-
-    public String getLvl (){
-        return this.lvl;
-    }
-
-    public Course(String name,String title, String desription,String fullDescription, int status) {
-        super(name, title, desription,fullDescription, status);
-        switch (status){
-            case 0:
-                this.status = Status.CLOSED;
-                break;
-            case 1:
-                this.status = Status.CURRENT;
-                break;
-            case 2:
-                this.status = Status.FINISHED;
-        }
-        Log.d(KEY_LOG, "status is: " + this.status.name());
-    }
-    
     @Override
-    public Enum<Status> getStatus() {
-        return status;
+    public String getName() {
+        return this.courseNameID;
     }
-    
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public String getFullDescription() {
+        return this.fullDescription;
+    }
+
+    @Override
+    public Enum getStatus() {
+        switch (isActive){
+            case 1:
+                return Status.CURRENT;
+            case 2:
+                return Status.FINISHED;
+            default:
+                return Status.CLOSED;
+        }
+    }
+
+    public int getProgressBar(){
+        return this.progressBar;
+    }
+
+    public void setProgressBar(int progress){
+        this.progressBar = progress;
+    }
+
+    public void setStatus(Course.Status status){
+        switch (status){
+            case CURRENT:
+                this.isActive = 1;
+                break;
+            case FINISHED:
+                this.isActive = 2;
+                break;
+            case CLOSED:
+                this.isActive = 0;
+                break;
+        }
+    }
+
+    public void upDate(int progressBar, Course.Status status){
+        AppDatabase db = App.getInstance().getDatabase();
+        CourseDao coursesDao = db.courseDao();
+        setProgressBar(progressBar);
+        setStatus(status);
+        coursesDao.update(this);
+    }
 }

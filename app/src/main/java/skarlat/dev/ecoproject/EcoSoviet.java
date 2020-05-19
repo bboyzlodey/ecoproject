@@ -1,48 +1,66 @@
 package skarlat.dev.ecoproject;
 
-import java.io.Serializable;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class EcoSoviet extends AbstractEco implements Serializable {
+@Entity
+public class EcoSoviet implements EcoInterface{
+
+	public String cardNameID;
+
+	@PrimaryKey(autoGenerate = true)
+	@NonNull
+	public long sovietID;
+
+	public int isFavorite;
+
+	public String title;
+
+	public String description;
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public String getTitle() {
+		return this.title;
+	}
+
+	@Override
+	public String getDescription() {
+		return this.description;
+	}
+
+	@Override
+	public String getFullDescription() {
+		return null;
+	}
+
+	@Override
+	public Enum getStatus() {
+		return isFavorite == 0 ? Status.UNLIKED : Status.LIKED;
+	}
 
 	private enum Status{
 		UNLIKED,
 		LIKED;
 	}
 
-	Status status;
-
-	public EcoSoviet(String name, String title, String desription, String fullDescription, int status) {
-		super(name, title, desription, fullDescription, status);
+	public void setStatus(EcoSoviet.Status status){
 		switch (status){
-			case 0:
-				this.status = Status.UNLIKED;
+			case UNLIKED:
+				isFavorite = 0;
 				break;
-			case 1:
-				this.status = Status.LIKED;
+			case LIKED:
+				isFavorite = 1;
+				break;
 		}
 	}
 
-	public EcoSoviet(String name, String title, String desription, String fullDescription, Enum<EcoSoviet.Status> status) {
-		super(name, title, desription, fullDescription);
-		this.status = (EcoSoviet.Status) status;
+	public void upDate(EcoSoviet.Status status){
+		setStatus(status);
 	}
-
-//	public EcoSoviet(String name, String title, boolean status){
-//		super(name, title);
-//		this.status = (status ? Status.LIKED : Status.UNLIKED);
-//	}
-
-	public EcoSoviet(String name, String title){
-		super(name, title);
-		this.status = Status.UNLIKED;
-	}
-
-	@Override
-	public Enum<EcoSoviet.Status> getStatus() {
-		return status;
-	}
-
-    public EcoSoviet(String name, String s, boolean b) {
-        super(name, s, b);
-    }
 }

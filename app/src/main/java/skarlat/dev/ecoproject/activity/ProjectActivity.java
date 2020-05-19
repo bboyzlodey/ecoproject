@@ -1,6 +1,4 @@
-package skarlat.dev.ecoproject;
-
-import androidx.appcompat.app.AppCompatActivity;
+package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +6,9 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import skarlat.dev.ecoproject.activity.HomeActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import skarlat.dev.ecoproject.R;
 
 
 /*

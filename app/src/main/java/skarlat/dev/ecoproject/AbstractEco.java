@@ -9,6 +9,10 @@ import java.io.Serializable;
 * super(name, description, status);
 *
  */
+
+/**
+ * removed
+ */
 abstract public class AbstractEco implements EcoInterface, Serializable {
 	private final String title;
 	private final String desription;
@@ -89,8 +93,4 @@ abstract public class AbstractEco implements EcoInterface, Serializable {
 	@Override
 	public String getName(){ return name; }
 
-	@Override
-	public String getFullDescription() {
-		return fullDescription;
-	}
 }
