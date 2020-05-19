@@ -23,7 +23,7 @@ import static skarlat.dev.ecoproject.Course.Status.FINISHED;
  */
 public class DatabaseHelper {
 
-    private AppDatabase db = App.getInstance().getDatabase();
+    private AppDatabase db = App.getDatabase();
     private CoursesDao coursesDao = db.cursCardDao();
     private CardsDao cardsDao = db.cardsDao();
     private SovietsDao sovietsDao = db.sovietsDao();
@@ -36,18 +36,17 @@ public class DatabaseHelper {
     }
 
     /**
-     * Список добавленных курсов
+     * @Constructor - Список добавленных курсов
      */
     public DatabaseHelper(InputStream inputStream){
             initCourses();
             initCoursesDB();
             initSoviets(inputStream);
     }
-
-
+    
     /**
      * Возвращает значение прогресс бара курса
-     * @param cursName - имя нужного курса
+     * @param cursName  имя нужного курса
      * @return int 0-100%
      */
     public int getCursProgressBar(String cursName) {

@@ -1,5 +1,9 @@
 package skarlat.dev.ecoproject;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
 public class EcoCard extends AbstractEco implements Serializable {

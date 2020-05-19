@@ -68,16 +68,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 	 */
 	@RequiresApi(api = Build.VERSION_CODES.N)
 	protected void forAll(CategoryAdapter.ViewHolder holder){
-		String all = "Все";
-		Collection<EcoCard> collection = (Collection<EcoCard>) ecoCards;
-		Stream<EcoCard> ecoCardStream = collection.stream();
-		long watched = ecoCardStream.filter(new Predicate<EcoCard>() {
-			@Override
-			public boolean test(EcoCard ecoCard) {
-				return ecoCard.status == EcoCard.Status.WATCHED;
-			}
-		}).count();
-		holder.totalProgress.setText(watched + "/" + ecoCards.size());
-		holder.category.setText(all);
+//		String all = "Все";
+//		Collection<EcoCard> collection = (Collection<EcoCard>) ecoCards;
+//		Stream<EcoCard> ecoCardStream = collection.stream();
+//		long watched = ecoCardStream.filter(new Predicate<EcoCard>() {
+//			@Override
+//			public boolean test(EcoCard ecoCard) {
+//				return ecoCard.status == EcoCard.Status.WATCHED;
+//			}
+//		}).count();
+//		holder.totalProgress.setText(watched + "/" + ecoCards.size());
+//		holder.category.setText(all);
 	}
 }

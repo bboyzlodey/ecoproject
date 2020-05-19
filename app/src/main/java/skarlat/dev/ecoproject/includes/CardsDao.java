@@ -10,6 +10,7 @@ import java.util.List;
 
 @Dao
 public interface CardsDao {
+    
     @Query("SELECT * FROM CardsDB")
     List<CardsDB> getAll();
 
@@ -21,7 +22,7 @@ public interface CardsDao {
 
     @Query("SELECT * FROM CardsDB WHERE cursID = :cursID AND isActive = 2")
     List<CardsDB> getAllActive(String cursID);
-
+    
     @Insert
     void insert(CardsDB cardsDB);
 

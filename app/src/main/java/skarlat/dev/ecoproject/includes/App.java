@@ -10,16 +10,16 @@ import androidx.room.Room;
  */
 
 public class App extends Application {
-
+    private final String DATABASE_NAME = "database";
     public static App instance;
 
-    private AppDatabase database;
+    private static AppDatabase database;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, AppDatabase.class, "database")
+        database = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
 //                .addMigrations(AppDatabase.MIGRATION)
                 .allowMainThreadQueries()
                 .build();
@@ -29,8 +29,9 @@ public class App extends Application {
         return instance;
     }
 
-
-    public AppDatabase getDatabase() {
+    public static AppDatabase getDatabase() {
         return database;
     }
+    
+    public String getDatabaseName(){return DATABASE_NAME;}
 }

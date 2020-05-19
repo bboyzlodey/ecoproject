@@ -5,6 +5,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import skarlat.dev.ecoproject.EcoCard;
+
 /**
  * Связь Room и SQLite
  * если нужно обновить структуру базы данных, то нужно делать миграцию сменив версию

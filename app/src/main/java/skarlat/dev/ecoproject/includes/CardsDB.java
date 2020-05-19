@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class CardsDB {
     @PrimaryKey
     @NonNull
-    public String cardID;
+    public String cardID; // Называние карточки
 
     public String cursID;
 

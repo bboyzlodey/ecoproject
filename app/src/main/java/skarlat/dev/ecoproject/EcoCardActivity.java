@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -28,6 +30,13 @@ import com.jackandphantom.customtogglebutton.CustomToggle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
+import skarlat.dev.ecoproject.includes.App;
+import skarlat.dev.ecoproject.includes.AppDatabase;
+import skarlat.dev.ecoproject.includes.CardsDB;
+import skarlat.dev.ecoproject.includes.SovietsDB;
+import skarlat.dev.ecoproject.includes.СoursesDB;
 //import androidx.appcompat.widget.Toolbar;
 
 public class EcoCardActivity extends AppCompatActivity {
@@ -42,6 +51,7 @@ public class EcoCardActivity extends AppCompatActivity {
 	Toolbar myToolbar;
 	
 	
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +62,19 @@ public class EcoCardActivity extends AppCompatActivity {
 		
 		whyColor = why.getTextColors();
 		howColor = how.getTextColors();
+		
+		AppDatabase db = App.getDatabase();
+		if (db != null){
+			Log.d("debug", "db != null");
+			db.cursCardDao().getAll().stream().forEach(new Consumer<СoursesDB>() {
+				@Override
+				public void accept(СoursesDB cardsDB) {
+					Log.d("cardsDB", cardsDB.cursID + " // " + cardsDB.id + " ** " + cardsDB.progressBar);
+				}
+			});
+		}
+		SovietsDB sovietsDB = new SovietsDB();
+		sovietsDB.ignoredMethod();
 		
 		whyBackground = why.getBackground();
 		howBackground = how.getBackground();
