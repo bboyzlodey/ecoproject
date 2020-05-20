@@ -1,48 +1,42 @@
-package skarlat.dev.ecoproject;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
+package skarlat.dev.ecoproject.activity;
 
 import android.app.ActionBar;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.Toolbar;
 
-import com.jackandphantom.customtogglebutton.CustomToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-import skarlat.dev.ecoproject.includes.App;
-import skarlat.dev.ecoproject.includes.AppDatabase;
-import skarlat.dev.ecoproject.includes.CardsDB;
-import skarlat.dev.ecoproject.includes.SovietsDB;
-import skarlat.dev.ecoproject.includes.СoursesDB;
+import skarlat.dev.ecoproject.EcoCard;
+import skarlat.dev.ecoproject.EcoSoviet;
+import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.adapter.DataAdapter;
+import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
+
+//import skarlat.dev.ecoproject.activity.adapters;
 //import androidx.appcompat.widget.Toolbar;
 
 public class EcoCardActivity extends AppCompatActivity {
 	public static String TAG = "EcoCardActivity";
 	private RecyclerView recyclerView;
 	private ScrollView scrollView;
+	private EcoCard ecoCard;
+	private DatabaseHelper db;
+	private View fullDescView;
 	List<EcoSoviet> ecoSoviets = new ArrayList<>();
 	Drawable whyBackground;
 	Drawable howBackground;
@@ -51,30 +45,23 @@ public class EcoCardActivity extends AppCompatActivity {
 	Toolbar myToolbar;
 	
 	
-	@RequiresApi(api = Build.VERSION_CODES.N)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_eco_cards);
-		
+
+		db = new DatabaseHelper();
+
+		Bundle bundle = getIntent().getExtras();
+
+		ecoCard = (EcoCard) bundle.get(EcoCard.class.getSimpleName());
+
+		fullDescView = findViewById(R.id.full_description);
 		final TextView how = (TextView) findViewById(R.id.how_text);
 		final TextView why = (TextView) findViewById(R.id.why_text);
 		
 		whyColor = why.getTextColors();
 		howColor = how.getTextColors();
-		
-		AppDatabase db = App.getDatabase();
-		if (db != null){
-			Log.d("debug", "db != null");
-			db.cursCardDao().getAll().stream().forEach(new Consumer<СoursesDB>() {
-				@Override
-				public void accept(СoursesDB cardsDB) {
-					Log.d("cardsDB", cardsDB.cursID + " // " + cardsDB.id + " ** " + cardsDB.progressBar);
-				}
-			});
-		}
-		SovietsDB sovietsDB = new SovietsDB();
-		sovietsDB.ignoredMethod();
 		
 		whyBackground = why.getBackground();
 		howBackground = how.getBackground();
@@ -99,6 +86,7 @@ public class EcoCardActivity extends AppCompatActivity {
 		});
 		
 		initiList();
+		setFulDesc();
 		myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 		initActionBar();
 		scrollView = (ScrollView) findViewById(R.id.scroll_description);
@@ -114,12 +102,12 @@ public class EcoCardActivity extends AppCompatActivity {
 	
 	private void initActionBar(){
 		setActionBar(myToolbar);
-		myToolbar.setTitle("Экономим водные ресурсы");
-		myToolbar.setSubtitle("Ресурсосбережение");
+		myToolbar.setTitle(ecoCard.getTitle());
+		myToolbar.setSubtitle(ecoCard.getDescription());
 		ActionBar actionBar = this.getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setBackgroundDrawable(getDrawable(R.drawable.original));
-		actionBar.setTitle("Экономим водные ресурсы");
+		actionBar.setTitle(ecoCard.getTitle());
 		actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back2);
 	}
 	
@@ -129,17 +117,25 @@ public class EcoCardActivity extends AppCompatActivity {
 	} // Для дебагинга и логинга
 	
 	protected void initiList(){
-		ecoSoviets.add(new EcoSoviet("Выключать воду",
-				"Выключать воду, когда чистишь зубы, намыливаюсь в душе или мою посуду.", true));
-		ecoSoviets.add(new EcoSoviet("Максимально загружать машинку",
-				"Загружать посудомоечную и стиральную машины больше чем на 80%.", false));
-		ecoSoviets.add(new EcoSoviet("Принять душ, а не ванну",
-				"В душе мы в среднем расходуем 100 литров, а при приеме ванны - около 200 литров.", false));
-		ecoSoviets.add(new EcoSoviet("Бдить и чинить!",
-				"Отслеживать состояние кранов, труб, бака унитаза и не допускать протечек.", false));
-		ecoSoviets.add(new EcoSoviet("Купить и успокоиться",
-				"Поставить на кран водо-сберегающую насадку-аэратор. " +
-						"Она стоит от 100 рублей в магазинах сантехники.", false));
+		ecoSoviets = db.getAllByCardName(ecoCard.getName());
+	}
+
+	private void setFulDesc(){
+		LinearLayout layout = findViewById(R.id.full_description);
+		Resources res = getResources();
+		String[] text = res.getStringArray(R.array.full_desc);
+		TypedArray icons = res.obtainTypedArray(R.array.img);
+
+
+		TextView textView = new TextView(this);
+		textView.setText(text[0]);
+
+		Drawable drawable = icons.getDrawable(0);
+		ImageView imageView = new ImageView(this);
+		imageView.setBackground(drawable);
+		layout.addView(textView);
+		layout.addView(imageView);
+
 	}
 	
 	protected  void changeVisibility(){

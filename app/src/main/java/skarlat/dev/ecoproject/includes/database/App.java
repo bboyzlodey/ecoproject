@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.includes;
+package skarlat.dev.ecoproject.includes.database;
 
 import android.app.Application;
 
@@ -21,6 +21,7 @@ public class App extends Application {
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
 //                .addMigrations(AppDatabase.MIGRATION)
+//                .openHelperFactory(new AssetSQLiteOpenHelperFactory())
                 .allowMainThreadQueries()
                 .build();
     }

@@ -1,10 +1,12 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.adapter;
 
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import skarlat.dev.ecoproject.activity.PageFragment;
 
 import skarlat.dev.ecoproject.fragment.UserFragment;
 
