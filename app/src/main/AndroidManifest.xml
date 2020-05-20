@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="skarlat.dev.ecoproject">
+	<uses-permission android:name="android.permission.INTERNET"/>
 
 	<application
+		android:name=".includes.database.App"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
+		android:largeHeap="true"
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
-		android:largeHeap="true"
-		android:theme="@style/AppTheme"
-		android:name=".includes.database.App">
-		<activity android:name=".activity.EcoCardActivity"
+		android:theme="@style/AppTheme">
+
+		<activity android:name=".activity.SignInActivity"></activity>
+		<activity android:name=".activity.AuthActivity" />
+		<activity
+			android:name=".activity.EcoCardActivity"
 			android:parentActivityName=".activity.ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".activity.ProjectActivity" />
 		</activity>
 		<activity android:name=".activity.ProjectActivity" />
-		<activity android:name=".activity.HomeActivity"/>
+		<activity android:name=".activity.HomeActivity" />
 		<activity android:name=".activity.CourseCardActivity" />
 		<activity android:name=".activity.MainActivity">
 			<intent-filter>

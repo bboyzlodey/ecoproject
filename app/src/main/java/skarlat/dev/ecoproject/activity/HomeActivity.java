@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
 	    // Передаём ViewPager в TabLayout
 	    tabLayout.setupWithViewPager(viewPager);
 	    
-	    //  Анимация для сглаживания программного скрола в PageFragment
+	    //  Анимация
 	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
 	
