@@ -78,14 +78,15 @@ public class PageFragment extends Fragment {
 			progressBarView.setValue(progressBar);
 			currentCardView.setTag(currentCourse);
 		}
-		TextView textViewDone = view.findViewById(R.id.course_done);
-		if (coursesDone == null){
-			textViewDone.setVisibility(View.GONE);
-		}else
-			textViewDone.setVisibility(View.VISIBLE);
 
 
 		initiList(); // создаем лист и заполняем его
+
+		TextView textViewDone = view.findViewById(R.id.course_done);
+		if (coursesDone == null || coursesDone.size() == 0){
+			textViewDone.setVisibility(View.GONE);
+		}else
+			textViewDone.setVisibility(View.VISIBLE);
 		/**
 		 *
 		 *      Заполнение RecyclerView;

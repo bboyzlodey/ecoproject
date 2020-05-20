@@ -148,4 +148,23 @@ public class EcoCardActivity extends AppCompatActivity {
 		}
 	}
 
+	public void onBackBtn(View view){
+		onBackPressed();
+	}
+
+
+	@Override
+	public void onBackPressed() {
+		setResult(RESULT_OK);
+		finish();
+	}
+
+	public void likeBtn(View view){
+		EcoSoviet tip = (EcoSoviet) view.getTag();
+		if (tip.getStatus() == EcoSoviet.Status.UNLIKED)
+			tip.upDate(EcoSoviet.Status.LIKED);
+		else
+			tip.upDate(EcoSoviet.Status.UNLIKED);
+	}
+
 }

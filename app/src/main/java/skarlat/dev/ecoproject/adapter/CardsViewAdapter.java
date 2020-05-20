@@ -4,14 +4,12 @@ package skarlat.dev.ecoproject.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
 
@@ -64,7 +61,6 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 holder.countOpenCard.setVisibility(View.GONE);
                 holder.cardClose.setVisibility(View.VISIBLE);
                 holder.cardClose.setText("");
-//                holder.backgroundCard.setBackgroundColor(R.color.colorWhite);
                 drawable = holder.backgroundCard.getBackground();
                 drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 //            holder.backgroundCard.setTranslationZ(24);
@@ -76,7 +72,6 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 holder.header.setText( ecoCard.getTitle() );
                 holder.description.setVisibility(View.VISIBLE);
                 holder.description.setText(ecoCard.getDescription());
-//                holder.backgroundCard.setBackgroundColor(R.color.colorWhite);
                 GradientDrawable gradientDrawable = (GradientDrawable) holder.backgroundCard.getBackground();
                 gradientDrawable.setColor(Color.WHITE);
                 holder.countOpenCard.setVisibility(View.VISIBLE);
@@ -87,21 +82,16 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 break;
         }
         holder.backgroundCard.setTag(ecoCard);
-        
-        /**
-         *    Можно делать также через реализацию с if
-         *    В след коммите я это удалю
-         */
-//        if (ecoCard.getStatus() == Course.Status.CLOSED) {
-//            holder.header.setVisibility(View.GONE);
-//            holder.description.setVisibility(View.GONE);
-//            holder.countOpenCard.setVisibility(View.GONE);
-//            holder.cardClose.setVisibility(View.VISIBLE);
-//            holder.cardClose.setText(String.valueOf(position));
-//        }
+
         if ( getItemCount() - 1 == position ){ // Latest item
             holder.nextCard.setVisibility(View.GONE);
-//            holder.backgroundCard.setMinimumHeight(86);
+            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, 240));
+            linearParams.setMargins(0,0,0,16);
+            holder.backgroundCard.setLayoutParams(linearParams);
+            holder.backgroundCard.requestLayout();
+
         }
     }
 

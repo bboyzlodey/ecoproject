@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import skarlat.dev.ecoproject.includes.database.App;
+import skarlat.dev.ecoproject.includes.database.AppDatabase;
+import skarlat.dev.ecoproject.includes.database.dao.SovietsDao;
+
 @Entity
 public class EcoSoviet implements EcoInterface{
 
@@ -44,9 +48,9 @@ public class EcoSoviet implements EcoInterface{
 		return isFavorite == 0 ? Status.UNLIKED : Status.LIKED;
 	}
 
-	private enum Status{
+	public enum Status{
 		UNLIKED,
-		LIKED;
+		LIKED
 	}
 
 	public void setStatus(EcoSoviet.Status status){
@@ -61,6 +65,9 @@ public class EcoSoviet implements EcoInterface{
 	}
 
 	public void upDate(EcoSoviet.Status status){
+		AppDatabase db = App.getInstance().getDatabase();
+		SovietsDao dao = db.sovietsDao();
 		setStatus(status);
+		dao.update(this);
 	}
 }

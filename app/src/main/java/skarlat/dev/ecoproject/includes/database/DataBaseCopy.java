@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class DataBaseWrapper
+public class DataBaseCopy
 {
-    private static String TAG = DataBaseWrapper.class.getName();
+    private static String TAG = DataBaseCopy.class.getName();
     private  String DB_PATH; //= "/data/data/com.example.yourproject/database/";
     private static String DB_NAME = "database";
     private SQLiteDatabase myDataBase = null;
     private final Context myContext;
 
-    public DataBaseWrapper(Context context)
+    public DataBaseCopy(Context context)
     {
 //        super(context, DB_NAME, null, 1);
 

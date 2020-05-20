@@ -16,7 +16,7 @@ import java.util.List;
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
-import skarlat.dev.ecoproject.includes.database.DataBaseWrapper;
+import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,9 +34,9 @@ public class HomeActivity extends AppCompatActivity {
 		/**
 		 * Копирование базы данных из папки assets
 		 */
-		DataBaseWrapper dataBaseWrapper = new DataBaseWrapper(this);
+		DataBaseCopy dataBaseCopy = new DataBaseCopy(this);
 		try {
-			dataBaseWrapper.createDataBase();
+			dataBaseCopy.createDataBase();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

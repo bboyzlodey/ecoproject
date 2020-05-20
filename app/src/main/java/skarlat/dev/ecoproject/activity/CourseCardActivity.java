@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private DatabaseHelper db = new DatabaseHelper();
     private List<EcoCard> ecoCard;
     private Course currentCourse;
+    private final int REQUST = 1;
 
 
     @Override
@@ -57,11 +60,13 @@ public class CourseCardActivity extends AppCompatActivity {
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
 
-        if ( progress > 0 )
+        if ( progress > 0  && progress < 100)
             startCourse.setText("Продолжить обучение");
+        else if ( progress >= 100){
+            startCourse.setVisibility(View.GONE);
+        }
         else
             startCourse.setText("Начать обучение");
-
 
         /**
          *
@@ -75,6 +80,30 @@ public class CourseCardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        progress = currentCourse.getProgressBar();
+        progressBarView.setValue(progress);
+        leftCards.setText(db.getLeftCards(courseName));
+
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
+        recyclerView.setAdapter(adapter);
+
+        if ( progress > 0  && progress < 100)
+            startCourse.setText("Продолжить обучение");
+        else if ( progress >= 100){
+            startCourse.setVisibility(View.GONE);
+        }
+        else
+            startCourse.setText("Начать обучение");
+    }
 
     public void onBackBtn(View view){
         onBackPressed();
@@ -87,30 +116,37 @@ public class CourseCardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * View карточки обновляет базу данных при переходе
+     * @param view
+     */
     public void openCard(View view) {
         EcoCard currentCard = (EcoCard) view.getTag();
 
         Intent intent = new Intent(this, EcoCardActivity.class);
+        intent.putExtra(currentCard.getClass().getSimpleName(), currentCard);
+        if (currentCard.getStatus() == EcoCard.Status.WATCHED) {
+            startActivityForResult(intent, REQUST);
+        }else {
 
-        if (currentCard.getStatus() == EcoCard.Status.WATCHED)
-            startActivity(intent);
-
-        for (int i = 0; i < ecoCard.size(); i++) {
-            if ( ecoCard.get(i).getName() == currentCard.getName() && (i + 1) < ecoCard.size()){
-                ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
-                break;
+            for (int i = 0; i < ecoCard.size(); i++) {
+                if (ecoCard.get(i).getName() == currentCard.getName() && (i + 1) < ecoCard.size()) {
+                    ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
+                    break;
+                }
             }
+
+            currentCard.upDate(EcoCard.Status.WATCHED);
+
+            upDateCurrentCourse();
+
+            startActivityForResult(intent, REQUST);
         }
-
-        currentCard.upDate(EcoCard.Status.WATCHED);
-
-        upDateCurrentCourse();
-
-        intent.putExtra(currentCard.getClass().getSimpleName(),currentCard);
-
-        startActivity(intent);
     }
 
+    /**
+     * Progress бар для базы данных
+     */
     private void upDateCurrentCourse(){
 
         double res =  100.00 / (double) ecoCard.size();
@@ -123,7 +159,11 @@ public class CourseCardActivity extends AppCompatActivity {
             currentCourse.upDate(progress, Course.Status.CURRENT);
     }
 
-
+    /**
+     * Кнопка продолжить обучение
+     * Обновляет базу данных при нажатии
+     * @param view
+     */
     public void startBtn(View view){
         for (int i = 0; i < ecoCard.size(); i++) {
             EcoCard card = ecoCard.get(i);
@@ -138,7 +178,9 @@ public class CourseCardActivity extends AppCompatActivity {
                 if (i != ecoCard.size() - 1) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
                 }
-                startActivity(intent);
+                card.upDate(EcoCard.Status.WATCHED);
+                startActivityForResult(intent,REQUST);
+                break;
             }
         }
     }

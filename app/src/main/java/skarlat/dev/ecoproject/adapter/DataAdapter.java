@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,10 +34,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	@Override
 	public void onBindViewHolder(DataAdapter.ViewHolder holder, int position) {
 		EcoSoviet ecoSoviet = soviets.get(position);
-//		holder.header.setText(ecoSoviet.getTitle());
-//		holder.description.setText(ecoSoviet.getDescription());
 		holder.header.setText(ecoSoviet.getTitle());
 		holder.description.setText(ecoSoviet.getDescription());
+		holder.toggle.setTag(ecoSoviet);
+		if (ecoSoviet.getStatus() == EcoSoviet.Status.LIKED)
+			holder.toggle.setChecked(true);
+		else
+			holder.toggle.setChecked(false);
 	}
 	
 	@Override
@@ -46,10 +50,12 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	
 	public class ViewHolder extends RecyclerView.ViewHolder {
 		final TextView header, description;
+		final ToggleButton toggle;
 		ViewHolder(View view){
 			super(view);
 			header = (TextView) view.findViewById(R.id.header_card);
 			description = (TextView) view.findViewById(R.id.descr_card);
+			toggle = view.findViewById(R.id.toggle);
 		}
 	}
 }

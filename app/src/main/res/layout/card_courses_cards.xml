@@ -12,6 +12,7 @@
         android:layout_height="80dp"
         android:orientation="vertical"
         android:background="@drawable/text_view_rounded"
+        android:layout_weight="0"
         android:onClick="openCard">
 
         <TextView
