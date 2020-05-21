@@ -12,6 +12,7 @@ import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 
 @Entity
 public class EcoCard  implements EcoInterface, Serializable {
+
 	@PrimaryKey
 	@NonNull
 	public String cardNameID;

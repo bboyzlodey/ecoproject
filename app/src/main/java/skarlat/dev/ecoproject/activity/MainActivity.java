@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void next(View view) {
-		Intent intent = new Intent(this, AuthActivity.class);
+			Intent intent = new Intent(this, AuthActivity.class);
 		startActivity(intent);
 	}
 

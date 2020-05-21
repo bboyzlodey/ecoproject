@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "45255464824-1nhked8ivj0q9vhq08kh2qp3f60aal13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "skarlat.dev.ecoproject",
+            "certificate_hash": "9aa8631ee500b946f0e6abddb6a5c08a24481135"
+          }
+        },
+        {
           "client_id": "45255464824-gnkhn1gk5bi0i868pc95kedmdiia8bnv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
