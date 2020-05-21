@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -100,6 +101,8 @@ public class UserFragment extends Fragment {
 				}
 			}
 		};
+		Drawable drawable = new BitmapDrawable();
+		
 		Thread thread = new Thread(runnable);
 //		runnable.run();
 //		try {
