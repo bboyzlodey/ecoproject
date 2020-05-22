@@ -97,10 +97,14 @@ public class PageFragment extends Fragment {
 		RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.recycle_courses_done);
 		CourseAdapter courseAdapter = new CourseAdapter(getContext(), courses);
 		CourseAdapter courseAdapterDone = new CourseAdapter(getContext(), coursesDone);
-		if(recyclerView != null)
+		if(recyclerView != null) {
 			recyclerView.setAdapter(courseAdapter);
-		if (recyclerViewDone != null)
+			recyclerView.setFocusable(false);
+		}
+		if (recyclerViewDone != null) {
 			recyclerViewDone.setAdapter(courseAdapterDone);
+			recyclerViewDone.setFocusable(false);
+		}
 		return view;
 	}
 	
