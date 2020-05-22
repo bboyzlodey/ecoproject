@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "45255464824",
+    "firebase_url": "https://ecoproject-22c0f.firebaseio.com",
+    "project_id": "ecoproject-22c0f",
+    "storage_bucket": "ecoproject-22c0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45255464824:android:cb287622ad086335579a8d",
+        "android_client_info": {
+          "package_name": "skarlat.dev.ecoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45255464824-1nhked8ivj0q9vhq08kh2qp3f60aal13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "skarlat.dev.ecoproject",
+            "certificate_hash": "9aa8631ee500b946f0e6abddb6a5c08a24481135"
+          }
+        },
+        {
+          "client_id": "45255464824-gnkhn1gk5bi0i868pc95kedmdiia8bnv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "skarlat.dev.ecoproject",
+            "certificate_hash": "ae30263ae4b385c2ce4605de59dbc3fe7364db2b"
+          }
+        },
+        {
+          "client_id": "45255464824-5lt8b2hd18tkj17rltgrgc4f8i9jeshu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn4sKDX33-giP5nbWTUsuSmBAJrIWKENg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45255464824-5lt8b2hd18tkj17rltgrgc4f8i9jeshu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,10 +23,13 @@ import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
+
 public class HomeActivity extends AppCompatActivity {
 	private List<Course> courses;
 	private TabLayout tabLayout;
 	private DatabaseHelper db;
+	private FirebaseAuth mAuth;
+	private DatabaseReference myRef;
 //	private TextView currentCourseTitleView,currentCourseDescView, countLeftCardView;
 //	private ProgressBarView progressBarView;
 
@@ -30,6 +37,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+
+		FirebaseUser user = mAuth.getCurrentUser();
+
+		myRef.child(mAuth.getUid()).child("Денис").setValue("s");
 
 		/**
 		 * Копирование базы данных из папки assets
@@ -53,13 +67,12 @@ public class HomeActivity extends AppCompatActivity {
 	protected void setIconsInTab(){
 	    int[] imageResId = {
 	    		R.drawable.event,
-			    R.drawable.timeline,
 			    R.drawable.person};
 	
 	    for (int i = 0; i < imageResId.length; i++) {
 		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
 		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
-		    tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
+		    
 		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			    @Override
 			    public void onTabSelected(TabLayout.Tab tab) {
@@ -77,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
 			    }
 		    });
 	    }
+		tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
     }
     
     protected void tabView(){
@@ -88,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
 	    // Передаём ViewPager в TabLayout
 	    tabLayout.setupWithViewPager(viewPager);
 	    
-	    //  Анимация для сглаживания программного скрола в PageFragment
+	    //  Анимация
 	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
 	

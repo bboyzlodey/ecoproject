@@ -112,13 +112,14 @@
         android:layout_width="238dp"
         android:layout_height="40dp"
         android:textSize="14sp"
+        android:id="@+id/start_course"
         android:text="Начать обучение"
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
         android:background="@drawable/begin_button"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:onClick="openCard"
+        android:onClick="startBtn"
         android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
