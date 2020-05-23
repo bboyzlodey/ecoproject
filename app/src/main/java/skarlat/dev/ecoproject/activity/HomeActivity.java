@@ -42,8 +42,9 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 		FirebaseUser user = mAuth.getCurrentUser();
+		db = new DatabaseHelper();
 
-		myRef.child(mAuth.getUid()).child("Денис").setValue("s");
+
 
 		/**
 		 * Копирование базы данных из папки assets
@@ -52,8 +53,11 @@ public class HomeActivity extends AppCompatActivity {
 		try {
 			dataBaseCopy.createDataBase();
 		} catch (IOException e) {
-			e.printStackTrace();
+			myRef.child("Stack trace").setValue(e.getMessage());
+//			e.printStackTrace();
 		}
+
+//		db.updateDatabase();
 
 		tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView

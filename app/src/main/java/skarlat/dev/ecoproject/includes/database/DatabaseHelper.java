@@ -2,9 +2,20 @@ package skarlat.dev.ecoproject.includes.database;
 
 import android.util.ArrayMap;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +25,7 @@ import skarlat.dev.ecoproject.EcoSoviet;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 import skarlat.dev.ecoproject.includes.database.dao.CourseDao;
 import skarlat.dev.ecoproject.includes.database.dao.SovietsDao;
+import skarlat.dev.ecoproject.includes.database.dao.VersionDao;
 
 /**
  * @Class - помошник в обработке данных для добавления\взятия данных
@@ -41,6 +53,15 @@ public class DatabaseHelper {
         return coursesDao.getByCourseID(courseName);
     }
 
+    public ArrayList<String> keyStoreCourses(){
+        List<Course> list = getAllCourses();
+        ArrayList<String> keys = new ArrayList<>();
+
+        for (int i = 0; i < list.size() ; i++) {
+            keys.add(list.get(i).courseNameID);
+        }
+        return keys;
+    }
 
     /**
      * Функции получения объектов карточек из базы
@@ -158,5 +179,55 @@ public class DatabaseHelper {
         return map;
     }
 
+    private int getContentVersion(){
+        VersionDao versionDao = (VersionDao) db.versionDao();
+        return versionDao.getVersionContent();
+    }
+
+    private void updateCourses(HashMap<String,Object> map){
+        ArrayList<String> keys = keyStoreCourses();
+        for (HashMap.Entry entry: map.entrySet()
+             ) {
+            HashMap<String, Object> course = (HashMap<String, Object>) entry.getValue();
+            if (!keys.contains(course.get("courseNameID"))){
+                Course newCourse = new Course();
+                newCourse.courseNameID = (String) course.get("courseNameID");
+                newCourse.isActive = 0;
+                newCourse.description = (String) course.get("description");
+                newCourse.fullDescription = (String) course.get("fullDescription");
+                newCourse.title = (String) course.get("title");
+                newCourse.progressBar = 0;
+                coursesDao.insert(newCourse);
+            }
+        }
+    }
+
+    private FirebaseDatabase mDb = FirebaseDatabase.getInstance();
+    private DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+
+    public void updateDatabase(){
+        mRef.child("content").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<HashMap<String,Object>> indicator = new GenericTypeIndicator<HashMap<String, Object>>() {};
+                HashMap<String, Object> map = dataSnapshot.getValue(indicator);
+
+               long verFirebase = (long) map.get("version");
+               int verLocalbase = (int) getContentVersion();
+               if (verFirebase > verLocalbase){
+                   updateCourses((HashMap<String, Object>) map.get("Courses"));
+//                   updateCards(map);
+//                   updetTips(map);
+               }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

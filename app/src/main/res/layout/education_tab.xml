@@ -29,7 +29,7 @@
 				android:layout_marginTop="27dp"
 				android:layout_marginBottom="17dp"
 				android:visibility="visible"
-				android:layout_weight="0"/>
+/>
 
 			<!--	CardView - Карточка текущего курса. Для демонстрации пойдет так-->
 			<androidx.cardview.widget.CardView
@@ -40,8 +40,7 @@
 				android:onClick="openCourse"
 				android:elevation="6dp"
 				tools:tag="tag"
-				android:visibility="visible"
-				android:layout_weight="0">
+				android:visibility="visible">
 
 				<RelativeLayout
 					android:layout_width="match_parent"
@@ -98,7 +97,7 @@
 				android:textSize="12sp"
 				android:layout_marginTop="8dp"
 				android:visibility="visible"
-				android:layout_weight="0"/>
+				/>
 
 			<TextView
 				android:layout_width="wrap_content"
@@ -107,7 +106,7 @@
 				android:text="Доступные курсы"
 				android:textSize="20sp"
 				android:layout_marginTop="16dp"
-				android:layout_weight="0"
+
 				android:layout_marginBottom="16dp"/>
 
 			<!--	RecycleView - пролистывание карточек доступных курсов-->
@@ -115,7 +114,6 @@
 				android:id="@+id/recycle_courses"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:layout_weight="1"
 				android:nestedScrollingEnabled="false"
 				app:layoutManager="LinearLayoutManager"
 				android:paddingBottom="16dp"
@@ -130,14 +128,14 @@
 				android:textSize="20sp"
 				android:visibility="visible"
 				android:layout_marginTop="16dp"
-				android:layout_weight="0"
+
 				android:layout_marginBottom="16dp"/>
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/recycle_courses_done"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
+				android:layout_height="wrap_content"
+
 				android:nestedScrollingEnabled="false"
 				app:layoutManager="LinearLayoutManager"
 				android:paddingBottom="16dp"

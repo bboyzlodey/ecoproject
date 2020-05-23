@@ -94,16 +94,22 @@ public class PageFragment extends Fragment {
 		
 		
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_courses);
+
 		RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.recycle_courses_done);
+
 		CourseAdapter courseAdapter = new CourseAdapter(getContext(), courses);
 		CourseAdapter courseAdapterDone = new CourseAdapter(getContext(), coursesDone);
 		if(recyclerView != null) {
+//			recyclerView.setNestedScrollingEnabled(false);
+//			recyclerView.setFocusable(false);
+//			recyclerView.setHasFixedSize(true);
+
 			recyclerView.setAdapter(courseAdapter);
-			recyclerView.setFocusable(false);
 		}
 		if (recyclerViewDone != null) {
-			recyclerViewDone.setAdapter(courseAdapterDone);
+			recyclerViewDone.setNestedScrollingEnabled(false);
 			recyclerViewDone.setFocusable(false);
+			recyclerViewDone.setAdapter(courseAdapterDone);
 		}
 		return view;
 	}
@@ -121,5 +127,4 @@ public class PageFragment extends Fragment {
 				coursesDone.add(course);
 		}
 	}
-	
 }
