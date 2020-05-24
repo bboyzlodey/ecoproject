@@ -7,11 +7,12 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Version {
 
-    @PrimaryKey
-    @NonNull
-   public int versionContent;
+   @PrimaryKey
+   @NonNull
+   public String searchKey;
 
-    @NonNull
-    public int versionUserBar;
+   public long versionContent;
+
+   public int versionUserBar;
 
 }

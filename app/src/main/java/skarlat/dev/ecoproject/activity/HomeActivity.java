@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 		}
 
 //		db.updateDatabase();
-
+//		db.updateUserProfile();
 		tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
 	    setIconsInTab();

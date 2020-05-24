@@ -114,7 +114,7 @@
 				android:id="@+id/recycle_courses"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:nestedScrollingEnabled="false"
+				android:nestedScrollingEnabled="true"
 				app:layoutManager="LinearLayoutManager"
 				android:paddingBottom="16dp"
 				tools:visibility="visible"/>

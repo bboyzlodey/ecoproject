@@ -4,6 +4,8 @@ import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
@@ -84,6 +87,9 @@ public class DatabaseHelper {
         return sovietsDao.getAllByCardNameID(cardName);
     }
 
+    public List<EcoSoviet> getAll(){
+        return sovietsDao.getAll();
+    }
     public List<EcoSoviet> getAllFavorite(){
         return sovietsDao.getAllFavorite();
     }
@@ -184,9 +190,49 @@ public class DatabaseHelper {
         return versionDao.getVersionContent();
     }
 
+    private int getProgressVersion(){
+        VersionDao versionDao = (VersionDao) db.versionDao();
+        return versionDao.getVersionUserBar();
+    }
+
+    private void updateTips(HashMap<String, Object> map, String cardName){
+        HashMap<String, Object > tips = (HashMap<String, Object>) map.get(cardName);
+        for (HashMap.Entry entry: tips.entrySet()
+             ) {
+            HashMap<String, Object> tip = (HashMap<String, Object>) entry.getValue();
+            EcoSoviet newEcoSoviet = new EcoSoviet();
+            newEcoSoviet.isFavorite = 0;
+            newEcoSoviet.cardNameID = cardName;
+            newEcoSoviet.description = (String) tip.get("description");
+            newEcoSoviet.title = (String) tip.get("title");
+            sovietsDao.insert(newEcoSoviet);
+        }
+    }
+
+    private void updateCards(HashMap<String,Object> map, String courseName){
+        HashMap<String, Object > cards = (HashMap<String, Object>) map.get("Cards");
+        HashMap<String, Object> cardLvl = (HashMap<String, Object>) cards.get(courseName);
+
+        for (HashMap.Entry entry: cardLvl.entrySet()
+             ) {
+            HashMap<String, Object> card = (HashMap<String, Object>) entry.getValue();
+            EcoCard newCard = new EcoCard();
+            long active = (long) card.get("isActive");
+            newCard.isActive = (int) active;
+            newCard.cardNameID = (String) Objects.requireNonNull(card.get("cardNameID"));
+            newCard.courseNameID = courseName;
+            newCard.description = (String) card.get("description");
+            newCard.fullDescription = (String) card.get("fullDescription");
+            newCard.title = (String) card.get("title");
+            cardsDao.insert(newCard);
+            updateTips((HashMap<String, Object>) map.get("Tips"), newCard.cardNameID);
+        }
+    }
+
     private void updateCourses(HashMap<String,Object> map){
         ArrayList<String> keys = keyStoreCourses();
-        for (HashMap.Entry entry: map.entrySet()
+        HashMap<String, Object> courses = (HashMap<String, Object>) map.get("Courses");
+        for (HashMap.Entry entry: courses.entrySet()
              ) {
             HashMap<String, Object> course = (HashMap<String, Object>) entry.getValue();
             if (!keys.contains(course.get("courseNameID"))){
@@ -198,6 +244,7 @@ public class DatabaseHelper {
                 newCourse.title = (String) course.get("title");
                 newCourse.progressBar = 0;
                 coursesDao.insert(newCourse);
+                updateCards(map, newCourse.courseNameID);
             }
         }
     }
@@ -216,11 +263,50 @@ public class DatabaseHelper {
                long verFirebase = (long) map.get("version");
                int verLocalbase = (int) getContentVersion();
                if (verFirebase > verLocalbase){
-                   updateCourses((HashMap<String, Object>) map.get("Courses"));
-//                   updateCards(map);
-//                   updetTips(map);
+                   updateCourses(map);
+                   Version version = db.versionDao().getVer("key");
+                   version.versionContent = (int) verFirebase;
+                   db.versionDao().update(version);
                }
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void updateUserProgress(HashMap<String, Object> map){
+
+    }
+
+    public void updateFirebaseProgress(String key, String value){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (key.equals("version"))
+            mRef.child(user.getUid()).child("progress").child(key).setValue(Integer.parseInt(value));
+        else
+            mRef.child(user.getUid()).child("progress").child(key).setValue(value);
+    }
+
+    public void updateUserProfile(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        mRef.child(user.getUid()).child("progress").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String,Object>> indicator = new GenericTypeIndicator<HashMap<String, Object>>() {};
+                HashMap<String, Object> map = dataSnapshot.getValue(indicator);
+                if (map == null){
+                    updateFirebaseProgress("version", "1");
+                }else{
+                    long ver = (long) map.get("version");
+                    int localVer = getProgressVersion();
+                    if (ver > localVer)
+                        updateUserProgress(map);
+                }
             }
 
             @Override
