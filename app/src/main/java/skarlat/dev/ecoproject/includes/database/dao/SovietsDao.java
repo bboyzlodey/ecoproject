@@ -20,11 +20,14 @@ import skarlat.dev.ecoproject.EcoSoviet;
 @Dao
 public interface SovietsDao {
 
-    @Query("SELECT * FROM EcoSoviet")
+    @Query("SELECT * FROM EcoSoviet WHERE isFavorite = 1")
     List<EcoSoviet> getAllFavorite();
 
     @Query("SELECT * FROM EcoSoviet")
     List<EcoSoviet> getAll();
+
+    @Query("SELECT * FROM EcoSoviet WHERE sovietID = :id")
+    EcoSoviet getByTipID(long id);
 
     @Query("SELECT * FROM EcoSoviet WHERE cardNameID = :cardNameID")
     List<EcoSoviet> getAllByCardNameID(String cardNameID);

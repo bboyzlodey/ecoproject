@@ -11,10 +11,10 @@ import skarlat.dev.ecoproject.includes.database.Version;
 @Dao
 public interface VersionDao {
 
-    @Query("SELECT * FROM Version WHERE searchKey = :key")
-    Version getVer(String key);
+    @Query("SELECT * FROM Version WHERE searchKey = 'key'")
+    Version getVer();
 
-    @Query("SELECT * FROM Version WHERE versionContent")
+    @Query("SELECT * FROM Version WHERE searchKey = 'key'")
     int getVersionContent();
 
     @Query("SELECT * FROM Version WHERE versionUserBar")

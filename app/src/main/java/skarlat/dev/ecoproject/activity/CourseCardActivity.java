@@ -56,6 +56,7 @@ public class CourseCardActivity extends AppCompatActivity {
 
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
+        progress = db.getCourseByName(courseName).getProgressBar();
         progressBarView.setValue(progress);
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
@@ -132,12 +133,13 @@ public class CourseCardActivity extends AppCompatActivity {
             for (int i = 0; i < ecoCard.size(); i++) {
                 if (ecoCard.get(i).getName() == currentCard.getName() && (i + 1) < ecoCard.size()) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
+                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
                     break;
                 }
             }
 
             currentCard.upDate(EcoCard.Status.WATCHED);
-
+            db.updateFirebaseProgress("Cards" ,currentCard.getName(), "status", 2);
             upDateCurrentCourse();
 
             startActivityForResult(intent, REQUST);
@@ -153,10 +155,13 @@ public class CourseCardActivity extends AppCompatActivity {
         res = Math.ceil(res);
 
         progress += res;
-        if (progress >= 100)
+        if (progress >= 100){
             currentCourse.upDate(progress, Course.Status.FINISHED);
-        else
+        }
+        else{
             currentCourse.upDate(progress, Course.Status.CURRENT);
+        }
+        db.updateFirebaseProgress("Courses" ,currentCourse.getName(), "progress", progress);
     }
 
     /**
@@ -177,8 +182,10 @@ public class CourseCardActivity extends AppCompatActivity {
 
                 if (i != ecoCard.size() - 1) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
+                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
                 }
                 card.upDate(EcoCard.Status.WATCHED);
+                db.updateFirebaseProgress("Cards" ,card.getName(), "status", 2);
                 startActivityForResult(intent,REQUST);
                 break;
             }

@@ -28,7 +28,6 @@ import skarlat.dev.ecoproject.EcoSoviet;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 import skarlat.dev.ecoproject.includes.database.dao.CourseDao;
 import skarlat.dev.ecoproject.includes.database.dao.SovietsDao;
-import skarlat.dev.ecoproject.includes.database.dao.VersionDao;
 
 /**
  * @Class - помошник в обработке данных для добавления\взятия данных
@@ -186,13 +185,13 @@ public class DatabaseHelper {
     }
 
     private int getContentVersion(){
-        VersionDao versionDao = (VersionDao) db.versionDao();
-        return versionDao.getVersionContent();
+        Version version = db.versionDao().getVer();
+        return (int) version.versionContent;
     }
 
     private int getProgressVersion(){
-        VersionDao versionDao = (VersionDao) db.versionDao();
-        return versionDao.getVersionUserBar();
+        Version version = db.versionDao().getVer();
+        return version.versionUserBar;
     }
 
     private void updateTips(HashMap<String, Object> map, String cardName){
@@ -249,10 +248,12 @@ public class DatabaseHelper {
         }
     }
 
-    private FirebaseDatabase mDb = FirebaseDatabase.getInstance();
-    private DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+
 
     public void updateDatabase(){
+        FirebaseDatabase mDb = FirebaseDatabase.getInstance();
+        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+        mRef.setPriority(2);
         mRef.child("content").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -264,11 +265,11 @@ public class DatabaseHelper {
                int verLocalbase = (int) getContentVersion();
                if (verFirebase > verLocalbase){
                    updateCourses(map);
-                   Version version = db.versionDao().getVer("key");
+                   Version version = db.versionDao().getVer();
                    version.versionContent = (int) verFirebase;
                    db.versionDao().update(version);
                }
-
+                updateUserProfile();
             }
 
             @Override
@@ -276,36 +277,76 @@ public class DatabaseHelper {
 
             }
         });
+
     }
 
     private void updateUserProgress(HashMap<String, Object> map){
+        HashMap<String, Objects> courseProgress = (HashMap<String, Objects>) map.get("Courses");
+        HashMap<String, Objects> cardProgress = (HashMap<String, Objects>) map.get("Cards");
+        HashMap<String, Objects> tip = (HashMap<String, Objects>) map.get("Tips");
+        for (HashMap.Entry entry: courseProgress.entrySet()
+             ) {
+            Course course = db.courseDao().getByCourseID((String) entry.getKey());
+            HashMap<String, Object> temp = (HashMap<String, Object>) entry.getValue();
+            long progress = (long) temp.get("progress");
+            course.progressBar = (int) progress;
+            if (progress >= 100)
+                course.setStatus(Course.Status.FINISHED);
+            db.courseDao().update(course);
+        }
+        for (HashMap.Entry entry: cardProgress.entrySet()
+             ) {
+            EcoCard card = db.cardsDao().getByCardID((String) entry.getKey());
+            HashMap<String, Object> temp = (HashMap<String, Object>) entry.getValue();
+            long status = (long) temp.get("status");
+            card.isActive = (int) status;
+            db.cardsDao().update(card);
+        }
+
+        for (HashMap.Entry entry: tip.entrySet()
+             ) {
+            EcoSoviet ecoSoviet = db.sovietsDao().getByTipID(Integer.parseInt((String) entry.getKey()));
+            HashMap<String, Object> temp = (HashMap<String, Object>) entry.getValue();
+            long status = (long) temp.get("status");
+            ecoSoviet.isFavorite = (int) status;
+            db.sovietsDao().update(ecoSoviet);
+        }
 
     }
 
-    public void updateFirebaseProgress(String key, String value){
+    public void updateFirebaseProgress(String group, String child, String key, int value){
+        FirebaseDatabase mDb = FirebaseDatabase.getInstance();
+        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if (key.equals("version"))
-            mRef.child(user.getUid()).child("progress").child(key).setValue(Integer.parseInt(value));
+        if (child != null && group != null)
+            mRef.child(user.getUid()).child("progress").child(group).child(child).child(key).setValue(value);
         else
             mRef.child(user.getUid()).child("progress").child(key).setValue(value);
     }
 
     public void updateUserProfile(){
+        FirebaseDatabase mDb = FirebaseDatabase.getInstance();
+        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+        mRef.setPriority(1);
         mRef.child(user.getUid()).child("progress").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<HashMap<String,Object>> indicator = new GenericTypeIndicator<HashMap<String, Object>>() {};
                 HashMap<String, Object> map = dataSnapshot.getValue(indicator);
                 if (map == null){
-                    updateFirebaseProgress("version", "1");
+                    updateFirebaseProgress(null,null,"version", 1);
                 }else{
                     long ver = (long) map.get("version");
                     int localVer = getProgressVersion();
-                    if (ver > localVer)
+                    if (ver > localVer) {
                         updateUserProgress(map);
+                        Version version = db.versionDao().getVer();
+                        version.versionUserBar = (int) ver;
+                        db.versionDao().update(version);
+                    }
                 }
             }
 

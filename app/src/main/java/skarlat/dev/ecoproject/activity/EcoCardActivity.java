@@ -161,10 +161,14 @@ public class EcoCardActivity extends AppCompatActivity {
 
 	public void likeBtn(View view){
 		EcoSoviet tip = (EcoSoviet) view.getTag();
-		if (tip.getStatus() == EcoSoviet.Status.UNLIKED)
+		if (tip.getStatus() == EcoSoviet.Status.UNLIKED) {
 			tip.upDate(EcoSoviet.Status.LIKED);
-		else
+			db.updateFirebaseProgress("Tips" ,String.valueOf(tip.sovietID), "status", 1);
+		}
+		else {
 			tip.upDate(EcoSoviet.Status.UNLIKED);
+			db.updateFirebaseProgress("Tips" ,String.valueOf(tip.sovietID), "status", 0);
+		}
 	}
 
 }

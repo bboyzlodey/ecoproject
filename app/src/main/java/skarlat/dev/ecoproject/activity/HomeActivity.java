@@ -9,13 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
-import java.util.List;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
@@ -25,26 +20,14 @@ import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 
 public class HomeActivity extends AppCompatActivity {
-	private List<Course> courses;
 	private TabLayout tabLayout;
 	private DatabaseHelper db;
-	private FirebaseAuth mAuth;
-	private DatabaseReference myRef;
-//	private TextView currentCourseTitleView,currentCourseDescView, countLeftCardView;
-//	private ProgressBarView progressBarView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        myRef = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-
-		FirebaseUser user = mAuth.getCurrentUser();
-		db = new DatabaseHelper();
-
-
 
 		/**
 		 * Копирование базы данных из папки assets
@@ -53,12 +36,12 @@ public class HomeActivity extends AppCompatActivity {
 		try {
 			dataBaseCopy.createDataBase();
 		} catch (IOException e) {
-			myRef.child("Stack trace").setValue(e.getMessage());
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
+		db = new DatabaseHelper();
+		db.updateDatabase();
 
-//		db.updateDatabase();
-//		db.updateUserProfile();
+
 		tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
 	    setIconsInTab();
@@ -99,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
     
     protected void tabView(){
 	    // Получаем ViewPager и устанавливаем в него адаптер
+
 	    ViewPager viewPager = findViewById(R.id.viewpager);
 	    viewPager.setAdapter(
 			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
