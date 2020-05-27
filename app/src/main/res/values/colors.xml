@@ -7,4 +7,7 @@
 	<color name="colorBlack">#000000</color>
 	<color name="colorCardBG">#D5D5D5</color>
 	<color name="colorWhite">@android:color/white</color>
+	<color name="colorBolotoButton">#C89B50</color>
+	<color name="colorBolotoText">#BC8933</color>
+	<color name="backgroundForSoviet">#F8F2E8</color>
 </resources>
