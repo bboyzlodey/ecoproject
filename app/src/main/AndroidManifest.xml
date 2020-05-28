@@ -25,8 +25,7 @@
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".activity.ProjectActivity" />
 		</activity>
-		<activity android:name=".activity.ProjectActivity" />
-		<activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.HomeActivity" />
 		<activity android:name=".activity.CourseCardActivity" />
 		<activity android:name=".activity.MainActivity">
 			<intent-filter>

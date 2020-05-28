@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -41,6 +42,20 @@ public class HomeActivity extends AppCompatActivity {
 		db = new DatabaseHelper();
 		db.updateDatabase();
 
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+			}
+		});
+		thread.start();
+		if (thread.isAlive()){
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 
 		tabLayout = (TabLayout) findViewById(R.id.home_tab);
         tabView(); // Иницилизация TabView
