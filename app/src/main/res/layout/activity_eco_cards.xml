@@ -5,122 +5,133 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".activity.EcoCardActivity">
+
 	<androidx.core.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:paddingBottom="30dp">
+
 		<LinearLayout
+			android:id="@+id/card_linear_layout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:id="@+id/card_linear_layout">
+			android:orientation="vertical">
+
 			<ImageView
+				android:id="@+id/card_picture"
 				android:layout_width="match_parent"
 				android:layout_height="300dp"
-				android:scaleType="centerCrop"
 				android:background="@color/backgroundForSoviet"
-				android:id="@+id/card_picture"/>
+				android:scaleType="centerCrop" />
+
 			<TextView
+				android:id="@+id/card_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="16dp"
 				android:layout_marginRight="16dp"
-				android:id="@+id/card_title"
-				android:textSize="32sp"
-				tools:text="Сберегаем электроэнергию"
-				android:fontFamily="@font/bellota_bold"
 				android:capitalize="sentences"
-				/>
+				android:fontFamily="@font/bellota_bold"
+				android:textSize="32sp"
+				tools:text="Сберегаем электроэнергию" />
 
 			<TextView
 				android:id="@+id/card_category"
 				style="16sp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="4dp"
-				android:fontFamily="@font/roboto"
-				tools:text="Category"
 				android:layout_marginLeft="16dp"
-				android:layout_marginRight="16dp"/>
-			<RelativeLayout
+				android:layout_marginTop="4dp"
+				android:layout_marginRight="16dp"
+				android:fontFamily="@font/roboto"
+				tools:text="Category" />
+
+			<skarlat.dev.ecoproject.customView.AdviceView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="16dp"
-				android:background="@android:color/holo_orange_dark"
-				android:layout_marginTop="16dp"
 				android:layout_marginLeft="16dp"
+				android:layout_marginTop="16dp"
 				android:layout_marginRight="16dp"
-				>
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Почему это важно?"
-					android:textSize="20sp"
-					android:id="@+id/card_why_const"
-					/>
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/card_why_shortDescription"
-					android:textSize="14sp"
-					tools:text="card_why_shortDescription"
-					android:layout_below="@id/card_why_const"
-					android:layout_marginTop="8dp"/>
-				<LinearLayout
+				android:background="@android:color/transparent">
+
+				<RelativeLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="horizontal"
-					android:layout_below="@id/card_why_shortDescription"
-					android:layout_marginTop="4dp"
+					android:padding="16dp"
+
 					>
 
 					<TextView
-						android:id="@+id/why_readMore_const"
+						android:id="@+id/card_why_const"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:fontFamily="@font/bellota_bold"
-						android:text="Читать дальше"
-						android:textSize="14sp" />
-					<ImageView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:src="@drawable/ic_vector_4"
-						android:background="@null"
-						android:layout_marginLeft="6dp"
-						android:layout_gravity="center_vertical"
-						/>
-				</LinearLayout>
+						android:text="Почему это важно?"
+						android:textSize="20sp" />
 
-			</RelativeLayout>
+					<TextView
+						android:id="@+id/card_why_shortDescription"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_below="@id/card_why_const"
+						android:layout_marginTop="8dp"
+						android:text="..............."
+						android:textSize="14sp"
+						tools:text="card_why_shortDescription" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_below="@id/card_why_shortDescription"
+						android:layout_marginTop="4dp"
+						android:orientation="horizontal">
+
+						<TextView
+							android:id="@+id/why_readMore_const"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:fontFamily="@font/bellota_bold"
+							android:text="Читать дальше"
+							android:textSize="14sp" />
+
+						<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginLeft="6dp"
+							android:background="@null"
+							android:src="@drawable/ic_vector_4" />
+					</LinearLayout>
+				</RelativeLayout>
+			</skarlat.dev.ecoproject.customView.AdviceView>
+
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Как я могу помочь?"
-				android:textSize="24dp"
-				android:fontFamily="@font/bellota_bold"
 				android:layout_marginLeft="16dp"
+				android:layout_marginTop="24dp"
 				android:layout_marginRight="16dp"
 				android:layout_marginBottom="16dp"
-				android:layout_marginTop="24dp"
-				/>
+				android:fontFamily="@font/bellota_bold"
+				android:text="Как я могу помочь?"
+				android:textSize="24dp" />
 
 		</LinearLayout>
 
 
-
 	</androidx.core.widget.NestedScrollView>
+
 	<ImageButton
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_marginTop="24dp"
+		android:layout_marginRight="16dp"
 		android:adjustViewBounds="true"
 		android:background="@null"
-		android:src="@drawable/ic_button_back"
+		android:onClick="onBackBtn"
 		android:scaleType="centerInside"
-		android:layout_alignParentRight="true"
-		android:layout_marginRight="16dp"
-		android:layout_marginTop="24dp"
-		android:onClick="onBackBtn"/>
+		android:src="@drawable/ic_button_back" />
 
 
 </RelativeLayout>

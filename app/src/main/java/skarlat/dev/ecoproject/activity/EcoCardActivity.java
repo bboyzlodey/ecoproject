@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,6 +70,13 @@ public class EcoCardActivity extends AppCompatActivity {
 				inflateLayout((EcoSoviet) iterator.next());
 			}while(iterator.hasNext());
 		}
+		Drawable drawable = getResources().getDrawable(R.drawable.rectangle_rounded_some);
+		Rect oldRect = drawable.getBounds();
+		Rect rect = new Rect(oldRect);
+		rect.right = rect.right + 10;
+		rect.top = rect.top + 10;
+		oldRect.union(rect);
+		
 	}
 	private String capitalize(String cap){
 		return cap.substring(0,1).concat(cap.substring(1).toLowerCase());
