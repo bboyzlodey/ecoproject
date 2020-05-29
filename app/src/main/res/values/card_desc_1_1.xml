@@ -4,6 +4,6 @@
         <item>Зачем экономить электроэнергию?</item>
     </string-array>
     <array name="img">
-        <item>@drawable/nature_1</item>
+        <item>@drawable/custom_progressbar</item>
     </array>
 </resources>
