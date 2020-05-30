@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ import android.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -57,6 +60,19 @@ public class EcoCardActivity extends AppCompatActivity {
 		db = new DatabaseHelper();
 		Bundle bundle = getIntent().getExtras();
 		ecoCard = (EcoCard) bundle.get(EcoCard.class.getSimpleName());
+		String path = ecoCard.cardNameID + ".png";
+		try {
+			BitmapDrawable bitmapDrawable;
+			InputStream inputStream;
+			inputStream = getAssets().open("images/" + ecoCard.courseNameID + "/" + path);
+			bitmapDrawable = new BitmapDrawable(inputStream);
+			ImageView img = (ImageView) findViewById(R.id.card_picture);
+			img.setImageDrawable(bitmapDrawable);
+			img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		TextView textView = (TextView) findViewById(R.id.card_title);
 		textView.setText(capitalize(ecoCard.title));
 		textView = (TextView) findViewById(R.id.card_category);
@@ -70,12 +86,6 @@ public class EcoCardActivity extends AppCompatActivity {
 				inflateLayout((EcoSoviet) iterator.next());
 			}while(iterator.hasNext());
 		}
-		Drawable drawable = getResources().getDrawable(R.drawable.rectangle_rounded_some);
-		Rect oldRect = drawable.getBounds();
-		Rect rect = new Rect(oldRect);
-		rect.right = rect.right + 10;
-		rect.top = rect.top + 10;
-		oldRect.union(rect);
 		
 	}
 	private String capitalize(String cap){

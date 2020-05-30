@@ -42,7 +42,7 @@ public class CourseCardActivity extends AppCompatActivity {
         Bundle tagView = getIntent().getExtras();
 
         currentCourse = (Course) tagView.get("tag");
-        courseName = (String) currentCourse.getName();
+        courseName = currentCourse.getName();
 
 
         cursTitle = (TextView) findViewById(R.id.curs_title);
