@@ -9,20 +9,34 @@
 	<androidx.core.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:paddingBottom="30dp">
+		android:paddingBottom="16dp">
 
 		<LinearLayout
-			android:id="@+id/card_linear_layout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:orientation="vertical">
+<RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
 
-			<ImageView
-				android:id="@+id/card_picture"
-				android:layout_width="match_parent"
-				android:layout_height="300dp"
-				android:background="@color/backgroundForSoviet"
-				android:scaleType="centerCrop" />
+	<ImageView
+	android:id="@+id/card_picture"
+	android:layout_width="match_parent"
+	android:layout_height="300dp"
+	android:background="@color/backgroundForSoviet"
+	android:scaleType="centerCrop" />
+	<ImageButton
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_marginTop="24dp"
+		android:layout_marginRight="16dp"
+		android:adjustViewBounds="true"
+		android:background="@null"
+		android:onClick="onBackBtn"
+		android:scaleType="centerInside"
+		android:src="@drawable/ic_button_back" />
+</RelativeLayout>
 
 			<TextView
 				android:id="@+id/card_title"
@@ -115,23 +129,32 @@
 				android:fontFamily="@font/bellota_bold"
 				android:text="Как я могу помочь?"
 				android:textSize="24dp" />
+			<LinearLayout
+				android:id="@+id/card_linear_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"/>
+			<Button
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/start_course"
+				android:textSize="20sp"
+				android:text="@string/complete_btn"
+				android:textColor="@color/colorWhite"
+				android:textAllCaps="true"
+				android:fontFamily="@font/roboto"
+				android:background="@drawable/begin_button"
+				android:layout_marginLeft="16dp"
+				android:layout_marginRight="16dp"
+				android:layout_marginTop="8dp"
+				android:onClick="onBackBtn"
+					/>
 
 		</LinearLayout>
 
 
 	</androidx.core.widget.NestedScrollView>
 
-	<ImageButton
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_marginTop="24dp"
-		android:layout_marginRight="16dp"
-		android:adjustViewBounds="true"
-		android:background="@null"
-		android:onClick="onBackBtn"
-		android:scaleType="centerInside"
-		android:src="@drawable/ic_button_back" />
 
 
 </RelativeLayout>
