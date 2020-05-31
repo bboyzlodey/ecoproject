@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,6 +32,7 @@ public class CourseCardActivity extends AppCompatActivity {
     private DatabaseHelper db = new DatabaseHelper();
     private List<EcoCard> ecoCard;
     private Course currentCourse;
+
     private final int REQUST = 1;
 
 
@@ -43,17 +45,19 @@ public class CourseCardActivity extends AppCompatActivity {
 
         currentCourse = (Course) tagView.get("tag");
         courseName = (String) currentCourse.getName();
-
+        String imgCourse = courseName.replace('-', '_');
 
         cursTitle = (TextView) findViewById(R.id.curs_title);
         progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
         leftCards = (TextView) findViewById(R.id.left_cards);
         courseDesc = (TextView) findViewById(R.id.course_desc);
         startCourse = findViewById(R.id.start_course);
-
+        ImageView courseImgView = findViewById(R.id.course_backgr);
 
         ecoCard = db.getAllCardsByCourseNameID(courseName);
 
+        int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
+        courseImgView.setImageResource(drawableID);
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
         progress = db.getCourseByName(courseName).getProgressBar();

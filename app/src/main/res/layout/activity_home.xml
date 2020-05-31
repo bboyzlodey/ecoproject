@@ -1,27 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
-	>
+	android:layout_width="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent">
 
-	<com.google.android.material.tabs.TabLayout
-		android:id="@+id/home_tab"
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		app:tabMode="fixed"
-		app:tabIndicatorColor="@color/colorWhite"
-		android:background="@color/colorBlack"
-		app:tabTextColor="@color/colorWhite"
-		/>
+		android:layout_height="match_parent"
+		android:id="@+id/scrollEducation"
+		android:visibility="visible">
 
-	<androidx.viewpager.widget.ViewPager
-		android:id="@+id/viewpager"
-		android:layout_width="match_parent"
-		android:layout_height="0px"
-		android:layout_weight="1"
-		android:background="@android:color/white"
-		/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp">
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+
+				>
+
+				<TextView
+					android:id="@+id/account_welcome"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Привет, Кристина!"
+					android:fontFamily="@font/bellota_bold"
+					android:textColor="@color/colorBlack"
+					android:layout_marginTop="29dp"
+					android:textSize="24sp"
+					/>
+
+				<TextView
+					android:id="@+id/account_quote"
+					android:gravity="bottom"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/colorGray"
+					android:text="Отличный день для того, чтобы узнать что-то новое!"
+					android:fontFamily="@font/sf_font_pro"
+					android:layout_marginTop="8dp"
+					android:layout_marginEnd="72dp"
+					android:textSize="14sp"
+					android:layout_below="@+id/account_welcome"
+					/>
+
+				<ImageView
+					android:id="@+id/my_account"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:layout_marginTop="24dp"
+					android:onClick="openProfile"
+					android:background="@drawable/ic_my_account" />
+
+			</RelativeLayout>
+
+			<TextView
+				android:id="@+id/current_course_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorBlack"
+				android:text="Текущий маршрут"
+				android:fontFamily="@font/sf_font_pro"
+				android:textSize="24sp"
+				android:layout_marginTop="24dp"
+				android:layout_marginBottom="16dp"
+				android:visibility="visible"
+				/>
+
+			<!--	CardView - Карточка текущего курса. Для демонстрации пойдет так-->
+			<androidx.cardview.widget.CardView
+				android:id="@+id/current_course"
+				android:layout_width="match_parent"
+				android:layout_height="177dp"
+				app:cardCornerRadius="8dp"
+				android:onClick="openCourse"
+				android:elevation="6dp"
+				tools:tag="tag"
+				android:visibility="visible">
+
+				<RelativeLayout
+					android:id="@+id/relative"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="@drawable/lvl_1">
+
+					<TextView
+						android:id="@+id/current_course_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="24dp"
+						android:layout_marginTop="16dp"
+						android:fontFamily="@font/bellota_bold"
+						android:text="@string/curs_title"
+						android:textColor="@color/colorWhite"
+						android:textSize="24sp" />
+
+					<TextView
+						android:id="@+id/current_small_description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_below="@+id/current_course_title"
+						android:layout_marginStart="24dp"
+						android:layout_marginTop="9dp"
+						android:fontFamily="@font/sf_font_pro"
+						android:text="@string/description"
+						android:textColor="@color/colorWhite"
+						android:textSize="13sp"
+						android:alpha="0.7"
+						tools:tag="firstStep" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentBottom="true"
+						android:layout_marginStart="24dp"
+						android:layout_marginVertical="16dp"
+						android:background="@drawable/ic_go_to"/>
+
+				</RelativeLayout>
+			</androidx.cardview.widget.CardView>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorBlack"
+				android:text="Доступные курсы"
+				android:textSize="20sp"
+				android:fontFamily="@font/sf_font_pro"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="16dp"/>
+
+			<!--	RecycleView - пролистывание карточек доступных курсов-->
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycle_courses"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:nestedScrollingEnabled="true"
+				app:layoutManager="LinearLayoutManager"
+				android:paddingBottom="16dp"
+				tools:visibility="visible"/>
+
+			<TextView
+				android:id="@+id/course_done"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorBlack"
+				android:text="@string/courses_done"
+				android:textSize="20sp"
+				android:visibility="visible"
+				android:textFontWeight="500"
+				android:fontFamily="@font/sf_font_pro"
+				android:layout_marginTop="16dp"
+
+				android:layout_marginBottom="16dp"/>
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycle_courses_done"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+
+				android:nestedScrollingEnabled="false"
+				app:layoutManager="LinearLayoutManager"
+				android:paddingBottom="16dp"
+				tools:visibility="visible"/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
 
 </LinearLayout>

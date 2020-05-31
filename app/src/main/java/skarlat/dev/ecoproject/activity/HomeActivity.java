@@ -1,35 +1,41 @@
 package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
+import skarlat.dev.ecoproject.adapter.CourseAdapter;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 
 public class HomeActivity extends AppCompatActivity {
-	private TabLayout tabLayout;
 	private DatabaseHelper db;
+	private List<Course> courses;
+	private List<Course> coursesDone;
+	private TextView nameAccount;
+	private RelativeLayout backgroundView;
 
-
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -42,73 +48,64 @@ public class HomeActivity extends AppCompatActivity {
 		db = new DatabaseHelper();
 		db.updateDatabase();
 
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
 
-			}
-		});
-		thread.start();
-		if (thread.isAlive()){
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		backgroundView = findViewById(R.id.relative);
+		TextView currentCourseLvlView  = findViewById(R.id.current_small_description);
+		TextView currentCourseTitleView  = findViewById(R.id.current_course_title);
+		TextView currentCourseTextView = findViewById(R.id.current_course_text_view);
+		CardView currentCardView = findViewById(R.id.current_course);
+		nameAccount = findViewById(R.id.account_welcome);
+
+		setAccountName();
+
+		Course currentCourse = db.getCurrentCourse();
+		if (currentCourse == null){
+			currentCourseTextView.setVisibility(View.GONE);
+			currentCardView.setVisibility(View.GONE);
+		}else {
+			backgroundView.setBackgroundResource(R.drawable.lvl_1);
+			currentCourseTitleView.setText(currentCourse.getTitle());
+			currentCourseLvlView.setText(currentCourse.getDescription());
+			currentCardView.setTag(currentCourse);
 		}
 
-		tabLayout = (TabLayout) findViewById(R.id.home_tab);
-        tabView(); // Иницилизация TabView
-	    setIconsInTab();
 
-    }
-	
-	/**
-	 *      Эта функция устанавливает иконки для таб бара
-	 */
-	protected void setIconsInTab(){
-	    int[] imageResId = {
-	    		R.drawable.event,
-			    R.drawable.person};
-	
-	    for (int i = 0; i < imageResId.length; i++) {
-		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
-		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
-		    
-		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-			    @Override
-			    public void onTabSelected(TabLayout.Tab tab) {
-					tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
-			    }
+		initiList();
 
-			    @Override
-			    public void onTabUnselected(TabLayout.Tab tab) {
-				    tab.getIcon().setTint(getResources().getColor(R.color.colorGray));
-			    }
+		TextView textViewDone = findViewById(R.id.course_done);
+		if (coursesDone == null || coursesDone.size() == 0){
+			textViewDone.setVisibility(View.GONE);
+		}else
+			textViewDone.setVisibility(View.VISIBLE);
 
-			    @Override
-			    public void onTabReselected(TabLayout.Tab tab) {
+		RecyclerView recyclerView = findViewById(R.id.recycle_courses);
 
-			    }
-		    });
-	    }
-		tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
-    }
-    
-    protected void tabView(){
-	    // Получаем ViewPager и устанавливаем в него адаптер
+		RecyclerView recyclerViewDone = findViewById(R.id.recycle_courses_done);
 
-	    ViewPager viewPager = findViewById(R.id.viewpager);
-	    viewPager.setAdapter(
-			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
-	
-	    // Передаём ViewPager в TabLayout
-	    tabLayout.setupWithViewPager(viewPager);
-	    
-	    //  Анимация
-	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-    }
-	
+		CourseAdapter courseAdapter = new CourseAdapter(this, courses);
+		CourseAdapter courseAdapterDone = new CourseAdapter(this, coursesDone);
+		if(recyclerView != null) {
+			recyclerView.setFocusable(false);
+			recyclerView.setAdapter(courseAdapter);
+		}
+		if (recyclerViewDone != null) {
+			recyclerViewDone.setFocusable(false);
+			recyclerViewDone.setAdapter(courseAdapterDone);
+		}
+	}
+
+	protected void initiList(){
+		courses = new ArrayList<>();
+		coursesDone = new ArrayList<>();
+		List<Course> list = db.getAllCourses();
+		for (int i = 0; i < list.size(); i++) {
+			Course course = list.get(i);
+			if (course.getStatus() == Course.Status.CLOSED){
+				courses.add(course);
+			}else if (course.getStatus() == Course.Status.FINISHED)
+				coursesDone.add(course);
+		}
+	}
 	/**
 	 *
 	 * @param v - это объект самой кнопки
@@ -119,21 +116,27 @@ public class HomeActivity extends AppCompatActivity {
 		Intent open = new Intent(this, CourseCardActivity.class);
 		Course tag = (Course) v.getTag();
 		open.putExtra("tag", tag);
-		/**
-		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
-		 *      String title;
-		 *      String description;
-		 *      Map<String, CursCard> curses;
-		 *
-		 *   То мы сделаем так, что бы отобразить нужный курс:
-		 *      static String KEY_GET = "education";
-		 *      String keyForPut = v.getContentDescription().toString();
-		 *      Education education = savedInstanceState.get(KEY_GET);
-		 *      CursCard willOpen = education.curses.get(keyForPut);
-		 *      savedInstanceState.put("curs", willOpen);
-		 *      Intent intent = new Intent(this, CursCard.class);
-		 *      startActivity(intent, savedInstanceState);
-		 */
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			open.putExtra("background", backgroundView.getSourceLayoutResId());
+		}
 		startActivity(open);
+	}
+
+	private void setAccountName(){
+		FirebaseAuth mAuth = FirebaseAuth.getInstance();
+		FirebaseUser user = mAuth.getCurrentUser();
+		String userName = user.getDisplayName().split(" ")[0];
+		nameAccount.setText("Привет, " + userName + "!");
+	}
+
+	public void openProfile(View view){
+		Intent intent = new Intent(this, AuthActivity.class);
+
+		startActivity(intent);
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 }

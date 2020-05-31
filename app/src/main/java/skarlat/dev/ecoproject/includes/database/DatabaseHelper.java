@@ -253,7 +253,6 @@ public class DatabaseHelper {
     public void updateDatabase(){
         FirebaseDatabase mDb = FirebaseDatabase.getInstance();
         DatabaseReference mRef = (DatabaseReference) mDb.getReference();
-        mRef.setPriority(2);
         mRef.child("content").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
