@@ -21,10 +21,8 @@
 
                 <ImageView
                     android:id="@+id/course_backgr"
-                    android:layout_width="@dimen/browser_actions_context_menu_max_width"
-                    android:layout_height="192sp"
-                    android:background="@drawable/lvl_1"
-                    android:translationX="-80dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="214sp" />
 
                 <View
                     android:id="@+id/back_btn"
@@ -41,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:fontFamily="@font/bellota_bold"
                 android:layout_marginTop="32dp"
                 android:text="@string/curs_title"
                 android:textColor="@color/colorBlack"
@@ -60,6 +59,7 @@
             <TextView
                 android:id="@+id/left_cards"
                 android:layout_width="wrap_content"
+                android:fontFamily="@font/sf_font_pro"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:layout_marginStart="16dp"
@@ -75,6 +75,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/sf_font_pro"
                 android:text="@string/description"
                 android:textSize="14sp"
                 android:lineSpacingExtra="6sp"

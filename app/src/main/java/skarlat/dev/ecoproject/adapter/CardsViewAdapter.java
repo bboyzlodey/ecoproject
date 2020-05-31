@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +61,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 holder.cardClose.setVisibility(View.VISIBLE);
                 holder.cardClose.setText("");
                 drawable = holder.backgroundCard.getBackground();
-                drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-//            holder.backgroundCard.setTranslationZ(24);
-//            holder.backgroundCard.setElevation(0);
+                drawable.setColorFilter(Color.rgb(248, 242, 232), PorterDuff.Mode.SRC_OVER);
                 holder.cardClose.setBackgroundResource(R.drawable.ic_play);
                 break;
             case WATCHED:
@@ -72,8 +69,8 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 holder.header.setText( ecoCard.getTitle() );
                 holder.description.setVisibility(View.VISIBLE);
                 holder.description.setText(ecoCard.getDescription());
-                GradientDrawable gradientDrawable = (GradientDrawable) holder.backgroundCard.getBackground();
-                gradientDrawable.setColor(Color.WHITE);
+                drawable = holder.backgroundCard.getBackground();
+                drawable.setColorFilter(Color.rgb(248, 242, 232), PorterDuff.Mode.SRC_OVER);
                 holder.countOpenCard.setVisibility(View.VISIBLE);
                 holder.countOpenCard.setText(String.valueOf(position + 1));
                 holder.cardClose.setVisibility(View.GONE);

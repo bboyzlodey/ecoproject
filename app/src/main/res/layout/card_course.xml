@@ -31,6 +31,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginStart="24dp"
 				android:layout_marginTop="16dp"
+				android:fontFamily="@font/bellota_bold"
 				android:textColor="@color/colorWhite"
 				android:textSize="24sp"
 				tools:text="Первые шаги" />
@@ -42,6 +43,7 @@
 				android:textSize="13sp"
 				android:id="@+id/current_small_description"
 				tools:text="Изи"
+				android:fontFamily="@font/sf_font_pro"
 				tools:tag="firstStep"
 				android:layout_marginStart="24dp"
 				android:layout_marginTop="9dp"

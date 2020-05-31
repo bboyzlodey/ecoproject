@@ -45,7 +45,7 @@ public class CourseCardActivity extends AppCompatActivity {
 
         currentCourse = (Course) tagView.get("tag");
         courseName = (String) currentCourse.getName();
-        String imgCourse = courseName.replace('-', '_');
+        String imgCourse = courseName.replace('-', '_') + "_1";
 
         cursTitle = (TextView) findViewById(R.id.curs_title);
         progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
@@ -57,7 +57,7 @@ public class CourseCardActivity extends AppCompatActivity {
         ecoCard = db.getAllCardsByCourseNameID(courseName);
 
         int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
-        courseImgView.setImageResource(drawableID);
+        courseImgView.setBackgroundResource(drawableID);
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
         progress = db.getCourseByName(courseName).getProgressBar();
