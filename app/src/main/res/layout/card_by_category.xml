@@ -9,7 +9,7 @@
 		android:id="@+id/current_category"
 		android:layout_width="116dp"
 		android:layout_height="116dp"
-		android:background="@drawable/nature_1"
+		tools:background="@color/colorAccent"
 		app:cardCornerRadius="8dp"
 		android:layout_weight="0"/>
 	<TextView

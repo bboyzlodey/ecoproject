@@ -109,13 +109,14 @@
 
     </ScrollView>
     <Button
-        android:layout_width="238dp"
-        android:layout_height="40dp"
-        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/start_course"
-        android:text="Начать обучение"
+        android:textSize="20sp"
+        android:text="@string/complete_btn"
         android:textColor="@color/colorWhite"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto"
         android:background="@drawable/begin_button"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

@@ -89,7 +89,4 @@ public class EcoCard  implements EcoInterface, Serializable {
 				break;
 		}
 	}
-
-
-
 }

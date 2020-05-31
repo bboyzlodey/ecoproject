@@ -36,11 +36,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 		EcoSoviet ecoSoviet = soviets.get(position);
 		holder.header.setText(ecoSoviet.getTitle());
 		holder.description.setText(ecoSoviet.getDescription());
-		holder.toggle.setTag(ecoSoviet);
-		if (ecoSoviet.getStatus() == EcoSoviet.Status.LIKED)
-			holder.toggle.setChecked(true);
-		else
-			holder.toggle.setChecked(false);
 	}
 	
 	@Override
@@ -50,12 +45,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 	
 	public class ViewHolder extends RecyclerView.ViewHolder {
 		final TextView header, description;
-		final ToggleButton toggle;
 		ViewHolder(View view){
 			super(view);
 			header = (TextView) view.findViewById(R.id.header_card);
 			description = (TextView) view.findViewById(R.id.descr_card);
-			toggle = view.findViewById(R.id.toggle);
 		}
 	}
 }

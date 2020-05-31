@@ -7,11 +7,3 @@
 		<corners android:radius="8dp" />
 	<size android:width="92dp" android:height="92dp"/>
 	</shape>
-
-<!--<item>-->
-<!--	<shape>-->
-<!--		<corners android:radius="8dp"/>-->
-<!--		<solid android:color="#D5D5D5"/>-->
-<!--	</shape>-->
-
-<!--</item>-->
