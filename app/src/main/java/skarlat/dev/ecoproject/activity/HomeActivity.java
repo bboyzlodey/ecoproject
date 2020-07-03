@@ -40,59 +40,10 @@ public class HomeActivity extends AppCompatActivity {
 		}
 		db = new DatabaseHelper();
 		db.updateDatabase();
+		
 
-
-		tabLayout = (TabLayout) findViewById(R.id.home_tab);
-        tabView(); // Иницилизация TabView
-	    setIconsInTab();
-
-    }
-	
-	/**
-	 *      Эта функция устанавливает иконки для таб бара
-	 */
-	protected void setIconsInTab(){
-	    int[] imageResId = {
-	    		R.drawable.event,
-			    R.drawable.person};
-	
-	    for (int i = 0; i < imageResId.length; i++) {
-		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
-		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
-		    
-		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-			    @Override
-			    public void onTabSelected(TabLayout.Tab tab) {
-					tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
-			    }
-
-			    @Override
-			    public void onTabUnselected(TabLayout.Tab tab) {
-				    tab.getIcon().setTint(getResources().getColor(R.color.colorGray));
-			    }
-
-			    @Override
-			    public void onTabReselected(TabLayout.Tab tab) {
-
-			    }
-		    });
-	    }
-		tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
     }
     
-    protected void tabView(){
-	    // Получаем ViewPager и устанавливаем в него адаптер
-
-	    ViewPager viewPager = findViewById(R.id.viewpager);
-	    viewPager.setAdapter(
-			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
-	
-	    // Передаём ViewPager в TabLayout
-	    tabLayout.setupWithViewPager(viewPager);
-	    
-	    //  Анимация
-	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-    }
 	
 	/**
 	 *
