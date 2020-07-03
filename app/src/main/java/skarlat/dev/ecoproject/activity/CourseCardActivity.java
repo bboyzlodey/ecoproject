@@ -76,7 +76,6 @@ public class CourseCardActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycle_cards);
         CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
         recyclerView.setAdapter(adapter);
-
         db.upDateIsCurrentCourse(courseName);
 
     }
