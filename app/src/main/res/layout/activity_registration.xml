@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/sign_in_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:layout_margin="16dp"
+	tools:context=".activity.RegistrationActivity">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textSize="24sp"
+		android:textStyle="bold"
+		android:fontFamily="@font/bellota_bold"
+		android:layout_marginTop="13dp"
+		android:text="@string/registration"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorGray"
+		android:text="Добро пожаловать в EcoTips"
+		android:layout_marginTop="8dp"
+		android:textSize="14sp"/>
+
+	<com.google.android.material.textfield.TextInputLayout
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+		app:boxStrokeColor="@color/colorBolotoButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:backgroundTint="@color/colorBolotoButton"
+		android:hint="@string/name"
+		android:layout_marginTop="24dp"
+		app:errorEnabled="true">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/user_name"
+			android:foregroundTint="@color/colorBolotoButton"
+			android:inputType="textCapWords"
+			android:singleLine="true"
+			android:textCursorDrawable="@drawable/cursor_boloto"
+			/>
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<com.google.android.material.textfield.TextInputLayout
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+		app:boxStrokeColor="@color/colorBolotoButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:backgroundTint="@color/colorBolotoButton"
+		android:hint="@string/email"
+		android:layout_marginTop="24dp"
+		app:errorEnabled="true">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/user_email"
+			android:foregroundTint="@color/colorBolotoButton"
+			android:inputType="textEmailAddress"
+			android:singleLine="true"
+			android:textCursorDrawable="@drawable/cursor_boloto"
+			/>
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/textField"
+		android:layout_marginTop="16dp"
+		app:boxStrokeColor="@color/colorBolotoButton"
+		app:passwordToggleEnabled="true"
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/passwd"
+		app:errorEnabled="true">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:inputType="textPassword"
+			android:id="@+id/user_passwd"
+			/>
+
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:layout_width="72dp"
+			android:layout_height="72dp"
+			android:src="@drawable/ic_arrow_back"
+			app:backgroundTint="@android:color/transparent"
+			android:backgroundTint="@color/colorBolotoButton"
+			android:layout_alignParentEnd="true"
+			android:clickable="false"
+			android:id="@+id/submit"
+			android:onClick="onClick"/>
+
+
+		<skarlat.dev.ecoproject.customView.AdviceView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="false"
+			android:layout_above="@id/sign_in_google"
+			android:onClick="onClick"
+			android:id="@+id/sign_in"
+			android:layout_marginBottom="16dp"
+			android:background="@android:color/transparent">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="16dp"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/card_why_const"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Уже есть аккаунт?"
+					android:textSize="16sp" />
+
+
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:orientation="horizontal">
+
+					<TextView
+						android:id="@+id/why_readMore_const"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:fontFamily="@font/bellota_bold"
+						android:textColor="@color/colorBolotoButton"
+						android:text="Войти"
+						android:textSize="14sp" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_marginLeft="6dp"
+						android:background="@null"
+						android:src="@drawable/ic_vector_4" />
+				</LinearLayout>
+			</LinearLayout>
+		</skarlat.dev.ecoproject.customView.AdviceView>
+
+		<Button
+			android:id="@+id/sign_in_google"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="visible"
+			android:text="Продолжить с Google"
+			android:textAllCaps="false"
+			android:drawableLeft="@drawable/google_icon"
+			android:background="@android:color/transparent"
+			android:layout_gravity="center"
+			android:layout_alignParentBottom="true"
+			android:elevation="4dp"
+			android:onClick="onClick"/>
+
+	</RelativeLayout>
+
+
+
+</LinearLayout>
