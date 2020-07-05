@@ -76,6 +76,11 @@ public class SignInActivity extends AppCompatActivity implements
 				 * @TODO: Логика для напоминания пароля
 				 */
 				break;
+			case R.id.register:
+				/**
+				 * @TODO: Логика для регистрации
+				 */
+				break;
 		}
 		signInGoogle();
 	}

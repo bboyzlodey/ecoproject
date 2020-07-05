@@ -108,6 +108,7 @@
 			android:layout_alignParentBottom="false"
 			android:layout_above="@id/sign_in_google"
 			android:onClick="onClick"
+			android:id="@+id/register"
 			android:layout_marginBottom="16dp"
 			android:background="@android:color/transparent">
 			<LinearLayout
