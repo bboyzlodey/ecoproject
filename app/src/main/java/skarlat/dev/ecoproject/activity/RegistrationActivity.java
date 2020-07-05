@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
 	/**
 	 * @TODO: Write code for:
 	 *          1. sign_in_google
-	 *          2. sign_in
+	 *          2. sign_in - writed
 	 *          3. submit
 	 */
 	public void onClick(View v){
@@ -36,6 +37,8 @@ public class RegistrationActivity extends AppCompatActivity {
 			case R.id.sign_in_google:
 				break;
 			case R.id.sign_in:
+				Intent intent = new Intent(this, SignInActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.submit:
 				break;

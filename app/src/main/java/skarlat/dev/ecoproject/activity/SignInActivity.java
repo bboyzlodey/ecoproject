@@ -62,27 +62,32 @@ public class SignInActivity extends AppCompatActivity implements
 	}
 	public void onClick(View v) {
 		int pressed = v.getId();
+		Intent intent = new Intent();
+		
 		switch (pressed){
 			case R.id.sign_in_google:
 				signInGoogle();
 				break;
 			case R.id.sign_in:
+//				intent.setClass(this, );
 				/**
 				 * @TODO: Логика для входа через наш профиль
 				 */
 				break;
 			case R.id.remind_passwd:
+				intent.setClass(this, RemindActivity.class);
 				/**
 				 * @TODO: Логика для напоминания пароля
 				 */
 				break;
 			case R.id.register:
+				intent.setClass(this, RegistrationActivity.class);
 				/**
 				 * @TODO: Логика для регистрации
 				 */
 				break;
 		}
-		signInGoogle();
+		startActivity(intent);
 	}
 	private void signInGoogle() {
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);

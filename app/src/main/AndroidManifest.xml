@@ -15,7 +15,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".activity.RegistrationActivity"></activity>
+		<activity android:name=".activity.RemindActivity"></activity>
+		<activity android:name=".activity.RegistrationActivity" />
 		<activity android:name=".activity.SignInActivity" />
 		<activity android:name=".activity.AuthActivity" />
 		<activity
