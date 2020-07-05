@@ -17,6 +17,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,11 +32,17 @@ public class SignInActivity extends AppCompatActivity implements
 	private GoogleApiClient mGoogleApiClient;
 	// Firebase instance variables
 	private FirebaseAuth mFirebaseAuth;
+	private TextInputEditText emailEditText;
+	private TextInputEditText passwdEditText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_in);
+		
+		emailEditText = (TextInputEditText) findViewById(R.id.user_email);
+		passwdEditText = (TextInputEditText) findViewById(R.id.user_passwd);
+		
 		// Initialize FirebaseAuth
 		mFirebaseAuth = FirebaseAuth.getInstance();
 		// Configure Google Sign In
@@ -50,10 +57,29 @@ public class SignInActivity extends AppCompatActivity implements
 				                   .build();
 	}
 	
-	public void sign(View v) {
-		signIn();
+	public void remindPassword(View v) {
+	
 	}
-	private void signIn() {
+	public void onClick(View v) {
+		int pressed = v.getId();
+		switch (pressed){
+			case R.id.sign_in_google:
+				signInGoogle();
+				break;
+			case R.id.sign_in:
+				/**
+				 * @TODO: Логика для входа через наш профиль
+				 */
+				break;
+			case R.id.remind_passwd:
+				/**
+				 * @TODO: Логика для напоминания пароля
+				 */
+				break;
+		}
+		signInGoogle();
+	}
+	private void signInGoogle() {
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 		startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
