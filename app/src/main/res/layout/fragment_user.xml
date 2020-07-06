@@ -1,178 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	tools:context=".fragment.UserFragment"
-	android:id="@+id/user_scroll">
+	android:orientation="vertical"
+	android:id="@+id/user_scroll"
+	android:paddingLeft="16dp"
+	android:paddingRight="16dp">
 
-	<ScrollView
+	<RelativeLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="visible">
-
-		<LinearLayout
-			android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="29dp">
+		<View
+			android:layout_width="20dp"
+			android:layout_height="20dp"
+			android:background="@drawable/ic_settings"
+			android:id="@+id/settings_button"
+			android:layout_alignParentEnd="true"
+			android:layout_marginEnd="2dp"
+			android:layout_centerVertical="true" />
+		<TextView
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:text="@string/my_profile"
+			android:fontFamily="@font/bellota_bold"
+			android:textSize="24dp"
+			android:layout_centerInParent="true"/>
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:layout_width="72dp"
+			android:layout_height="72dp"
+			android:src="@drawable/ic_arrow_back2"
+			app:backgroundTint="@android:color/transparent"
+			android:backgroundTint="@color/colorWhite"
+			android:elevation="6dp"
+			android:layout_alignParentStart="true"
+			android:clickable="false"
+			android:id="@+id/submit"
+			/>
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+	</RelativeLayout>
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp">
 
-				<View
-					android:layout_width="20dp"
-					android:layout_height="20dp"
-					android:background="@drawable/ic_settings"
-					android:id="@+id/settings_button"
-					android:layout_marginTop="18dp"
-					android:layout_alignParentRight="true"
-					android:layout_marginRight="18dp"/>
 
-				<de.hdodenhof.circleimageview.CircleImageView
-					xmlns:app="http://schemas.android.com/apk/res-auto"
-					android:id="@+id/profile_image"
-					android:layout_width="96dp"
-					android:layout_height="96dp"
-					android:layout_marginTop="31dp"
-					tools:src="@android:color/holo_orange_dark"
-					android:layout_centerHorizontal="true"
-					app:civ_border_width="2dp"
-					app:civ_border_color="#FF000000"/>
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Денис"
-					android:textColor="@color/colorBlack"
-					android:textSize="20dp"
-					android:layout_below="@id/profile_image"
-					android:layout_centerHorizontal="true"
-					android:layout_marginTop="15dp"
-					android:id="@+id/user_name"/>
-				<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_below="@id/user_name"
-					android:layout_centerHorizontal="true"
-					android:layout_marginTop="24dp"
-					android:orientation="horizontal"
-					android:id="@+id/text_progress_layout">
+		<de.hdodenhof.circleimageview.CircleImageView
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			android:id="@+id/profile_image"
+			android:layout_width="85dp"
+			android:layout_height="85dp"
+			tools:src="@android:color/holo_orange_dark"
+			android:layout_marginRight="24dp"/>
 
-					<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:id="@+id/percent_progress"
-						android:textSize="32sp"
-						android:text="55%"
-						android:textColor="@color/colorBlack"/>
-					<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:textColor="@color/colorBlack"
-						android:text="ЭКО"
-						android:textSize="16sp"
-						android:layout_marginLeft="6dp"
-						android:freezesText="true"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Денис"
+			android:textColor="@color/colorBlack"
+			android:textSize="20dp"
+			android:layout_toEndOf="@id/profile_image"
+			android:id="@+id/user_name"/>
 
-				</LinearLayout>
-				
-				<skarlat.dev.ecoproject.customView.ProgressBarView
-					android:layout_width="match_parent"
-					android:layout_height="7dp"
-					android:layout_marginRight="72dp"
-					android:layout_marginLeft="72dp"
-					android:layout_marginTop="2dp"
-					android:layout_below="@id/text_progress_layout"
-					android:background="@drawable/custom_progressbar"
-					android:id="@+id/total_progressBar"/>
 
-			</RelativeLayout>
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="2dp"
-				android:background="@drawable/text_view_rounded"
-				android:layout_marginLeft="16dp"
-				android:layout_marginRight="16dp"
-				android:layout_marginTop="32dp"
-				android:layout_marginBottom="24dp"
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/percent_progress"
+				android:layout_alignBottom="@id/profile_image"
+				android:layout_toEndOf="@id/profile_image"
+				android:textSize="24sp"
+				android:text="55%"
+				android:textColor="@color/colorBlack"/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorBlack"
+				android:text="ЭКО"
+				android:textSize="16sp"
+				android:freezesText="true"
+				android:layout_toEndOf="@id/percent_progress"
+				android:layout_marginStart="5dp"
+				android:layout_alignBottom="@id/profile_image"
 				/>
 
-			<RelativeLayout
+
+		<skarlat.dev.ecoproject.customView.ProgressBarView
+			android:layout_width="match_parent"
+			android:layout_height="7dp"
+			android:layout_toEndOf="@id/profile_image"
+			android:layout_centerInParent="true"
+			android:background="@drawable/custom_progressbar"
+			android:id="@+id/total_progressBar"/>
+
+	</RelativeLayout>
+
+	<skarlat.dev.ecoproject.customView.AdviceView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="false"
+		android:layout_above="@id/sign_in_google"
+android:layout_marginTop="24dp"
+		android:id="@+id/register"
+		android:background="@android:color/transparent">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="16dp"
+			android:layout_marginLeft="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp">
+			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginRight="16dp"
-				android:layout_marginLeft="16dp">
-				<LinearLayout
-					android:layout_width="match_parent"
+				android:orientation="horizontal">
+				<RelativeLayout
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:orientation="horizontal">
-					<RelativeLayout
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						>
-						<TextView
+					>
+					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="Количество человек\n на нашем борту:"
 						android:textColor="@color/colorBlack"
 						android:textSize="16dp"
 						android:id="@+id/textCount"
-							/>
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:id="@+id/count_users"
-							android:textSize="40dp"
-							android:textColor="@color/colorBlack"
-							android:text="1201"
-							android:layout_below="@id/textCount"
-							android:layout_marginTop="4dp"/>
-					</RelativeLayout>
-					<RelativeLayout
-						android:layout_width="match_parent"
-						android:layout_height="match_parent">
+						/>
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/count_users"
+						android:textSize="42sp"
+						android:textColor="@color/colorBlack"
+						android:text="1201"
+						android:layout_below="@id/textCount"
+						android:layout_marginTop="4dp"/>
+				</RelativeLayout>
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical">
 
-						<View
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:scaleX="1"
-							android:scaleY="1"
-							android:background="@drawable/text_view_rounded"/>
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:scaleX="1"
+						android:scaleY="100"
+						android:background="@drawable/text_view_rounded"
+						android:layout_alignParentEnd="true"/>
 
-					</RelativeLayout>
+				</RelativeLayout>
 
-				</LinearLayout>
+			</LinearLayout>
 
 
-			</RelativeLayout>
+		</RelativeLayout>
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="2dp"
-				android:background="@drawable/text_view_rounded"
-				android:layout_marginLeft="16dp"
-				android:layout_marginRight="16dp"
-				android:layout_marginTop="24dp"
-				android:layout_marginBottom="24dp"
-				/>
+	</skarlat.dev.ecoproject.customView.AdviceView>
+
+
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="visible"
+		android:layout_marginTop="27dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/colorBlack"
 				android:textSize="20sp"
 				android:text="Пройденные карточки"
-				android:layout_marginLeft="16dp"
+				android:layout_marginStart="16dp"
 				/>
 			<androidx.recyclerview.widget.RecyclerView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
 				android:id="@+id/cards_by_category"
-				android:layout_marginTop="24dp"
-				android:paddingLeft="16dp"
+				android:layout_marginTop="16dp"
+				android:paddingStart="16dp"
 				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 		</LinearLayout>
 
@@ -180,4 +197,4 @@
 	</ScrollView>
 
 
-</RelativeLayout>
+</LinearLayout>

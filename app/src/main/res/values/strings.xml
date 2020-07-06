@@ -17,4 +17,5 @@
 	<string name="email">Email</string>
 	<string name="registration">Регистрация</string>
 	<string name="name">Имя</string>
+	<string name="my_profile">Мой профиль</string>
 </resources>
