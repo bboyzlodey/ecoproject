@@ -190,6 +190,7 @@ android:layout_marginTop="24dp"
 				android:id="@+id/cards_by_category"
 				android:layout_marginTop="16dp"
 				android:paddingStart="16dp"
+				tools:listitem="@layout/card_by_category"
 				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 		</LinearLayout>
 
