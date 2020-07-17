@@ -54,5 +54,9 @@ dependencies {
     implementation "com.android.support:design:${supportLibrary}"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.material:material:1.0.0-rc01' // For Floating Action Button
+    // Custom TAB from https://github.com/ogaclejapan/SmartTabLayout
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    //Optional: see how to use the utility.
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
 }

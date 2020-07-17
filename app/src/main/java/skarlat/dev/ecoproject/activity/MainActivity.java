@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.TestActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void next(View view) {
-			Intent intent = new Intent(this, AuthActivity.class);
+			Intent intent = new Intent(this, TestActivity.class);
 		startActivity(intent);
 	}
 

@@ -12,18 +12,26 @@
 		Как можно её спасти?"
 		android:textSize="20sp"
 		android:id="@+id/question_text"/>
-	<androidx.recyclerview.widget.RecyclerView
+	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/answers"
-		tools:listitem="@layout/question_check"
-		tools:itemCount="1"
-		android:layout_marginTop="16dp"/>
-	<Button
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Ответить"
-		android:textColor="@color/colorWhite"
-		android:textAllCaps="true"
-		android:layout_weight="0"/>
+		android:id="@+id/scrollView">
+		<androidx.recyclerview.widget.RecyclerView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/answers"
+			tools:listitem="@layout/question_check"
+			tools:itemCount="1"
+			android:layout_marginTop="16dp"
+			android:nestedScrollingEnabled="false"/>
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Ответить"
+			android:textColor="@color/colorWhite"
+			android:textAllCaps="true"
+			android:layout_weight="0"/>
+
+	</ScrollView>
+
 </LinearLayout>
