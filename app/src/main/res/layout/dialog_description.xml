@@ -21,7 +21,7 @@
 			android:id="@+id/description_image"
 			android:src="@drawable/lvl_1_1"
 			android:scaleType="centerCrop"
-			app:riv_corner_radius="16dip"
+			app:riv_corner_radius="16dp"
 			app:riv_mutate_background="true"
 			app:riv_tile_mode="repeat"
 			android:layout_height="167dp"
