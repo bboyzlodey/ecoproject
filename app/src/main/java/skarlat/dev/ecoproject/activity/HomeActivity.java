@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
+import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
@@ -22,13 +25,19 @@ import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 public class HomeActivity extends AppCompatActivity {
 	private TabLayout tabLayout;
 	private DatabaseHelper db;
+	private FirebaseAuth auth;
+	private ActivityHomeBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
+	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+		String userName = user.getDisplayName();
+	 
+	 
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -41,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
 		db = new DatabaseHelper();
 		db.updateDatabase();
 		
-
     }
     
 	

@@ -52,8 +52,7 @@ public class RegistrationActivity extends AppCompatActivity {
 				onBackPressed();
 				break;
 			case R.id.submit:
-				if (filledAllFields()){
-					createNewUser();
+				if (createNewUser()){
 					Toast.makeText(RegistrationActivity.this, "Проверьте почту!",
 							Toast.LENGTH_SHORT).show();
 					startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
@@ -67,41 +66,47 @@ public class RegistrationActivity extends AppCompatActivity {
 	}
 	
 	protected boolean createNewUser(){
-		String userEmail, userpasswd;
+		String userEmail, userPasswd, userName;
 		final boolean[] result = new boolean[1];
 		
-		mAuth = FirebaseAuth.getInstance();
 		userEmail = emailEditText.getText().toString();
-		userpasswd = passwdEditText.getText().toString();
-		mAuth.createUserWithEmailAndPassword(userEmail, userpasswd)
-				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-			@Override
-			public void onComplete(@NonNull Task<AuthResult> task) {
-				if ((result[0] = task.isSuccessful())){
-					Log.i(TAG, "createUserWithEmail: success");
-				}
-				else{
-					Log.e(TAG, "createUserWithEmail: failed");
-				}
-				
-			}
-		});
+		userPasswd = passwdEditText.getText().toString();
+		userName = nameEditText.getText().toString();
+		result[0] = validateUserData(userEmail, userPasswd, userName);
 		if (result[0]){
-			FirebaseUser user = mAuth.getCurrentUser();
-			if (user != null){
-				user.updateProfile(new UserProfileChangeRequest.Builder()
-						                   .setDisplayName(nameEditText.getText().toString()).build());
+			mAuth = FirebaseAuth.getInstance();
+			mAuth.createUserWithEmailAndPassword(userEmail, userPasswd)
+					.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+						@Override
+						public void onComplete(@NonNull Task<AuthResult> task) {
+							if ((result[0] = task.isSuccessful())){
+								Log.i(TAG, "createUserWithEmail: success");
+							}
+							else{
+								Log.e(TAG, "createUserWithEmail: failed");
+							}
+						}
+					});
+			if (result[0]){
+				FirebaseUser user = mAuth.getCurrentUser();
+				result[0] = user != null;
+				if (result[0]){
+					user.updateProfile(new UserProfileChangeRequest.Builder()
+							                   .setDisplayName(userName)
+							                   .build());
+				}
 			}
-			return (user == null);
 		}
 		return result[0];
 	}
-	protected boolean filledAllFields(){
-		
-		return (nameEditText.getText().toString() != null && emailEditText.getText().toString() != null
-		&& passwdEditText.getText().toString() != null);
+	
+	protected boolean filledAllFields(String ...args){
+		return (args[0] != null && args[1] != null && args[2] != null);
 	}
 	
+	protected boolean validateUserData(String eMail, String password, String name){
+		return filledAllFields(eMail, password, name) && userDataValidation(password, eMail);
+	}
 	/**
 	 * Method for checking user password of security this password.
 	 * Rules for password security:

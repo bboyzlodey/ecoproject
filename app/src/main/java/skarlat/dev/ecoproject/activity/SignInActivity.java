@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import skarlat.dev.ecoproject.R;
@@ -30,7 +31,6 @@ public class SignInActivity extends AppCompatActivity implements
 	private final String TAG = "SignInActivity";
 	private final int RC_SIGN_IN = 10;
 	private GoogleApiClient mGoogleApiClient;
-	// Firebase instance variables
 	private FirebaseAuth mFirebaseAuth;
 	private TextInputEditText emailEditText;
 	private TextInputEditText passwdEditText;
@@ -45,6 +45,7 @@ public class SignInActivity extends AppCompatActivity implements
 		
 		// Initialize FirebaseAuth
 		mFirebaseAuth = FirebaseAuth.getInstance();
+		FirebaseUser mFireBaseUser = mFirebaseAuth.getCurrentUser();
 		// Configure Google Sign In
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 				                          .requestIdToken(getString(R.string.default_web_client_id))
@@ -60,6 +61,7 @@ public class SignInActivity extends AppCompatActivity implements
 	public void remindPassword(View v) {
 	
 	}
+	
 	public void onClick(View v) {
 		int pressed = v.getId();
 		Intent intent = new Intent();
@@ -67,15 +69,19 @@ public class SignInActivity extends AppCompatActivity implements
 		switch (pressed){
 			case R.id.sign_in_google:
 				signInGoogle();
+				FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+				Log.d(TAG, "User is " + (user == null ? "null" : (user.getDisplayName() + "\n" + user.getEmail()
+				+ "\n" + user.getPhoneNumber() + "\n" + user.toString())));
+//				intent.setClass(this, HomeActivity.class);
 				break;
 			case R.id.sign_in:
-//				intent.setClass(this, );
 				/**
 				 * @TODO: Логика для входа через наш профиль
 				 */
 				break;
 			case R.id.remind_passwd:
 				intent.setClass(this, RemindActivity.class);
+				startActivity(intent);
 				/**
 				 * @TODO: Логика для напоминания пароля
 				 */
@@ -85,22 +91,26 @@ public class SignInActivity extends AppCompatActivity implements
 				/**
 				 * @TODO: Логика для регистрации
 				 */
+				startActivity(intent);
 				break;
 		}
-		startActivity(intent);
-	}
+		}
 	private void signInGoogle() {
+		Log.d(TAG, "signInGoogle");
+		
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 		startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		Log.d(TAG, "onActivityResult");
 		
 		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
 		if (requestCode == RC_SIGN_IN) {
 			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 			if (result.isSuccess()) {
+				Log.e(TAG, "Result is Success");
 				// Google Sign-In was successful, authenticate with Firebase
 				GoogleSignInAccount account = result.getSignInAccount();
 				firebaseAuthWithGoogle(account);
@@ -110,9 +120,10 @@ public class SignInActivity extends AppCompatActivity implements
 			}
 		}
 	}
-	private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+	private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
 		Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
 		AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+		
 		mFirebaseAuth.signInWithCredential(credential)
 				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 					@Override
@@ -126,7 +137,10 @@ public class SignInActivity extends AppCompatActivity implements
 							Log.w(TAG, "signInWithCredential", task.getException());
 							Toast.makeText(SignInActivity.this, "Authentication failed.",
 									Toast.LENGTH_SHORT).show();
+							Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+							startActivity(intent);
 						} else {
+							Log.d(TAG, "name: " + acct.getDisplayName() + "\n".concat(acct.getEmail()));
 							startActivity(new Intent(SignInActivity.this, AuthActivity.class));
 							finish();
 						}
