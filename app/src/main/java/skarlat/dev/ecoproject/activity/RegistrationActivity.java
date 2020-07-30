@@ -54,6 +54,8 @@ public class RegistrationActivity extends AppCompatActivity {
 			case R.id.submit:
 				if (filledAllFields()){
 					createNewUser();
+					Toast.makeText(RegistrationActivity.this, "Проверьте почту!",
+							Toast.LENGTH_SHORT).show();
 					startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
 				}
 				else{
@@ -64,27 +66,70 @@ public class RegistrationActivity extends AppCompatActivity {
 		}
 	}
 	
-	protected void createNewUser(){
+	protected boolean createNewUser(){
+		String userEmail, userpasswd;
+		final boolean[] result = new boolean[1];
+		
 		mAuth = FirebaseAuth.getInstance();
-		mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwdEditText.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+		userEmail = emailEditText.getText().toString();
+		userpasswd = passwdEditText.getText().toString();
+		mAuth.createUserWithEmailAndPassword(userEmail, userpasswd)
+				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 			@Override
 			public void onComplete(@NonNull Task<AuthResult> task) {
-				if (task.isSuccessful()){
-					Log.d(TAG, "createUserWithEmail:success");
+				if ((result[0] = task.isSuccessful())){
+					Log.i(TAG, "createUserWithEmail: success");
 				}
 				else{
-					Log.d(TAG, "createUserWithEmail:failed");
+					Log.e(TAG, "createUserWithEmail: failed");
 				}
+				
 			}
 		});
-		FirebaseUser user = mAuth.getCurrentUser();
-		if (user != null){
-			user.updateProfile(new UserProfileChangeRequest.Builder()
-					                   .setDisplayName(nameEditText.getText().toString()).build());
+		if (result[0]){
+			FirebaseUser user = mAuth.getCurrentUser();
+			if (user != null){
+				user.updateProfile(new UserProfileChangeRequest.Builder()
+						                   .setDisplayName(nameEditText.getText().toString()).build());
+			}
+			return (user == null);
 		}
+		return result[0];
 	}
 	protected boolean filledAllFields(){
+		
 		return (nameEditText.getText().toString() != null && emailEditText.getText().toString() != null
 		&& passwdEditText.getText().toString() != null);
+	}
+	
+	/**
+	 * Method for checking user password of security this password.
+	 * Rules for password security:
+	 *      1. Password must contains minimum 6 characters.
+	 *      2. Password contains minimum:
+	 *          2.1 One special character
+	 *          2.2 One uppercase and lowercase character
+	 *          2.3 One characters of number
+	 * @param passwd - String of password for user what must be checked on security
+	 * @return boolean value. True - security is OK, else non OK.
+	 */
+	protected boolean passwCheckerSecurity(String passwd){
+		boolean security;
+		String securityRegex = ".+";
+		
+		security = passwd.length() >= 6;
+		security = passwd.matches(securityRegex);
+		return  security;
+	}
+	
+	protected boolean eMailCheckerCorrect(String eMail){
+		boolean valid;
+		final String validPattern = "\\w+@\\w+\\.[a-zA-z]{2,4}";
+		
+		valid = (eMail != null) && eMail.matches(validPattern);
+		return valid;
+	}
+	protected boolean userDataValidation(String passwd, String eMail){
+		return passwCheckerSecurity(passwd) && eMailCheckerCorrect(eMail);
 	}
 }
