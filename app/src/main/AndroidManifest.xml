@@ -15,22 +15,32 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".TestActivity"></activity>
-		<activity android:name=".activity.RemindActivity" />
-		<activity android:name=".activity.RegistrationActivity" />
-		<activity android:name=".activity.SignInActivity" />
-		<activity android:name=".activity.AuthActivity" />
+		<activity android:name=".TestActivity"
+			android:exported="true"></activity>
+		<activity android:name=".activity.RemindActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.RegistrationActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.SignInActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.AuthActivity"
+			android:exported="true"/>
 		<activity
 			android:name=".activity.EcoCardActivity"
+			android:exported="true"
 			android:parentActivityName=".activity.ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".activity.ProjectActivity" />
 		</activity>
-		<activity android:name=".activity.ProjectActivity" />
-		<activity android:name=".activity.HomeActivity" />
-		<activity android:name=".activity.CourseCardActivity" />
-		<activity android:name=".activity.MainActivity">
+		<activity android:name=".activity.ProjectActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.HomeActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.CourseCardActivity"
+			android:exported="true"/>
+		<activity android:name=".activity.MainActivity"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
