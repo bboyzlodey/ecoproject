@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void next(View view) {
-			Intent intent = new Intent(this, TestActivity.class);
+			Intent intent = new Intent(this, SignInActivity.class);
 		startActivity(intent);
 	}
 

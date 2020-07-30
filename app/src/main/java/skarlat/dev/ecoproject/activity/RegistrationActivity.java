@@ -19,6 +19,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import skarlat.dev.ecoproject.R;
 
+/**
+ * RegistrationActivity - активность для регистрации нового юзера через FireBase
+ */
 public class RegistrationActivity extends AppCompatActivity {
 	final String TAG = "RegistrationActivity";
 	private TextInputEditText nameEditText;
@@ -46,8 +49,7 @@ public class RegistrationActivity extends AppCompatActivity {
 			case R.id.sign_in_google:
 				break;
 			case R.id.sign_in:
-				Intent intent = new Intent(this, SignInActivity.class);
-				startActivity(intent);
+				onBackPressed();
 				break;
 			case R.id.submit:
 				if (filledAllFields()){
