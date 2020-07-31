@@ -72,7 +72,7 @@ public class SignInActivity extends AppCompatActivity implements
 				FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 				Log.d(TAG, "User is " + (user == null ? "null" : (user.getDisplayName() + "\n" + user.getEmail()
 				+ "\n" + user.getPhoneNumber() + "\n" + user.toString())));
-//				intent.setClass(this, HomeActivity.class);
+				intent.setClass(this, HomeActivity.class);
 				break;
 			case R.id.sign_in:
 				/**
@@ -94,7 +94,8 @@ public class SignInActivity extends AppCompatActivity implements
 				startActivity(intent);
 				break;
 		}
-		}
+		startActivity(intent);
+	}
 	private void signInGoogle() {
 		Log.d(TAG, "signInGoogle");
 		

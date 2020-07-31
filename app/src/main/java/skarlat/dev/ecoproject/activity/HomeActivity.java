@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -27,17 +28,16 @@ public class HomeActivity extends AppCompatActivity {
 	private DatabaseHelper db;
 	private FirebaseAuth auth;
 	private ActivityHomeBinding binding;
-
-
+	private String TAG = "HomeActivity";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-		String userName = user.getDisplayName();
-	 
-	 
+	    if (user != null)
+	        Log.d(TAG, "The current user name is: " + user.getDisplayName());
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -49,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
 		}
 		db = new DatabaseHelper();
 		db.updateDatabase();
-		
     }
     
 	

@@ -29,9 +29,9 @@ public class ProjectActivity extends AppCompatActivity {
 		pbHorizontal = (ProgressBar) findViewById(R.id.pb_horizontal);
 		tvProgressHorizontal = (TextView) findViewById(R.id.tv_progress_horizontal);
 
-		progress =  getIntent().getExtras().getInt("progressBar");
+//		progress =  getIntent().getExtras().getInt("progressBar");
 
-		postProgress(progress);
+//		postProgress(10);
 	}
 
 	public void onClick(View v) {
