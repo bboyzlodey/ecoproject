@@ -12,15 +12,23 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import io.github.luizgrp.sectionedrecyclerviewadapter.Section;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
+import skarlat.dev.ecoproject.section.CourseSection;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -35,9 +43,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-	    if (user != null)
-	        Log.d(TAG, "The current user name is: " + user.getDisplayName());
+//	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+	    if (User.currentUser != null){
+	        Log.d(TAG, "The current user name is: " + User.currentUser.name);
+	        binding.helloUser.setText("Привет, " + User.currentUser.name);
+	    }
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -49,9 +59,21 @@ public class HomeActivity extends AppCompatActivity {
 		}
 		db = new DatabaseHelper();
 		db.updateDatabase();
+	    SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
+	    List<Course> listCourses = new ArrayList<Course>();
+	    Course course = new Course();
+	    course.description = "Для начинаюзих";
+	    course.title = "Первые шаги!";
+	    Course courseq = new Course();
+	    courseq.description = "Для начинаюзих";
+	    courseq.title = "Первые шаги!";
+	    listCourses.add(course);
+	    Section section = new CourseSection(listCourses, "Текущий курс");
+	    sectionedRecyclerViewAdapter.addSection(section);
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(listCourses, "Пройденные курсы"));
+	    binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
     }
     
-	
 	/**
 	 *
 	 * @param v - это объект самой кнопки
@@ -62,21 +84,6 @@ public class HomeActivity extends AppCompatActivity {
 		Intent open = new Intent(this, CourseCardActivity.class);
 		Course tag = (Course) v.getTag();
 		open.putExtra("tag", tag);
-		/**
-		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
-		 *      String title;
-		 *      String description;
-		 *      Map<String, CursCard> curses;
-		 *
-		 *   То мы сделаем так, что бы отобразить нужный курс:
-		 *      static String KEY_GET = "education";
-		 *      String keyForPut = v.getContentDescription().toString();
-		 *      Education education = savedInstanceState.get(KEY_GET);
-		 *      CursCard willOpen = education.curses.get(keyForPut);
-		 *      savedInstanceState.put("curs", willOpen);
-		 *      Intent intent = new Intent(this, CursCard.class);
-		 *      startActivity(intent, savedInstanceState);
-		 */
 		startActivity(open);
 	}
 }

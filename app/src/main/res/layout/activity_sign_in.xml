@@ -97,7 +97,7 @@
 			app:backgroundTint="@android:color/transparent"
 			android:backgroundTint="@color/colorBolotoButton"
 			android:layout_alignParentEnd="true"
-			android:clickable="false"
+			android:clickable="true"
 			android:id="@+id/sign_in"
 			android:onClick="onClick"/>
 

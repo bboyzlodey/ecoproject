@@ -2,7 +2,10 @@ package skarlat.dev.ecoproject;
 
 import android.graphics.drawable.BitmapDrawable;
 
+import skarlat.dev.ecoproject.activity.MainActivity;
+
 public class User {
+	public static User currentUser;
 	public String name;
 	private String eMail;
 	public int progress;
@@ -11,6 +14,7 @@ public class User {
 	
 	public User(String name) {
 		this.name = name;
+		currentUser = this;
 	}
 	
 	public String geteMail() {
@@ -28,4 +32,5 @@ public class User {
 	public void setAvatar(BitmapDrawable avatar) {
 		this.avatar = avatar;
 	}
+	
 }

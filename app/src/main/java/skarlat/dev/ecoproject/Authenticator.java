@@ -8,4 +8,8 @@ public abstract class Authenticator<T> {
 	}
 	
 	public abstract User getCurrentUser();
+	
+	T getInstance(){
+		return instance;
+	}
 }

@@ -12,12 +12,15 @@
 	<string name="courses_done">Пройденные курсы</string>
 	<string name="sign_in">Вход</string>
 	<string name="complete_btn">Завершить</string>
-	<string name="hello">Привет, </string>
+	<string name="hello">Добро пожаловать в EcoTips!</string>
+	<string name="helloUser">Привет, </string>
 	<string name="passwd">Пароль</string>
 	<string name="email">Email</string>
 	<string name="registration">Регистрация</string>
 	<string name="name">Имя</string>
 	<string name="my_profile">Мой профиль</string>
+	<string name="errorSignInWithEmail">Не получилось. Попробуйте еще раз!</string>
+	<string name="errorSignInWithGoogle">Не получилось.</string>
 	<string name="title_activity_kotlin">KotlinActivity</string>
 	<!-- Strings used for fragments for navigation -->
 	<string name="first_fragment_label">First Fragment</string>
