@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -26,15 +27,13 @@ import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
+import skarlat.dev.ecoproject.includes.database.App;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 import skarlat.dev.ecoproject.section.CourseSection;
 
 
 public class HomeActivity extends AppCompatActivity {
-	private TabLayout tabLayout;
-	private DatabaseHelper db;
-	private FirebaseAuth auth;
 	private ActivityHomeBinding binding;
 	private String TAG = "HomeActivity";
 	
@@ -43,7 +42,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 	    if (User.currentUser != null){
 	        Log.d(TAG, "The current user name is: " + User.currentUser.name);
 	        binding.helloUser.setText("Привет, " + User.currentUser.name);
@@ -57,20 +55,13 @@ public class HomeActivity extends AppCompatActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		db = new DatabaseHelper();
-		db.updateDatabase();
 	    SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
-	    List<Course> listCourses = new ArrayList<Course>();
-	    Course course = new Course();
-	    course.description = "Для начинаюзих";
-	    course.title = "Первые шаги!";
-	    Course courseq = new Course();
-	    courseq.description = "Для начинаюзих";
-	    courseq.title = "Первые шаги!";
-	    listCourses.add(course);
-	    Section section = new CourseSection(listCourses, "Текущий курс");
-	    sectionedRecyclerViewAdapter.addSection(section);
-	    sectionedRecyclerViewAdapter.addSection(new CourseSection(listCourses, "Пройденные курсы"));
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
+	    
+	    
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
+	
 	    binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
     }
     
@@ -82,8 +73,20 @@ public class HomeActivity extends AppCompatActivity {
 	 */
 	public void openCourse(View v){
 		Intent open = new Intent(this, CourseCardActivity.class);
-		Course tag = (Course) v.getTag();
-		open.putExtra("tag", tag);
-		startActivity(open);
+		CharSequence charSequence = v.getContentDescription();
+		if (charSequence != null){
+			open.putExtra("OPEN_COURSE", charSequence.toString());
+			startActivity(open);
+		}
+		else {
+			TextView textView = v.findViewById(R.id.current_title);
+			CharSequence str = textView.getContentDescription();
+			if (str != null)
+			{
+				open.putExtra("OPEN_COURSE", str.toString());
+				startActivity(open);
+			}
+		}
+		
 	}
 }

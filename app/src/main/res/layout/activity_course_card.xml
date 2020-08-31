@@ -22,6 +22,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="192sp"
                     android:background="@color/colorGray"
+                    tools:background="@drawable/lvl_1_1"
+                    android:scaleY="2"
                     />
                 <View
                     android:id="@+id/back_btn"
@@ -30,7 +32,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginStart="16dp"
                     android:onClick="onBackBtn"
-                    android:background="@drawable/ic_arrow_back"/>
+                    android:background="@drawable/ic_arrow_back2"/>
             </FrameLayout>
 
             <TextView

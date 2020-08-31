@@ -41,7 +41,7 @@ public class CourseCardActivity extends AppCompatActivity {
 
         Bundle tagView = getIntent().getExtras();
 
-        currentCourse = (Course) tagView.get("tag");
+        currentCourse = db.getCourseByName(tagView.get("OPEN_COURSE").toString());
         courseName = currentCourse.getName();
 
 

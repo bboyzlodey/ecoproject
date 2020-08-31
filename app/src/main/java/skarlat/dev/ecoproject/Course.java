@@ -1,7 +1,11 @@
 package skarlat.dev.ecoproject;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -26,7 +30,7 @@ public class Course implements EcoInterface, Serializable {
     public int progressBar;
 
     public int isActive;
-
+    
     public enum Status{
         CLOSED,
         CURRENT,
@@ -93,5 +97,14 @@ public class Course implements EcoInterface, Serializable {
         setProgressBar(progressBar);
         setStatus(status);
         coursesDao.update(this);
+    }
+    
+    public Drawable getImage(){
+        Drawable drawable = new BitmapDrawable(fullPathToImage());
+        return drawable;
+    }
+    
+    private String fullPathToImage(){
+        return Const.IMAGES_ROOT_FOLDER + courseNameID + ".png";
     }
 }
