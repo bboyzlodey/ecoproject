@@ -32,6 +32,7 @@ import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.EcoSoviet;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.adapter.DataAdapter;
+import skarlat.dev.ecoproject.databinding.ActivityEcoCardsBinding;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 //import skarlat.dev.ecoproject.activity.adapters;
@@ -51,24 +52,20 @@ public class EcoCardActivity extends AppCompatActivity {
 	ColorStateList howColor;
 	Toolbar myToolbar;
 	LinearLayout linearLayout;
+	private ActivityEcoCardsBinding binding;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_eco_cards);
+		binding = ActivityEcoCardsBinding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
 		db = new DatabaseHelper();
 		Bundle bundle = getIntent().getExtras();
 		ecoCard = (EcoCard) bundle.get(EcoCard.class.getSimpleName());
 		String path = ecoCard.cardNameID + ".png";
 		try {
-			BitmapDrawable bitmapDrawable;
-			InputStream inputStream;
-			inputStream = getAssets().open("images/" + ecoCard.courseNameID + "/" + path);
-			bitmapDrawable = new BitmapDrawable(inputStream);
-			ImageView img = (ImageView) findViewById(R.id.card_picture);
-			img.setImageDrawable(bitmapDrawable);
-			img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			binding.cardPicture.setImageDrawable(ecoCard.getImage());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

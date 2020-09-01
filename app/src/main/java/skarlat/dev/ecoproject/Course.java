@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject;
 
+import android.content.res.AssetManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -8,6 +9,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import skarlat.dev.ecoproject.includes.database.App;
@@ -68,7 +70,12 @@ public class Course implements EcoInterface, Serializable {
                 return Status.CLOSED;
         }
     }
-
+    
+    @Override
+    public String getPathImage() {
+        return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
+    }
+    
     public int getProgressBar(){
         return this.progressBar;
     }
@@ -104,7 +111,12 @@ public class Course implements EcoInterface, Serializable {
         return drawable;
     }
     
+    public Drawable getImage(AssetManager manager) throws IOException {
+        Drawable drawable = new BitmapDrawable(manager.open(fullPathToImage()));
+        return drawable;
+    }
+    
     private String fullPathToImage(){
-        return Const.IMAGES_ROOT_FOLDER + courseNameID + ".png";
+        return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
     }
 }

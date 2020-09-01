@@ -47,7 +47,12 @@ public class EcoSoviet implements EcoInterface{
 	public Enum getStatus() {
 		return isFavorite == 0 ? Status.UNLIKED : Status.LIKED;
 	}
-
+	
+	@Override
+	public String getPathImage() {
+		return null;
+	}
+	
 	public enum Status{
 		UNLIKED,
 		LIKED

@@ -57,20 +57,11 @@ public class HomeActivity extends AppCompatActivity {
 		}
 	    SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
 	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
-	    
-	    
 	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
 	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
-	
 	    binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
     }
     
-	/**
-	 *
-	 * @param v - это объект самой кнопки
-	 *          из нее мы можем вытянуть свойство tag и по этому ключу запустить другое активити
-	 *          (открыть курс)
-	 */
 	public void openCourse(View v){
 		Intent open = new Intent(this, CourseCardActivity.class);
 		CharSequence charSequence = v.getContentDescription();

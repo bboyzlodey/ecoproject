@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject.section
 
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
@@ -8,8 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
+import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.Course
 import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.includes.database.App
+import java.io.IOException
+import java.io.InputStream
 
 
 class CourseSection (val listCourses: List<Course>, val sectionName: String) : Section(SectionParameters.builder()
@@ -26,7 +31,26 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
         courseHolder.header.text = listCourses[position].title
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
-//        courseHolder.cardView.setBackgroundDrawable(listCourses[position].image)
+        val imgDrawable : Drawable = getImageDrawableForCourse(getPathToImage(position))
+        courseHolder.cardView.setBackgroundDrawable(imgDrawable)
+    }
+
+    private fun getPathToImage(position: Int) : String{
+        return Const.IMAGES_ROOT_FOLDER + listCourses[position].courseNameID + "/" + listCourses[position].courseNameID + ".png"
+    }
+
+    private fun getImageDrawableForCourse(path: String) : Drawable{
+        val assetManager = App.instance.resources.assets
+        var drawable: Drawable
+
+        try {
+            val steam: InputStream = assetManager.open(path)
+            drawable = BitmapDrawable(steam)
+//            drawable = Drawable.createFromPath(path)!!
+        } catch (p: Exception){
+            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!;
+        }
+        return drawable
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {
