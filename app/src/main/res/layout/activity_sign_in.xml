@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:layout_margin="16dp"
+	android:padding="16dp"
 	tools:context=".activity.SignInActivity">
 
 	<TextView
@@ -95,7 +95,7 @@
 			android:layout_height="72dp"
 			android:src="@drawable/ic_arrow_back"
 			app:backgroundTint="@android:color/transparent"
-			android:backgroundTint="@color/colorBolotoButton"
+			android:backgroundTint="@color/fab_sign_in"
 			android:layout_alignParentEnd="true"
 			android:clickable="true"
 			android:id="@+id/sign_in"

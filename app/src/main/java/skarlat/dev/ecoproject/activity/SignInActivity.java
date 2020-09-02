@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,16 +50,7 @@ public class SignInActivity extends AppCompatActivity implements
 		super.onCreate(savedInstanceState);
 		binding = ActivitySignInBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
-		
-		
-		// Initialize FirebaseAuth
-//		mFirebaseAuth = FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-//			@Override
-//			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//
-//			}
-//		});
-		// Configure Google Sign In
+		mFirebaseAuth = FirebaseAuth.getInstance();
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 				                          .requestIdToken(getString(R.string.default_web_client_id))
 				                          .requestEmail()
@@ -66,6 +60,63 @@ public class SignInActivity extends AppCompatActivity implements
 						                   this /* OnConnectionFailedListener */)
 				                   .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
 				                   .build();
+		binding.signInGoogle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				signInGoogle();
+			}
+		});
+		binding.signIn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				signInWithEmailAndPassword();
+			}
+		});
+		binding.signIn.setEnabled(false);
+		binding.userEmail.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				enableOrDisableButton(binding.signIn);
+			}
+		});
+		binding.userPasswd.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				enableOrDisableButton(binding.signIn);
+			}
+		});
+	}
+	
+	private void enableOrDisableButton(View view){
+		String userEmail = binding.userEmail.getText().toString();
+		String userPassword = binding.userPasswd.getText().toString();
+		
+		if (!userEmail.equals("") && !userPassword.equals("")){
+			view.setEnabled(true);
+		}
+		else if (binding.signIn.isEnabled()){
+			view.setEnabled(false);
+		}
 	}
 	
 	public void remindPassword(View v) {
@@ -73,36 +124,37 @@ public class SignInActivity extends AppCompatActivity implements
 	}
 	
 	public void onClick(View v) {
-	/*	int pressed = v.getId();
+		int pressed = v.getId();
 		Intent intent = new Intent();
-		User user;
-		boolean can = true;
 		
 		switch (pressed){
-			case R.id.sign_in_google:
-				signInGoogle();
-//				user = App.auth.getCurrentUser();
-//				if (user == null){
-//					Log.e(TAG, "Failed to signInGoogle");
-//					Toast.makeText(this, R.string.errorSignInWithGoogle, Toast.LENGTH_SHORT)
-//					.show();
-//				}
-//				else{
-//					intent.putExtra(KEY_USENAME, user.name);
-//					intent.setClass(this, HomeActivity.class);
-//				}
-//				intent.setClass(this, HomeActivity.class);
+			case R.id.remind_passwd:
+				intent.setClass(this, RemindActivity.class);
+				startActivity(intent);
 				break;
-			case R.id.sign_in:
-				can = false;
-				String pass = binding.userPasswd.getText().toString();
-				String eMail = binding.userEmail.getText().toString();
-				FirebaseAuth auth = FirebaseAuth.getInstance();
-				auth.signInWithEmailAndPassword(eMail, pass)
+			case R.id.register:
+				intent.setClass(this, RegistrationActivity.class);
+				startActivity(intent);
+				break;
+		}
+	}
+	
+	private void signInGoogle() {
+		Log.d(TAG, "signInGoogle");
+		
+		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+		startActivityForResult(signInIntent, RC_SIGN_IN);
+	}
+	
+	private void signInWithEmailAndPassword(){
+		String pass = binding.userPasswd.getText().toString();
+		String eMail = binding.userEmail.getText().toString();
+		mFirebaseAuth.signInWithEmailAndPassword(eMail, pass)
 				.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 					@Override
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if (task.isSuccessful()){
+							Intent intent = new Intent();
 							intent.setClass(getBaseContext(), HomeActivity.class);
 							intent.putExtra(KEY_USENAME, task.getResult().getUser().getDisplayName());
 							Log.d(TAG, "Task " +" is successful");
@@ -113,40 +165,11 @@ public class SignInActivity extends AppCompatActivity implements
 						}
 					}
 				});
-				
-//				if((user =  new FireBaseLoginner(pass, eMail).logIn()) != null){
-//					Log.i(TAG, "The user signedIn: " + user.name);
-//					intent.putExtra(KEY_USENAME, user.name);
-//				}
-//				else{
-//					Log.e(TAG, "Failed sign in");
-//					Toast.makeText(this, R.string.errorSignInWithEmail, Toast.LENGTH_SHORT)
-//					.show();
-//				}
-				break;
-			case R.id.remind_passwd:
-				intent.setClass(this, RemindActivity.class);
-				break;
-			case R.id.register:
-				intent.setClass(this, RegistrationActivity.class);
-				break;
-		}
-//		if (can)
-//		startActivity(intent);*/
-		Intent intent = new Intent(this, HomeActivity.class);
-		new User("Дениска");
-	}
-	private void signInGoogle() {
-		Log.d(TAG, "signInGoogle");
-		
-		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-		startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.d(TAG, "onActivityResult");
-		
 		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
 		if (requestCode == RC_SIGN_IN) {
 			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
