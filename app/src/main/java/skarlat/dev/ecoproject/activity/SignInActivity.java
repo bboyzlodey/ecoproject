@@ -3,6 +3,7 @@ package skarlat.dev.ecoproject.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.FireBaseLoginner;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
@@ -143,7 +145,7 @@ public class SignInActivity extends AppCompatActivity implements
 		Log.d(TAG, "signInGoogle");
 		
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-		startActivityForResult(signInIntent, RC_SIGN_IN);
+		startActivityForResult(signInIntent, Const.RC_SIGN_IN_GOOGLE);
 	}
 	
 	private void signInWithEmailAndPassword(){
@@ -157,6 +159,7 @@ public class SignInActivity extends AppCompatActivity implements
 							Intent intent = new Intent();
 							intent.setClass(getBaseContext(), HomeActivity.class);
 							intent.putExtra(KEY_USENAME, task.getResult().getUser().getDisplayName());
+							User.currentUser = new User(task.getResult().getUser().getDisplayName());
 							Log.d(TAG, "Task " +" is successful");
 							startActivity(intent);
 						}
@@ -166,12 +169,14 @@ public class SignInActivity extends AppCompatActivity implements
 					}
 				});
 	}
+	
+	@SuppressLint("ShowToast")
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.d(TAG, "onActivityResult");
 		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-		if (requestCode == RC_SIGN_IN) {
+		if (requestCode == Const.RC_SIGN_IN_GOOGLE) {
 			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 			if (result.isSuccess()) {
 				Log.e(TAG, "Result is Success");
@@ -182,10 +187,12 @@ public class SignInActivity extends AppCompatActivity implements
 				startActivity(intent);
 			} else {
 				// Google Sign-In failed
+				Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT);
 				Log.e(TAG, "Google Sign-In failed.");
 			}
 		}
 	}
+	
 	private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
 		Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
 		AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);

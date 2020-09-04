@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 	    if (User.currentUser != null){
 	        Log.d(TAG, "The current user name is: " + User.currentUser.name);
-	        binding.helloUser.setText("Привет, " + User.currentUser.name);
+	        binding.helloUser.setText("Привет, " + User.currentUser.name + "!");
 	    }
 		/**
 		 * Копирование базы данных из папки assets
