@@ -3,10 +3,13 @@ package skarlat.dev.ecoproject.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.adapters.TextViewBindingAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -36,7 +39,7 @@ import skarlat.dev.ecoproject.databinding.ActivityRegistrationBinding;
  * RegistrationActivity - активность для регистрации нового юзера через FireBase
  */
 public class RegistrationActivity extends AppCompatActivity implements
-		GoogleApiClient.OnConnectionFailedListener{
+		GoogleApiClient.OnConnectionFailedListener {
 	final String TAG = "RegistrationActivity";
 	private TextInputEditText nameEditText;
 	private TextInputEditText emailEditText;
@@ -54,6 +57,89 @@ public class RegistrationActivity extends AppCompatActivity implements
 		nameEditText = binding.userEmail;
 		emailEditText = binding.userName;
 		passwdEditText = binding.userPasswd;
+		
+		binding.submit.setEnabled(false);
+		setListenerForEditTexts();
+	}
+	
+	private void setListenerForEditTexts(){
+		binding.userEmail.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				enableOrDisableButton(binding.submit);
+			}
+		});
+		
+		binding.userPasswd.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				binding.userPasswd.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					
+					}
+					
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					
+					}
+					
+					@Override
+					public void afterTextChanged(Editable s) {
+						enableOrDisableButton(binding.submit);
+					}
+				});
+			}
+		});
+		
+		binding.userName.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				enableOrDisableButton(binding.submit);
+			}
+		});
+	}
+	
+	private void enableOrDisableButton(View view){
+		String userEmail = binding.userEmail.getText().toString();
+		String userPassword = binding.userPasswd.getText().toString();
+		
+		if (!userEmail.equals("") && !userPassword.equals("")){
+			view.setEnabled(true);
+		}
+		else if (binding.signIn.isEnabled()){
+			view.setEnabled(false);
+		}
 	}
 	
 	public void onClick(View v){
@@ -231,5 +317,4 @@ public class RegistrationActivity extends AppCompatActivity implements
 			}
 		}
 	}
-	
 }

@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:layout_margin="16dp"
+	android:padding="16dp"
 	tools:context=".activity.RegistrationActivity">
 
 	<TextView
@@ -42,7 +42,6 @@
 			android:foregroundTint="@color/colorBolotoButton"
 			android:inputType="textCapWords"
 			android:singleLine="true"
-			android:textCursorDrawable="@drawable/cursor_boloto"
 			/>
 	</com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +62,6 @@
 			android:foregroundTint="@color/colorBolotoButton"
 			android:inputType="textEmailAddress"
 			android:singleLine="true"
-			android:textCursorDrawable="@drawable/cursor_boloto"
 			/>
 	</com.google.android.material.textfield.TextInputLayout>
 
@@ -95,9 +93,8 @@
 			android:layout_height="72dp"
 			android:src="@drawable/ic_arrow_back"
 			app:backgroundTint="@android:color/transparent"
-			android:backgroundTint="@color/colorBolotoButton"
+			android:backgroundTint="@color/fab_submit"
 			android:layout_alignParentEnd="true"
-			android:clickable="false"
 			android:id="@+id/submit"
 			android:onClick="onClick"/>
 
