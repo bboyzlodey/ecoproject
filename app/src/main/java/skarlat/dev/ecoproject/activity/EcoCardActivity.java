@@ -113,6 +113,6 @@ public class EcoCardActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		setResult(RESULT_OK);
-		finish();
+		super.onBackPressed();
 	}
 }

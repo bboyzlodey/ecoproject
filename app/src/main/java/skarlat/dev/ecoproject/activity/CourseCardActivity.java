@@ -66,7 +66,7 @@ public class CourseCardActivity extends AppCompatActivity {
         courseDesc.setText(currentCourse.getFullDescription());
     
         try {
-            binding.courseAvatar.setBackground(currentCourse.getImage(getAssets()));
+            binding.courseAvatar.setImageDrawable(currentCourse.getImage(getAssets()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,22 +93,22 @@ public class CourseCardActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // TODO("LOGIC FOR CLOSE CARD")
+//        progress = currentCourse.getProgressBar();
+//        progressBarView.setValue(progress);
+//        leftCards.setText(db.getLeftCards(courseName));
+//
+//        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
+//        recyclerView.setAdapter(adapter);
+//
+//        if ( progress > 0  && progress < 100)
+//            startCourse.setText("Продолжить обучение");
+//        else if ( progress >= 100){
+//            startCourse.setVisibility(View.GONE);
+//        }
+//        else
+//            startCourse.setText("Начать обучение");
         super.onActivityResult(requestCode, resultCode, data);
-
-        progress = currentCourse.getProgressBar();
-        progressBarView.setValue(progress);
-        leftCards.setText(db.getLeftCards(courseName));
-
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
-        recyclerView.setAdapter(adapter);
-
-        if ( progress > 0  && progress < 100)
-            startCourse.setText("Продолжить обучение");
-        else if ( progress >= 100){
-            startCourse.setVisibility(View.GONE);
-        }
-        else
-            startCourse.setText("Начать обучение");
     }
 
     public void onBackBtn(View view){
