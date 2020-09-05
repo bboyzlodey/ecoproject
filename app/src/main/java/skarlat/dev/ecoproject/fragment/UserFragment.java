@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -21,10 +24,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.adapter.CategoryAdapter;
+import skarlat.dev.ecoproject.includes.database.App;
+import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +83,7 @@ public class UserFragment extends Fragment {
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
 	}
+	ImageView imageView;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,60 +92,46 @@ public class UserFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.cards_by_category);
 		TextView textView = (TextView) view.findViewById(R.id.user_name);
-		final ImageView imageView = (ImageView) view.findViewById(R.id.profile_image);
-		textView.setText(userName);
+		
+		imageView = (ImageView) view.findViewById(R.id.profile_image);
+		textView.setText(User.currentUser.name);
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				try {
-					URL photoURL = new URL(userPhotoUrl);
-					URLConnection urlConnection = photoURL.openConnection();
-					InputStream inputStream = urlConnection.getInputStream();
-					imageView.setImageDrawable(new BitmapDrawable(getResources(),inputStream));
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				showUserAvatar();
 			}
 		};
-		Drawable drawable = new BitmapDrawable();
 		
-		Thread thread = new Thread(runnable);
-//		runnable.run();
-//		try {
-		thread.start();
-		if(thread.isAlive()){
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		cards = App.getDatabase().cardsDao().getAll();
+		
+		FloatingActionButton fab = view.findViewById(R.id.pressBackFromFragment);
+		fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Objects.requireNonNull(getActivity()).onBackPressed();
 			}
-		}
-//			URL photoURL = new URL(userPhotoUrl);
-//			URLConnection urlConnection = photoURL.openConnection();
-//			InputStream inputStream = urlConnection.getInputStream();
-//			imageView.setImageDrawable(new BitmapDrawable(inputStream));
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
-		cards = new ArrayList<>();
+		});
 		// @TODO: Заменить заполнение листа с ипользованием БД
-//		cards.add(new EcoCard("name", "description", "description",
-//				"description", EcoCard.Status.WATCHED));
-//		cards.add(new EcoCard("name", "description", "description",
-//				"description", EcoCard.Status.WATCHED));
-//		cards.add(new EcoCard("name", "description", "description",
-//				"description", EcoCard.Status.OPENED));
-//		cards.add(new EcoCard("name", "description", "description",
-//				"description", EcoCard.Status.CLOSED));
 		
 		CategoryAdapter adapter = new CategoryAdapter(getContext(), cards);
-		
+		DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), RecyclerView.HORIZONTAL);
+		itemDecoration.setDrawable(getResources().getDrawable(R.drawable.divider_category));
+		recyclerView.addItemDecoration(itemDecoration);
 		recyclerView.setAdapter(adapter);
+		
 		return view;
+	}
+	
+	private void showUserAvatar(){
+		try {
+			URL photoURL = new URL(userPhotoUrl);
+			URLConnection urlConnection = photoURL.openConnection();
+			InputStream inputStream = urlConnection.getInputStream();
+			imageView.setImageDrawable(new BitmapDrawable(getResources(),inputStream));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

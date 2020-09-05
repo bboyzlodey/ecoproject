@@ -8,8 +8,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,21 +31,34 @@ import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
+import skarlat.dev.ecoproject.fragment.UserFragment;
 import skarlat.dev.ecoproject.includes.database.App;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 import skarlat.dev.ecoproject.section.CourseSection;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends FragmentActivity {
 	private ActivityHomeBinding binding;
 	private String TAG = "HomeActivity";
+	private FragmentManager fragmentManager;
+	private Fragment fragment;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+				openUserFragment();
+				Log.d(TAG, "profileImageClicked");
+	        }
+        });
+        if (User.currentUser == null) {
+        	User.currentUser = new User("Roza");
+        }
 	    if (User.currentUser != null){
 	        Log.d(TAG, "The current user name is: " + User.currentUser.name);
 	        binding.helloUser.setText("Привет, " + User.currentUser.name + "!");
@@ -79,5 +96,22 @@ public class HomeActivity extends AppCompatActivity {
 			}
 		}
 		
+	}
+	
+	private void openUserFragment(){
+		fragment = UserFragment.newInstance(0);
+		fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().add(R.id.home_layout, fragment).commit();
+		binding.linearLayout.setVisibility(View.GONE);
+	}
+	
+	@Override
+	public void onBackPressed() {
+    	if (fragmentManager.getFragments().size() > 0){
+    		binding.linearLayout.setVisibility(View.VISIBLE);
+			fragmentManager.beginTransaction().detach(fragment).commit();
+    	}
+    	else
+			super.onBackPressed();
 	}
 }
