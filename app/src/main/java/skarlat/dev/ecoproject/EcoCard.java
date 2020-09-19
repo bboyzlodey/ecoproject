@@ -10,7 +10,6 @@ import androidx.room.PrimaryKey;
 import java.io.IOException;
 import java.io.Serializable;
 
-import skarlat.dev.ecoproject.includes.database.App;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 

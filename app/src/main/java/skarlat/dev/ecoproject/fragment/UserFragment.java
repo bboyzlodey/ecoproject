@@ -1,8 +1,6 @@
 package skarlat.dev.ecoproject.fragment;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,7 +20,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,8 +27,7 @@ import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.adapter.CategoryAdapter;
-import skarlat.dev.ecoproject.includes.database.App;
-import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
+import skarlat.dev.ecoproject.App;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,7 +105,7 @@ public class UserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Objects.requireNonNull(getActivity()).onBackPressed();
-			}
+			onDestroy();}
 		});
 		// @TODO: Заменить заполнение листа с ипользованием БД
 		

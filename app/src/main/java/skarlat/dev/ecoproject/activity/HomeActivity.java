@@ -4,37 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.gms.dynamic.SupportFragmentWrapper;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import io.github.luizgrp.sectionedrecyclerviewadapter.Section;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
-import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
-import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.fragment.UserFragment;
-import skarlat.dev.ecoproject.includes.database.App;
+import skarlat.dev.ecoproject.App;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
-import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 import skarlat.dev.ecoproject.section.CourseSection;
 
 

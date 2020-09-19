@@ -3,6 +3,7 @@ package skarlat.dev.ecoproject.section
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,7 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.Course
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.includes.database.App
-import java.io.IOException
+import skarlat.dev.ecoproject.App
 import java.io.InputStream
 
 
@@ -32,7 +32,7 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
         val imgDrawable : Drawable = getImageDrawableForCourse(getPathToImage(position))
-        courseHolder.cardView.setBackgroundDrawable(imgDrawable)
+        courseHolder.imageCouse.setImageDrawable(imgDrawable)
     }
 
     private fun getPathToImage(position: Int) : String{
@@ -83,11 +83,13 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
         val header: TextView
         val smallDescriptiom: TextView
         val cardView: CardView
+        val imageCouse : ImageView
 
         init {
             header = view.findViewById<View>(R.id.current_title) as TextView
             smallDescriptiom = view.findViewById<View>(R.id.current_small_description) as TextView
             cardView = view.findViewById(R.id.current_course) as CardView
+            imageCouse = view.findViewById(R.id.imgCourse) as ImageView
         }
     }
 }

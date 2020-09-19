@@ -54,7 +54,6 @@ public class CourseCardActivity extends AppCompatActivity {
         progressBarView = binding.pbHorizontal;
         leftCards = binding.leftCards;
         courseDesc = binding.courseDesc;
-//        startCourse = binding.
         
         ecoCard = db.getAllCardsByCourseNameID(courseName);
         

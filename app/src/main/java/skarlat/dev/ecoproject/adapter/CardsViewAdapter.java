@@ -22,6 +22,9 @@ import java.util.List;
 import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
 
+/**
+ * TODO ("Implement adapter for different viewTypes")
+ */
 public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.ViewHolder>  {
     private LayoutInflater inflater;
     private List<EcoCard> card;

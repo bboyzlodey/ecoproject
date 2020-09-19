@@ -10,8 +10,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import skarlat.dev.ecoproject.includes.database.App;
-
 public class FireBaseLoginner extends Loginner implements OnCompleteListener<AuthResult> {
 	private final String TAG = "FireBaseLoginner";
 	private String operation;

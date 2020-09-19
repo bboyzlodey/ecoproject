@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import skarlat.dev.ecoproject.App;
 import skarlat.dev.ecoproject.Course;
 import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.EcoSoviet;
@@ -319,10 +320,10 @@ public class DatabaseHelper {
         DatabaseReference mRef = (DatabaseReference) mDb.getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if (child != null && group != null)
-            mRef.child(user.getUid()).child("progress").child(group).child(child).child(key).setValue(value);
-        else
-            mRef.child(user.getUid()).child("progress").child(key).setValue(value);
+//        if (child != null && group != null)
+//            mRef.child(user.getUid()).child("progress").child(group).child(child).child(key).setValue(value);
+//        else
+//            mRef.child(user.getUid()).child("progress").child(key).setValue(value);
     }
 
     public void updateUserProfile(){

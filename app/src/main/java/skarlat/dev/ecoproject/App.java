@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.includes.database;
+package skarlat.dev.ecoproject;
 
 import android.app.Application;
 
@@ -6,8 +6,10 @@ import androidx.room.Room;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import skarlat.dev.ecoproject.Authenticator;
-import skarlat.dev.ecoproject.FireBaseAuthenticator;
+import skarlat.dev.ecoproject.includes.database.AppDatabase;
+import work.upstarts.editorjskit.EJKit;
+import work.upstarts.editorjskit.models.EJAbstractCustomBlock;
+import work.upstarts.editorjskit.models.EJCustomBlock;
 
 /**
  * @CLass - подлючение к базе данных ассихнронно
@@ -30,6 +32,7 @@ public class App extends Application {
 //                .openHelperFactory(new AssetSQLiteOpenHelperFactory())
                 .allowMainThreadQueries()
                 .build();
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJQuoteBlockType.QUOTE, EJQuoteData.class));
     }
 
     public static App getInstance() {
