@@ -22,23 +22,25 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="21dp"
             android:textSize="16sp"
-            android:textColor="#727272"
+            android:textColor="#252723"
+            android:fontFamily="@font/bellota_bold"
             tools:text="Title"
             android:id="@+id/title_card"
-            tools:visibility="gone"
+            tools:visibility="visible"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/description"
+            android:fontFamily="@font/sf_font_pro"
             android:layout_alignTop="@+id/title_card"
             android:layout_marginTop="25dp"
             android:layout_marginStart="24dp"
             android:textSize="12sp"
             android:id="@+id/descr_card"
-            android:textColor="#A0A0A0"
-            tools:visibility="gone"
+            android:textColor="@color/colorGray"
+            tools:visibility="visible"
             />
 
         <TextView

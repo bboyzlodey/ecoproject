@@ -34,6 +34,7 @@ public class AuthActivity extends AppCompatActivity  implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_auth);
+		Log.d(TAG, "Input in AuthActivity");
 		initUser();
 		mGoogleApiClient = new GoogleApiClient.Builder(this)
 				                   .enableAutoManage(this /* FragmentActivity */,
@@ -46,11 +47,13 @@ public class AuthActivity extends AppCompatActivity  implements
 		mFirebaseAuth = FirebaseAuth.getInstance();
 		mFirebaseUser = mFirebaseAuth.getCurrentUser();
 		if (mFirebaseUser == null) {
+			Log.e(TAG, "mFirebaseUser is null");
 			// Not signed in, launch the Sign In activity
-			startActivity(new Intent(this, SignInActivity.class));
-			finish();
-			return;
-		} else {
+//			startActivity(new Intent(this, SignInActivity.class));
+//			finish();
+//			return;
+		}
+		else {
 			mUsername = mFirebaseUser.getDisplayName();
 			
 			if (mFirebaseUser.getPhotoUrl() != null) {

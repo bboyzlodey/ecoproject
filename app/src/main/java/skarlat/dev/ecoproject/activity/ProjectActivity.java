@@ -24,14 +24,14 @@ public class ProjectActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_project);
+//		setContentView(R.layout.activity_project);
 
-		pbHorizontal = (ProgressBar) findViewById(R.id.pb_horizontal);
-		tvProgressHorizontal = (TextView) findViewById(R.id.tv_progress_horizontal);
+//		pbHorizontal = (ProgressBar) findViewById(R.id.pb_horizontal);
+//		tvProgressHorizontal = (TextView) findViewById(R.id.tv_progress_horizontal);
 
-		progress =  getIntent().getExtras().getInt("progressBar");
+//		progress =  getIntent().getExtras().getInt("progressBar");
 
-		postProgress(progress);
+//		postProgress(10);
 	}
 
 	public void onClick(View v) {

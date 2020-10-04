@@ -1,0 +1,25 @@
+{
+  "time" : 1560845515750,
+  "blocks" : [
+    {
+      "type" : "header",
+      "data" : {
+        "text" : "Почему это важно? Concat",
+        "level" : 1
+      }
+    },
+    {
+      "type" : "quote",
+      "data" : {
+        "text" : "Да потому что!"
+      }
+    },
+    {
+      "type" : "paragraph",
+      "data" : {
+        "text" : "Необходимо"
+      }
+    }
+  ],
+  "version" : "2.12.3"
+}

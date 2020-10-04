@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import skarlat.dev.ecoproject.includes.database.App;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.SovietsDao;
 
@@ -47,7 +46,12 @@ public class EcoSoviet implements EcoInterface{
 	public Enum getStatus() {
 		return isFavorite == 0 ? Status.UNLIKED : Status.LIKED;
 	}
-
+	
+	@Override
+	public String getPathImage() {
+		return null;
+	}
+	
 	public enum Status{
 		UNLIKED,
 		LIKED

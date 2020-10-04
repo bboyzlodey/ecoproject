@@ -2,49 +2,51 @@ package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import java.io.IOException;
-import java.util.List;
 
-import skarlat.dev.ecoproject.Course;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.adapter.SampleFragmentPagerAdapter;
+import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
+import skarlat.dev.ecoproject.fragment.UserFragment;
+import skarlat.dev.ecoproject.App;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
-import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
+import skarlat.dev.ecoproject.section.CourseSection;
 
 
-public class HomeActivity extends AppCompatActivity {
-	private List<Course> courses;
-	private TabLayout tabLayout;
-	private DatabaseHelper db;
-	private FirebaseAuth mAuth;
-	private DatabaseReference myRef;
-//	private TextView currentCourseTitleView,currentCourseDescView, countLeftCardView;
-//	private ProgressBarView progressBarView;
-
+public class HomeActivity extends FragmentActivity {
+	private ActivityHomeBinding binding;
+	private String TAG = "HomeActivity";
+	private FragmentManager fragmentManager;
+	private Fragment fragment;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        myRef = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-
-		FirebaseUser user = mAuth.getCurrentUser();
-
-		myRef.child(mAuth.getUid()).child("Денис").setValue("s");
-
+	    binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+				openUserFragment();
+				Log.d(TAG, "profileImageClicked");
+	        }
+        });
+        if (User.currentUser == null) {
+        	User.currentUser = new User("Roza");
+        }
+	    if (User.currentUser != null){
+	        Log.d(TAG, "The current user name is: " + User.currentUser.name);
+	        binding.helloUser.setText("Привет, " + User.currentUser.name + "!");
+	    }
 		/**
 		 * Копирование базы данных из папки assets
 		 */
@@ -54,83 +56,46 @@ public class HomeActivity extends AppCompatActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		tabLayout = (TabLayout) findViewById(R.id.home_tab);
-        tabView(); // Иницилизация TabView
-	    setIconsInTab();
-
-    }
-	
-	/**
-	 *      Эта функция устанавливает иконки для таб бара
-	 */
-	protected void setIconsInTab(){
-	    int[] imageResId = {
-	    		R.drawable.event,
-			    R.drawable.person};
-	
-	    for (int i = 0; i < imageResId.length; i++) {
-		    tabLayout.getTabAt(i).setIcon(imageResId[i]);
-		    tabLayout.getTabAt(i).getIcon().setTint(getResources().getColor(R.color.colorGray));
-		    
-		    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-			    @Override
-			    public void onTabSelected(TabLayout.Tab tab) {
-					tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
-			    }
-
-			    @Override
-			    public void onTabUnselected(TabLayout.Tab tab) {
-				    tab.getIcon().setTint(getResources().getColor(R.color.colorGray));
-			    }
-
-			    @Override
-			    public void onTabReselected(TabLayout.Tab tab) {
-
-			    }
-		    });
-	    }
-		tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.colorWhite));
+	    SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
+	    sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
+	    binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
     }
     
-    protected void tabView(){
-	    // Получаем ViewPager и устанавливаем в него адаптер
-	    ViewPager viewPager = findViewById(R.id.viewpager);
-	    viewPager.setAdapter(
-			    new SampleFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
-	
-	    // Передаём ViewPager в TabLayout
-	    tabLayout.setupWithViewPager(viewPager);
-	    
-	    //  Анимация
-	    viewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-    }
-	
-	/**
-	 *
-	 * @param v - это объект самой кнопки
-	 *          из нее мы можем вытянуть свойство tag и по этому ключу запустить другое активити
-	 *          (открыть курс)
-	 */
 	public void openCourse(View v){
 		Intent open = new Intent(this, CourseCardActivity.class);
-		Course tag = (Course) v.getTag();
-		open.putExtra("tag", tag);
-		/**
-		 * Допустим, у нас есть объект Education (глобальная переменная) с полями:
-		 *      String title;
-		 *      String description;
-		 *      Map<String, CursCard> curses;
-		 *
-		 *   То мы сделаем так, что бы отобразить нужный курс:
-		 *      static String KEY_GET = "education";
-		 *      String keyForPut = v.getContentDescription().toString();
-		 *      Education education = savedInstanceState.get(KEY_GET);
-		 *      CursCard willOpen = education.curses.get(keyForPut);
-		 *      savedInstanceState.put("curs", willOpen);
-		 *      Intent intent = new Intent(this, CursCard.class);
-		 *      startActivity(intent, savedInstanceState);
-		 */
-		startActivity(open);
+		CharSequence charSequence = v.getContentDescription();
+		if (charSequence != null){
+			open.putExtra("OPEN_COURSE", charSequence.toString());
+			startActivity(open);
+		}
+		else {
+			TextView textView = v.findViewById(R.id.current_title);
+			CharSequence str = textView.getContentDescription();
+			if (str != null)
+			{
+				open.putExtra("OPEN_COURSE", str.toString());
+				startActivity(open);
+			}
+		}
+		
+	}
+	
+	private void openUserFragment(){
+		fragment = UserFragment.newInstance(0);
+		fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().add(R.id.home_layout, fragment).commit();
+		binding.linearLayout.setVisibility(View.GONE);
+	}
+	
+	@Override
+	public void onBackPressed() {
+    	if (fragmentManager.getFragments().size() > 0){
+    		binding.linearLayout.setVisibility(View.VISIBLE);
+			fragmentManager.beginTransaction().detach(fragment).commit();
+    	}
+    	else
+			super.onBackPressed();
 	}
 }

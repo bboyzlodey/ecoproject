@@ -6,4 +6,5 @@ public interface EcoInterface {
 	String getDescription();
 	String getFullDescription();
 	Enum getStatus();
+	String getPathImage();
 }

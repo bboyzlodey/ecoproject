@@ -1,18 +1,21 @@
 package skarlat.dev.ecoproject;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.IOException;
 import java.io.Serializable;
 
-import skarlat.dev.ecoproject.includes.database.App;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 
 @Entity
 public class EcoCard  implements EcoInterface, Serializable {
-
+	private final static String postfixPath = "_cover_hdpi";
 	@PrimaryKey
 	@NonNull
 	public String cardNameID;
@@ -68,7 +71,17 @@ public class EcoCard  implements EcoInterface, Serializable {
 		}
 		return null;
 	}
-
+	
+	public Drawable getImage() throws IOException {
+		Drawable drawable = new BitmapDrawable(App.instance.getAssets().open(getPathImage()));
+		return drawable;
+	}
+	
+	@Override
+	public String getPathImage() {
+		return Const.IMAGES_ROOT_FOLDER + courseNameID  + "/" +  cardNameID + postfixPath + ".png";
+	}
+	
 	public void upDate(EcoCard.Status status) {
 		AppDatabase db = App.getInstance().getDatabase();
 		CardsDao cardsDao = db.cardsDao();
@@ -89,7 +102,4 @@ public class EcoCard  implements EcoInterface, Serializable {
 				break;
 		}
 	}
-
-
-
 }

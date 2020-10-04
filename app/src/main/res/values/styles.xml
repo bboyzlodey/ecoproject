@@ -3,24 +3,32 @@
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 		<!-- Customize your theme here. -->
-		<item name="colorButtonNormal">@color/colorBlack</item>
+		<item name="colorButtonNormal">@color/colorBolotoButton</item>
 		<item name="android:statusBarColor">@color/colorBlack</item>
 		<item name="tabIndicatorColor">@color/colorWhite</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:textColor">@color/colorBlack</item>
+		<item name="android:fontFamily">@font/roboto</item>
+		<item name="android:textCursorDrawable">@drawable/cursor_boloto</item>
 	</style>
+
 	<style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">
 		<item name="android:gravity">center_horizontal|bottom</item>
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_gravity">center</item>
 		<item name="android:textAlignment">center</item>
 	</style>
+
 	<style name="Home" parent="Widget.AppCompat.ButtonBar">
 		<item name="background">@color/colorWhite</item>
 	</style>
+
 	<style name="nameOfSoviet" parent="@style/Widget.AppCompat.TextView">
-		<item name="android:textSize">18sp</item>
-		<item name="android:textColor">@color/colorBlack</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:textColor">#252723</item>
 		<item name="android:textStyle">bold</item>
 	</style>
+
 	<style name="FullscreenCustom" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:windowContentOverlay">@null</item>
@@ -30,4 +38,23 @@
 	<style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
 		<item name="tabIndicatorColor">#0000FF</item>
 	</style>
+
+	<style name="Theme.App" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+		...
+		<item name="colorPrimary">@color/colorGray</item>
+		<!--		<item name="colorOnSurface">@color/shrine_pink_900</item>-->
+		<!--		<item name="colorError">@color/shrine_red</item>-->
+		<!--		<item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>-->
+		<!--		<item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>-->
+	</style>
+
+	<style name="AppTheme.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

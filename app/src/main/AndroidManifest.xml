@@ -2,39 +2,65 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	package="skarlat.dev.ecoproject">
+
 	<uses-permission android:name="android.permission.INTERNET" />
 
-
 	<application
-		android:name=".includes.database.App"
+		android:name=".App"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:largeHeap="true"
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
-		android:usesCleartextTraffic="true"
-		android:theme="@style/AppTheme">
-
-		<activity android:name=".activity.SignInActivity"></activity>
-		<activity android:name=".activity.AuthActivity" />
+		android:theme="@style/AppTheme"
+		android:usesCleartextTraffic="true">
+		<activity android:name=".activity.WhyActivity"></activity>
+		<activity
+			android:name=".TestActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.RemindActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.RegistrationActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.SignInActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.AuthActivity"
+			android:exported="true" />
 		<activity
 			android:name=".activity.EcoCardActivity"
+			android:exported="true"
 			android:parentActivityName=".activity.ProjectActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value=".activity.ProjectActivity" />
 		</activity>
-		<activity android:name=".activity.ProjectActivity" />
-		<activity android:name=".activity.HomeActivity" />
-		<activity android:name=".activity.CourseCardActivity" />
-		<activity android:name=".activity.MainActivity">
+		<activity
+			android:name=".activity.ProjectActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.HomeActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.CourseCardActivity"
+			android:exported="true" />
+		<activity
+			android:name=".activity.MainActivity"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<meta-data
+			android:name="preloaded_fonts"
+			android:resource="@array/preloaded_fonts" />
 	</application>
 
 </manifest>

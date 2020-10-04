@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.List;
 
 import skarlat.dev.ecoproject.Course;
@@ -17,6 +19,8 @@ import skarlat.dev.ecoproject.EcoCard;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
+import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
+import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 public class CourseCardActivity extends AppCompatActivity {
@@ -32,53 +36,58 @@ public class CourseCardActivity extends AppCompatActivity {
     private List<EcoCard> ecoCard;
     private Course currentCourse;
     private final int REQUST = 1;
+    private ActivityCourseCardBinding binding;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_card);
+        binding = ActivityCourseCardBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
 
         Bundle tagView = getIntent().getExtras();
 
-        currentCourse = (Course) tagView.get("tag");
-        courseName = (String) currentCourse.getName();
+        currentCourse = db.getCourseByName(tagView.get("OPEN_COURSE").toString());
+        courseName = currentCourse.getName();
 
-
-        cursTitle = (TextView) findViewById(R.id.curs_title);
-        progressBarView = (ProgressBarView) findViewById(R.id.pb_horizontal);
-        leftCards = (TextView) findViewById(R.id.left_cards);
-        courseDesc = (TextView) findViewById(R.id.course_desc);
-        startCourse = findViewById(R.id.start_course);
-
+        cursTitle = binding.cursTitle;
+        progressBarView = binding.pbHorizontal;
+        leftCards = binding.leftCards;
+        courseDesc = binding.courseDesc;
 
         ecoCard = db.getAllCardsByCourseNameID(courseName);
 
+        // получение ID по имени
+       // int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
+       // courseImgView.setBackgroundResource(drawableID);
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
+        progress = db.getCourseByName(courseName).getProgressBar();
         progressBarView.setValue(progress);
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
 
-        if ( progress > 0  && progress < 100)
-            startCourse.setText("Продолжить обучение");
-        else if ( progress >= 100){
-            startCourse.setVisibility(View.GONE);
+        try {
+            binding.courseAvatar.setImageDrawable(currentCourse.getImage(getAssets()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        else
-            startCourse.setText("Начать обучение");
 
-        /**
-         *
-         *      Добавляем лист объектов в recycleView;
-         */
-        recyclerView = (RecyclerView) findViewById(R.id.recycle_cards);
+//        if ( progress > 0  && progress < 100)
+//            startCourse.setText("Продолжить обучение");
+//        else if ( progress >= 100){
+//            startCourse.setVisibility(View.GONE);
+//        }
+//        else
+//            startCourse.setText("Начать обучение");
+
+
         CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
-        recyclerView.setAdapter(adapter);
-
+        binding.recycleCards.setAdapter(adapter);
         db.upDateIsCurrentCourse(courseName);
-
     }
+
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
@@ -87,22 +96,22 @@ public class CourseCardActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // TODO("LOGIC FOR CLOSE CARD")
+//        progress = currentCourse.getProgressBar();
+//        progressBarView.setValue(progress);
+//        leftCards.setText(db.getLeftCards(courseName));
+//
+//        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
+//        recyclerView.setAdapter(adapter);
+//
+//        if ( progress > 0  && progress < 100)
+//            startCourse.setText("Продолжить обучение");
+//        else if ( progress >= 100){
+//            startCourse.setVisibility(View.GONE);
+//        }
+//        else
+//            startCourse.setText("Начать обучение");
         super.onActivityResult(requestCode, resultCode, data);
-
-        progress = currentCourse.getProgressBar();
-        progressBarView.setValue(progress);
-        leftCards.setText(db.getLeftCards(courseName));
-
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
-        recyclerView.setAdapter(adapter);
-
-        if ( progress > 0  && progress < 100)
-            startCourse.setText("Продолжить обучение");
-        else if ( progress >= 100){
-            startCourse.setVisibility(View.GONE);
-        }
-        else
-            startCourse.setText("Начать обучение");
     }
 
     public void onBackBtn(View view){
@@ -112,8 +121,7 @@ public class CourseCardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        super.onBackPressed();
     }
 
     /**
@@ -132,12 +140,13 @@ public class CourseCardActivity extends AppCompatActivity {
             for (int i = 0; i < ecoCard.size(); i++) {
                 if (ecoCard.get(i).getName() == currentCard.getName() && (i + 1) < ecoCard.size()) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
+                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
                     break;
                 }
             }
 
             currentCard.upDate(EcoCard.Status.WATCHED);
-
+            db.updateFirebaseProgress("Cards" ,currentCard.getName(), "status", 2);
             upDateCurrentCourse();
 
             startActivityForResult(intent, REQUST);
@@ -153,10 +162,13 @@ public class CourseCardActivity extends AppCompatActivity {
         res = Math.ceil(res);
 
         progress += res;
-        if (progress >= 100)
+        if (progress >= 100){
             currentCourse.upDate(progress, Course.Status.FINISHED);
-        else
+        }
+        else{
             currentCourse.upDate(progress, Course.Status.CURRENT);
+        }
+        db.updateFirebaseProgress("Courses" ,currentCourse.getName(), "progress", progress);
     }
 
     /**
@@ -177,8 +189,10 @@ public class CourseCardActivity extends AppCompatActivity {
 
                 if (i != ecoCard.size() - 1) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
+                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
                 }
                 card.upDate(EcoCard.Status.WATCHED);
+                db.updateFirebaseProgress("Cards" ,card.getName(), "status", 2);
                 startActivityForResult(intent,REQUST);
                 break;
             }

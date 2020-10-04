@@ -42,7 +42,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 		holder.tag.setTag(course); // присваиваем вьюхе "карточка" объект карточки(Course);
 
 	}
-	
+	@Override
+	public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+		super.onAttachedToRecyclerView(recyclerView);
+	}
 	@Override
 	public int getItemCount() {
 		return courses.size();

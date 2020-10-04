@@ -1,15 +1,20 @@
 package skarlat.dev.ecoproject.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
@@ -41,7 +46,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 			forAll(holder);
 		}
 		EcoCard ecoCard = ecoCards.get(position);
-//		holder.header.setText(ecoSoviet.getTitle());
+		holder.category.setText("Ресурсы");
+		try {
+			holder.imageView.setImageDrawable(ecoCard.getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 //		holder.description.setText(ecoSoviet.getDescription());
 	}
 	
@@ -53,11 +63,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 	public class ViewHolder extends RecyclerView.ViewHolder {
 		final TextView totalProgress, category;
 		final View view;
+		final CardView cardView;
+		final ImageView imageView;
 		ViewHolder(View view){
 			super(view);
 			this.view = view;
 			totalProgress = (TextView) view.findViewById(R.id.progress_category);
 			category = (TextView) view.findViewById(R.id.title_category);
+			cardView = (CardView) view.findViewById(R.id.current_category);
+			imageView = (ImageView) view.findViewById(R.id.image);
 		}
 	}
 	

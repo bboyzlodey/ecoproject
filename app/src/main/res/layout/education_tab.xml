@@ -25,12 +25,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/colorBlack"
-				android:text="Текущий курс"
+				android:text="Текущий маршрут"
 				android:textSize="24sp"
 				android:layout_marginTop="27dp"
 				android:layout_marginBottom="17dp"
 				android:visibility="visible"
-				android:layout_weight="0"/>
+/>
 
 			<!--	CardView - Карточка текущего курса. Для демонстрации пойдет так-->
 			<androidx.cardview.widget.CardView
@@ -41,8 +41,7 @@
 				android:onClick="openCourse"
 				android:elevation="6dp"
 				tools:tag="tag"
-				android:visibility="visible"
-				android:layout_weight="0">
+				android:visibility="visible">
 
 				<RelativeLayout
 					android:layout_width="match_parent"
@@ -55,51 +54,28 @@
 						android:id="@+id/current_course_title"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_above="@id/current_small_description"
 						android:textColor="@color/colorWhite"
-						android:textSize="16sp"
+						android:textSize="24sp"
 						android:text="@string/curs_title"
-						tools:textColor="@color/colorBlack"
-						android:layout_marginStart="16dp"
-						android:layout_marginBottom="2dp"
+						android:layout_marginStart="24dp"
+						android:layout_marginTop="16dp"
 						/>
 
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:textColor="@color/colorWhite"
-						android:textSize="12sp"
+						android:textSize="13sp"
+						android:layout_below="@+id/current_course_title"
 						android:id="@+id/current_small_description"
+						android:layout_marginStart="24dp"
+						android:layout_marginTop="9dp"
 						android:text="@string/description"
 						tools:tag="firstStep"
-						android:paddingLeft="16dp"
-						android:layout_gravity="bottom"
-						android:layout_marginBottom="12dp"
-						android:layout_alignParentBottom="true"
-						tools:textColor="@color/colorBlack"
 						/>
 
 				</RelativeLayout>
 			</androidx.cardview.widget.CardView>
-
-			<skarlat.dev.ecoproject.customView.ProgressBarView
-				android:id="@+id/pb_horizontal"
-				android:layout_width="fill_parent"
-				android:layout_height="7dp"
-				android:background="@drawable/custom_progressbar"
-				android:layout_marginTop="8dp"
-				android:visibility="visible"/>
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/colorBlack"
-				android:id="@+id/count_left_cards"
-				android:text="@string/count_card"
-				android:textSize="12sp"
-				android:layout_marginTop="8dp"
-				android:visibility="visible"
-				android:layout_weight="0"/>
 
 			<TextView
 				android:layout_width="wrap_content"
@@ -108,7 +84,6 @@
 				android:text="Доступные курсы"
 				android:textSize="20sp"
 				android:layout_marginTop="16dp"
-				android:layout_weight="0"
 				android:layout_marginBottom="16dp"/>
 
 			<!--	RecycleView - пролистывание карточек доступных курсов-->
@@ -116,8 +91,7 @@
 				android:id="@+id/recycle_courses"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:nestedScrollingEnabled="false"
+				android:nestedScrollingEnabled="true"
 				app:layoutManager="LinearLayoutManager"
 				android:paddingBottom="16dp"
 				tools:visibility="visible"/>
@@ -131,14 +105,14 @@
 				android:textSize="20sp"
 				android:visibility="visible"
 				android:layout_marginTop="16dp"
-				android:layout_weight="0"
+
 				android:layout_marginBottom="16dp"/>
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/recycle_courses_done"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
+				android:layout_height="wrap_content"
+
 				android:nestedScrollingEnabled="false"
 				app:layoutManager="LinearLayoutManager"
 				android:paddingBottom="16dp"

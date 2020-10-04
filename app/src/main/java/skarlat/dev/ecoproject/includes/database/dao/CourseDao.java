@@ -23,6 +23,15 @@ public interface CourseDao {
 
     @Query("SELECT * FROM Course")
     List<Course> getAll();
+    
+    @Query("SELECT * FROM Course WHERE isActive = 1")
+    List<Course> getAllIsActive();
+    
+    @Query("SELECT * FROM Course WHERE isActive = 0")
+    List<Course> getAllNonActive();
+    
+    @Query("SELECT * FROM Course WHERE isActive != 0 AND isActive != 1")
+    List<Course> getAllFinished();
 
     @Query("SELECT * FROM Course WHERE courseNameID = :courseNameID")
     Course getByCourseID(String courseNameID);

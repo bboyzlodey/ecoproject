@@ -1,9 +1,19 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
+    viewBinding {
+        enabled = true
+    }
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "skarlat.dev.ecoproject"
@@ -20,6 +30,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+// To inline the bytecode built with JVM target 1.8 into
+// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -53,5 +72,22 @@ dependencies {
     implementation 'com.jackandphantom.android:customtogglebutton:1.0.1'
     implementation "com.android.support:design:${supportLibrary}"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.android.material:material:1.0.0-rc01' // For Floating Action Button
+    // Custom TAB from https://github.com/ogaclejapan/SmartTabLayout
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    //Optional: see how to use the utility.
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+    // UI artickles
+    implementation 'com.github.upstarts:ejkit-gson:1.0.1'
+    implementation 'com.github.upstarts:ejkit:1.0.1'
+    // Rounded ImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.2.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/heckslam/EditorJSKit" }
 }
