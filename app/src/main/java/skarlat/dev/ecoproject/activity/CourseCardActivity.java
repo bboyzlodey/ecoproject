@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,28 +43,31 @@ public class CourseCardActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCourseCardBinding.inflate(getLayoutInflater());
-    
+
         setContentView(binding.getRoot());
 
         Bundle tagView = getIntent().getExtras();
 
         currentCourse = db.getCourseByName(tagView.get("OPEN_COURSE").toString());
         courseName = currentCourse.getName();
-        
+
         cursTitle = binding.cursTitle;
         progressBarView = binding.pbHorizontal;
         leftCards = binding.leftCards;
         courseDesc = binding.courseDesc;
-        
+
         ecoCard = db.getAllCardsByCourseNameID(courseName);
-        
+
+        // получение ID по имени
+       // int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
+       // courseImgView.setBackgroundResource(drawableID);
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
         progress = db.getCourseByName(courseName).getProgressBar();
         progressBarView.setValue(progress);
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
-    
+
         try {
             binding.courseAvatar.setImageDrawable(currentCourse.getImage(getAssets()));
         } catch (IOException e) {
@@ -77,13 +81,13 @@ public class CourseCardActivity extends AppCompatActivity {
 //        }
 //        else
 //            startCourse.setText("Начать обучение");
-        
-        
+
+
         CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
         binding.recycleCards.setAdapter(adapter);
         db.upDateIsCurrentCourse(courseName);
     }
-    
+
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
