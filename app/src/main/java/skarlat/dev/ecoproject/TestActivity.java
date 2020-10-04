@@ -9,7 +9,6 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-import skarlat.dev.ecoproject.activity.PageFragment;
 
 public class TestActivity extends AppCompatActivity {
 	

@@ -137,6 +137,7 @@ public class SignInActivity extends AppCompatActivity implements
 	}
 	
 	private void signInGoogle() {
+		// TODO (Method not working)
 		Log.d(TAG, "signInGoogle");
 		
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -183,7 +184,8 @@ public class SignInActivity extends AppCompatActivity implements
 			} else {
 				// Google Sign-In failed
 				Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT);
-				Log.e(TAG, "Google Sign-In failed.");
+				Log.e(TAG, "Google Sign-In failed." + result.getStatus().getStatusMessage());
+
 			}
 		}
 	}
