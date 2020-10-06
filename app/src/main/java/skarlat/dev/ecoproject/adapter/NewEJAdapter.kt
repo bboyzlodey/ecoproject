@@ -26,7 +26,7 @@ class NewEJAdapter(style: EJStyle? = EJKit.ejStyle,
                 .addDelegate(TableAdapterDelegate(style))
                 .addDelegate(RawHtmlAdapterDelegate(style))
                 .addDelegate(ArticleQuoteElement(style))
-
+                .addDelegate(AdviceLinkElement(style))
     }
 
 }

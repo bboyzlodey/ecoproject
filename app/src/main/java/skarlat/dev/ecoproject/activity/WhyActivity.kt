@@ -16,7 +16,7 @@ import work.upstarts.editorjskit.ui.EditorJsAdapter
 import work.upstarts.editorjskit.ui.theme.EJStyle
 import work.upstarts.gsonparser.EJDeserializer
 
-const val DATA_JSON_PATH = "dummy_data.json"
+const val DATA_JSON_PATH = "why.json"
 
 data class EJResponse(val blocks: List<EJBlock>)
 class WhyActivity : AppCompatActivity() {

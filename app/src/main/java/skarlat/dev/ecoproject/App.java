@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import work.upstarts.editorjskit.EJKit;
 import work.upstarts.editorjskit.models.EJAbstractCustomBlock;
-import work.upstarts.editorjskit.models.EJCustomBlock;
 
 /**
  * @CLass - подлючение к базе данных ассихнронно
@@ -32,9 +31,13 @@ public class App extends Application {
 //                .openHelperFactory(new AssetSQLiteOpenHelperFactory())
                 .allowMainThreadQueries()
                 .build();
-        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJQuoteBlockType.QUOTE, EJQuoteData.class));
+        registerCustomBlocks();
     }
 
+    private void registerCustomBlocks() {
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJAdditionalBlocks.QUOTE, EJQuoteData.class));
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJAdditionalBlocks.ADVICE_LINK, EJAdviceLinkData.class));
+    }
     public static App getInstance() {
         return instance;
     }
