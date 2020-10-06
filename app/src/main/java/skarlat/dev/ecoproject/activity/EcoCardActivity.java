@@ -70,12 +70,12 @@ public class EcoCardActivity extends AppCompatActivity {
 			e.printStackTrace();
 		}
 		
-		TextView textView = (TextView) findViewById(R.id.card_title);
+		TextView textView = findViewById(R.id.card_title);
 		textView.setText(capitalize(ecoCard.title));
-		textView = (TextView) findViewById(R.id.card_category);
+		textView = findViewById(R.id.card_category);
 		textView.setText(ecoCard.description);
 		initiList();
-		linearLayout = (LinearLayout) findViewById(R.id.card_linear_layout);
+		linearLayout = findViewById(R.id.card_linear_layout);
 		int i = 0;
 		Iterator iterator = ecoSoviets.iterator();
 		if (!ecoSoviets.isEmpty()){

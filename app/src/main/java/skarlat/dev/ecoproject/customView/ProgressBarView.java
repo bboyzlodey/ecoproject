@@ -46,7 +46,7 @@ public class ProgressBarView extends TextView {
             ClipDrawable barValue = (ClipDrawable) background.getDrawable(1);
 
             // Устанавливаем уровень шкалы
-            int newClipLevel = (int) (value * 10000 / mMaxValue);
+            int newClipLevel = value * 10000 / mMaxValue;
             barValue.setLevel(newClipLevel);
 
             // Уведомляем об изменении Drawable

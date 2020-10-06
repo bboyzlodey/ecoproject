@@ -47,8 +47,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 		final TextView header, description;
 		ViewHolder(View view){
 			super(view);
-			header = (TextView) view.findViewById(R.id.header_card);
-			description = (TextView) view.findViewById(R.id.descr_card);
+			header = view.findViewById(R.id.header_card);
+			description = view.findViewById(R.id.descr_card);
 		}
 	}
 }

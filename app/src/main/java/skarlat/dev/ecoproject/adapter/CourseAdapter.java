@@ -56,8 +56,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 		final CardView tag;
 		ViewHolder(View view){
 			super(view);
-			header = (TextView) view.findViewById(R.id.current_title);
-			lvl = (TextView) view.findViewById(R.id.current_small_description);
+			header = view.findViewById(R.id.current_title);
+			lvl = view.findViewById(R.id.current_small_description);
 			tag = view.findViewById(R.id.current_course);
 		}
 	}

@@ -106,12 +106,12 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
         final RelativeLayout backgroundCard;
         ViewHolder(View view){
             super(view);
-            backgroundCard = (RelativeLayout)view.findViewById(R.id.background_card);
-            header = (TextView) view.findViewById(R.id.title_card);
-            description = (TextView) view.findViewById(R.id.descr_card);
-            countOpenCard = (TextView) view.findViewById(R.id.count_open_card);
-            cardClose = (TextView) view.findViewById(R.id.card_close);
-            nextCard = (View) view.findViewById(R.id.nextCard);
+            backgroundCard = view.findViewById(R.id.background_card);
+            header = view.findViewById(R.id.title_card);
+            description = view.findViewById(R.id.descr_card);
+            countOpenCard = view.findViewById(R.id.count_open_card);
+            cardClose = view.findViewById(R.id.card_close);
+            nextCard = view.findViewById(R.id.nextCard);
         }
     }
 }

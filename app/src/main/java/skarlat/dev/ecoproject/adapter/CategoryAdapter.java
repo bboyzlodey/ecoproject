@@ -68,10 +68,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 		ViewHolder(View view){
 			super(view);
 			this.view = view;
-			totalProgress = (TextView) view.findViewById(R.id.progress_category);
-			category = (TextView) view.findViewById(R.id.title_category);
-			cardView = (CardView) view.findViewById(R.id.current_category);
-			imageView = (ImageView) view.findViewById(R.id.image);
+			totalProgress = view.findViewById(R.id.progress_category);
+			category = view.findViewById(R.id.title_category);
+			cardView = view.findViewById(R.id.current_category);
+			imageView = view.findViewById(R.id.image);
 		}
 	}
 	

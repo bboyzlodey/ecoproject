@@ -34,7 +34,7 @@ public class Course implements EcoInterface, Serializable {
     public enum Status{
         CLOSED,
         CURRENT,
-        FINISHED;
+        FINISHED
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Course implements EcoInterface, Serializable {
     }
 
     public void upDate(int progressBar, Course.Status status){
-        AppDatabase db = App.getInstance().getDatabase();
+        AppDatabase db = App.getDatabase();
         CourseDao coursesDao = db.courseDao();
         setProgressBar(progressBar);
         setStatus(status);

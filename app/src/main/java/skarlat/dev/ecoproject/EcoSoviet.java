@@ -69,7 +69,7 @@ public class EcoSoviet implements EcoInterface{
 	}
 
 	public void upDate(EcoSoviet.Status status){
-		AppDatabase db = App.getInstance().getDatabase();
+		AppDatabase db = App.getDatabase();
 		SovietsDao dao = db.sovietsDao();
 		setStatus(status);
 		dao.update(this);

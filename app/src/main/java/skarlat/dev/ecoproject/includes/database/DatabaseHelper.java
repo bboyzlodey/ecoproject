@@ -35,7 +35,7 @@ import skarlat.dev.ecoproject.includes.database.dao.SovietsDao;
  */
 public class DatabaseHelper {
 
-    private AppDatabase db = App.getInstance().getDatabase();
+    private AppDatabase db = App.getDatabase();
     private CourseDao coursesDao = db.courseDao();
     private CardsDao cardsDao = db.cardsDao();
     private SovietsDao sovietsDao = db.sovietsDao();
@@ -253,7 +253,7 @@ public class DatabaseHelper {
 
     public void updateDatabase(){
         FirebaseDatabase mDb = FirebaseDatabase.getInstance();
-        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+        DatabaseReference mRef = mDb.getReference();
         mRef.child("content").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -262,7 +262,7 @@ public class DatabaseHelper {
                 HashMap<String, Object> map = dataSnapshot.getValue(indicator);
 
                long verFirebase = (long) map.get("version");
-               int verLocalbase = (int) getContentVersion();
+               int verLocalbase = getContentVersion();
                if (verFirebase > verLocalbase){
                    updateCourses(map);
                    Version version = db.versionDao().getVer();
@@ -316,7 +316,7 @@ public class DatabaseHelper {
 
     public void updateFirebaseProgress(String group, String child, String key, int value){
         FirebaseDatabase mDb = FirebaseDatabase.getInstance();
-        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+        DatabaseReference mRef = mDb.getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 //        if (child != null && group != null)
@@ -327,7 +327,7 @@ public class DatabaseHelper {
 
     public void updateUserProfile(){
         FirebaseDatabase mDb = FirebaseDatabase.getInstance();
-        DatabaseReference mRef = (DatabaseReference) mDb.getReference();
+        DatabaseReference mRef = mDb.getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         mRef.setPriority(1);

@@ -86,10 +86,10 @@ public class UserFragment extends Fragment {
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
-		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.cards_by_category);
-		TextView textView = (TextView) view.findViewById(R.id.user_name);
+		RecyclerView recyclerView = view.findViewById(R.id.cards_by_category);
+		TextView textView = view.findViewById(R.id.user_name);
 		
-		imageView = (ImageView) view.findViewById(R.id.profile_image);
+		imageView = view.findViewById(R.id.profile_image);
 		textView.setText(User.currentUser.name);
 		Runnable runnable = new Runnable() {
 			@Override

@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-		// new feature
+		// new feature WhyActivity
 		Intent intent = new Intent(); // удалить
-//		intent.setClass(this, WhyActivity.class);
-//		startActivity(intent);
-//		finish();
+		intent.setClass(this, WhyActivity.class);
+		startActivity(intent);
+		finish();
 
 		// Код временно закоментирован для дебагинга
-		new AsyncTask<Void, Void, User>() {
+	/*	new AsyncTask<Void, Void, User>() {
 			@Override
 			protected User doInBackground(Void... voids) {
 				return App.auth.getCurrentUser();
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
 				startActivity(intent);
 				super.onPostExecute(user);
 			}
-		}.execute();
+		}.execute();*/
 	}
 	
 

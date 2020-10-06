@@ -19,8 +19,8 @@ public class RemindActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_remind);
-		email = (TextInputEditText) findViewById(R.id.user_email);
-		remindButton = (Button) findViewById(R.id.remind);
+		email = findViewById(R.id.user_email);
+		remindButton = findViewById(R.id.remind);
 	}
 	public void onClick(View v){
 		int pressed = v.getId();

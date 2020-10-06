@@ -83,7 +83,7 @@ public class EcoCard  implements EcoInterface, Serializable {
 	}
 	
 	public void upDate(EcoCard.Status status) {
-		AppDatabase db = App.getInstance().getDatabase();
+		AppDatabase db = App.getDatabase();
 		CardsDao cardsDao = db.cardsDao();
 		setStatus(status);
 		cardsDao.update(this);

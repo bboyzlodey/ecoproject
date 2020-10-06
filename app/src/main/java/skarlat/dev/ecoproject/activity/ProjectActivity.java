@@ -40,7 +40,7 @@ public class ProjectActivity extends AppCompatActivity {
 	}
 
 	private void postProgress(int progress) {
-		String strProgress = String.valueOf(progress) + " %";
+		String strProgress = progress + " %";
 		pbHorizontal.setProgress(progress);
 
 		if (progress == 0) {

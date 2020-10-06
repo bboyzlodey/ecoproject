@@ -48,7 +48,7 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
             drawable = BitmapDrawable(steam)
 //            drawable = Drawable.createFromPath(path)!!
         } catch (p: Exception){
-            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!;
+            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!
         }
         return drawable
     }
