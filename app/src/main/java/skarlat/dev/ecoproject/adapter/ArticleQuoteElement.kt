@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.quote_element.view.*
-import skarlat.dev.ecoproject.EJAdditionalBlocks
-import skarlat.dev.ecoproject.EJQuoteData
+import skarlat.dev.ecoproject.ArticleEcoTipsBlocks
+import skarlat.dev.ecoproject.ArticleQuoteData
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
@@ -23,7 +23,7 @@ class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<M
     }
 
     override fun isForViewType(items: MutableList<Any>, position: Int): Boolean {
-        return items[position] is EJCustomBlock && (items[position] as EJCustomBlock).type == EJAdditionalBlocks.QUOTE
+        return items[position] is EJCustomBlock && (items[position] as EJCustomBlock).type == ArticleEcoTipsBlocks.QUOTE
     }
 
     override fun onBindViewHolder(items: MutableList<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
@@ -45,7 +45,7 @@ class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<M
             this.quoteBlock = quoteBlock
 
             with(itemView) {
-                quoteText.text = (quoteBlock.data as EJQuoteData).text
+                quoteText.text = (quoteBlock.data as ArticleQuoteData).text
             }
         }
     }

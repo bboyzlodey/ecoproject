@@ -39,14 +39,23 @@
       }
     },
     {
-      "type" : "image",
-      "data" : {
-        "url" : "https://static.tildacdn.com/tild6366-6666-4765-b065-633965636536/logo.png"
-      },
-      "caption" : "Here could be some caption for this picture",
-      "withBorder" : false,
-      "stretched" : true,
-      "withBackground" : true
+      "type": "image",
+      "data": {
+        "file": {
+          "url": "https://static.tildacdn.com/tild6366-6666-4765-b065-633965636536/logo.png"
+        },
+        "caption": "Here could be some caption for this picture",
+        "withBorder": true,
+        "stretched": false,
+        "withBackground": true
+      }
+    },
+    {
+      "type": "article_image",
+      "data": {
+        "caption": "Новогиреевская солнечная электростанция",
+        "path": "images.lvl-1/lvl-1.png"
+      }
     },
     {
       "type" : "advice_link",

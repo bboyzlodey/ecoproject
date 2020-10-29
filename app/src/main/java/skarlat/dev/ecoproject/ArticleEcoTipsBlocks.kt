@@ -1,20 +1,21 @@
 package skarlat.dev.ecoproject
 
 import work.upstarts.editorjskit.models.EJAbstractBlockType
-import work.upstarts.editorjskit.models.EJBlockType
 
 /**
  * Enum class contains custom EJ blocks. Declare it this.
  */
-enum class EJAdditionalBlocks(override val jsonName: String) : EJAbstractBlockType {
+enum class ArticleEcoTipsBlocks(override val jsonName: String) : EJAbstractBlockType {
     QUOTE("quote"),
-    ADVICE_LINK("advice_link");
+    ADVICE_LINK("advice_link"),
+    ARTICLE_IMAGE("article_image");
 
     companion object {
-        fun fromString(jsonName: String): EJAdditionalBlocks {
+        fun fromString(jsonName: String): ArticleEcoTipsBlocks {
             return when (jsonName){
                 "quote" -> QUOTE
                 "advice_link" -> ADVICE_LINK
+                "article_image" -> ARTICLE_IMAGE
                 else -> throw IllegalArgumentException(jsonName)
             }
         }

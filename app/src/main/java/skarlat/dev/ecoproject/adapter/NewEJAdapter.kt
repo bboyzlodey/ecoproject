@@ -3,6 +3,7 @@ package skarlat.dev.ecoproject.adapter
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import skarlat.dev.ecoproject.ArticleImageElement
 import work.upstarts.editorjskit.EJKit
 import work.upstarts.editorjskit.models.EJBlock
 import work.upstarts.editorjskit.ui.EditorJsAdapter
@@ -27,6 +28,7 @@ class NewEJAdapter(style: EJStyle? = EJKit.ejStyle,
                 .addDelegate(RawHtmlAdapterDelegate(style))
                 .addDelegate(ArticleQuoteElement(style))
                 .addDelegate(AdviceLinkElement(style))
+                .addDelegate(ArticleImageElement(style))
     }
 
 }

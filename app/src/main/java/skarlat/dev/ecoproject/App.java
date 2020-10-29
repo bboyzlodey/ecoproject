@@ -35,8 +35,9 @@ public class App extends Application {
     }
 
     private void registerCustomBlocks() {
-        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJAdditionalBlocks.QUOTE, EJQuoteData.class));
-        EJKit.INSTANCE.register(new EJAbstractCustomBlock(EJAdditionalBlocks.ADVICE_LINK, EJAdviceLinkData.class));
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(ArticleEcoTipsBlocks.QUOTE, ArticleQuoteData.class));
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(ArticleEcoTipsBlocks.ADVICE_LINK, ArticleAdviceLinkData.class));
+        EJKit.INSTANCE.register(new EJAbstractCustomBlock(ArticleEcoTipsBlocks.ARTICLE_IMAGE, ArticleImageData.class));
     }
     public static App getInstance() {
         return instance;
