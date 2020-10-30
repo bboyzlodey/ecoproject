@@ -1,46 +1,36 @@
 package skarlat.dev.ecoproject.activity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import skarlat.dev.ecoproject.Const;
-import skarlat.dev.ecoproject.EcoCard;
-import skarlat.dev.ecoproject.EcoSoviet;
+import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
+import skarlat.dev.ecoproject.includes.dataclass.EcoSoviet;
 import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.adapter.DataAdapter;
 import skarlat.dev.ecoproject.databinding.ActivityEcoCardsBinding;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 //import skarlat.dev.ecoproject.activity.adapters;
 //import androidx.appcompat.widget.Toolbar;
 
-public class EcoCardActivity extends AppCompatActivity {
+public class CardActivity extends AppCompatActivity {
     public static String TAG = "EcoCardActivity";
     private RecyclerView recyclerView;
     private ScrollView scrollView;
@@ -74,7 +64,7 @@ public class EcoCardActivity extends AppCompatActivity {
         binding.whyItPossible.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent whyIntent = new Intent(EcoCardActivity.this, WhyActivity.class);
+                Intent whyIntent = new Intent(CardActivity.this, WhyActivity.class);
                 whyIntent.putExtra(Const.ARTICLE_JSON_PATH, ecoCard.courseNameID + "/" + ecoCard.cardNameID + ".json");
             }
         });

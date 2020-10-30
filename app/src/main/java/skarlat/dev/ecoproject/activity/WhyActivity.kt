@@ -1,7 +1,6 @@
 package skarlat.dev.ecoproject.activity
 
 import android.content.res.AssetManager
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -10,18 +9,17 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_why.*
 import skarlat.dev.ecoproject.Const.ARTICLE_JSON_PATH
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.adapter.NewEJAdapter
+import skarlat.dev.ecoproject.adapter.ArticleAdapter
 import work.upstarts.editorjskit.models.EJBlock
 import work.upstarts.editorjskit.models.HeadingLevel
-import work.upstarts.editorjskit.ui.EditorJsAdapter
 import work.upstarts.editorjskit.ui.theme.EJStyle
 import work.upstarts.gsonparser.EJDeserializer
 
 data class EJResponse(val blocks: List<EJBlock>)
 class WhyActivity : AppCompatActivity() {
 
-    private val rvAdapter: NewEJAdapter by lazy {
-        NewEJAdapter(EJStyle.builderWithDefaults(this.applicationContext)
+    private val rvAdapter: ArticleAdapter by lazy {
+        ArticleAdapter(EJStyle.builderWithDefaults(this.applicationContext)
 //                .paragraphTextSize(16)
 //                .paragraphTextColor(ContextCompat.getColor(this, R.color.paragraphTextColor))
 //                .paragraphMargin( , 0, 0, 20)

@@ -7,4 +7,5 @@ object Const {
     const val MIN_LENGTH_PASSWORD = 6
     const val RC_SIGN_IN_GOOGLE = 10
     const val ARTICLE_JSON_PATH = "ARTICLE_JSON_PATH"
+    const val TAG = "JEY-HO!"
 }

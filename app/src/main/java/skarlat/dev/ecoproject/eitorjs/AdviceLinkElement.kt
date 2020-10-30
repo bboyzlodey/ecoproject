@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.adapter
+package skarlat.dev.ecoproject.eitorjs
 
 import android.content.Intent
 import android.net.Uri
@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.element_advice_link.view.*
-import skarlat.dev.ecoproject.ArticleEcoTipsBlocks
-import skarlat.dev.ecoproject.ArticleAdviceLinkData
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock

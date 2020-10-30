@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject
+package skarlat.dev.ecoproject.eitorjs
 
 
 import android.graphics.Paint
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.article_image.view.*
 import kotlinx.android.synthetic.main.quote_element.view.*
+import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
 import work.upstarts.editorjskit.models.data.EJData

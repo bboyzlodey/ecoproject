@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	tools:context=".activity.EcoCardActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CardActivity">
 
-	<androidx.core.widget.NestedScrollView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
-<RelativeLayout
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-	<ImageView
-	android:id="@+id/card_picture"
-	android:layout_width="match_parent"
-	android:layout_height="300dp"
-	tools:src="@drawable/lvl_1_1_x2"
-	android:scaleType="centerCrop" />
-	<ImageButton
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_marginTop="24dp"
-		android:layout_marginRight="16dp"
-		android:adjustViewBounds="true"
-		android:background="@null"
-		android:onClick="onBackBtn"
-		android:scaleType="centerInside"
-		android:src="@drawable/ic_close" />
-</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-			<TextView
-				android:id="@+id/card_title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="16dp"
-				android:layout_marginRight="16dp"
-				android:layout_marginTop="16dp"
-				android:capitalize="sentences"
-				android:fontFamily="@font/bellota_bold"
-				android:textSize="32sp"
-				android:text="Проверь свои знания!" />
+                <ImageView
+                    android:id="@+id/card_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    tools:src="@drawable/lvl_1_1_x2"
+                    android:scaleType="centerCrop" />
 
-			<TextView
-				android:id="@+id/desription"
-				android:textSize="16sp"
-				android:textColor="@color/colorGray"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="16dp"
-				android:layout_marginTop="4dp"
-				android:layout_marginRight="16dp"
-				tools:text="Category" />
-			<Button
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/start_course"
-				android:textSize="20sp"
-				android:text="@string/complete_btn"
-				android:textColor="@color/colorWhite"
-				android:textAllCaps="true"
-				android:fontFamily="@font/roboto"
-				android:background="@drawable/begin_button"
-				android:layout_marginLeft="16dp"
-				android:layout_marginRight="16dp"
-				android:layout_marginTop="8dp"
-				android:layout_marginBottom="16dp"
-				android:onClick="onBackBtn"
-					/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="16dp"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:onClick="onBackBtn"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_close" />
+            </RelativeLayout>
 
-		</LinearLayout>
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:capitalize="sentences"
+                android:fontFamily="@font/bellota_bold"
+                android:textSize="32sp"
+                android:text="Проверь свои знания!" />
+
+            <TextView
+                android:id="@+id/desription"
+                android:textSize="16sp"
+                android:textColor="@color/colorGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="16dp"
+                tools:text="Category" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_course"
+                android:textSize="20sp"
+                android:text="@string/complete_btn"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:fontFamily="@font/roboto"
+                android:background="@drawable/begin_button"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:onClick="onBackBtn" />
+
+        </LinearLayout>
 
 
-	</androidx.core.widget.NestedScrollView>
-
+    </androidx.core.widget.NestedScrollView>
 
 
 </RelativeLayout>

@@ -13,43 +13,43 @@ import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
 public class ProgressBarView extends TextView {
-        // Максимальное значение шкалы
-        private int mMaxValue = 100;
+    // Максимальное значение шкалы
+    private int mMaxValue = 100;
 
-        // Конструкторы
-        public ProgressBarView(Context context, AttributeSet attrs, int defStyle) {
-            super(context, attrs, defStyle);
-        }
+    // Конструкторы
+    public ProgressBarView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-        public ProgressBarView(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
+    public ProgressBarView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-        public ProgressBarView(Context context) {
-            super(context);
-        }
+    public ProgressBarView(Context context) {
+        super(context);
+    }
 
-        // Установка максимального значения
-        public void setMaxValue(int maxValue) {
-            mMaxValue = maxValue;
-        }
+    // Установка максимального значения
+    public void setMaxValue(int maxValue) {
+        mMaxValue = maxValue;
+    }
 
-        // Установка значения
-        public synchronized void setValue(int value) {
-            // Установка новой надписи
+    // Установка значения
+    public synchronized void setValue(int value) {
+        // Установка новой надписи
 //            this.setText(String.valueOf(value));
 
-            // Drawable, отвечающий за фон
-            LayerDrawable background = (LayerDrawable) this.getBackground();
+        // Drawable, отвечающий за фон
+        LayerDrawable background = (LayerDrawable) this.getBackground();
 
-            // Достаём Clip, отвечающий за шкалу, по индексу 1
-            ClipDrawable barValue = (ClipDrawable) background.getDrawable(1);
+        // Достаём Clip, отвечающий за шкалу, по индексу 1
+        ClipDrawable barValue = (ClipDrawable) background.getDrawable(1);
 
-            // Устанавливаем уровень шкалы
-            int newClipLevel = value * 10000 / mMaxValue;
-            barValue.setLevel(newClipLevel);
+        // Устанавливаем уровень шкалы
+        int newClipLevel = value * 10000 / mMaxValue;
+        barValue.setLevel(newClipLevel);
 
-            // Уведомляем об изменении Drawable
-            drawableStateChanged();
-        }
+        // Уведомляем об изменении Drawable
+        drawableStateChanged();
+    }
 }

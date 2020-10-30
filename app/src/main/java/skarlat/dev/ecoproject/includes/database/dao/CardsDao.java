@@ -8,14 +8,15 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import skarlat.dev.ecoproject.EcoCard;
+import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
+
 /**
  * Подключение к базе данных
  *
  * @Interface CursCardDao - интерфейс с методами работы с базой данных
  * @methods Query - получение данных по заданным аргументам
- *          Insert - создание новой таблицы в базе данных
- *          Update - обновление данных существующей таблицы
+ * Insert - создание новой таблицы в базе данных
+ * Update - обновление данных существующей таблицы
  */
 @Dao
 public interface CardsDao {

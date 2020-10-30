@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject
+package skarlat.dev.ecoproject.eitorjs
 
 import work.upstarts.editorjskit.models.EJAbstractBlockType
 
@@ -12,7 +12,7 @@ enum class ArticleEcoTipsBlocks(override val jsonName: String) : EJAbstractBlock
 
     companion object {
         fun fromString(jsonName: String): ArticleEcoTipsBlocks {
-            return when (jsonName){
+            return when (jsonName) {
                 "quote" -> QUOTE
                 "advice_link" -> ADVICE_LINK
                 "article_image" -> ARTICLE_IMAGE

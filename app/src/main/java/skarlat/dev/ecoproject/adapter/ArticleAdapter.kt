@@ -3,15 +3,16 @@ package skarlat.dev.ecoproject.adapter
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import skarlat.dev.ecoproject.ArticleImageElement
+import skarlat.dev.ecoproject.eitorjs.AdviceLinkElement
+import skarlat.dev.ecoproject.eitorjs.ArticleImageElement
+import skarlat.dev.ecoproject.eitorjs.ArticleQuoteElement
 import work.upstarts.editorjskit.EJKit
 import work.upstarts.editorjskit.models.EJBlock
-import work.upstarts.editorjskit.ui.EditorJsAdapter
 import work.upstarts.editorjskit.ui.adapterdelegates.*
 import work.upstarts.editorjskit.ui.theme.EJStyle
 
-class NewEJAdapter(style: EJStyle? = EJKit.ejStyle,
-                   diffCallback: DiffUtil.ItemCallback<Any>? = null) : AsyncListDifferDelegationAdapter<Any>(diffCallback
+class ArticleAdapter(style: EJStyle? = EJKit.ejStyle,
+                     diffCallback: DiffUtil.ItemCallback<Any>? = null) : AsyncListDifferDelegationAdapter<Any>(diffCallback
         ?: DIFF_CALLBACK) {
     init {
         initDelegates(style)

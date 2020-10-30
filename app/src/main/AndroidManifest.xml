@@ -17,10 +17,10 @@
 		android:usesCleartextTraffic="true">
 		<activity android:name=".activity.WhyActivity"></activity>
 		<activity
-			android:name=".TestActivity"
+			android:name=".activity.TestActivity"
 			android:exported="true" />
 		<activity
-			android:name=".activity.RemindActivity"
+			android:name=".activity.RemindPasswordActivity"
 			android:exported="true" />
 		<activity
 			android:name=".activity.RegistrationActivity"
@@ -32,21 +32,14 @@
 			android:name=".activity.AuthActivity"
 			android:exported="true" />
 		<activity
-			android:name=".activity.EcoCardActivity"
-			android:exported="true"
-			android:parentActivityName=".activity.ProjectActivity">
-			<meta-data
-				android:name="android.support.PARENT_ACTIVITY"
-				android:value=".activity.ProjectActivity" />
+			android:name=".activity.CardActivity"
+			android:exported="true">
 		</activity>
-		<activity
-			android:name=".activity.ProjectActivity"
-			android:exported="true" />
 		<activity
 			android:name=".activity.HomeActivity"
 			android:exported="true" />
 		<activity
-			android:name=".activity.CourseCardActivity"
+			android:name=".activity.CourseActivity"
 			android:exported="true" />
 		<activity
 			android:name=".activity.MainActivity"

@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_margin="16dp"
-	android:orientation="vertical">
-	<TextView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		tools:text="Случается, что мы чисто физически не успеваем съесть еду.
-		Как можно её спасти?"
-		android:textSize="20sp"
-		android:id="@+id/question_text"/>
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/scrollView">
-		<androidx.recyclerview.widget.RecyclerView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/answers"
-			tools:listitem="@layout/question_check"
-			tools:itemCount="1"
-			android:layout_marginTop="16dp"
-			android:nestedScrollingEnabled="false"/>
-		<Button
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="Ответить"
-			android:textColor="@color/colorWhite"
-			android:textAllCaps="true"
-			android:layout_weight="0"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
 
-	</ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Случается, что мы чисто физически не успеваем съесть еду.
+		Как можно её спасти?"
+        android:textSize="20sp"
+        android:id="@+id/question_text" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/answers"
+            tools:listitem="@layout/question_check"
+            tools:itemCount="1"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ответить"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="true"
+            android:layout_weight="0" />
+
+    </ScrollView>
 
 </LinearLayout>

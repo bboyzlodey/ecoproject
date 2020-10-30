@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.adapter
+package skarlat.dev.ecoproject.eitorjs
 
 import android.graphics.Paint
 import android.view.View
@@ -6,14 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.quote_element.view.*
-import skarlat.dev.ecoproject.ArticleEcoTipsBlocks
-import skarlat.dev.ecoproject.ArticleQuoteData
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
 import work.upstarts.editorjskit.ui.theme.EJStyle
 
-class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<MutableList<Any>>() {
+class ArticleQuoteElement(private val theme: EJStyle? = null) : AdapterDelegate<MutableList<Any>>() {
 
     var items: MutableList<Any>? = null
 

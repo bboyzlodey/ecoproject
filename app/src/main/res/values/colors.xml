@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#6200EE</color>
-	<color name="colorPrimaryDark">#3700B3</color>
-	<color name="colorAccent">@color/colorBolotoButton</color>
-	<color name="colorGray">#989E9D</color>
-	<color name="colorBlack">#000000</color>
-	<color name="colorBlackTitle">#2D2823</color>
-	<color name="colorCardBG">#D5D5D5</color>
-	<color name="colorWhite">@android:color/white</color>
-	<color name="colorBolotoButton">#C89B50</color>
-	<color name="colorBolotoButtonDisabled">#40C89B50</color>
-	<color name="colorBolotoText">#BC8933</color>
-	<color name="backgroundForSoviet">#F8F2E8</color>
-	<color name="colorBrown">#C89B50</color>
-	<color name="colorCaptionText">#9D9997</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">@color/colorBolotoButton</color>
+    <color name="colorGray">#989E9D</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlackTitle">#2D2823</color>
+    <color name="colorCardBG">#D5D5D5</color>
+    <color name="colorWhite">@android:color/white</color>
+    <color name="colorBolotoButton">#C89B50</color>
+    <color name="colorBolotoButtonDisabled">#40C89B50</color>
+    <color name="colorBolotoText">#BC8933</color>
+    <color name="backgroundForSoviet">#F8F2E8</color>
+    <color name="colorBrown">#C89B50</color>
+    <color name="colorCaptionText">#9D9997</color>
 
-	<color name="selectedAnswer">#33bc9348</color>
-	<color name="unselectedAnswer">#0Dbc9348</color>
-	<color name="answerTextColor">#252723</color>
-	<color name="paragraphTextColor">#2D2823</color>
+    <color name="selectedAnswer">#33bc9348</color>
+    <color name="unselectedAnswer">#0Dbc9348</color>
+    <color name="answerTextColor">#252723</color>
+    <color name="paragraphTextColor">#2D2823</color>
 </resources>
