@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_why.*
+import skarlat.dev.ecoproject.Const.ARTICLE_JSON_PATH
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.adapter.NewEJAdapter
 import work.upstarts.editorjskit.models.EJBlock
@@ -15,8 +16,6 @@ import work.upstarts.editorjskit.models.HeadingLevel
 import work.upstarts.editorjskit.ui.EditorJsAdapter
 import work.upstarts.editorjskit.ui.theme.EJStyle
 import work.upstarts.gsonparser.EJDeserializer
-
-const val DATA_JSON_PATH = "why.json"
 
 data class EJResponse(val blocks: List<EJBlock>)
 class WhyActivity : AppCompatActivity() {
@@ -33,7 +32,7 @@ class WhyActivity : AppCompatActivity() {
 //                .headingTypefaceDetailed(Typeface.createFromAsset(assets, "fonts/bellota_bold.ttf"), HeadingLevel.h1)
 //                .headingTypefaceDetailed(Typeface.createFromAsset(assets, "fonts/bellota_bold.ttf"), HeadingLevel.h2)
 //                .paragraphTypeface(Typeface.createFromAsset(assets, "fonts/bellota_bold.ttf"))
-                .imageMargin(0 , 0, 0, 20)
+                .imageMargin(0, 0, 0, 20)
                 .build())
     }
     val blocksType = object : TypeToken<MutableList<EJBlock>>() {}.type
@@ -45,14 +44,17 @@ class WhyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_why)
 
-        val dummyData = readFileFromAssets(DATA_JSON_PATH, assets)
+        backButton.setOnClickListener { onBackPressed() }
+        val JsonDataPath = intent.extras?.getString(ARTICLE_JSON_PATH)
+        val dummyData = JsonDataPath?.let { readFileFromAssets(it, assets) }
         recyclerView.adapter = rvAdapter
         val ejResponse = gson.fromJson(dummyData, EJResponse::class.java)
         rvAdapter.items = ejResponse.blocks
     }
 
-    fun readFileFromAssets(fname: String, assetsManager: AssetManager) =
-            assetsManager.open(fname).readBytes().toString(Charsets.UTF_8)
+    fun readFileFromAssets(fname: String, assetsManager: AssetManager): String {
+        return assetsManager.open(fname).readBytes().toString(Charsets.UTF_8)
+    }
 
 
 }
