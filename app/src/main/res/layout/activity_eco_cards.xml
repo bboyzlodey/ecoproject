@@ -52,13 +52,14 @@
 
             <TextView
                 android:id="@+id/card_category"
-                style="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/roboto"
+                android:textColor="@color/colorCaptionText"
+                android:textSize="16sp"
                 tools:text="Category" />
 
             <skarlat.dev.ecoproject.customView.AdviceView
@@ -90,10 +91,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/card_why_const"
                         android:layout_marginTop="8dp"
-                        android:maxLines="2"
-                        android:text="..............."
-                        android:textSize="14sp"
-                        tools:text="card_why_shortDescription" />
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="3"
+                        android:maxLines="3"
+                        android:text="Электроэнергия — один из поставщиков загрязнителей в почву, воду и атмосферу. Такими загрязнителями чаще всего выступают продукты сгорания топлива (уголь, нефть, газ и тд.)."
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

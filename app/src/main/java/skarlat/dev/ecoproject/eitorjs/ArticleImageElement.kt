@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.article_image.view.*
-import kotlinx.android.synthetic.main.quote_element.view.*
+import kotlinx.android.synthetic.main.article_quote.view.*
 import skarlat.dev.ecoproject.App
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate

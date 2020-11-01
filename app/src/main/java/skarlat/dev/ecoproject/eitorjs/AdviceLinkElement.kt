@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.element_advice_link.view.*
+import kotlinx.android.synthetic.main.article_link.view.*
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
@@ -17,7 +17,7 @@ class AdviceLinkElement(private val theme: EJStyle? = null) : AdapterDelegate<Mu
     var items: MutableList<Any>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        val view = parent.inflate(R.layout.element_advice_link)
+        val view = parent.inflate(R.layout.article_link)
         return ViewHolder(view)
     }
 
