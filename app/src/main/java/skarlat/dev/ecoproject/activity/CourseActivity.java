@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,16 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.util.List;
 
-import skarlat.dev.ecoproject.Course;
-import skarlat.dev.ecoproject.EcoCard;
-import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
+import skarlat.dev.ecoproject.includes.dataclass.Course;
+import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter;
 import skarlat.dev.ecoproject.customView.ProgressBarView;
-import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
-import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
-public class CourseCardActivity extends AppCompatActivity {
+public class CourseActivity extends AppCompatActivity {
     private ProgressBarView progressBarView;
     private TextView leftCards;
     private TextView cursTitle;
@@ -59,8 +56,8 @@ public class CourseCardActivity extends AppCompatActivity {
         ecoCard = db.getAllCardsByCourseNameID(courseName);
 
         // получение ID по имени
-       // int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
-       // courseImgView.setBackgroundResource(drawableID);
+        // int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
+        // courseImgView.setBackgroundResource(drawableID);
         cursTitle.setText(currentCourse.getTitle());
         progress = currentCourse.getProgressBar();
         progress = db.getCourseByName(courseName).getProgressBar();
@@ -83,7 +80,7 @@ public class CourseCardActivity extends AppCompatActivity {
 //            startCourse.setText("Начать обучение");
 
 
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseCardActivity.this, ecoCard);
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard);
         binding.recycleCards.setAdapter(adapter);
         db.upDateIsCurrentCourse(courseName);
     }
@@ -114,7 +111,7 @@ public class CourseCardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void onBackBtn(View view){
+    public void onBackBtn(View view) {
         onBackPressed();
     }
 
@@ -126,27 +123,28 @@ public class CourseCardActivity extends AppCompatActivity {
 
     /**
      * View карточки обновляет базу данных при переходе
+     *
      * @param view
      */
     public void openCard(View view) {
         EcoCard currentCard = (EcoCard) view.getTag();
 
-        Intent intent = new Intent(this, EcoCardActivity.class);
+        Intent intent = new Intent(this, CardActivity.class);
         intent.putExtra(currentCard.getClass().getSimpleName(), currentCard);
         if (currentCard.getStatus() == EcoCard.Status.WATCHED) {
             startActivityForResult(intent, REQUST);
-        }else {
+        } else {
 
             for (int i = 0; i < ecoCard.size(); i++) {
                 if (ecoCard.get(i).getName() == currentCard.getName() && (i + 1) < ecoCard.size()) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
-                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
+                    db.updateFirebaseProgress("Cards", ecoCard.get(i + 1).getName(), "status", 1);
                     break;
                 }
             }
 
             currentCard.upDate(EcoCard.Status.WATCHED);
-            db.updateFirebaseProgress("Cards" ,currentCard.getName(), "status", 2);
+            db.updateFirebaseProgress("Cards", currentCard.getName(), "status", 2);
             upDateCurrentCourse();
 
             startActivityForResult(intent, REQUST);
@@ -156,44 +154,44 @@ public class CourseCardActivity extends AppCompatActivity {
     /**
      * Progress бар для базы данных
      */
-    private void upDateCurrentCourse(){
+    private void upDateCurrentCourse() {
 
-        double res =  100.00 / (double) ecoCard.size();
+        double res = 100.00 / (double) ecoCard.size();
         res = Math.ceil(res);
 
         progress += res;
-        if (progress >= 100){
+        if (progress >= 100) {
             currentCourse.upDate(progress, Course.Status.FINISHED);
-        }
-        else{
+        } else {
             currentCourse.upDate(progress, Course.Status.CURRENT);
         }
-        db.updateFirebaseProgress("Courses" ,currentCourse.getName(), "progress", progress);
+        db.updateFirebaseProgress("Courses", currentCourse.getName(), "progress", progress);
     }
 
     /**
      * Кнопка продолжить обучение
      * Обновляет базу данных при нажатии
+     *
      * @param view
      */
-    public void startBtn(View view){
+    public void startBtn(View view) {
         for (int i = 0; i < ecoCard.size(); i++) {
             EcoCard card = ecoCard.get(i);
             Enum status = card.getStatus();
-            if (status == EcoCard.Status.OPENED){
-                Intent intent = new Intent(this, EcoCardActivity.class);
+            if (status == EcoCard.Status.OPENED) {
+                Intent intent = new Intent(this, CardActivity.class);
 
-                intent.putExtra(card.getClass().getSimpleName(),card);
+                intent.putExtra(card.getClass().getSimpleName(), card);
 
                 upDateCurrentCourse();
 
                 if (i != ecoCard.size() - 1) {
                     ecoCard.get(i + 1).upDate(EcoCard.Status.OPENED);
-                    db.updateFirebaseProgress("Cards" ,ecoCard.get(i + 1).getName(), "status", 1);
+                    db.updateFirebaseProgress("Cards", ecoCard.get(i + 1).getName(), "status", 1);
                 }
                 card.upDate(EcoCard.Status.WATCHED);
-                db.updateFirebaseProgress("Cards" ,card.getName(), "status", 2);
-                startActivityForResult(intent,REQUST);
+                db.updateFirebaseProgress("Cards", card.getName(), "status", 2);
+                startActivityForResult(intent, REQUST);
                 break;
             }
         }

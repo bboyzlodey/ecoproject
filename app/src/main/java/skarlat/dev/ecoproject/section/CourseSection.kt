@@ -11,13 +11,13 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.Course
+import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.App
 import java.io.InputStream
 
 
-class CourseSection (val listCourses: List<Course>, val sectionName: String) : Section(SectionParameters.builder()
+class CourseSection(val listCourses: List<Course>, val sectionName: String) : Section(SectionParameters.builder()
         .itemResourceId(R.layout.card_course)
         .headerResourceId(R.layout.section_of_courses)
         .build()) {
@@ -31,15 +31,15 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
         courseHolder.header.text = listCourses[position].title
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
-        val imgDrawable : Drawable = getImageDrawableForCourse(getPathToImage(position))
+        val imgDrawable: Drawable = getImageDrawableForCourse(getPathToImage(position))
         courseHolder.imageCouse.setImageDrawable(imgDrawable)
     }
 
-    private fun getPathToImage(position: Int) : String{
+    private fun getPathToImage(position: Int): String {
         return Const.IMAGES_ROOT_FOLDER + listCourses[position].courseNameID + "/" + listCourses[position].courseNameID + ".png"
     }
 
-    private fun getImageDrawableForCourse(path: String) : Drawable{
+    private fun getImageDrawableForCourse(path: String): Drawable {
         val assetManager = App.instance.resources.assets
         var drawable: Drawable
 
@@ -47,8 +47,8 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
             val steam: InputStream = assetManager.open(path)
             drawable = BitmapDrawable(steam)
 //            drawable = Drawable.createFromPath(path)!!
-        } catch (p: Exception){
-            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!;
+        } catch (p: Exception) {
+            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!
         }
         return drawable
     }
@@ -83,7 +83,7 @@ class CourseSection (val listCourses: List<Course>, val sectionName: String) : S
         val header: TextView
         val smallDescriptiom: TextView
         val cardView: CardView
-        val imageCouse : ImageView
+        val imageCouse: ImageView
 
         init {
             header = view.findViewById<View>(R.id.current_title) as TextView

@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.adapter
+package skarlat.dev.ecoproject.eitorjs
 
 import android.graphics.Paint
 import android.view.View
@@ -6,18 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.quote_element.view.*
-import skarlat.dev.ecoproject.EJQuoteBlockType
-import skarlat.dev.ecoproject.EJQuoteData
 import skarlat.dev.ecoproject.R
-import work.upstarts.editorjskit.EJKit
 import work.upstarts.editorjskit.environment.inflate
-import work.upstarts.editorjskit.models.EJAbstractCustomBlock
-import work.upstarts.editorjskit.models.EJBlock
 import work.upstarts.editorjskit.models.EJCustomBlock
-import work.upstarts.editorjskit.models.EJHeaderBlock
 import work.upstarts.editorjskit.ui.theme.EJStyle
 
-class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<MutableList<Any>>() {
+class ArticleQuoteElement(private val theme: EJStyle? = null) : AdapterDelegate<MutableList<Any>>() {
 
     var items: MutableList<Any>? = null
 
@@ -27,7 +21,7 @@ class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<M
     }
 
     override fun isForViewType(items: MutableList<Any>, position: Int): Boolean {
-        return items[position] is EJCustomBlock && (items[position] as EJCustomBlock).type == EJQuoteBlockType.QUOTE
+        return items[position] is EJCustomBlock && (items[position] as EJCustomBlock).type == ArticleEcoTipsBlocks.QUOTE
     }
 
     override fun onBindViewHolder(items: MutableList<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
@@ -49,12 +43,8 @@ class ArticleQuoteElement(private val theme: EJStyle? = null): AdapterDelegate<M
             this.quoteBlock = quoteBlock
 
             with(itemView) {
-                quoteText.text = (quoteBlock.data as EJQuoteData).text
+                quoteText.text = (quoteBlock.data as ArticleQuoteData).text
             }
-
-//            applyHeaderTheme(view) { theme, paint ->
-//                theme.applyHeadingStyle(view, paint, headerBlock.data.level)
-//            }
         }
     }
 }

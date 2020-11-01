@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -9,13 +9,15 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import skarlat.dev.ecoproject.R;
+
 
 public class TestActivity extends AppCompatActivity {
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_test);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
 //		FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
 //				getSupportFragmentManager(), FragmentPagerItems.with(this)
 //						                             .add("2", PageFragment.class)
@@ -27,5 +29,5 @@ public class TestActivity extends AppCompatActivity {
 //
 //		SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 //		viewPagerTab.setViewPager(viewPager);
-	}
+    }
 }

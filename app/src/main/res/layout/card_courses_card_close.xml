@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    tools:context=".activity.CourseCardActivity"
+    tools:context=".activity.CourseActivity"
     android:orientation="vertical"
     android:background="@drawable/text_view_rounded">
 
@@ -18,7 +18,6 @@
         android:textSize="14sp"
         android:textAlignment="gravity"
         android:gravity="center"
-        android:background="@drawable/ic_close"
-        />
+        android:background="@drawable/ic_close" />
 
 </LinearLayout>

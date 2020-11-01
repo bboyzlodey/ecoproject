@@ -19,6 +19,16 @@
       "data" : {
         "text" : "Необходимо"
       }
+    },
+    {
+      "type" : "image",
+      "data" : {
+        "url" : "https://static.tildacdn.com/tild6366-6666-4765-b065-633965636536/logo.png"
+      },
+      "caption" : "Here could be some caption for this picture",
+      "withBorder" : false,
+      "stretched" : true,
+      "withBackground" : true
     }
   ],
   "version" : "2.12.3"

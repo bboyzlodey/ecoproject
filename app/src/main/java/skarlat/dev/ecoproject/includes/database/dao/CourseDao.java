@@ -8,28 +8,28 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import skarlat.dev.ecoproject.Course;
+import skarlat.dev.ecoproject.includes.dataclass.Course;
 
 /**
  * Подключение к базе данных
  *
  * @Interface CursCardDao - интерфейс с методами работы с базой данных
  * @methods Query - получение данных по заданным аргументам
- *          Insert - создание новой таблицы в базе данных
- *          Update - обновление данных существующей таблицы
+ * Insert - создание новой таблицы в базе данных
+ * Update - обновление данных существующей таблицы
  */
 @Dao
 public interface CourseDao {
 
     @Query("SELECT * FROM Course")
     List<Course> getAll();
-    
+
     @Query("SELECT * FROM Course WHERE isActive = 1")
     List<Course> getAllIsActive();
-    
+
     @Query("SELECT * FROM Course WHERE isActive = 0")
     List<Course> getAllNonActive();
-    
+
     @Query("SELECT * FROM Course WHERE isActive != 0 AND isActive != 1")
     List<Course> getAllFinished();
 

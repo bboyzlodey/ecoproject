@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject;
+package skarlat.dev.ecoproject.includes.dataclass;
 
 import android.content.res.AssetManager;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,6 +11,8 @@ import androidx.room.PrimaryKey;
 import java.io.IOException;
 import java.io.Serializable;
 
+import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CourseDao;
 
@@ -30,11 +32,11 @@ public class Course implements EcoInterface, Serializable {
     public int progressBar;
 
     public int isActive;
-    
-    public enum Status{
+
+    public enum Status {
         CLOSED,
         CURRENT,
-        FINISHED;
+        FINISHED
     }
 
     @Override
@@ -59,7 +61,7 @@ public class Course implements EcoInterface, Serializable {
 
     @Override
     public Enum getStatus() {
-        switch (isActive){
+        switch (isActive) {
             case 1:
                 return Status.CURRENT;
             case 2:
@@ -68,22 +70,22 @@ public class Course implements EcoInterface, Serializable {
                 return Status.CLOSED;
         }
     }
-    
+
     @Override
     public String getPathImage() {
         return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
     }
-    
-    public int getProgressBar(){
+
+    public int getProgressBar() {
         return this.progressBar;
     }
 
-    public void setProgressBar(int progress){
+    public void setProgressBar(int progress) {
         this.progressBar = progress;
     }
 
-    public void setStatus(Course.Status status){
-        switch (status){
+    public void setStatus(Course.Status status) {
+        switch (status) {
             case CURRENT:
                 this.isActive = 1;
                 break;
@@ -96,25 +98,25 @@ public class Course implements EcoInterface, Serializable {
         }
     }
 
-    public void upDate(int progressBar, Course.Status status){
-        AppDatabase db = App.getInstance().getDatabase();
+    public void upDate(int progressBar, Course.Status status) {
+        AppDatabase db = App.getDatabase();
         CourseDao coursesDao = db.courseDao();
         setProgressBar(progressBar);
         setStatus(status);
         coursesDao.update(this);
     }
-    
-    public Drawable getImage(){
+
+    public Drawable getImage() {
         Drawable drawable = new BitmapDrawable(fullPathToImage());
         return drawable;
     }
-    
+
     public Drawable getImage(AssetManager manager) throws IOException {
         Drawable drawable = new BitmapDrawable(manager.open(fullPathToImage()));
         return drawable;
     }
-    
-    private String fullPathToImage(){
+
+    private String fullPathToImage() {
         return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
     }
 }
