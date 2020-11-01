@@ -66,6 +66,7 @@ public class CardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent whyIntent = new Intent(CardActivity.this, WhyActivity.class);
                 whyIntent.putExtra(Const.ARTICLE_JSON_PATH, ecoCard.courseNameID + "/" + ecoCard.cardNameID + ".json");
+                startActivity(whyIntent);
             }
         });
         TextView textView = findViewById(R.id.card_title);
