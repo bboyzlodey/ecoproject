@@ -80,7 +80,8 @@ public class CourseActivity extends AppCompatActivity {
 //            startCourse.setText("Начать обучение");
 
 
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard);
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard, this::openCard);
+        // TODO Add item decoration
         binding.recycleCards.setAdapter(adapter);
         db.upDateIsCurrentCourse(courseName);
     }
@@ -126,7 +127,7 @@ public class CourseActivity extends AppCompatActivity {
      *
      * @param view
      */
-    public void openCard(View view) {
+    public Void openCard(View view) {
         EcoCard currentCard = (EcoCard) view.getTag();
 
         Intent intent = new Intent(this, CardActivity.class);
@@ -149,6 +150,7 @@ public class CourseActivity extends AppCompatActivity {
 
             startActivityForResult(intent, REQUST);
         }
+        return null;
     }
 
     /**
