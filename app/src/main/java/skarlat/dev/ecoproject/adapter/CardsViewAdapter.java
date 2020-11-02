@@ -76,7 +76,7 @@ public class CardsViewAdapter extends RecyclerView.Adapter<CardsViewAdapter.View
                 drawable.setColorFilter(Color.rgb(248, 242, 232), PorterDuff.Mode.SRC_OVER);
                 holder.countOpenCard.setVisibility(View.VISIBLE);
                 holder.countOpenCard.setText(String.valueOf(position + 1));
-                holder.cardClose.setVisibility(View.GONE);
+                holder.cardClose.setBackgroundResource(R.drawable.ic_lock);
                 break;
             default:
                 break;
