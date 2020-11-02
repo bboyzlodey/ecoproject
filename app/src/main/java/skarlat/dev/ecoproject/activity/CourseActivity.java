@@ -66,7 +66,7 @@ public class CourseActivity extends AppCompatActivity {
         courseDesc.setText(currentCourse.getFullDescription());
 
         try {
-            binding.courseAvatar.setImageDrawable(currentCourse.getImage(getAssets()));
+            binding.courseAvatar.setImageDrawable(currentCourse.getBarImage(getAssets()));
         } catch (IOException e) {
             e.printStackTrace();
         }
