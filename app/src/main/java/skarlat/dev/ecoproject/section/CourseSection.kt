@@ -14,6 +14,7 @@ import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.setImageFromAssets
 import java.io.InputStream
 
 
@@ -31,8 +32,8 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
         courseHolder.header.text = listCourses[position].title
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
-        val imgDrawable: Drawable = listCourses[position].getItemCardImage(App.instance.resources.assets)
-        courseHolder.imageCouse.setImageDrawable(imgDrawable)
+
+        courseHolder.imageCouse.setImageFromAssets(App.instance.assets, listCourses[position].pathItemCardImage())
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {

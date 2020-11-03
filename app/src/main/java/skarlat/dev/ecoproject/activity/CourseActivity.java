@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.util.List;
 
+import skarlat.dev.ecoproject.ExtendedFunctionsKt;
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
 import skarlat.dev.ecoproject.includes.dataclass.Course;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
@@ -65,11 +66,7 @@ public class CourseActivity extends AppCompatActivity {
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
 
-        try {
-            binding.courseAvatar.setImageDrawable(currentCourse.getBarImage(getAssets()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ExtendedFunctionsKt.setImageFromAssets(binding.courseAvatar, getAssets(), currentCourse.pathBarImage());
 
 //        if ( progress > 0  && progress < 100)
 //            startCourse.setText("Продолжить обучение");
