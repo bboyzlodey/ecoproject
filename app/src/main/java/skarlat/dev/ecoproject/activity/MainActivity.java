@@ -21,13 +21,11 @@ public class MainActivity extends AppCompatActivity{
 	static final private int PROGRESS_BAR = 0;
 	private final String TAG = "MainActivity";
 	private ActivityMainBinding binding;
-	
 	@SuppressLint("StaticFieldLeak")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
-
 		// new feature
 		Intent intent = new Intent(); // удалить
 //		intent.setClass(this, WhyActivity.class);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
 			}
 		}.execute();
 	}
-	
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

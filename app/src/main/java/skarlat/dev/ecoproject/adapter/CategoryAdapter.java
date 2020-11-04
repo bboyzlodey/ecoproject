@@ -1,8 +1,6 @@
 package skarlat.dev.ecoproject.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +13,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import skarlat.dev.ecoproject.EcoCard;
-import skarlat.dev.ecoproject.EcoSoviet;
 import skarlat.dev.ecoproject.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
@@ -71,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 			totalProgress = (TextView) view.findViewById(R.id.progress_category);
 			category = (TextView) view.findViewById(R.id.title_category);
 			cardView = (CardView) view.findViewById(R.id.current_category);
-			imageView = (ImageView) view.findViewById(R.id.image);
+			imageView = (ImageView) view.findViewById(R.id.tab_image);
 		}
 	}
 	

@@ -16,7 +16,7 @@
 			android:layout_height="match_parent"
 			tools:src="@drawable/lvl_1_1"
 			android:scaleType="centerCrop"
-			android:id="@+id/image"/>
+			android:id="@+id/tab_image"/>
 	</androidx.cardview.widget.CardView>
 	<TextView
 		android:layout_width="wrap_content"
