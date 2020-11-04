@@ -1,34 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TestActivity">
+    android:orientation="vertical"
+    tools:context=".TestActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/colorBolotoButton"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/textViewToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="120dp"
+            android:fontFamily="@font/bellota_bold"
+            android:gravity="center_vertical"
+            android:text="Проверим знания!"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24dp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="16dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_width="match_parent"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabMaxWidth="40dp"
-        app:tabMinWidth="32dp"
-        app:tabIndicator="@drawable/circle"
-        app:tabIndicatorColor="@color/colorBolotoButton"
-        app:tabIndicatorHeight="32dp"
-        android:clipToPadding="true"
-        app:tabSelectedTextColor="@color/colorWhite"
-        android:clickable="false">
 
-        <com.google.android.material.tabs.TabItem
-            android:text="3"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:clickable="false" />
+
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:clickable="false"
+        app:tabMaxWidth="0dp"
+            app:tabUnboundedRipple="true"
+            app:tabIndicatorColor="@color/colorBolotoButton"
+
+    >
+
+<!--        android:layout_gravity="center_horizontal"-->
+
+        <!--        android:fillViewport="false"-->
+
+        <!--        android:minHeight="60dp"-->
+        <!--        app:tabGravity="center"-->
+        <!--        app:tabIndicator="@drawable/circle"-->
+        <!--        app:tabIndicatorColor="@color/colorBolotoButton"-->
+        <!--        app:tabIndicatorGravity="center"-->
+        <!--        app:tabIndicatorHeight="35dp"-->
+        <!--        app:tabMinWidth="41dp"-->
+        <!--        app:tabMode="fixed"-->
+        <!--        app:tabSelectedTextColor="@color/colorWhite"-->
+        <!--        app:tabTextAppearance="@style/CustomTabText"-->
+        <!--        app:tabTextColor="@color/colorBlack"-->
+
+        <!--                <com.google.android.material.tabs.TabItem-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:layout_margin="30dp"-->
+        <!--                    android:clickable="false"-->
+        <!--                    android:padding="30dp"-->
+
+        <!--                    />-->
 
     </com.google.android.material.tabs.TabLayout>
 
-</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/quizViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+
+        />
+
+
+</LinearLayout>
+
