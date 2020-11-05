@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TestActivity">
+    tools:context=".activity.QuizActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -41,12 +41,14 @@
         android:layout_margin="10dp"
         android:clickable="false"
         app:tabMaxWidth="0dp"
-            app:tabUnboundedRipple="true"
-            app:tabIndicatorColor="@color/colorBolotoButton"
+        app:tabIndicatorColor="@color/colorBolotoButton"
+        app:tabUnboundedRipple="true"
 
-    >
-
-<!--        android:layout_gravity="center_horizontal"-->
+        >
+        <!-- Закоменченый код ниже был в TabLazout, не получилось сделать через xml отображение панели -->
+        <!--        с выбором номера теста, посколькку tablayout то сжимается то растяиваеся и -->
+        <!--        настроить та как в ТЗ нельзя поэтому было решено пробовать через кастомное view-->
+        <!--        android:layout_gravity="center_horizontal"-->
 
         <!--        android:fillViewport="false"-->
 
