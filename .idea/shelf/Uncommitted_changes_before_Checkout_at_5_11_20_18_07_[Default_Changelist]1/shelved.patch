@@ -1,0 +1,127 @@
+Index: app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n\n\t<!-- Base application theme. -->\n\t<style name=\"AppTheme\" parent=\"Theme.AppCompat.Light.NoActionBar\">\n\t\t<!-- Customize your theme here. -->\n\t\t<item name=\"colorButtonNormal\">@color/colorBolotoButton</item>\n\t\t<item name=\"android:statusBarColor\">@color/colorBlack</item>\n\t\t<item name=\"tabIndicatorColor\">@color/colorWhite</item>\n\t\t<item name=\"android:textAllCaps\">false</item>\n\t\t<item name=\"android:textColor\">@color/colorBlack</item>\n\t\t<item name=\"android:fontFamily\">@font/roboto</item>\n\t\t<item name=\"android:textCursorDrawable\">@drawable/cursor_boloto</item>\n\t</style>\n\n\t<style name=\"titleTextAppearance\" parent=\"@style/Widget.AppCompat.TextView\">\n\t\t<item name=\"android:gravity\">center_horizontal|bottom</item>\n\t\t<item name=\"android:layout_width\">match_parent</item>\n\t\t<item name=\"android:layout_gravity\">center</item>\n\t\t<item name=\"android:textAlignment\">center</item>\n\t</style>\n\n\t<style name=\"Home\" parent=\"Widget.AppCompat.ButtonBar\">\n\t\t<item name=\"background\">@color/colorWhite</item>\n\t</style>\n\n\t<style name=\"nameOfSoviet\" parent=\"@style/Widget.AppCompat.TextView\">\n\t\t<item name=\"android:textSize\">20sp</item>\n\t\t<item name=\"android:textColor\">#252723</item>\n\t\t<item name=\"android:textStyle\">bold</item>\n\t</style>\n\n\t<style name=\"FullscreenCustom\" parent=\"Theme.AppCompat.Light.NoActionBar\">\n\t\t<item name=\"android:windowFullscreen\">true</item>\n\t\t<item name=\"android:windowContentOverlay\">@null</item>\n\t</style>\n\n\n\t<style name=\"MyCustomTabLayout\" parent=\"Widget.Design.TabLayout\">\n\t\t<item name=\"tabIndicatorColor\">#0000FF</item>\n\t</style>\n\n\t<style name=\"Theme.App\" parent=\"Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense\">\n\t\t...\n\t\t<item name=\"colorPrimary\">@color/colorGray</item>\n\t\t<!--\t\t<item name=\"colorOnSurface\">@color/shrine_pink_900</item>-->\n\t\t<!--\t\t<item name=\"colorError\">@color/shrine_red</item>-->\n\t\t<!--\t\t<item name=\"textAppearanceSubtitle1\">@style/TextAppearance.App.Subtitle1</item>-->\n\t\t<!--\t\t<item name=\"textAppearanceCaption\">@style/TextAppearance.App.Caption</item>-->\n\t</style>\n\n\t<style name=\"AppTheme.NoActionBar\">\n\t\t<item name=\"windowActionBar\">false</item>\n\t\t<item name=\"windowNoTitle\">true</item>\n\t</style>\n\n\t<style name=\"AppTheme.AppBarOverlay\" parent=\"ThemeOverlay.AppCompat.Dark.ActionBar\" />\n\n\t<style name=\"AppTheme.PopupOverlay\" parent=\"ThemeOverlay.AppCompat.Light\" />\n\n\t<style name=\"CustomTabText\" parent=\"TextAppearance.Design.Tab\">\n\t\t<item name=\"android:textSize\">17dp</item>\n\n\t\t<item name=\"android:fontFamily\">@font/sf_font_pro</item>\n\n\t</style>\n\n\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/styles.xml	(revision 6e3d974f6d14f511b9699ac026e8b6cbe78afb19)
++++ app/src/main/res/values/styles.xml	(date 1604596026000)
+@@ -1,61 +1,71 @@
+ <resources>
+ 
+-	<!-- Base application theme. -->
+-	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+-		<!-- Customize your theme here. -->
+-		<item name="colorButtonNormal">@color/colorBolotoButton</item>
+-		<item name="android:statusBarColor">@color/colorBlack</item>
+-		<item name="tabIndicatorColor">@color/colorWhite</item>
+-		<item name="android:textAllCaps">false</item>
+-		<item name="android:textColor">@color/colorBlack</item>
+-		<item name="android:fontFamily">@font/roboto</item>
+-		<item name="android:textCursorDrawable">@drawable/cursor_boloto</item>
+-	</style>
++    <!-- Base application theme. -->
++    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
++        <!-- Customize your theme here. -->
++        <item name="colorButtonNormal">@color/colorBolotoButton</item>
++        <item name="android:statusBarColor">@color/colorBlack</item>
++        <item name="tabIndicatorColor">@color/colorWhite</item>
++        <item name="android:textAllCaps">false</item>
++        <item name="android:textColor">@color/colorBlack</item>
++        <item name="android:fontFamily">@font/roboto</item>
++        <item name="android:textCursorDrawable">@drawable/cursor_boloto</item>
++    </style>
+ 
+-	<style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">
+-		<item name="android:gravity">center_horizontal|bottom</item>
+-		<item name="android:layout_width">match_parent</item>
+-		<item name="android:layout_gravity">center</item>
+-		<item name="android:textAlignment">center</item>
+-	</style>
++    <style name="HeaderText" parent="@android:style/TextAppearance">
++        <item name="android:textColor">@color/colorPrimary</item>
++        <item name="fontFamily">@font/bellota_bold</item>
++    </style>
++
++    <style name="ParagraphText" parent="@android:style/TextAppearance">
++        <item name="android:textColor">@color/delimeter_color</item>
++        <item name="android:paddingStart">16dp</item>
++    </style>
++
++    <style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">
++        <item name="android:gravity">center_horizontal|bottom</item>
++        <item name="android:layout_width">match_parent</item>
++        <item name="android:layout_gravity">center</item>
++        <item name="android:textAlignment">center</item>
++    </style>
+ 
+-	<style name="Home" parent="Widget.AppCompat.ButtonBar">
+-		<item name="background">@color/colorWhite</item>
+-	</style>
++    <style name="Home" parent="Widget.AppCompat.ButtonBar">
++        <item name="background">@color/colorWhite</item>
++    </style>
+ 
+-	<style name="nameOfSoviet" parent="@style/Widget.AppCompat.TextView">
+-		<item name="android:textSize">20sp</item>
+-		<item name="android:textColor">#252723</item>
+-		<item name="android:textStyle">bold</item>
+-	</style>
++    <style name="nameOfSoviet" parent="@style/Widget.AppCompat.TextView">
++        <item name="android:textSize">20sp</item>
++        <item name="android:textColor">#252723</item>
++        <item name="android:textStyle">bold</item>
++    </style>
+ 
+-	<style name="FullscreenCustom" parent="Theme.AppCompat.Light.NoActionBar">
+-		<item name="android:windowFullscreen">true</item>
+-		<item name="android:windowContentOverlay">@null</item>
+-	</style>
++    <style name="FullscreenCustom" parent="Theme.AppCompat.Light.NoActionBar">
++        <item name="android:windowFullscreen">true</item>
++        <item name="android:windowContentOverlay">@null</item>
++    </style>
+ 
+ 
+-	<style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+-		<item name="tabIndicatorColor">#0000FF</item>
+-	</style>
++    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
++        <item name="tabIndicatorColor">#0000FF</item>
++    </style>
+ 
+-	<style name="Theme.App" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+-		...
+-		<item name="colorPrimary">@color/colorGray</item>
+-		<!--		<item name="colorOnSurface">@color/shrine_pink_900</item>-->
+-		<!--		<item name="colorError">@color/shrine_red</item>-->
+-		<!--		<item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>-->
+-		<!--		<item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>-->
+-	</style>
++    <style name="Theme.App" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
++        ...
++        <item name="colorPrimary">@color/colorGray</item>
++        <!--		<item name="colorOnSurface">@color/shrine_pink_900</item>-->
++        <!--		<item name="colorError">@color/shrine_red</item>-->
++        <!--		<item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>-->
++        <!--		<item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>-->
++    </style>
+ 
+-	<style name="AppTheme.NoActionBar">
+-		<item name="windowActionBar">false</item>
+-		<item name="windowNoTitle">true</item>
+-	</style>
++    <style name="AppTheme.NoActionBar">
++        <item name="windowActionBar">false</item>
++        <item name="windowNoTitle">true</item>
++    </style>
+ 
+-	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
++    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+ 
+-	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
++    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+ 
+ 	<style name="CustomTabText" parent="TextAppearance.Design.Tab">
+ 		<item name="android:textSize">17dp</item>
