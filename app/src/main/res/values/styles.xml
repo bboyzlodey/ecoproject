@@ -83,4 +83,12 @@
 	</style>
 
 
+	<style name="CustomTabText" parent="TextAppearance.Design.Tab">
+		<item name="android:textSize">17dp</item>
+
+		<item name="android:fontFamily">@font/sf_font_pro</item>
+
+	</style>
+
+
 </resources>
