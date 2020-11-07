@@ -39,7 +39,7 @@ class CardsViewAdapter(private val context: Context?, private val card: List<Eco
         } else {
             holder.cardView.setCardBackgroundColor(when (status) {
                 EcoCard.Status.CLOSED -> context?.let { ContextCompat.getColor(it, R.color.colorGray) }!!
-                else -> context?.let { ContextCompat.getColor(it, R.color.colorPrimaryDark) }!!
+                else -> context?.let { ContextCompat.getColor(it, R.color.cardOpenedBG) }!!
             })
             holder.statusIcon.setImageResource(if (status == EcoCard.Status.OPENED) R.drawable.ic_play else R.drawable.ic_lock)
         }
