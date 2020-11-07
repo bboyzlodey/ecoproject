@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.show
+import skarlat.dev.ecoproject.visible
 
 
 class CardsViewAdapter(private val context: Context?, private val card: List<EcoCard>, private val cardClickListener: (View) -> Void) : RecyclerView.Adapter<CardsViewAdapter.ViewHolder>() {
@@ -32,6 +33,7 @@ class CardsViewAdapter(private val context: Context?, private val card: List<Eco
         holder.description.show(finished)
         holder.title.show(finished)
         holder.statusIcon.show(!finished)
+        holder.numberIcon.visible(finished)
         if (finished) {
             holder.title.text = ecoCard.title
             holder.description.text = ecoCard.description
