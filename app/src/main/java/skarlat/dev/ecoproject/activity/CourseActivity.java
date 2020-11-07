@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 import skarlat.dev.ecoproject.ConnectionDecorator;
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.ExtendedFunctionsKt;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
@@ -43,31 +44,9 @@ public class CourseActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCourseCardBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
 
-        Bundle tagView = getIntent().getExtras();
-
-        currentCourse = db.getCourseByName(tagView.get("OPEN_COURSE").toString());
-        courseName = currentCourse.getName();
-
-        cursTitle = binding.cursTitle;
-        progressBarView = binding.pbHorizontal;
-        leftCards = binding.leftCards;
-        courseDesc = binding.courseDesc;
-
-        ecoCard = db.getAllCardsByCourseNameID(courseName);
-
-        // получение ID по имени
-        // int drawableID = this.getResources().getIdentifier(imgCourse, "drawable", getPackageName());
-        // courseImgView.setBackgroundResource(drawableID);
-        cursTitle.setText(currentCourse.getTitle());
-        progress = currentCourse.getProgressBar();
-        progress = db.getCourseByName(courseName).getProgressBar();
-        progressBarView.setValue(progress);
-        leftCards.setText(db.getLeftCards(courseName));
-        courseDesc.setText(currentCourse.getFullDescription());
-
+        updateData();
         ExtendedFunctionsKt.setImageFromAssets(binding.courseAvatar, getAssets(), currentCourse.pathBarImage());
 
 //        if ( progress > 0  && progress < 100)
@@ -78,12 +57,6 @@ public class CourseActivity extends AppCompatActivity {
 //        else
 //            startCourse.setText("Начать обучение");
 
-
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard, this::openCard);
-        // TODO Add item decoration
-        binding.recycleCards.setAdapter(adapter);
-        binding.recycleCards.addItemDecoration(new ConnectionDecorator(0, 0, R.color.colorAccent, getResources().getDrawable(R.drawable.card_divider)));
-        db.upDateIsCurrentCourse(courseName);
     }
 
 
@@ -95,6 +68,11 @@ public class CourseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // TODO("LOGIC FOR CLOSE CARD")
+        if (requestCode == Const.CARD_OPENED) {
+            if (resultCode == Const.CARD_ACTIVITY_OK) {
+                updateData();
+            }
+        }
 //        progress = currentCourse.getProgressBar();
 //        progressBarView.setValue(progress);
 //        leftCards.setText(db.getLeftCards(courseName));
@@ -197,5 +175,27 @@ public class CourseActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    public void updateData() {
+        Bundle tagView = getIntent().getExtras();
+
+        currentCourse = db.getCourseByName(tagView.get("OPEN_COURSE").toString());
+        courseName = currentCourse.getName();
+        cursTitle = binding.cursTitle;
+        progressBarView = binding.pbHorizontal;
+        leftCards = binding.leftCards;
+        courseDesc = binding.courseDesc;
+        ecoCard = db.getAllCardsByCourseNameID(courseName);
+        cursTitle.setText(currentCourse.getTitle());
+        progress = currentCourse.getProgressBar();
+        progress = db.getCourseByName(courseName).getProgressBar();
+        progressBarView.setValue(progress);
+        leftCards.setText(db.getLeftCards(courseName));
+        courseDesc.setText(currentCourse.getFullDescription());
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard, this::openCard);
+        binding.recycleCards.setAdapter(adapter);
+        binding.recycleCards.addItemDecoration(new ConnectionDecorator(0, 0, R.color.colorAccent, getResources().getDrawable(R.drawable.card_divider)));
+        db.upDateIsCurrentCourse(courseName);
     }
 }
