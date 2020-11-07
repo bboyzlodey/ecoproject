@@ -65,11 +65,11 @@
       }
     },
     {
+      "type": "advice_image",
       "data": {
         "caption": "Расход воды с аэратором и без него",
         "path": "lvl-1/save_water/save_water_picture_1.png"
-      },
-      "type": "advice_image"
+      }
     },
     {
       "type": "paragraph",
@@ -78,11 +78,11 @@
       }
     },
     {
+      "type": "article_image",
       "data": {
         "caption": "Расход воды на мытье посуды в литрах",
         "path": "lvl-1/save_watter/save_water_picture_2.png"
-      },
-      "type": "advice_image"
+      }
     },
     {
       "type": "paragraph",
