@@ -4,14 +4,16 @@ package skarlat.dev.ecoproject.eitorjs
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.article_image.view.*
-import kotlinx.android.synthetic.main.quote_element.view.*
+import kotlinx.android.synthetic.main.article_quote.view.*
 import skarlat.dev.ecoproject.App
 import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.show
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
 import work.upstarts.editorjskit.models.data.EJData
@@ -51,8 +53,13 @@ class ArticleImageElement(private val theme: EJStyle? = null) : AdapterDelegate<
 
             with(itemView) {
                 if (data is ArticleImageData) {
-                    caption.text = (data as ArticleImageData).caption
-                    imageView.setImageDrawable(getImageDrawable((data as ArticleImageData).path))
+                    val imageData = data as ArticleImageData
+                    caption.text = imageData.caption
+                    caption.show(imageData.caption.isNotEmpty())
+                    imageView.setImageDrawable(when {
+                        (imageData.path.isNotEmpty()) -> getImageDrawable(imageData.path)
+                        else -> resources.getDrawable(R.drawable.lvl_1, null)
+                    })
                 }
             }
         }
@@ -61,12 +68,12 @@ class ArticleImageElement(private val theme: EJStyle? = null) : AdapterDelegate<
             val assetManager = App.instance.resources.assets
             var drawable: Drawable
 
-            try {
+            drawable = try {
                 val steam: InputStream = assetManager.open(path)
-                drawable = BitmapDrawable(steam)
-//            drawable = Drawable.createFromPath(path)!!
-            } catch (p: Exception) {
-                drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!
+                BitmapDrawable(steam)
+            } catch (error: Exception) {
+                error.printStackTrace()
+                App.instance.getDrawable(R.drawable.lvl_1_1)!!
             }
             return drawable
         }

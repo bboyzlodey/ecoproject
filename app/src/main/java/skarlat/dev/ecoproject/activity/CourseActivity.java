@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.util.List;
 
+import skarlat.dev.ecoproject.ConnectionDecorator;
+import skarlat.dev.ecoproject.ExtendedFunctionsKt;
+import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
 import skarlat.dev.ecoproject.includes.dataclass.Course;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
@@ -65,11 +68,7 @@ public class CourseActivity extends AppCompatActivity {
         leftCards.setText(db.getLeftCards(courseName));
         courseDesc.setText(currentCourse.getFullDescription());
 
-        try {
-            binding.courseAvatar.setImageDrawable(currentCourse.getImage(getAssets()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ExtendedFunctionsKt.setImageFromAssets(binding.courseAvatar, getAssets(), currentCourse.pathBarImage());
 
 //        if ( progress > 0  && progress < 100)
 //            startCourse.setText("Продолжить обучение");
@@ -80,8 +79,10 @@ public class CourseActivity extends AppCompatActivity {
 //            startCourse.setText("Начать обучение");
 
 
-        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard);
+        CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard, this::openCard);
+        // TODO Add item decoration
         binding.recycleCards.setAdapter(adapter);
+        binding.recycleCards.addItemDecoration(new ConnectionDecorator(0, 0, R.color.colorAccent, getResources().getDrawable(R.drawable.card_divider)));
         db.upDateIsCurrentCourse(courseName);
     }
 
@@ -126,7 +127,7 @@ public class CourseActivity extends AppCompatActivity {
      *
      * @param view
      */
-    public void openCard(View view) {
+    public Void openCard(View view) {
         EcoCard currentCard = (EcoCard) view.getTag();
 
         Intent intent = new Intent(this, CardActivity.class);
@@ -149,6 +150,7 @@ public class CourseActivity extends AppCompatActivity {
 
             startActivityForResult(intent, REQUST);
         }
+        return null;
     }
 
     /**

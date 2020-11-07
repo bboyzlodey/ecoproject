@@ -23,8 +23,8 @@
                     android:id="@+id/card_picture"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    tools:src="@drawable/lvl_1_1_x2"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/lvl_1_1" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -44,39 +44,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
                 android:capitalize="sentences"
                 android:fontFamily="@font/bellota_bold"
-                android:textSize="32sp"
-                android:text="Проверь свои знания!" />
+                android:text="Проверь свои знания!"
+                android:textSize="32sp" />
 
             <TextView
                 android:id="@+id/desription"
-                android:textSize="16sp"
-                android:textColor="@color/colorGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="16dp"
+                android:textColor="@color/colorGray"
+                android:textSize="16sp"
                 tools:text="Category" />
 
             <Button
+                android:id="@+id/start_course"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/start_course"
-                android:textSize="20sp"
-                android:text="@string/complete_btn"
-                android:textColor="@color/colorWhite"
-                android:textAllCaps="true"
-                android:fontFamily="@font/roboto"
-                android:background="@drawable/begin_button"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="onBackBtn" />
+                android:background="@drawable/begin_button"
+                android:fontFamily="@font/roboto"
+                android:onClick="onBackBtn"
+                android:text="@string/begin"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
