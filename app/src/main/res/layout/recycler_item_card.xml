@@ -10,7 +10,8 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:cardBackgroundColor="@color/colorPrimaryDark">
+        app:cardCornerRadius="12dp"
+        tools:cardBackgroundColor="@color/cardOpenedBG">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,18 +25,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_card_number" />
+                android:src="@drawable/ic_card_number" />
 
             <!--            TODO chain-->
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:fontFamily="@font/bellota_bold"
                 android:textColor="@color/answerTextColor"
                 android:textSize="18sp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/number"
                 app:layout_constraintTop_toBottomOf="@id/description"
                 app:layout_constraintTop_toTopOf="@id/number"
@@ -46,7 +49,6 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/title_card"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/sf_font_pro"
@@ -55,6 +57,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/number"
                 app:layout_constraintStart_toEndOf="@id/number"
                 app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintVertical_bias="0"
                 tools:text="@string/description"
                 tools:visibility="visible" />
 
