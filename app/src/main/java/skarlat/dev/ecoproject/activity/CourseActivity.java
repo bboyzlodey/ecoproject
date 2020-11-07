@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.util.List;
 
+import skarlat.dev.ecoproject.ConnectionDecorator;
 import skarlat.dev.ecoproject.ExtendedFunctionsKt;
+import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding;
 import skarlat.dev.ecoproject.includes.dataclass.Course;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
@@ -80,6 +82,7 @@ public class CourseActivity extends AppCompatActivity {
         CardsViewAdapter adapter = new CardsViewAdapter(CourseActivity.this, ecoCard, this::openCard);
         // TODO Add item decoration
         binding.recycleCards.setAdapter(adapter);
+        binding.recycleCards.addItemDecoration(new ConnectionDecorator(0, 0, R.color.colorAccent, getResources().getDrawable(R.drawable.card_divider)));
         db.upDateIsCurrentCourse(courseName);
     }
 
