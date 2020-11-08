@@ -18,16 +18,23 @@ import skarlat.dev.ecoproject.show
 import skarlat.dev.ecoproject.visible
 
 
-class CardsViewAdapter(private val context: Context?, private val card: List<EcoCard>, private val cardClickListener: (View) -> Void) : RecyclerView.Adapter<CardsViewAdapter.ViewHolder>() {
+class CardsViewAdapter(private val context: Context?, private val cardClickListener: (View) -> Void) : RecyclerView.Adapter<CardsViewAdapter.ViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var cards = arrayListOf<EcoCard>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.recycler_item_card, parent, false)
         return ViewHolder(view)
     }
 
+    fun submitList(card: List<EcoCard>){
+        cards.clear()
+        cards.addAll(card)
+        notifyDataSetChanged()
+    }
+
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ecoCard = card[position]
+        val ecoCard = cards[position]
         val status = ecoCard.status as EcoCard.Status
         val finished = status == EcoCard.Status.WATCHED
         holder.description.show(finished)
@@ -54,7 +61,7 @@ class CardsViewAdapter(private val context: Context?, private val card: List<Eco
     }
 
     override fun getItemCount(): Int {
-        return card.size
+        return cards.size
     }
 
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {

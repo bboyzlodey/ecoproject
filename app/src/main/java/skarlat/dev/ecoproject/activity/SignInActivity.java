@@ -157,6 +157,7 @@ public class SignInActivity extends AppCompatActivity implements
                             User.currentUser = new User(task.getResult().getUser().getDisplayName());
                             Log.d(TAG, "Task " + " is successful");
                             startActivity(intent);
+                            finish();
                         } else {
                             Log.d(TAG, "Task " + " is failure");
                         }

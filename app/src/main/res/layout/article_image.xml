@@ -13,6 +13,8 @@
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/cardOpenedBG"
+        android:background="@color/cardOpenedBG"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/begin_button" />
 
