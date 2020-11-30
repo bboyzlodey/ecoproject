@@ -18,46 +18,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/buttonBack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arrow_back2"
-                android:tint="@color/colorBlack"
-                app:backgroundTint="@color/colorWhite"
-                app:borderWidth="0dp"
-                app:fabSize="mini"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:maxImageSize="16dp" />
-
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/bellota_bold"
                 android:gravity="center"
-                android:text="@string/settings"
+                android:text="@string/edit_profile"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@id/buttonBack"
-                app:layout_constraintEnd_toStartOf="@id/buttonEdit"
-                app:layout_constraintStart_toEndOf="@id/buttonBack"
-                app:layout_constraintTop_toTopOf="@id/buttonBack" />
-
-            <ImageView
-                android:id="@+id/buttonEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_edit"
-                app:layout_constraintBottom_toBottomOf="@id/title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/title" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,50 +58,78 @@
             android:text="@string/name"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/valueName"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:text="Кристина"
-            android:textSize="20sp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorBolotoButton"
+            app:boxStrokeColor="@color/colorBolotoButton"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundTint="@color/colorBolotoButton"
+                android:inputType="textCapWords"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/labelEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/email"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/valueEmail"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:text="Email"
-            android:textSize="20sp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorBolotoButton"
+            app:boxStrokeColor="@color/colorBolotoButton"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundTint="@color/colorBolotoButton"
+                android:inputType="textCapWords"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/labelPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/passwd"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/valuePassword"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:text="******"
-            android:textSize="20sp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorBolotoButton"
+            app:boxStrokeColor="@color/colorBolotoButton"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundTint="@color/colorBolotoButton"
+                android:inputType="textCapWords"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -136,7 +139,7 @@
         android:layout_height="0dp"
         android:fontFamily="sans-serif-medium"
         android:minHeight="48dp"
-        android:text="@string/edit"
+        android:text="@string/save"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:cornerRadius="16dp"
@@ -151,7 +154,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
-        android:text="@string/exit"
+        android:text="@string/cancel"
         android:textColor="@color/colorBolotoButton"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
