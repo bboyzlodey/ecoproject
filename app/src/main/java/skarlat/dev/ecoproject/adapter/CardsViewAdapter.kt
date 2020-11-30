@@ -2,8 +2,7 @@ package skarlat.dev.ecoproject.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
         return ViewHolder(view)
     }
 
-    fun submitList(card: List<EcoCard>){
+    fun submitList(card: List<EcoCard>) {
         cards.clear()
         cards.addAll(card)
         notifyDataSetChanged()
@@ -53,6 +52,12 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
             holder.statusIcon.setImageResource(if (status == EcoCard.Status.OPENED) R.drawable.ic_play else R.drawable.ic_lock)
         }
         holder.cardView.tag = ecoCard
+
+        Log.d("CardsViewAdapter", "onBindViewHolder position ${position + 1}")
+        val numberDrawableId = context?.applicationContext?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
+                ?: R.drawable.ic_card_number
+        val numberDrawable = context?.getDrawable(numberDrawableId)
+        numberDrawable?.let { holder.numberIcon.setImageDrawable(it) }
         if (finished || status == EcoCard.Status.OPENED) {
             holder.cardView.setOnClickListener {
                 cardClickListener(it)
