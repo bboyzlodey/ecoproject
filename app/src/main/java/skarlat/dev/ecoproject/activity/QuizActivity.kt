@@ -40,35 +40,8 @@ Method for concatenation  ViewPager and tabLayout
         }.attach()
 
 
-        quizViewPager.layoutDirection = ViewPager2.LAYOUT_DIRECTION_LTR
-        tabLayout.layoutDirection = View.LAYOUT_DIRECTION_LTR
-
-        //Make  tabIndicator invisible
-        tabLayout.setSelectedTabIndicator(null)
 
 
-
-
-
-/*
-Method for driving TabLayout
- */
-
-//        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//
-//
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//
-//            }
-//
-//        })
 
 
 

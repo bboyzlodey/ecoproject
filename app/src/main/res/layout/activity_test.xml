@@ -19,59 +19,43 @@
             android:id="@+id/textViewToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="120dp"
             android:fontFamily="@font/bellota_bold"
             android:gravity="center_vertical"
-            android:text="Проверим знания!"
+            android:text="@string/check_knowledge"
             android:textColor="@color/cardview_light_background"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
 
     </androidx.appcompat.widget.Toolbar>
 
 
     <com.google.android.material.tabs.TabLayout
-
-
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:clickable="false"
-        app:tabMaxWidth="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="72dp"
+        app:tabGravity="fill"
+        app:tabIndicator="@drawable/fixed_circle"
         app:tabIndicatorColor="@color/colorBolotoButton"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="42dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/colorBlack"
         app:tabUnboundedRipple="true"
-
         >
-        <!-- Закоменченый код ниже был в TabLazout, не получилось сделать через xml отображение панели -->
-        <!--        с выбором номера теста, посколькку tablayout то сжимается то растяиваеся и -->
-        <!--        настроить та как в ТЗ нельзя поэтому было решено пробовать через кастомное view-->
-        <!--        android:layout_gravity="center_horizontal"-->
 
-        <!--        android:fillViewport="false"-->
 
-        <!--        android:minHeight="60dp"-->
-        <!--        app:tabGravity="center"-->
-        <!--        app:tabIndicator="@drawable/circle"-->
-        <!--        app:tabIndicatorColor="@color/colorBolotoButton"-->
-        <!--        app:tabIndicatorGravity="center"-->
-        <!--        app:tabIndicatorHeight="35dp"-->
-        <!--        app:tabMinWidth="41dp"-->
-        <!--        app:tabMode="fixed"-->
-        <!--        app:tabSelectedTextColor="@color/colorWhite"-->
-        <!--        app:tabTextAppearance="@style/CustomTabText"-->
-        <!--        app:tabTextColor="@color/colorBlack"-->
 
-        <!--                <com.google.android.material.tabs.TabItem-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:layout_margin="30dp"-->
-        <!--                    android:clickable="false"-->
-        <!--                    android:padding="30dp"-->
 
-        <!--                    />-->
 
     </com.google.android.material.tabs.TabLayout>
 

@@ -20,7 +20,7 @@ class QuizFragment : Fragment() {
 
         // Method for creating new instances of the fragment
 
-        fun create(page: Int): QuizFragment {
+        fun getinstance(page: Int): QuizFragment {
             val fragment = QuizFragment()
             val args = Bundle()
             args.putInt(ARG_PAGE, page)
