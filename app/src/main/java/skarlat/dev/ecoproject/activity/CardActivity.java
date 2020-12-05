@@ -55,7 +55,6 @@ public class CardActivity extends AppCompatActivity {
         db = new DatabaseHelper();
         Bundle bundle = getIntent().getExtras();
         ecoCard = (EcoCard) bundle.get(EcoCard.class.getSimpleName());
-        String path = ecoCard.cardNameID + ".png";
         try {
             binding.cardPicture.setImageDrawable(ecoCard.getImage());
         } catch (IOException e) {
@@ -65,7 +64,7 @@ public class CardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent whyIntent = new Intent(CardActivity.this, WhyActivity.class);
-                whyIntent.putExtra(Const.ARTICLE_JSON_PATH, ecoCard.courseNameID + "/" + ecoCard.cardNameID + ".json");
+                whyIntent.putExtra(Const.ARTICLE_JSON_PATH, ecoCard.courseNameID + "/" + ecoCard.cardNameID + "/" + ecoCard.cardNameID + ".json");
                 startActivity(whyIntent);
             }
         });
@@ -75,7 +74,6 @@ public class CardActivity extends AppCompatActivity {
         textView.setText(ecoCard.description);
         initiList();
         linearLayout = findViewById(R.id.card_linear_layout);
-        int i = 0;
         Iterator iterator = ecoSoviets.iterator();
         if (!ecoSoviets.isEmpty()) {
             do {

@@ -14,10 +14,11 @@ import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.setImageFromAssets
 import java.io.InputStream
 
 
-class CourseSection(val listCourses: List<Course>, val sectionName: String) : Section(SectionParameters.builder()
+class CourseSection(private val listCourses: List<Course>, private val sectionName: String) : Section(SectionParameters.builder()
         .itemResourceId(R.layout.card_course)
         .headerResourceId(R.layout.section_of_courses)
         .build()) {
@@ -31,26 +32,8 @@ class CourseSection(val listCourses: List<Course>, val sectionName: String) : Se
         courseHolder.header.text = listCourses[position].title
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
-        val imgDrawable: Drawable = getImageDrawableForCourse(getPathToImage(position))
-        courseHolder.imageCouse.setImageDrawable(imgDrawable)
-    }
 
-    private fun getPathToImage(position: Int): String {
-        return Const.IMAGES_ROOT_FOLDER + listCourses[position].courseNameID + "/" + listCourses[position].courseNameID + ".png"
-    }
-
-    private fun getImageDrawableForCourse(path: String): Drawable {
-        val assetManager = App.instance.resources.assets
-        var drawable: Drawable
-
-        try {
-            val steam: InputStream = assetManager.open(path)
-            drawable = BitmapDrawable(steam)
-//            drawable = Drawable.createFromPath(path)!!
-        } catch (p: Exception) {
-            drawable = App.instance.getDrawable(R.drawable.lvl_1_1)!!
-        }
-        return drawable
+        courseHolder.imageCouse.setImageFromAssets(App.instance.assets, listCourses[position].pathItemCardImage())
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {
@@ -72,11 +55,8 @@ class CourseSection(val listCourses: List<Course>, val sectionName: String) : Se
     }
 
     inner class CourseCategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var headerOfCourseSection: TextView
+        var headerOfCourseSection: TextView = itemView.findViewById(R.id.section_title_text) as TextView
 
-        init {
-            headerOfCourseSection = itemView.findViewById(R.id.section_title_text) as TextView
-        }
     }
 
     inner class CourseViewHolder(view: View) : RecyclerView.ViewHolder(view) {

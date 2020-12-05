@@ -106,17 +106,10 @@ public class Course implements EcoInterface, Serializable {
         coursesDao.update(this);
     }
 
-    public Drawable getImage() {
-        Drawable drawable = new BitmapDrawable(fullPathToImage());
-        return drawable;
+    public String pathBarImage() {
+        return Const.IMAGES_ROOT_FOLDER  + courseNameID + "/" + "bar_card.png";
     }
-
-    public Drawable getImage(AssetManager manager) throws IOException {
-        Drawable drawable = new BitmapDrawable(manager.open(fullPathToImage()));
-        return drawable;
-    }
-
-    private String fullPathToImage() {
-        return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
+    public String pathItemCardImage() {
+        return Const.IMAGES_ROOT_FOLDER  + courseNameID + "/" + "item_card.png";
     }
 }

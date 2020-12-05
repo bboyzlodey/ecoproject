@@ -82,7 +82,7 @@ public class EcoCard implements EcoInterface, Serializable {
 
     @Override
     public String getPathImage() {
-        return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + cardNameID + postfixPath + ".png";
+        return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + cardNameID + "/" + cardNameID + postfixPath + ".png";
     }
 
     public void upDate(EcoCard.Status status) {

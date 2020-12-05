@@ -13,13 +13,12 @@
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorPrimary</item>
         <item name="fontFamily">@font/bellota_bold</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="ParagraphText" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/delimeter_color</item>
-        <item name="android:paddingStart">16dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">

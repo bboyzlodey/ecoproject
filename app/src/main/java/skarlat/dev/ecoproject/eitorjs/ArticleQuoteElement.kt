@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.quote_element.view.*
+import kotlinx.android.synthetic.main.article_quote.view.*
 import skarlat.dev.ecoproject.R
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
@@ -16,7 +16,7 @@ class ArticleQuoteElement(private val theme: EJStyle? = null) : AdapterDelegate<
     var items: MutableList<Any>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        val view = parent.inflate(R.layout.quote_element)
+        val view = parent.inflate(R.layout.article_quote)
         return ViewHolder(view)
     }
 
