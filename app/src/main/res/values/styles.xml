@@ -66,24 +66,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+
+
+
+
 	<style name="CustomTabText" parent="TextAppearance.Design.Tab">
 		<item name="android:textSize">17sp</item>
-
-		<item name="android:fontFamily">@font/sf_font_pro</item>
-
-	</style>
-
-
-	<style name="CustomTabText" parent="TextAppearance.Design.Tab">
-		<item name="android:textSize">17dp</item>
-
-		<item name="android:fontFamily">@font/sf_font_pro</item>
-
-	</style>
-
-
-	<style name="CustomTabText" parent="TextAppearance.Design.Tab">
-		<item name="android:textSize">17dp</item>
 
 		<item name="android:fontFamily">@font/sf_font_pro</item>
 
