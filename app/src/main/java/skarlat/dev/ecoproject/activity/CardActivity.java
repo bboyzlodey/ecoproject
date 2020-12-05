@@ -27,8 +27,6 @@ import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.databinding.ActivityEcoCardsBinding;
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
-//import skarlat.dev.ecoproject.activity.adapters;
-//import androidx.appcompat.widget.Toolbar;
 
 public class CardActivity extends AppCompatActivity {
     public static String TAG = "EcoCardActivity";
@@ -111,7 +109,7 @@ public class CardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(RESULT_OK);
+        setResult(Const.CARD_ACTIVITY_OK);
         super.onBackPressed();
     }
 }

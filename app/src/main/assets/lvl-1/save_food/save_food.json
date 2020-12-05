@@ -15,11 +15,11 @@
       }
     },
     {
+      "type": "article_image",
       "data": {
         "caption": "Количество воды в литрах, которое уходит на производство 1 кг продукта",
         "path": "lvl-1/save_food/save_food_picture_1.png"
-      },
-      "type": "advice_image"
+      }
     },
     {
       "type": "paragraph",

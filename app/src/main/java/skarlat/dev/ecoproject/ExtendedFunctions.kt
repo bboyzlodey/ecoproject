@@ -26,6 +26,13 @@ fun View.show(show: Boolean = false) {
     }
 }
 
+fun View.visible(show: Boolean = false) {
+    visibility = if (show) {
+        View.VISIBLE
+    } else {
+        View.INVISIBLE
+    }
+}
 fun ImageView.setImageFromAssets(assetManager: AssetManager, path: String) {
     try {
         val drawable: Drawable = BitmapDrawable(assetManager.open(path))

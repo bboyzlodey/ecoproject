@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.io.IOException;
+import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import skarlat.dev.ecoproject.R;
@@ -43,7 +44,7 @@ public class HomeActivity extends FragmentActivity {
         if (User.currentUser == null) {
             User.currentUser = new User("Roza");
         }
-        if (User.currentUser != null) {
+        else  {
             Log.d(TAG, "The current user name is: " + User.currentUser.name);
             binding.helloUser.setText("Привет, " + User.currentUser.name + "!");
         }
@@ -89,7 +90,12 @@ public class HomeActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getFragments().size() > 0) {
+        if (fragmentManager == null){
+            super.onBackPressed();
+            return;
+        }
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        if (fragmentList.size() > 0) {
             binding.linearLayout.setVisibility(View.VISIBLE);
             fragmentManager.beginTransaction().detach(fragment).commit();
         } else

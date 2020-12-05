@@ -8,4 +8,6 @@ object Const {
     const val RC_SIGN_IN_GOOGLE = 10
     const val ARTICLE_JSON_PATH = "ARTICLE_JSON_PATH"
     const val TAG = "JEY-HO!"
+    const val CARD_ACTIVITY_OK = 0x0
+    const val CARD_OPENED = 0x1
 }

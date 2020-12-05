@@ -1,8 +1,8 @@
 package skarlat.dev.ecoproject.activity
 
 import android.content.res.AssetManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -20,16 +20,16 @@ data class EJResponse(val blocks: List<EJBlock>)
 class WhyActivity : AppCompatActivity() {
 
     private val rvAdapter: ArticleAdapter by lazy {
-        val contentStartEndMargin = resources.getDimensionPixelSize(R.dimen.standard_margin)
+        val contentStartEndMargin = 16
         ArticleAdapter(EJStyle.builderWithDefaults(this.applicationContext)
                 .paragraphTextColor(ContextCompat.getColor(this, R.color.paragraphTextColor))
                 .headingColorDetailed(ContextCompat.getColor(this, R.color.paragraphTextColor), HeadingLevel.h1)
                 .headingColorDetailed(ContextCompat.getColor(this, R.color.paragraphTextColor), HeadingLevel.h2)
                 .headingColorDetailed(ContextCompat.getColor(this, R.color.paragraphTextColor), HeadingLevel.h3)
-                .headingMargin(contentStartEndMargin, resources.getDimensionPixelSize(R.dimen.h1_top_margin), contentStartEndMargin, resources.getDimensionPixelSize(R.dimen.h1_bottom_margin), HeadingLevel.h1)
-                .headingMargin(contentStartEndMargin, resources.getDimensionPixelSize(R.dimen.h2_top_margin), contentStartEndMargin, 0, HeadingLevel.h2)
-                .headingMargin(contentStartEndMargin, resources.getDimensionPixelSize(R.dimen.h2_top_margin), contentStartEndMargin, 0, HeadingLevel.h3)
-                .paragraphMargin(contentStartEndMargin, resources.getDimensionPixelSize(R.dimen.article_paragraph_top_margin), contentStartEndMargin, 0)
+                .headingMargin(contentStartEndMargin, 16, contentStartEndMargin, 5, HeadingLevel.h1)
+                .headingMargin(contentStartEndMargin, 20, contentStartEndMargin, 0, HeadingLevel.h2)
+                .headingMargin(contentStartEndMargin, 20, contentStartEndMargin, 0, HeadingLevel.h3)
+                .paragraphMargin(contentStartEndMargin, 20, contentStartEndMargin, 0)
                 .build())
     }
     val blocksType = object : TypeToken<MutableList<EJBlock>>() {}.type

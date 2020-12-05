@@ -27,14 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // new feature WhyActivity
-		/*Intent intent = new Intent(); // удалить
-		intent.setClass(this, WhyActivity.class);
-		startActivity(intent);
-		finish();
-*/
-        // Код временно закоментирован для дебагинга
         new AsyncTask<Void, Void, User>() {
             @Override
             protected User doInBackground(Void... voids) {
@@ -50,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "User is null");
                 } else {
                     intent.setClass(getBaseContext(), HomeActivity.class);
-                    Log.d(TAG, "User not null");
+                    User.currentUser = user;
+                    Log.d(TAG, "User not null: " + user.name);
                 }
                 binding.progress.setVisibility(View.INVISIBLE);
                 startActivity(intent);
+                finish();
                 super.onPostExecute(user);
             }
         }.execute();

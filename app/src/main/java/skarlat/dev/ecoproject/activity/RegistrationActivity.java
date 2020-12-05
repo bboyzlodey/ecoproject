@@ -54,8 +54,8 @@ public class RegistrationActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        nameEditText = binding.userEmail;
-        emailEditText = binding.userName;
+        nameEditText = binding.userName;
+        emailEditText = binding.userEmail;
         passwdEditText = binding.userPasswd;
 
         binding.submit.setEnabled(false);
@@ -176,6 +176,7 @@ public class RegistrationActivity extends AppCompatActivity implements
                                         Toast.LENGTH_SHORT).show();
                                 Log.i(TAG, "createUserWithEmail: success");
                                 if (setUserNameInFireBase(userName)) {
+                                    finish();
                                     Log.i(TAG, "setUserNameInFireBase: true");
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Не получилось установить имя", Toast.LENGTH_SHORT);
@@ -234,10 +235,13 @@ public class RegistrationActivity extends AppCompatActivity implements
 
     protected boolean eMailCheckerCorrect(String eMail) {
         boolean valid;
-        final String validPattern = "\\w+@\\w+\\.[a-zA-z]{2,4}";
+//        final String validPattern = "\\w+@\\w+\\.[a-zA-z]{2,4}";
+        //TODO Create safety valid pattern
 
-        valid = (!eMail.equals("")) && eMail.matches(validPattern);
-        Log.d(TAG, "eMailCheckerCorrect return: " + valid);
+//        valid = (!eMail.equals("")) && eMail.matches(validPattern);
+        valid = (!eMail.equals(""));
+        Log.d(TAG, "eMailCheckerCorrect return: " + valid + " " +eMail);
+        Toast.makeText(this, "Неправильный email!", Toast.LENGTH_SHORT).show();
         return valid;
     }
 
