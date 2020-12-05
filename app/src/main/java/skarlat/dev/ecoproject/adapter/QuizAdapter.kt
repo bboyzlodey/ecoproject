@@ -14,6 +14,6 @@ class QuizAdapter(activity: AppCompatActivity, val itemsCount: Int)
     }
 
     override fun createFragment(position: Int): Fragment {
-        return QuizFragment.create(position)
+        return QuizFragment.getinstance(position)
     }
 }

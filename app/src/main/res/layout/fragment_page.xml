@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:scaleX="5"
-        android:scaleY="5" />
+        android:textSize="15sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
