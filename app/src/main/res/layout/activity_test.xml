@@ -7,29 +7,8 @@
     android:orientation="vertical"
     tools:context=".activity.QuizActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/colorBolotoButton"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <include layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/textViewToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="120dp"
-            android:fontFamily="@font/bellota_bold"
-            android:gravity="center_vertical"
-            android:text="@string/check_knowledge"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp" />
-
-
-    </androidx.appcompat.widget.Toolbar>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -52,10 +31,6 @@
         app:tabTextColor="@color/colorBlack"
         app:tabUnboundedRipple="true"
         >
-
-
-
-
 
     </com.google.android.material.tabs.TabLayout>
 
