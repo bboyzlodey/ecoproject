@@ -2,6 +2,8 @@ package skarlat.dev.ecoproject;
 
 import android.graphics.drawable.BitmapDrawable;
 
+import skarlat.dev.ecoproject.activity.MainActivity;
+
 public class User {
     public static User currentUser;
     public String name;
