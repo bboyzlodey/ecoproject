@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	package="skarlat.dev.ecoproject">
 
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +15,10 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".activity.WhyActivity" />
+		<activity android:name=".activity.WhyActivity"></activity>
+		<activity
+			android:name=".activity.TestActivity"
+			android:exported="true" />
 		<activity
 			android:name=".activity.RemindPasswordActivity"
 			android:exported="true" />
@@ -40,11 +44,6 @@
 		<activity
 			android:name=".activity.MainActivity"
 			android:exported="true">
-
-		</activity>
-		<activity
-			android:name=".activity.QuizActivity"
-			android:exported="true" >
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
