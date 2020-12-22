@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TestActivity">
+    android:orientation="vertical"
+    tools:context=".activity.QuizActivity">
+
+    <include layout="@layout/toolbar" />
+
+
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="16dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="72dp"
         app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabMaxWidth="40dp"
-        app:tabMinWidth="32dp"
-        app:tabIndicator="@drawable/circle"
+        app:tabIndicator="@drawable/fixed_circle"
         app:tabIndicatorColor="@color/colorBolotoButton"
-        app:tabIndicatorHeight="32dp"
-        android:clipToPadding="true"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="42dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorWhite"
-        android:clickable="false">
-
-        <com.google.android.material.tabs.TabItem
-            android:text="3"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:clickable="false" />
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/colorBlack"
+        app:tabUnboundedRipple="true"
+        >
 
     </com.google.android.material.tabs.TabLayout>
 
-</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/quizViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+
+        />
+
+
+</LinearLayout>
+

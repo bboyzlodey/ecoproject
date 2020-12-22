@@ -1,0 +1,31 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n\txmlns:tools=\"http://schemas.android.com/tools\"\n\tpackage=\"skarlat.dev.ecoproject\">\n\n\t<uses-permission android:name=\"android.permission.INTERNET\" />\n\n\t<application\n\t\tandroid:name=\".App\"\n\t\tandroid:allowBackup=\"true\"\n\t\tandroid:icon=\"@mipmap/ic_launcher\"\n\t\tandroid:label=\"@string/app_name\"\n\t\tandroid:largeHeap=\"true\"\n\t\tandroid:roundIcon=\"@mipmap/ic_launcher_round\"\n\t\tandroid:supportsRtl=\"true\"\n\t\tandroid:theme=\"@style/AppTheme\"\n\t\tandroid:usesCleartextTraffic=\"true\">\n\t\t<activity android:name=\".activity.WhyActivity\"></activity>\n\t\t<activity\n\t\t\tandroid:name=\".activity.TestActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.RemindPasswordActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.RegistrationActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.SignInActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.AuthActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.CardActivity\"\n\t\t\tandroid:exported=\"true\">\n\t\t</activity>\n\t\t<activity\n\t\t\tandroid:name=\".activity.HomeActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.CourseActivity\"\n\t\t\tandroid:exported=\"true\" />\n\t\t<activity\n\t\t\tandroid:name=\".activity.MainActivity\"\n\t\t\tandroid:exported=\"true\">\n\t\t\t<intent-filter>\n\t\t\t\t<action android:name=\"android.intent.action.MAIN\" />\n\n\t\t\t\t<category android:name=\"android.intent.category.LAUNCHER\" />\n\t\t\t</intent-filter>\n\t\t</activity>\n\n\t\t<meta-data\n\t\t\tandroid:name=\"preloaded_fonts\"\n\t\t\tandroid:resource=\"@array/preloaded_fonts\" />\n\t</application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision a108f7df83c38e265077e19456ce2af9d041b591)
++++ app/src/main/AndroidManifest.xml	(date 1604596181000)
+@@ -41,15 +41,19 @@
+ 		<activity
+ 			android:name=".activity.CourseActivity"
+ 			android:exported="true" />
++
+ 		<activity
+-			android:name=".activity.MainActivity"
++			android:name=".activity.QuizActivity"
+ 			android:exported="true">
+ 			<intent-filter>
+ 				<action android:name="android.intent.action.MAIN" />
+-
+ 				<category android:name="android.intent.category.LAUNCHER" />
+ 			</intent-filter>
+ 		</activity>
++		<activity
++			android:name=".activity.MainActivity"
++			android:exported="true">
++		</activity>
+ 
+ 		<meta-data
+ 			android:name="preloaded_fonts"

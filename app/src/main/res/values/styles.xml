@@ -13,12 +13,13 @@
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="fontFamily">@font/bellota_bold</item>
-        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="ParagraphText" parent="@android:style/TextAppearance">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/delimeter_color</item>
+        <item name="android:paddingStart">16dp</item>
     </style>
 
     <style name="titleTextAppearance" parent="@style/Widget.AppCompat.TextView">
@@ -65,5 +66,28 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">17sp</item>
+
+        <item name="android:fontFamily">@font/sf_font_pro</item>
+
+    </style>
+
+    <style name="Sf_pro_20" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/sf_font_pro</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:gravity">center_horizontal|top</item>
+    </style>
+
+    <style name="Toolbar_quiz" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/colorBolotoButton</item>
+    </style>
+
+    <style name="Theme_toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/colorBolotoButton</item>
+    </style>
 
 </resources>
