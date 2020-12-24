@@ -85,7 +85,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
     private fun onBindCourseDescription(holder: CourseDescriptionViewHolder, position: Int) {
         val courseDescription = cards[position] as Course
         holder.courseTitle.text = courseDescription.title
-        holder.courseDescription.text = courseDescription.description
+        holder.courseDescription.text = courseDescription.fullDescription
         holder.leftCards.text = "Осталось 5 карточек"
 //        holder.progressOfCourse.progress
     }
