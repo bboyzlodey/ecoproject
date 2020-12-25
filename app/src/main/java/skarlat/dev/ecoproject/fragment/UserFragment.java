@@ -3,6 +3,8 @@ package skarlat.dev.ecoproject.fragment;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
 
+import skarlat.dev.ecoproject.databinding.FragmentUserBinding;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
@@ -53,14 +56,6 @@ public class UserFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static UserFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -82,15 +77,17 @@ public class UserFragment extends Fragment {
 
     ImageView imageView;
 
+    private FragmentUserBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.cards_by_category);
-        TextView textView = view.findViewById(R.id.user_name);
+        binding = FragmentUserBinding.inflate(getLayoutInflater());
+        RecyclerView recyclerView = binding.cardsByCategory;
+        TextView textView = binding.userName;
 
-        imageView = view.findViewById(R.id.profile_image);
+        imageView = binding.profileImage;
         textView.setText(User.currentUser.name);
         Runnable runnable = new Runnable() {
             @Override
@@ -101,7 +98,7 @@ public class UserFragment extends Fragment {
 
         cards = App.getDatabase().cardsDao().getAll();
 
-        FloatingActionButton fab = view.findViewById(R.id.pressBackFromFragment);
+        FloatingActionButton fab = binding.pressBackFromFragment;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +114,23 @@ public class UserFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(adapter);
 
-        return view;
+        return binding.getRoot();
+    }
+
+    private void closeFragment(){
+        getFragmentManager().beginTransaction().remove(this).detach(this).commit();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assert getFragmentManager() != null;
+                getFragmentManager().beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit();
+            }
+        });
     }
 
     private void showUserAvatar() {

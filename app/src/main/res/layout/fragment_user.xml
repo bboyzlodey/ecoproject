@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_scroll"
@@ -13,13 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <View
+        <ImageView
             android:id="@+id/settings_button"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/ic_settings" />
 
         <TextView
@@ -53,7 +54,8 @@
         android:layout_marginEnd="16dp">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="85dp"
             android:layout_height="85dp"
@@ -122,50 +124,50 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Количество человек\n на нашем борту:"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:id="@+id/count_users"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textCount"
-                        android:layout_marginTop="4dp"
-                        android:text="1201"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="42sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textCount"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/count_users_label"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/countUsersImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/text_view_rounded"
-                        android:scaleX="1"
-                        android:scaleY="100" />
+                <TextView
+                    android:id="@+id/count_users"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textCount"
+                    android:layout_marginTop="4dp"
+                    android:text="1201"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="42sp"
+                    app:layout_constraintEnd_toStartOf="@id/countUsersImage"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textCount"
+                    app:layout_constraintWidth_default="wrap" />
 
-                </RelativeLayout>
-
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/countUsersImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/text_view_rounded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textCount"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_default="wrap" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </RelativeLayout>
@@ -188,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Пройденные карточки"
+                android:text="@string/finished_cards"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 
@@ -197,7 +199,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
+                android:paddingStart="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/card_by_category" />
         </LinearLayout>

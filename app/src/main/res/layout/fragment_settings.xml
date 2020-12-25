@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -107,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
-            android:text="Email"
+            android:text="Email@mail.ru"
             android:textSize="20sp" />
 
         <TextView
@@ -143,6 +145,7 @@
         app:layout_constraintBottom_toTopOf="@id/buttonExit"
         app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
         app:layout_constraintHeight_default="wrap"
+        android:textAppearance="@style/Platform.MaterialComponents.Light"
         app:layout_constraintStart_toStartOf="@id/guideLineStart" />
 
     <com.google.android.material.button.MaterialButton
@@ -154,12 +157,12 @@
         android:text="@string/exit"
         android:textColor="@color/colorBolotoButton"
         android:textSize="20sp"
+        android:textAppearance="@style/Platform.MaterialComponents.Light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="@id/guideLineStart"
-        app:strokeColor="@color/colorBolotoButton"
-        app:strokeWidth="4dp" />
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLineStart"
