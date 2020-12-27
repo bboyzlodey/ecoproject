@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import durdinapps.rxfirebase2.RxFirebaseUser;
 import io.reactivex.Completable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import skarlat.dev.ecoproject.R;
@@ -100,23 +102,28 @@ public class EditProfileSettingsFragment extends Fragment {
         while (firebaseRequestQueue.size() > 0) {
             completable = completable.andThen(Objects.requireNonNull(Objects.requireNonNull(firebaseRequestQueue.poll()).delay(10, TimeUnit.SECONDS)));
         }
-        completable.subscribe(new Action() {
-            @Override
-            public void run() throws Exception {
-                showSuccessfulMessageInToast("Жизнь прекрасна!");
-                closeFragment();
-            }
-        }, new Consumer<Throwable>() {
-            // TODO Handling firebase exceptions
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                showSuccessfulMessageInToast("Возникла ошибка");
+        Disposable disposable =
+                completable.subscribe(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        showSuccessfulMessageInToast("Жизнь прекрасна!");
+                        closeFragment();
+                    }
+                }, new Consumer<Throwable>() {
+                    // TODO Handling firebase exceptions
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        showSuccessfulMessageInToast("Возникла ошибка");
 
-                showSuccessfulMessageInToast("Перезапустите приложение");
-                closeFragment();
-                throwable.printStackTrace();
-            }
-        });
+                        if (throwable instanceof FirebaseAuthRecentLoginRequiredException) {
+                            showSuccessfulMessageInToast("Зайдите в свой профиль заново");
+                        } else {
+                            showSuccessfulMessageInToast("Перезапустите приложение");
+                        }
+                        closeFragment();
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
     private void changePassword(FirebaseUser firebaseUser, String newPassword) {
