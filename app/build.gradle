@@ -63,6 +63,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.facebook.android:facebook-login:5.0.0'  // FaceBook Login
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'      // Google Login (Auth.)
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:2.2.20"
+    implementation 'com.github.FrangSierra:RxFirebase:1.5.6'
     //For Room
     implementation 'androidx.room:room-runtime:2.2.5'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
@@ -90,4 +93,5 @@ dependencies {
 repositories {
     mavenCentral()
     maven { url "https://dl.bintray.com/heckslam/EditorJSKit" }
+    maven { url "https://jitpack.io" }
 }
