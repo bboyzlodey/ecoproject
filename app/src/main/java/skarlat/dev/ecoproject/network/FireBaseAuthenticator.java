@@ -18,7 +18,7 @@ public class FireBaseAuthenticator extends Authenticator<FirebaseAuth> {
             return null;
         }
         User user = new User(firebaseUser.getDisplayName());
-        user.seteMail(firebaseUser.getEmail());
+        user.setEmail(firebaseUser.getEmail());
         return user;
     }
 }

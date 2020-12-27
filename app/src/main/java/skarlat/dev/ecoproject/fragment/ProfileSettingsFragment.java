@@ -1,6 +1,5 @@
 package skarlat.dev.ecoproject.fragment;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import skarlat.dev.ecoproject.App;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.databinding.FragmentSettingsBinding;
@@ -26,7 +24,7 @@ public class ProfileSettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.valueName.setText(User.currentUser.name);
-        binding.valueEmail.setText(User.currentUser.geteMail());
+        binding.valueEmail.setText(User.currentUser.getEmail());
         binding.valuePassword.setText(getContext().getString(R.string.mask_user_password));
 
         View.OnClickListener editClick = new View.OnClickListener() {

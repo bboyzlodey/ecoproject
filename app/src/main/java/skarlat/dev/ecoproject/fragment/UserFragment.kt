@@ -52,7 +52,7 @@ class UserFragment : Fragment() {
         val recyclerView = binding!!.cardsByCategory
         val textView = binding!!.userName
         imageView = binding!!.profileImage
-        textView.text = User.currentUser.name
+        textView.text = User.currentUser?.name
         val runnable = Runnable { showUserAvatar() }
         cards = App.getDatabase().cardsDao().all
         val fab = binding!!.pressBackFromFragment

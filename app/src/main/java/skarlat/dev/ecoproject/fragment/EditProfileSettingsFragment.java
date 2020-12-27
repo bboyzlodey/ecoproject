@@ -25,8 +25,6 @@ import java.util.concurrent.TimeUnit;
 import durdinapps.rxfirebase2.RxFirebaseUser;
 import io.reactivex.Completable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.databinding.FragmentEditProfileBinding;
@@ -44,7 +42,7 @@ public class EditProfileSettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.userName.setText(User.currentUser.name);
-        binding.userEmail.setText(User.currentUser.geteMail());
+        binding.userEmail.setText(User.currentUser.getEmail());
         binding.userPassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
         binding.buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +54,9 @@ public class EditProfileSettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 User newUser = new User();
-                newUser.seteMail(binding.userEmail.getText().toString());
+                newUser.setEmail(binding.userEmail.getText().toString());
                 newUser.name = binding.userName.getText().toString();
+                newUser.setPassword(binding.userPassword.getText().toString());
                 updateUser(newUser);
             }
         });
@@ -70,26 +69,14 @@ public class EditProfileSettingsFragment extends Fragment {
     private void updateUser(User newUser) {
         User currentUser = User.currentUser;
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (!currentUser.geteMail().equals(newUser.geteMail())) {
-            firebaseRequestQueue.add(RxFirebaseUser
-                    .updateEmail(firebaseUser, newUser.geteMail())
-                    .doOnError(throwable -> showSuccessfulMessageInToast("Error!"))
-                    .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.mail_changed_success))));
+        if (!currentUser.getEmail().equals(newUser.getEmail())) {
+            changeUserMail(firebaseUser, newUser.getEmail());
         }
         if (!currentUser.name.equals(newUser.name)) {
-            firebaseRequestQueue.add(
-                    RxFirebaseUser
-                            .updateProfile(firebaseUser, new UserProfileChangeRequest.Builder().setDisplayName(newUser.name).build())
-                            .doOnError(throwable -> showSuccessfulMessageInToast("Error! Change password!"))
-                            .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.name_changed_success)))
-            );
+            changeUserName(firebaseUser, newUser.name);
         }
-        if (!binding.userPassword.getText().toString().equals(getContext().getString(R.string.mask_user_password))) {
-            firebaseRequestQueue.add(
-                    RxFirebaseUser.updatePassword(firebaseUser, binding.userPassword.getText().toString())
-                            .doOnError(error -> showSuccessfulMessageInToast("Error! Change password!"))
-                            .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.password_changed_success)))
-            );
+        if (!newUser.getPassword().equals(getContext().getString(R.string.mask_user_password))) {
+            changePassword(firebaseUser, newUser.getPassword());
         }
         processingRequests();
     }
@@ -102,32 +89,46 @@ public class EditProfileSettingsFragment extends Fragment {
         while (firebaseRequestQueue.size() > 0) {
             completable = completable.andThen(Objects.requireNonNull(Objects.requireNonNull(firebaseRequestQueue.poll()).delay(10, TimeUnit.SECONDS)));
         }
+        // TODO Handling firebase exceptions
         Disposable disposable =
-                completable.subscribe(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        showSuccessfulMessageInToast("Жизнь прекрасна!");
-                        closeFragment();
-                    }
-                }, new Consumer<Throwable>() {
-                    // TODO Handling firebase exceptions
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        showSuccessfulMessageInToast("Возникла ошибка");
+                completable.subscribe(() -> {
+                    showSuccessfulMessageInToast("Жизнь прекрасна!");
+                    closeFragment();
+                }, throwable -> {
+                    showSuccessfulMessageInToast("Возникла ошибка");
 
-                        if (throwable instanceof FirebaseAuthRecentLoginRequiredException) {
-                            showSuccessfulMessageInToast("Зайдите в свой профиль заново");
-                        } else {
-                            showSuccessfulMessageInToast("Перезапустите приложение");
-                        }
-                        closeFragment();
-                        throwable.printStackTrace();
+                    if (throwable instanceof FirebaseAuthRecentLoginRequiredException) {
+                        showSuccessfulMessageInToast("Зайдите в свой профиль заново");
+                    } else {
+                        showSuccessfulMessageInToast("Перезапустите приложение");
                     }
+                    closeFragment();
+                    throwable.printStackTrace();
                 });
     }
 
     private void changePassword(FirebaseUser firebaseUser, String newPassword) {
+        firebaseRequestQueue.add(
+                RxFirebaseUser.updatePassword(firebaseUser, newPassword)
+                        .doOnError(error -> showSuccessfulMessageInToast("Error! Change password!"))
+                        .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.password_changed_success)))
+        );
+    }
 
+    private void changeUserName(FirebaseUser firebaseUser, String newName) {
+        firebaseRequestQueue.add(
+                RxFirebaseUser
+                        .updateProfile(firebaseUser, new UserProfileChangeRequest.Builder().setDisplayName(newName).build())
+                        .doOnError(throwable -> showSuccessfulMessageInToast("Error! Change password!"))
+                        .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.name_changed_success)))
+        );
+    }
+
+    private void changeUserMail(FirebaseUser firebaseUser, String newEmail) {
+        firebaseRequestQueue.add(RxFirebaseUser
+                .updateEmail(firebaseUser, newEmail)
+                .doOnError(throwable -> showSuccessfulMessageInToast("Error!"))
+                .doOnComplete(() -> showSuccessfulMessageInToast(getString(R.string.mail_changed_success))));
     }
 
     private void showSuccessfulMessageInToast(String message) {
