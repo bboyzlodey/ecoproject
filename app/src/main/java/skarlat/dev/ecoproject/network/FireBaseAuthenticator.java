@@ -13,10 +13,12 @@ public class FireBaseAuthenticator extends Authenticator<FirebaseAuth> {
 
     @Override
     public User getCurrentUser() {
-        FirebaseUser user = instance.getCurrentUser();
-        if (user == null) {
+        FirebaseUser firebaseUser = instance.getCurrentUser();
+        if (firebaseUser == null) {
             return null;
         }
-        return new User(user.getDisplayName());
+        User user = new User(firebaseUser.getDisplayName());
+        user.seteMail(firebaseUser.getEmail());
+        return user;
     }
 }
