@@ -6,12 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
+    android:clipChildren="false"
     tools:context=".SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:clipChildren="false"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,10 +30,12 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorWhite"
                 android:src="@drawable/ic_arrow_back2"
                 android:tint="@color/colorBlack"
                 app:backgroundTint="@color/colorWhite"
                 app:borderWidth="0dp"
+                app:elevation="0dp"
                 app:fabSize="mini"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,10 +138,11 @@
 
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/buttonEditMaterial"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-medium"
         android:minHeight="48dp"
         android:text="@string/edit"
@@ -145,10 +152,9 @@
         app:layout_constraintBottom_toTopOf="@id/buttonExit"
         app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
         app:layout_constraintHeight_default="wrap"
-        android:textAppearance="@style/Platform.MaterialComponents.Light"
         app:layout_constraintStart_toStartOf="@id/guideLineStart" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/buttonExit"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -157,12 +163,11 @@
         android:text="@string/exit"
         android:textColor="@color/colorBolotoButton"
         android:textSize="20sp"
-        android:textAppearance="@style/Platform.MaterialComponents.Light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="@id/guideLineStart"
-        />
+        app:strokeWidth="1dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLineStart"

@@ -60,9 +60,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //  FireBase
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.facebook.android:facebook-login:5.0.0'  // FaceBook Login
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'      // Google Login (Auth.)
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:2.2.20"
+    implementation 'com.github.FrangSierra:RxFirebase:1.5.6'
     //For Room
     implementation 'androidx.room:room-runtime:2.2.5'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
@@ -86,8 +90,12 @@ dependencies {
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+
 }
 repositories {
     mavenCentral()
     maven { url "https://dl.bintray.com/heckslam/EditorJSKit" }
+    maven { url "https://jitpack.io" }
 }

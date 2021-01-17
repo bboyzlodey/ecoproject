@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
         new AsyncTask<Void, Void, User>() {
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                binding.progress.setVisibility(View.VISIBLE);
+            }
+
+            @Override
             protected User doInBackground(Void... voids) {
                 return App.auth.getCurrentUser();
             }

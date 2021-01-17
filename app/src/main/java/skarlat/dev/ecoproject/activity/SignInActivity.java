@@ -155,6 +155,7 @@ public class SignInActivity extends AppCompatActivity implements
                             intent.setClass(getBaseContext(), HomeActivity.class);
                             intent.putExtra(KEY_USENAME, task.getResult().getUser().getDisplayName());
                             User.currentUser = new User(task.getResult().getUser().getDisplayName());
+                            User.currentUser.setEmail(task.getResult().getUser().getEmail());
                             Log.d(TAG, "Task " + " is successful");
                             startActivity(intent);
                             finish();
