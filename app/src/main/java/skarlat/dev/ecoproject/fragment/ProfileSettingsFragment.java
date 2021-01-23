@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.activity.SignInActivity;
 import skarlat.dev.ecoproject.databinding.FragmentSettingsBinding;
 
 public class ProfileSettingsFragment extends Fragment {
@@ -41,6 +45,19 @@ public class ProfileSettingsFragment extends Fragment {
             }
         });
         binding.buttonEditMaterial.setOnClickListener(editClick);
+        binding.buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getContext(), SignInActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void navigateToEditSettings(){

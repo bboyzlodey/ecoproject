@@ -9,16 +9,13 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.Source
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import skarlat.dev.ecoproject.App
-import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
+import skarlat.dev.ecoproject.network.FirebaseAPI
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
@@ -83,15 +80,9 @@ class UserFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val firebase = Firebase.firestore
-        firebase
-                .collection(Const.ECO_TIPS_COLLECTION)
-                .get(Source.SERVER)
-                .addOnSuccessListener { querySnapshot ->
-                    val data = querySnapshot.documents[0].data?.get("countUsers")
-                    if (data is Long) {
-                        binding?.countUsers?.text = getString(R.string.count_users_format, data)
-                    }
+        FirebaseAPI
+                .getUsersCount { count ->
+                    binding?.countUsers?.text = getString(R.string.count_users_format, count)
                 }
     }
 

@@ -10,6 +10,7 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textCursorDrawable">@drawable/cursor_boloto</item>
+        <item name="buttonStyle">@style/ButtonFillStyle</item>
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
@@ -60,6 +61,15 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ButtonStrokedStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_stroked</item>
+        <item name="android:textColor">@color/colorBolotoText</item>
+    </style>
+    <style name="ButtonFillStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_boloto</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

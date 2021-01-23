@@ -58,6 +58,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
         holderCourseCard.title.show(finished)
         holderCourseCard.statusIcon.show(!finished)
         holderCourseCard.numberIcon.visible(finished)
+        holderCourseCard.state = status
         if (finished) {
             holderCourseCard.title.text = ecoCard.title
             holderCourseCard.description.text = ecoCard.description
@@ -101,7 +102,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
         val numberIcon: ImageView = view.findViewById(R.id.number)
         val statusIcon: ImageView = view.findViewById(R.id.statusIcon)
         val cardView: CardView = view.findViewById(R.id.cardView)
-
+        var state: EcoCard.Status? = null
     }
 
     inner class CourseDescriptionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -117,6 +118,4 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
             else -> COURSE_DESCRIPTION_VIEW_TYPE
         }
     }
-
-
 }
