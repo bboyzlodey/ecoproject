@@ -112,4 +112,7 @@ public class CardActivity extends AppCompatActivity {
         setResult(Const.CARD_ACTIVITY_OK);
         super.onBackPressed();
     }
+
+
 }
+

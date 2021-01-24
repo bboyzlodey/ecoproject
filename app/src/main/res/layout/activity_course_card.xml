@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -18,17 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll"
             app:statusBarScrim="@color/colorBolotoButton">
 
             <ImageView
                 android:id="@+id/courseAvatar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:fitsSystemWindows="true"
-                android:minHeight="150dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 tools:src="@drawable/lvl_1_1" />
 
             <ImageButton
@@ -40,7 +39,6 @@
                 android:background="@drawable/ic_arrow_back2"
                 android:focusable="true"
                 android:onClick="onBackBtn" />
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,15 +46,13 @@
 
         android:id="@+id/recycle_cards"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
         android:paddingBottom="60dp"
         app:layoutManager="LinearLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:itemCount="6"
         tools:listitem="@layout/recycler_item_card"
         tools:visibility="visible" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

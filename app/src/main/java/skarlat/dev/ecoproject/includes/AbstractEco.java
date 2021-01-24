@@ -21,11 +21,8 @@ abstract public class AbstractEco implements EcoInterface, Serializable {
     private final String name;
     private final String fullDescription;
     private int status;
-    //<<<<<<< HEAD
     public boolean temp;
-    //=======
     private int i;
-//>>>>>>> denis
 
     public AbstractEco(String name, String title, String desription, String fullDescription, int status) {
         this.name = name;

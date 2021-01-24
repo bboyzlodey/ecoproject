@@ -6,38 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".activity.CardActivity">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:id="@+id/appBar">
 
-                <ImageView
-                    android:id="@+id/card_picture"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    tools:src="@drawable/lvl_1_1" />
+                    android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="16dp"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:onClick="onBackBtn"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_close" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/card_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/lvl_1_1" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="16dp"
+                        android:adjustViewBounds="true"
+                        android:background="@null"
+                        android:onClick="onBackBtn"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_close" />
+                </RelativeLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
             <TextView
                 android:id="@+id/card_title"
@@ -139,7 +152,15 @@
                 android:id="@+id/card_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="horizontal" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_eco_tips"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
 
             <Button
                 android:id="@+id/start_course"
@@ -164,3 +185,6 @@
 
 
 </RelativeLayout>
+
+</RelativeLayout>
+
