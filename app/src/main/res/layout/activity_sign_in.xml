@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sign_in_layout"
@@ -12,34 +13,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/bellota_bold"
         android:layout_marginTop="13dp"
-        android:text="@string/sign_in" />
+        android:fontFamily="@font/bellota_bold"
+        android:text="@string/sign_in"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorGray"
-        android:text="@string/hello"
         android:layout_marginTop="8dp"
+        android:text="@string/hello"
+        android:textColor="@color/colorGray"
         android:textSize="14sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/colorBolotoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/colorBolotoButton"
         android:hint="@string/email"
-        android:layout_marginTop="24dp"
+        app:boxStrokeColor="@color/colorBolotoButton"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_email"
             android:foregroundTint="@color/colorBolotoButton"
             android:inputType="textEmailAddress"
             android:singleLine="true"
@@ -48,20 +49,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
-        android:layout_marginTop="16dp"
-        app:boxStrokeColor="@color/colorBolotoButton"
-        app:passwordToggleEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="@string/passwd"
-        app:errorEnabled="true">
+        app:boxStrokeColor="@color/colorBolotoButton"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_passwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/user_passwd" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,19 +71,19 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/remind_passwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:onClick="onClick"
-            android:id="@+id/remind_passwd">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Не помню пароль"
                 android:layout_marginTop="16dp"
-                android:textSize="14sp"
-                android:textColor="@color/colorGray" />
+                android:text="Не помню пароль"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -93,32 +94,32 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sign_in"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:src="@drawable/ic_arrow_back"
-            app:backgroundTint="@android:color/transparent"
-            android:backgroundTint="@color/fab_sign_in"
             android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/fab_sign_in"
             android:clickable="true"
-            android:id="@+id/sign_in"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:src="@drawable/ic_arrow_back"
+            app:backgroundTint="@android:color/transparent" />
 
 
         <skarlat.dev.ecoproject.customView.AdviceView
+            android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
             android:layout_above="@id/sign_in_google"
-            android:onClick="onClick"
-            android:id="@+id/register"
+            android:layout_alignParentBottom="false"
             android:layout_marginBottom="16dp"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            android:onClick="onClick">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/card_why_const"
@@ -140,8 +141,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/bellota_bold"
-                        android:textColor="@color/colorBolotoButton"
                         android:text="Зарегестрироваться"
+                        android:textColor="@color/colorBolotoButton"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -159,15 +160,17 @@
             android:id="@+id/sign_in_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:text="Продолжить с Google"
-            android:textAllCaps="false"
-            android:drawableLeft="@drawable/google_icon"
-            android:background="@android:color/transparent"
-            android:layout_gravity="center"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/google_icon"
             android:elevation="4dp"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:text="@string/google_sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

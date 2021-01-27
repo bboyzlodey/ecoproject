@@ -20,4 +20,5 @@
     <color name="unselectedAnswer">#0Dbc9348</color>
     <color name="answerTextColor">#252723</color>
     <color name="paragraphTextColor">#2D2823</color>
+    <color name="no_active_card_divider">#9D9997</color>
 </resources>

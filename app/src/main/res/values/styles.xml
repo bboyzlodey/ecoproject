@@ -3,13 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorButtonNormal">@color/colorBolotoButton</item>
         <item name="android:statusBarColor">@color/colorBlack</item>
         <item name="tabIndicatorColor">@color/colorWhite</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textCursorDrawable">@drawable/cursor_boloto</item>
+        <item name="android:buttonStyle">@style/ButtonFillStyle</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
@@ -43,23 +46,16 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-
-    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">#0000FF</item>
+    <style name="ButtonStrokedStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_stroked</item>
+        <item name="android:textColor">@color/colorBolotoText</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="Theme.App" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        ...
-        <item name="colorPrimary">@color/colorGray</item>
-        <!--		<item name="colorOnSurface">@color/shrine_pink_900</item>-->
-        <!--		<item name="colorError">@color/shrine_red</item>-->
-        <!--		<item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>-->
-        <!--		<item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>-->
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="ButtonFillStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_boloto</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

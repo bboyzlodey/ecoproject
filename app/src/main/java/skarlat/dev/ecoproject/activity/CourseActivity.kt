@@ -3,15 +3,11 @@ package skarlat.dev.ecoproject.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import skarlat.dev.ecoproject.ConnectionDecorator
+import skarlat.dev.ecoproject.ConnectionCardDecorator
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter
-import skarlat.dev.ecoproject.customView.ProgressBarView
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper
 import skarlat.dev.ecoproject.includes.dataclass.Course
@@ -37,7 +33,7 @@ class CourseActivity : AppCompatActivity() {
         updateData()
         binding!!.recycleCards.adapter = adapter
         binding!!.courseAvatar.setImageFromAssets(assets, currentCourse!!.pathBarImage())
-        binding!!.recycleCards.addItemDecoration(ConnectionDecorator(0f, 0f, R.color.colorAccent, resources.getDrawable(R.drawable.card_divider)))
+        binding!!.recycleCards.addItemDecoration(ConnectionCardDecorator())
 
 
 //        if ( progress > 0  && progress < 100)

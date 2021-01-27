@@ -2,12 +2,16 @@ package skarlat.dev.ecoproject
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.ColorRes
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.RecyclerView
 import java.lang.Exception
 
 fun Int.pxToDp(context: Context): Int = TypedValue.applyDimension(
@@ -43,3 +47,6 @@ fun ImageView.setImageFromAssets(assetManager: AssetManager, path: String) {
         setImageResource(R.drawable.lvl_1)
     }
 }
+
+fun RecyclerView.ViewHolder.getColor(@ColorRes colorId : Int, theme : Resources.Theme? = null)
+        = ResourcesCompat.getColor(itemView.resources, colorId, theme)
