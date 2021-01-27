@@ -145,7 +145,6 @@
         android:fontFamily="sans-serif-medium"
         android:minHeight="48dp"
         android:text="@string/save"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/buttonExit"
         app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
         app:layout_constraintHeight_default="wrap"
