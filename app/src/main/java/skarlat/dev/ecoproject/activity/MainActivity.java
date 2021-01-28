@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SettingsManager settingsManager = new SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE));
         new AsyncTask<Void, Void, User>() {
             @Override
             protected void onPreExecute() {
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     intent.setClass(getBaseContext(), HomeActivity.class);
                     User.currentUser = user;
+                    assert user.name != null;
+                    settingsManager.updateUserName(user.name);
                     Log.d(TAG, "User not null: " + user.name);
                 }
                 binding.progress.setVisibility(View.INVISIBLE);

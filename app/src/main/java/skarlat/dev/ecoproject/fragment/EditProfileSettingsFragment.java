@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -25,13 +27,16 @@ import java.util.concurrent.TimeUnit;
 import durdinapps.rxfirebase2.RxFirebaseUser;
 import io.reactivex.Completable;
 import io.reactivex.disposables.Disposable;
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.FragmentEditProfileBinding;
 
 public class EditProfileSettingsFragment extends Fragment {
 
     private FragmentEditProfileBinding binding;
+    private SettingsManager settingsManager;
 
     public static Fragment newInstance() {
         return new EditProfileSettingsFragment();
@@ -41,9 +46,9 @@ public class EditProfileSettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.userName.setText(User.currentUser.name);
-        binding.userEmail.setText(User.currentUser.getEmail());
-        binding.userPassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
+        settingsManager = new SettingsManager(Objects.requireNonNull(getActivity()).getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE));
+
+
         binding.buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +65,18 @@ public class EditProfileSettingsFragment extends Fragment {
                 updateUser(newUser);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initUser();
+    }
+
+    private void initUser() {
+        binding.userName.setText(settingsManager.getUserName());
+        binding.userEmail.setText(User.currentUser.getEmail());
+        binding.userPassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
     }
 
     private volatile HashMap<String, Task<Void>> tasks = new HashMap<>(3);
@@ -136,6 +153,7 @@ public class EditProfileSettingsFragment extends Fragment {
     }
 
     private void closeFragment() {
+        settingsManager.updateUserName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         getFragmentManager().beginTransaction().remove(this).detach(this).commit();
     }
 

@@ -9,16 +9,19 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleObserver;
 
 import java.io.IOException;
 import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
+import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.fragment.UserFragment;
-import skarlat.dev.ecoproject.App;
 import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
 import skarlat.dev.ecoproject.section.CourseSection;
 
@@ -28,12 +31,16 @@ public class HomeActivity extends FragmentActivity {
     private String TAG = "HomeActivity";
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private SettingsManager settingsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        settingsManager = new SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE));
+        getLifecycle().addObserver(new LifecycleObserver() {
+        });
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,13 +48,6 @@ public class HomeActivity extends FragmentActivity {
                 Log.d(TAG, "profileImageClicked");
             }
         });
-        if (User.currentUser == null) {
-            User.currentUser = new User("Roza");
-        }
-        else  {
-            Log.d(TAG, "The current user name is: " + User.currentUser.name);
-            binding.helloUser.setText("Привет, " + User.currentUser.name + "!");
-        }
         /**
          * Копирование базы данных из папки assets
          */
@@ -81,16 +81,40 @@ public class HomeActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateUser();
+    }
+
+    private void updateUser() {
+        if (User.currentUser == null) {
+            User.currentUser = new User("Roza");
+        } else {
+            Log.d(TAG, "The current user name is: " + User.currentUser.name);
+            binding.helloUser.setText("Привет, " + settingsManager.getUserName() + "!");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUser();
+    }
+
     private void openUserFragment() {
         fragment = UserFragment.newInstance(0);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.home_layout, fragment).commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.home_layout, fragment)
+                .commitNow();
+//                .commit();
         binding.linearLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void onBackPressed() {
-        if (fragmentManager == null){
+        if (fragmentManager == null) {
             super.onBackPressed();
             return;
         }
