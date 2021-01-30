@@ -56,6 +56,6 @@
     <string name="test_is_done">Тест пройден !</string>
     <string name="image_next_card">image_next_card</string>
     <string name="check_knowledge">Проверим знания!</string>
-    <string name="How_can_i_help">Как я могу помочь?</string>
+    <string name="header_eco_article">Как я могу помочь?</string>
 
 </resources>

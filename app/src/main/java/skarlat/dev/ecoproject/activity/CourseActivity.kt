@@ -78,7 +78,7 @@ class CourseActivity : AppCompatActivity() {
      */
     fun openCard(view: View): Void? {
         val currentCard = view.tag as EcoCard
-        val intent = Intent(this, CardActivityMine::class.java)
+        val intent = Intent(this, CardActivity::class.java)
         intent.putExtra(currentCard.javaClass.simpleName, currentCard)
         if (currentCard.status === EcoCard.Status.WATCHED) {
             startActivityForResult(intent, REQUST)

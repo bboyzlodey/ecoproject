@@ -1,19 +1,19 @@
 package skarlat.dev.ecoproject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.customView.AdviceView
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.includes.dataclass.EcoSoviet
 
-class TipsAdapter (context: Context? , onAdviceListener: OnAdviceListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var cards = arrayListOf<Any>()
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private  val onAdviceListener = onAdviceListener
+class TipsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var cards = mutableListOf<Any>()
+
+    var onItemClick: ((EcoCard) -> Unit)? = null
 
     companion object {
         const val ADVICE_VIEW = 1
@@ -25,11 +25,15 @@ class TipsAdapter (context: Context? , onAdviceListener: OnAdviceListener) : Rec
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+     fun clearList () {
+      cards.clear()
+    }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            ADVICE_VIEW -> AdviceViewHolder(inflater.inflate(R.layout.advice_view, parent, false),onAdviceListener)
-            else -> CardSovietViewHolder(inflater.inflate(R.layout.card_soviet, parent, false))
+            ADVICE_VIEW -> AdviceViewHolder(layoutInflater.inflate(R.layout.item_advice, parent, false))
+            else -> CardSovietViewHolder(layoutInflater.inflate(R.layout.card_soviet, parent, false))
         }
 
     }
@@ -45,16 +49,16 @@ class TipsAdapter (context: Context? , onAdviceListener: OnAdviceListener) : Rec
     private fun onBindAdvice(holder: AdviceViewHolder, position: Int) {
 
         val advice = cards[position] as EcoCard
-        holder.card_title.text = advice.title
-        holder.card_category.text = advice.description
-        holder.description.text = advice.fullDescription
+        holder.cardTitle.text = advice.title
+        holder.cardCategory.text = advice.description
+        holder.description.text = "Test text Test text !!!!!!"
 
     }
 
     private fun onBindCardSoviet(holder: CardSovietViewHolder, position: Int) {
         val cardDescription = cards[position] as EcoSoviet
-        holder.header_card.text = cardDescription.title
-        holder.descr_card.text = cardDescription.description
+        holder.headerCard.text = cardDescription.title
+        holder.descrCard.text = cardDescription.description
 
     }
 
@@ -62,23 +66,25 @@ class TipsAdapter (context: Context? , onAdviceListener: OnAdviceListener) : Rec
         return cards.size
     }
 
-    private inner class AdviceViewHolder internal constructor(itemView: View, onAdviceListener: OnAdviceListener) : RecyclerView.ViewHolder(itemView) , View.OnClickListener  {
+    private inner class AdviceViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val description: TextView = itemView.findViewById(R.id.card_why_shortDescription)
-        val card_title: TextView = itemView.findViewById(R.id.card_title)
-        val card_category: TextView = itemView.findViewById(R.id.card_category)
-         val clickListener = itemView.setOnClickListener(this )
-         val onAdviceListener = onAdviceListener
+        val cardTitle: TextView = itemView.findViewById(R.id.card_title)
+        val cardCategory: TextView = itemView.findViewById(R.id.card_category)
+        val adviceView: AdviceView = itemView.findViewById(R.id.whyItPossible)
 
-        override fun onClick(v: View?) {
-            onAdviceListener.onClickAdvice(adapterPosition)
-
+        init {
+            adviceView.setOnClickListener {
+                onItemClick?.invoke(cards[adapterPosition] as EcoCard)
+            }
         }
+
 
     }
 
     private inner class CardSovietViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val header_card: TextView = itemView.findViewById(R.id.header_card)
-        val descr_card: TextView = itemView.findViewById(R.id.descr_card)
+        val headerCard: TextView = itemView.findViewById(R.id.header_card)
+        val descrCard: TextView = itemView.findViewById(R.id.descr_card)
 
     }
 
@@ -88,9 +94,6 @@ class TipsAdapter (context: Context? , onAdviceListener: OnAdviceListener) : Rec
             cards[position] is EcoSoviet -> CARD_SOVIET
             else -> ADVICE_VIEW
         }
-    }
-         interface OnAdviceListener {
-        fun onClickAdvice(position: Int)
     }
 
 
