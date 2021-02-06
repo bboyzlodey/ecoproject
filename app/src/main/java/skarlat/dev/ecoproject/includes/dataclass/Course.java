@@ -1,17 +1,12 @@
 package skarlat.dev.ecoproject.includes.dataclass;
 
-import android.content.res.AssetManager;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CourseDao;
@@ -99,7 +94,7 @@ public class Course implements EcoInterface, Serializable {
     }
 
     public void upDate(int progressBar, Course.Status status) {
-        AppDatabase db = App.getDatabase();
+        AppDatabase db = EcoTipsApp.getDatabase();
         CourseDao coursesDao = db.courseDao();
         setProgressBar(progressBar);
         setStatus(status);

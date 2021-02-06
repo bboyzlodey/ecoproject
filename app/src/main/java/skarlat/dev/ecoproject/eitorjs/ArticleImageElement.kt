@@ -4,14 +4,13 @@ package skarlat.dev.ecoproject.eitorjs
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.article_image.view.*
 import kotlinx.android.synthetic.main.article_quote.view.*
-import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.show
 import work.upstarts.editorjskit.environment.inflate
@@ -65,7 +64,7 @@ class ArticleImageElement(private val theme: EJStyle? = null) : AdapterDelegate<
         }
 
         private fun getImageDrawable(path: String): Drawable {
-            val assetManager = App.instance.resources.assets
+            val assetManager = EcoTipsApp.instance.resources.assets
             var drawable: Drawable
 
             drawable = try {
@@ -73,7 +72,7 @@ class ArticleImageElement(private val theme: EJStyle? = null) : AdapterDelegate<
                 BitmapDrawable(steam)
             } catch (error: Exception) {
                 error.printStackTrace()
-                App.instance.getDrawable(R.drawable.lvl_1_1)!!
+                EcoTipsApp.instance.getDrawable(R.drawable.lvl_1_1)!!
             }
             return drawable
         }

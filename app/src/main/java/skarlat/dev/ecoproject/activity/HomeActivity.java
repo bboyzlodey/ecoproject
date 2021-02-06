@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
-import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
@@ -58,9 +58,9 @@ public class HomeActivity extends FragmentActivity {
             e.printStackTrace();
         }
         SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(App.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
+        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
+        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
+        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
         binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
     }
 

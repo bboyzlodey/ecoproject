@@ -10,7 +10,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.User;
 
 public class FireBaseLoginner extends Loginner implements OnCompleteListener<AuthResult> {
@@ -25,7 +25,7 @@ public class FireBaseLoginner extends Loginner implements OnCompleteListener<Aut
     @Override
     public User logIn(String passwd, String eMail) {
         operation = "signInWithEmail";
-        FirebaseAuth mAuth = (FirebaseAuth) App.auth.getInstance();
+        FirebaseAuth mAuth = (FirebaseAuth) EcoTipsApp.auth.getInstance();
         /*FirebaseUser user* =*/
         mAuth
                 .signInWithEmailAndPassword(eMail, passwd)

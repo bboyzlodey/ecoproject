@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.core.SettingsManager;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected User doInBackground(Void... voids) {
-                return App.auth.getCurrentUser();
+                return EcoTipsApp.auth.getCurrentUser();
             }
 
             @SuppressLint("StaticFieldLeak")

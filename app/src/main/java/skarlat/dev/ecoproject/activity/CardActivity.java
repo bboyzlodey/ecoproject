@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import skarlat.dev.ecoproject.Const;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
 import skarlat.dev.ecoproject.includes.dataclass.EcoSoviet;
 import skarlat.dev.ecoproject.R;
@@ -30,19 +31,12 @@ import skarlat.dev.ecoproject.includes.database.DatabaseHelper;
 
 public class CardActivity extends AppCompatActivity {
     public static String TAG = "EcoCardActivity";
-    private RecyclerView recyclerView;
-    private ScrollView scrollView;
     private EcoCard ecoCard;
     private DatabaseHelper db;
-    private View fullDescView;
     List<EcoSoviet> ecoSoviets = new ArrayList<>();
-    Drawable whyBackground;
-    Drawable howBackground;
-    ColorStateList whyColor;
-    ColorStateList howColor;
-    Toolbar myToolbar;
     LinearLayout linearLayout;
     private ActivityEcoCardsBinding binding;
+    private SettingsManager settingsManager;
 
 
     @Override
@@ -50,7 +44,10 @@ public class CardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEcoCardsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        settingsManager = new SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE));
         db = new DatabaseHelper();
+        db.calculateUserProgress(settingsManager);
         Bundle bundle = getIntent().getExtras();
         ecoCard = (EcoCard) bundle.get(EcoCard.class.getSimpleName());
         try {
