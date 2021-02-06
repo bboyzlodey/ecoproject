@@ -93,13 +93,15 @@
             android:textSize="16sp" />
 
 
-        <skarlat.dev.ecoproject.customView.ProgressBarView
+        <ProgressBar
             android:id="@+id/total_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@id/profile_image"
-            android:background="@drawable/custom_progressbar" />
+            android:progressDrawable="@drawable/custom_progressbar"
+            />
 
     </RelativeLayout>
 
@@ -156,7 +158,6 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/countUsersImage"
                     android:layout_width="0dp"
-                    app:riv_corner_radius="8dp"
                     android:layout_height="0dp"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/community"
@@ -166,7 +167,8 @@
                     app:layout_constraintHeight_default="wrap"
                     app:layout_constraintStart_toEndOf="@id/textCount"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_default="wrap" />
+                    app:layout_constraintWidth_default="wrap"
+                    app:riv_corner_radius="8dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

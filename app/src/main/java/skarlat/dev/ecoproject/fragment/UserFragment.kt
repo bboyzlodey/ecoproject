@@ -81,6 +81,7 @@ class UserFragment : Fragment() {
         }
         val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
         binding?.percentProgress?.text = "${settingsManager.userProgress}%"
+        binding?.totalProgressBar?.progress = settingsManager.userProgress
     }
 
     override fun onStart() {

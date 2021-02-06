@@ -4,13 +4,7 @@
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="5dp" />
-            <gradient
-                android:startColor="#C89B50"
-                android:centerColor="#C89B50"
-                android:centerY="1.0"
-                android:endColor="@color/colorBolotoText"
-                android:angle="270"
-                android:alpha="0.15" />
+            <solid android:color="@color/progress_bar_progress_bg" />
         </shape>
     </item>
 
@@ -19,10 +13,7 @@
         <clip>
             <shape>
                 <corners android:radius="5dp" />
-                <gradient
-                    android:startColor="@color/colorBolotoText"
-                    android:centerColor="@color/colorBolotoText"
-                    android:endColor="@color/colorBolotoText" />
+                <solid android:color="@color/progress_bar_tint" />
             </shape>
         </clip>
     </item>
