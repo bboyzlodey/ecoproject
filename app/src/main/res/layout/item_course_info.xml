@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,14 +22,14 @@
             android:textSize="24sp" />
 
 
-        <skarlat.dev.ecoproject.customView.ProgressBarView
+        <ProgressBar
             android:id="@+id/progressOfCourse"
+            style="@style/EcoProgressBarStyle"
             android:layout_width="fill_parent"
-            android:layout_height="7dp"
+            android:layout_height="@dimen/eco_progress_bar_height"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/custom_progressbar" />
+            android:layout_marginRight="16dp" />
 
         <TextView
             android:id="@+id/left_cards"

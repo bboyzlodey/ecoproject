@@ -52,4 +52,14 @@
     <string name="mail_changed_success">Почта изменена!</string>
     <string name="count_users_format">%04d</string>
     <string name="google_sign_in">Продолжить с Google</string>
+    <string name="left_cards_mask">Осталось %s</string>
+    <string name="eco_label">ЭКО</string>
+    <plurals name="left_card_plurals">
+        <item quantity="zero">%1$d карточек</item>
+        <item quantity="one">%1$d карточка</item>
+        <item quantity="two">%1$d карточки</item>
+        <item quantity="few">%1$d карточки</item>
+        <item quantity="many">%1$d карточек</item>
+        <item quantity="other">%1$d карточки</item>
+    </plurals>
 </resources>

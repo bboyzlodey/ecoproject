@@ -66,9 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/profile_image"
-            android:text="Денис"
+            tools:text="Денис"
             android:textColor="@color/colorBlack"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
 
         <TextView
@@ -77,30 +77,29 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/profile_image"
             android:layout_toEndOf="@id/profile_image"
-            android:text="55%"
+            tools:text="55%"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/profile_image"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/percent_progress"
             android:freezesText="true"
-            android:text="ЭКО"
+            android:layout_alignBaseline="@id/percent_progress"
+            android:text="@string/eco_label"
             android:textColor="@color/colorBlack"
             android:textSize="16sp" />
 
 
         <ProgressBar
             android:id="@+id/total_progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@style/EcoProgressBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="7dp"
+            android:layout_height="@dimen/eco_progress_bar_height"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@id/profile_image"
-            android:progressDrawable="@drawable/custom_progressbar"
             />
 
     </RelativeLayout>

@@ -2,6 +2,7 @@ package skarlat.dev.ecoproject.includes.dataclass;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -27,6 +28,12 @@ public class Course implements EcoInterface, Serializable {
     public int progressBar;
 
     public int isActive;
+
+    @Ignore
+    public int leftCards;
+
+    @Ignore
+    public int countCards;
 
     public enum Status {
         CLOSED,

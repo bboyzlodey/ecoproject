@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -87,8 +88,11 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
         val courseDescription = cards[position] as Course
         holder.courseTitle.text = courseDescription.title
         holder.courseDescription.text = courseDescription.fullDescription
-        holder.leftCards.text = "Осталось 5 карточек"
-//        holder.progressOfCourse.progress
+        holder.leftCards.text = holder.itemView.context.getString(R.string.left_cards_mask,
+                holder.itemView.context.resources.getQuantityString(R.plurals.left_card_plurals, courseDescription.leftCards, courseDescription.leftCards)
+        )
+        holder.progressOfCourse.max = courseDescription.countCards
+        holder.progressOfCourse.progress = courseDescription.countCards - courseDescription.leftCards
     }
 
     override fun getItemCount(): Int {
@@ -107,7 +111,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
 
     inner class CourseDescriptionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val courseTitle: TextView = view.findViewById(R.id.curs_title)
-        val progressOfCourse: ProgressBarView = view.findViewById(R.id.progressOfCourse)
+        val progressOfCourse: ProgressBar = view.findViewById(R.id.progressOfCourse)
         val leftCards: TextView = view.findViewById(R.id.left_cards)
         val courseDescription: TextView = view.findViewById(R.id.course_desc)
     }
