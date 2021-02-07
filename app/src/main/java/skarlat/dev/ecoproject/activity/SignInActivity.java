@@ -29,6 +29,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivitySignInBinding;
 
 public class SignInActivity extends AppCompatActivity implements
@@ -41,12 +42,16 @@ public class SignInActivity extends AppCompatActivity implements
     private TextInputEditText emailEditText;
     private TextInputEditText passwdEditText;
     ActivitySignInBinding binding;
+    private SettingsManager settingsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        settingsManager = new SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE));
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -156,6 +161,8 @@ public class SignInActivity extends AppCompatActivity implements
                             intent.putExtra(KEY_USENAME, task.getResult().getUser().getDisplayName());
                             User.currentUser = new User(task.getResult().getUser().getDisplayName());
                             User.currentUser.setEmail(task.getResult().getUser().getEmail());
+                            assert User.currentUser.name != null;
+                            settingsManager.updateUserName(User.currentUser.name);
                             Log.d(TAG, "Task " + " is successful");
                             startActivity(intent);
                             finish();

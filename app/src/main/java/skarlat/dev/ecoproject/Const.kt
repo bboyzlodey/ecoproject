@@ -11,4 +11,5 @@ object Const {
     const val CARD_ACTIVITY_OK = 0x0
     const val CARD_OPENED = 0x1
     const val ECO_TIPS_COLLECTION = "ecoTips"
+    const val ECO_TIPS_PREFERENCES = "eco_tips_preferences"
 }

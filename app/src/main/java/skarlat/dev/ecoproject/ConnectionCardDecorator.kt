@@ -18,7 +18,7 @@ class ConnectionCardDecorator : RecyclerView.ItemDecoration() {
             val child = parent[i]
             parent.getDecoratedBoundsWithMargins(child, viewBounds)
             val drawable = child.resources.getDrawable(R.drawable.card_divider, null)
-            val bottom = viewBounds.bottom - 4.dpToPx(App.instance.baseContext.applicationContext)
+            val bottom = viewBounds.bottom - 4.dpToPx(EcoTipsApp.instance.baseContext.applicationContext)
             val top = bottom - drawable.intrinsicHeight
             val middle = (viewBounds.right - viewBounds.left) / 2
             val partOf = drawable.intrinsicWidth / 2

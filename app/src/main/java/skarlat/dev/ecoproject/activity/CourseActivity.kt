@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import skarlat.dev.ecoproject.ConnectionCardDecorator
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper
@@ -15,7 +14,6 @@ import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.setImageFromAssets
 
 class CourseActivity : AppCompatActivity() {
-    private var progressOfCourse = 0
     private var courseName: String? = null
     private val db = DatabaseHelper()
     private var ecoCards: List<EcoCard>? = null
@@ -35,22 +33,9 @@ class CourseActivity : AppCompatActivity() {
         binding!!.courseAvatar.setImageFromAssets(assets, currentCourse!!.pathBarImage())
         binding!!.recycleCards.addItemDecoration(ConnectionCardDecorator())
 
-
-//        if ( progress > 0  && progress < 100)
-//            startCourse.setText("Продолжить обучение");
-//        else if ( progress >= 100){
-//            startCourse.setVisibility(View.GONE);
-//        }
-//        else
-//            startCourse.setText("Начать обучение");
-    }
-
-    override fun startActivityForResult(intent: Intent, requestCode: Int) {
-        super.startActivityForResult(intent, requestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // TODO("LOGIC FOR CLOSE CARD")
         if (requestCode == Const.CARD_OPENED) {
             if (resultCode == Const.CARD_ACTIVITY_OK) {
                 updateData()
@@ -61,10 +46,6 @@ class CourseActivity : AppCompatActivity() {
 
     fun onBackBtn(view: View?) {
         onBackPressed()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
     }
 
     /**
@@ -88,25 +69,9 @@ class CourseActivity : AppCompatActivity() {
             }
             currentCard.upDate(EcoCard.Status.WATCHED)
             db.updateFirebaseProgress("Cards", currentCard.name, "status", 2)
-            upDateCurrentCourse()
             startActivityForResult(intent, REQUST)
         }
         return null
-    }
-
-    /**
-     * Progress бар для базы данных
-     */
-    private fun upDateCurrentCourse() {
-        var res = 100.00 / ecoCards!!.size.toDouble()
-        res = Math.ceil(res)
-        progressOfCourse += res.toInt()
-        if (progressOfCourse >= 100) {
-            currentCourse!!.upDate(progressOfCourse, Course.Status.FINISHED)
-        } else {
-            currentCourse!!.upDate(progressOfCourse, Course.Status.CURRENT)
-        }
-        db.updateFirebaseProgress("Courses", currentCourse!!.name, "progress", progressOfCourse)
     }
 
     private fun updateData() {
@@ -114,8 +79,8 @@ class CourseActivity : AppCompatActivity() {
         currentCourse = db.getCourseByName(tagView!!["OPEN_COURSE"].toString())
         courseName = currentCourse?.getName()
         ecoCards = db.getAllCardsByCourseNameID(courseName)
-        progressOfCourse = currentCourse?.getProgressBar()!!
-        progressOfCourse = db.getCourseByName(courseName).getProgressBar()
+        currentCourse?.leftCards = ecoCards?.count { it.status != EcoCard.Status.WATCHED } ?: 0
+        currentCourse?.countCards = ecoCards?.size ?: 0
         val adapterList = arrayListOf<Any>(currentCourse!!)
         adapterList.addAll(ecoCards!!)
         adapter!!.submitList(adapterList)

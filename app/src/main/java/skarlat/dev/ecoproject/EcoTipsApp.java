@@ -6,6 +6,8 @@ import androidx.room.Room;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import skarlat.dev.ecoproject.eitorjs.ArticleAdviceLinkData;
 import skarlat.dev.ecoproject.eitorjs.ArticleEcoTipsBlocks;
 import skarlat.dev.ecoproject.eitorjs.ArticleImageData;
@@ -16,15 +18,13 @@ import skarlat.dev.ecoproject.network.FireBaseAuthenticator;
 import work.upstarts.editorjskit.EJKit;
 import work.upstarts.editorjskit.models.EJAbstractCustomBlock;
 
-/**
- * @CLass - подлючение к базе данных ассихнронно
- */
-
-public class App extends Application {
+public class EcoTipsApp extends Application {
     private final String DATABASE_NAME = "database";
-    public static App instance;
+    public static EcoTipsApp instance;
     public static Authenticator auth;
     private static AppDatabase database;
+
+    private static CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
     public void onCreate() {
@@ -45,7 +45,7 @@ public class App extends Application {
         EJKit.INSTANCE.register(new EJAbstractCustomBlock(ArticleEcoTipsBlocks.ARTICLE_IMAGE, ArticleImageData.class));
     }
 
-    public static App getInstance() {
+    public static EcoTipsApp getInstance() {
         return instance;
     }
 
@@ -55,5 +55,16 @@ public class App extends Application {
 
     public String getDatabaseName() {
         return DATABASE_NAME;
+    }
+
+    @Override
+    public void onTerminate() {
+        disposables.dispose();
+        disposables.clear();
+        super.onTerminate();
+    }
+
+    public static void addDisposable(Disposable subscription) {
+        disposables.add(subscription);
     }
 }

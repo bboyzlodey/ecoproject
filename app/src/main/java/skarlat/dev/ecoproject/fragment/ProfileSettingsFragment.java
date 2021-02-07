@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +13,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
+import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.activity.SignInActivity;
+import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.FragmentSettingsBinding;
 
 public class ProfileSettingsFragment extends Fragment {
@@ -24,12 +29,12 @@ public class ProfileSettingsFragment extends Fragment {
         return new ProfileSettingsFragment();
     }
 
+    private SettingsManager settingsManager;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.valueName.setText(User.currentUser.name);
-        binding.valueEmail.setText(User.currentUser.getEmail());
-        binding.valuePassword.setText(getContext().getString(R.string.mask_user_password));
+
+        settingsManager = new SettingsManager(getActivity().getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE));
 
         View.OnClickListener editClick = new View.OnClickListener() {
             @Override
@@ -53,7 +58,20 @@ public class ProfileSettingsFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initUser();
+    }
+
+    private void initUser() {
+        binding.valueName.setText(settingsManager.getUserName());
+        binding.valueEmail.setText(User.currentUser.getEmail());
+        binding.valuePassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
+    }
+
     private void logout() {
+        settingsManager.clearSettings();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getContext(), SignInActivity.class);
         startActivity(intent);

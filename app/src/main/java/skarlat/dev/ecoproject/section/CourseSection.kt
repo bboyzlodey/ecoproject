@@ -1,7 +1,5 @@
 package skarlat.dev.ecoproject.section
 
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
-import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.setImageFromAssets
-import java.io.InputStream
 
 
 class CourseSection(private val listCourses: List<Course>, private val sectionName: String) : Section(SectionParameters.builder()
@@ -33,7 +29,7 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
         courseHolder.smallDescriptiom.text = listCourses[position].description
         courseHolder.header.contentDescription = listCourses[position].courseNameID
 
-        courseHolder.imageCouse.setImageFromAssets(App.instance.assets, listCourses[position].pathItemCardImage())
+        courseHolder.imageCouse.setImageFromAssets(EcoTipsApp.instance.assets, listCourses[position].pathItemCardImage())
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {

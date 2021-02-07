@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 import java.io.IOException;
 import java.io.Serializable;
 
-import skarlat.dev.ecoproject.App;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
@@ -76,7 +76,7 @@ public class EcoCard implements EcoInterface, Serializable {
     }
 
     public Drawable getImage() throws IOException {
-        Drawable drawable = new BitmapDrawable(App.instance.getAssets().open(getPathImage()));
+        Drawable drawable = new BitmapDrawable(EcoTipsApp.instance.getAssets().open(getPathImage()));
         return drawable;
     }
 
@@ -86,7 +86,7 @@ public class EcoCard implements EcoInterface, Serializable {
     }
 
     public void upDate(EcoCard.Status status) {
-        AppDatabase db = App.getDatabase();
+        AppDatabase db = EcoTipsApp.getDatabase();
         CardsDao cardsDao = db.cardsDao();
         setStatus(status);
         cardsDao.update(this);

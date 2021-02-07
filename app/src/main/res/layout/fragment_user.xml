@@ -66,9 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/profile_image"
-            android:text="Денис"
+            tools:text="Денис"
             android:textColor="@color/colorBlack"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
 
         <TextView
@@ -77,29 +77,30 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/profile_image"
             android:layout_toEndOf="@id/profile_image"
-            android:text="55%"
+            tools:text="55%"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/profile_image"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/percent_progress"
             android:freezesText="true"
-            android:text="ЭКО"
+            android:layout_alignBaseline="@id/percent_progress"
+            android:text="@string/eco_label"
             android:textColor="@color/colorBlack"
             android:textSize="16sp" />
 
 
-        <skarlat.dev.ecoproject.customView.ProgressBarView
+        <ProgressBar
             android:id="@+id/total_progressBar"
+            style="@style/EcoProgressBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="7dp"
+            android:layout_height="@dimen/eco_progress_bar_height"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@id/profile_image"
-            android:background="@drawable/custom_progressbar" />
+            />
 
     </RelativeLayout>
 
@@ -156,7 +157,6 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/countUsersImage"
                     android:layout_width="0dp"
-                    app:riv_corner_radius="8dp"
                     android:layout_height="0dp"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/community"
@@ -166,7 +166,8 @@
                     app:layout_constraintHeight_default="wrap"
                     app:layout_constraintStart_toEndOf="@id/textCount"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_default="wrap" />
+                    app:layout_constraintWidth_default="wrap"
+                    app:riv_corner_radius="8dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

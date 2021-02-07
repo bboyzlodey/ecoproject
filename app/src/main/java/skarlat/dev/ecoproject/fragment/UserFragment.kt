@@ -1,5 +1,6 @@
 package skarlat.dev.ecoproject.fragment
 
+import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +10,12 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import skarlat.dev.ecoproject.App
+import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
+import skarlat.dev.ecoproject.core.SettingsManager
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.network.FirebaseAPI
@@ -51,7 +54,7 @@ class UserFragment : Fragment() {
         imageView = binding!!.profileImage
         textView.text = User.currentUser?.name
         val runnable = Runnable { showUserAvatar() }
-        cards = App.getDatabase().cardsDao().all
+        cards = EcoTipsApp.getDatabase().cardsDao().all
         val fab = binding!!.pressBackFromFragment
         fab.setOnClickListener {
             Objects.requireNonNull(activity)?.onBackPressed()
@@ -76,6 +79,9 @@ class UserFragment : Fragment() {
             assert(fragmentManager != null)
             fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
         }
+        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
+        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
+        binding?.totalProgressBar?.progress = settingsManager.userProgress
     }
 
     override fun onStart() {
