@@ -20,7 +20,7 @@
     <string name="name">Имя</string>
     <string name="my_profile">Мой профиль</string>
     <string name="errorSignInWithEmail">Не получилось. Попробуйте еще раз!</string>
-    <string name="errorSignInWithGoogle">Не получилось.</string>
+    <string name="errorSignInWithGoogle">Ошибка</string>
     <string name="title_activity_kotlin">KotlinActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -55,6 +55,9 @@
     <string name="left_cards_mask">Осталось %s</string>
     <string name="eco_label">ЭКО</string>
     <string name="hello_user_mask">Привет, %s!</string>
+    <string name="registration_failed">Ошибка</string>
+    <string name="registration_successful">Успешно</string>
+    <string name="name_attach_error">Не получилось установить имя</string>
     <plurals name="left_card_plurals">
         <item quantity="zero">%1$d карточек</item>
         <item quantity="one">%1$d карточка</item>
