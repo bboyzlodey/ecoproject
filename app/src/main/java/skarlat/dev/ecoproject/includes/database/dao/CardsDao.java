@@ -3,11 +3,13 @@ package skarlat.dev.ecoproject.includes.database.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Maybe;
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard;
 
 /**
@@ -36,7 +38,7 @@ public interface CardsDao {
     void insert(EcoCard ecoCard);
 
     @Update
-    void update(EcoCard ecoCard);
+    Maybe<Integer> update(EcoCard ecoCard);
 
     @Delete
     void delete(EcoCard ecoCard);

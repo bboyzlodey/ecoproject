@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -70,8 +71,15 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.0.10"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     //For Room
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+    def room_version = "2.3.0-beta01"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
     //noinspection GradleCompatible
     implementation 'com.android.support:cardview-v7:23.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

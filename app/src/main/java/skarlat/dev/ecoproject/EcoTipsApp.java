@@ -2,7 +2,10 @@ package skarlat.dev.ecoproject;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,7 +27,28 @@ public class EcoTipsApp extends Application {
     public static Authenticator auth;
     private static AppDatabase database;
 
-    private static CompositeDisposable disposables = new CompositeDisposable();
+    private static final CompositeDisposable disposables = new CompositeDisposable();
+
+    private final static Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE Course RENAME TO Course_old");
+            database.execSQL("CREATE TABLE \"Course_new\" (\n" +
+                    "\t\"courseNameID\"\tTEXT NOT NULL,\n" +
+                    "\t\"isActive\"\tINTEGER NOT NULL,\n" +
+                    "\t\"title\"\tTEXT,\n" +
+                    "\t\"description\"\tTEXT,\n" +
+                    "\t\"fullDescription\"\tTEXT,\n" +
+                    "\tPRIMARY KEY(\"courseNameID\")\n" +
+                    ");");
+            database.execSQL(
+                    "INSERT INTO Course_new (courseNameID, isActive, title, description, fullDescription) " +
+                            "SELECT courseNameID, isActive, title, description, fullDescription " +
+                            "FROM Course_old ");
+            database.execSQL("DROP TABLE Course_old");
+            database.execSQL("ALTER TABLE Course_new RENAME TO Course");
+        }
+    };
 
     @Override
     public void onCreate() {
@@ -32,8 +56,8 @@ public class EcoTipsApp extends Application {
         auth = new FireBaseAuthenticator(FirebaseAuth.getInstance());
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-//                .addMigrations(AppDatabase.MIGRATION)
-//                .openHelperFactory(new AssetSQLiteOpenHelperFactory())
+                .createFromAsset("database")
+                .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries()
                 .build();
         registerCustomBlocks();
@@ -45,16 +69,8 @@ public class EcoTipsApp extends Application {
         EJKit.INSTANCE.register(new EJAbstractCustomBlock(ArticleEcoTipsBlocks.ARTICLE_IMAGE, ArticleImageData.class));
     }
 
-    public static EcoTipsApp getInstance() {
-        return instance;
-    }
-
     public static AppDatabase getDatabase() {
         return database;
-    }
-
-    public String getDatabaseName() {
-        return DATABASE_NAME;
     }
 
     @Override

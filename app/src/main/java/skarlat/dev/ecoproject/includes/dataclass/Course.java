@@ -19,15 +19,14 @@ public class Course implements EcoInterface, Serializable {
     @NonNull
     public String courseNameID;
 
+    public int isActive;
+
     public String title;
 
     public String description;
 
     public String fullDescription;
 
-    public int progressBar;
-
-    public int isActive;
 
     @Ignore
     public int leftCards;
@@ -78,14 +77,6 @@ public class Course implements EcoInterface, Serializable {
         return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + courseNameID + ".png";
     }
 
-    public int getProgressBar() {
-        return this.progressBar;
-    }
-
-    public void setProgressBar(int progress) {
-        this.progressBar = progress;
-    }
-
     public void setStatus(Course.Status status) {
         switch (status) {
             case CURRENT:
@@ -100,13 +91,6 @@ public class Course implements EcoInterface, Serializable {
         }
     }
 
-    public void upDate(int progressBar, Course.Status status) {
-        AppDatabase db = EcoTipsApp.getDatabase();
-        CourseDao coursesDao = db.courseDao();
-        setProgressBar(progressBar);
-        setStatus(status);
-        coursesDao.update(this);
-    }
 
     public String pathBarImage() {
         return Const.IMAGES_ROOT_FOLDER  + courseNameID + "/" + "bar_card.png";

@@ -2,7 +2,6 @@ package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,10 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
-import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.Const;
+import skarlat.dev.ecoproject.EcoTipsApp;
 import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
 import skarlat.dev.ecoproject.fragment.UserFragment;
@@ -45,18 +43,17 @@ public class HomeActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 openUserFragment();
-                Log.d(TAG, "profileImageClicked");
             }
         });
-        /**
-         * Копирование базы данных из папки assets
-         */
         DataBaseCopy dataBaseCopy = new DataBaseCopy(this);
         try {
             dataBaseCopy.createDataBase();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initUI() {
         SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
         sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
         sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
@@ -85,15 +82,11 @@ public class HomeActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
         updateUser();
+        initUI();
     }
 
     private void updateUser() {
-        if (User.currentUser == null) {
-            User.currentUser = new User("Roza");
-        } else {
-            Log.d(TAG, "The current user name is: " + User.currentUser.name);
-            binding.helloUser.setText("Привет, " + settingsManager.getUserName() + "!");
-        }
+        binding.helloUser.setText(getString(R.string.hello_user_mask, settingsManager.getUserName()));
     }
 
     @Override

@@ -16,7 +16,7 @@ import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.includes.database.dao.CardsDao;
 
 @Entity
-public class EcoCard implements EcoInterface, Serializable {
+public class EcoCard implements Serializable {
     private final static String postfixPath = "_cover_hdpi";
     @PrimaryKey
     @NonNull
@@ -38,31 +38,18 @@ public class EcoCard implements EcoInterface, Serializable {
         WATCHED,
     }
 
-    @Override
     public String getName() {
         return this.cardNameID;
     }
 
-    @Override
     public String getTitle() {
         return this.title;
     }
 
-    @Override
     public String getDescription() {
         return this.description;
     }
 
-    @Override
-    public String getFullDescription() {
-        return this.fullDescription;
-    }
-
-    public String getCourseNameID() {
-        return this.courseNameID;
-    }
-
-    @Override
     public Enum getStatus() {
         switch (this.isActive) {
             case 0:
@@ -76,16 +63,14 @@ public class EcoCard implements EcoInterface, Serializable {
     }
 
     public Drawable getImage() throws IOException {
-        Drawable drawable = new BitmapDrawable(EcoTipsApp.instance.getAssets().open(getPathImage()));
-        return drawable;
+        return new BitmapDrawable(EcoTipsApp.instance.getAssets().open(getPathImage()));
     }
 
-    @Override
     public String getPathImage() {
         return Const.IMAGES_ROOT_FOLDER + courseNameID + "/" + cardNameID + "/" + cardNameID + postfixPath + ".png";
     }
 
-    public void upDate(EcoCard.Status status) {
+    public void update(EcoCard.Status status) {
         AppDatabase db = EcoTipsApp.getDatabase();
         CardsDao cardsDao = db.cardsDao();
         setStatus(status);

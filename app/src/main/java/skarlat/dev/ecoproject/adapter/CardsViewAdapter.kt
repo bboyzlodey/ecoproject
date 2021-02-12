@@ -1,39 +1,31 @@
 package skarlat.dev.ecoproject.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.customView.ProgressBarView
+import skarlat.dev.ecoproject.*
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
-import skarlat.dev.ecoproject.show
-import skarlat.dev.ecoproject.visible
 
 
-class CardsViewAdapter(private val context: Context?, private val cardClickListener: (View) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
+class CardsViewAdapter(private val cardClickListener: (View) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var cards = arrayListOf<Any>()
 
     companion object {
-        const val COURSE_DESCRIPTION_VIEW_TYPE = 1
-        const val COURSE_CARD = 2
+        const val COURSE_DESCRIPTION_VIEW_TYPE = R.layout.item_course_info
+        const val COURSE_CARD_VIEW_TYPE = R.layout.recycler_item_card
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val view = inflate(viewType, parent)
         return when (viewType) {
-            COURSE_DESCRIPTION_VIEW_TYPE -> CourseDescriptionViewHolder(inflater.inflate(R.layout.item_course_info, parent, false))
-            else -> CourseCardViewHolder(inflater.inflate(R.layout.recycler_item_card, parent, false))
-
+            COURSE_DESCRIPTION_VIEW_TYPE -> CourseDescriptionViewHolder(view)
+            else -> CourseCardViewHolder(view)
         }
     }
 
@@ -64,18 +56,18 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
             holderCourseCard.title.text = ecoCard.title
             holderCourseCard.description.text = ecoCard.description
         } else {
-            holderCourseCard.cardView.setCardBackgroundColor(when (status) {
-                EcoCard.Status.CLOSED -> context?.let { ContextCompat.getColor(it, R.color.colorGray) }!!
-                else -> context?.let { ContextCompat.getColor(it, R.color.cardOpenedBG) }!!
-            })
+            val cardBackgroundId = when (status) {
+                EcoCard.Status.CLOSED -> R.color.colorGray
+                else -> R.color.cardOpenedBG
+            }
+            holderCourseCard.cardView.setCardBackgroundColor(holderCourseCard.getColor(cardBackgroundId))
             holderCourseCard.statusIcon.setImageResource(if (status == EcoCard.Status.OPENED) R.drawable.ic_play else R.drawable.ic_lock)
         }
         holderCourseCard.cardView.tag = ecoCard
 
-        Log.d("CardsViewAdapter", "onBindViewHolder position ${position + 1}")
-        val numberDrawableId = context?.applicationContext?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
+        val numberDrawableId = holderCourseCard.cardView?. context?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
                 ?: R.drawable.ic_card_number
-        val numberDrawable = context?.getDrawable(numberDrawableId)
+        val numberDrawable = holderCourseCard.cardView?.context?.getDrawable(numberDrawableId)
         numberDrawable?.let { holderCourseCard.numberIcon.setImageDrawable(it) }
         if (finished || status == EcoCard.Status.OPENED) {
             holderCourseCard.cardView.setOnClickListener {
@@ -118,7 +110,7 @@ class CardsViewAdapter(private val context: Context?, private val cardClickListe
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            cards[position] is EcoCard -> COURSE_CARD
+            cards[position] is EcoCard -> COURSE_CARD_VIEW_TYPE
             else -> COURSE_DESCRIPTION_VIEW_TYPE
         }
     }

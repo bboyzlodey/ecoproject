@@ -1,9 +1,5 @@
 package skarlat.dev.ecoproject.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,8 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -21,16 +22,17 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.Objects;
 
 import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.R;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivitySignInBinding;
+import timber.log.Timber;
 
 public class SignInActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
@@ -38,6 +40,7 @@ public class SignInActivity extends AppCompatActivity implements
     private final int RC_SIGN_IN = 10;
     private final String KEY_USENAME = "USERNAME";
     private GoogleApiClient mGoogleApiClient;
+    private GoogleSignInClient signInClient;
     private FirebaseAuth mFirebaseAuth;
     private TextInputEditText emailEditText;
     private TextInputEditText passwdEditText;
@@ -57,6 +60,7 @@ public class SignInActivity extends AppCompatActivity implements
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        signInClient = GoogleSignIn.getClient(this, gso);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */,
                         this /* OnConnectionFailedListener */)
@@ -120,10 +124,6 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    public void remindPassword(View v) {
-
-    }
-
     public void onClick(View v) {
         int pressed = v.getId();
         Intent intent = new Intent();
@@ -142,15 +142,15 @@ public class SignInActivity extends AppCompatActivity implements
 
     private void signInGoogle() {
         // TODO (Method not working)
-        Log.d(TAG, "signInGoogle");
+        Timber.d("signInGoogle");
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, Const.RC_SIGN_IN_GOOGLE);
     }
 
     private void signInWithEmailAndPassword() {
-        String pass = binding.userPasswd.getText().toString();
-        String eMail = binding.userEmail.getText().toString();
+        String pass = Objects.requireNonNull(binding.userPasswd.getText()).toString();
+        String eMail = Objects.requireNonNull(binding.userEmail.getText()).toString();
         mFirebaseAuth.signInWithEmailAndPassword(eMail, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -163,26 +163,26 @@ public class SignInActivity extends AppCompatActivity implements
                             User.currentUser.setEmail(task.getResult().getUser().getEmail());
                             assert User.currentUser.name != null;
                             settingsManager.updateUserName(User.currentUser.name);
-                            Log.d(TAG, "Task " + " is successful");
+                            Timber.d("Task " + " is successful");
                             startActivity(intent);
                             finish();
                         } else {
-                            Log.d(TAG, "Task " + " is failure");
+                            Timber.d("Task " + " is failure");
                         }
                     }
                 });
     }
 
-    @SuppressLint("ShowToast")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult");
+        Timber.d("onActivityResult");
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == Const.RC_SIGN_IN_GOOGLE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            assert result != null;
             if (result.isSuccess()) {
-                Log.e(TAG, "Result is Success");
+                Timber.e("Result is Success");
                 // Google Sign-In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
@@ -190,16 +190,21 @@ public class SignInActivity extends AppCompatActivity implements
                 startActivity(intent);
             } else {
                 // Google Sign-In failed
-                Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT);
-                Log.e(TAG, "Google Sign-In failed." + result.getStatus().getStatusMessage());
+                Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT).show();
+                Timber.e("Google Sign-In failed." + result.getStatus().getStatusMessage());
 
             }
         }
     }
 
+    private final int RC_SIGN_IN_GOOGLE = 1;
+
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        // TODO Re-implement it
+        startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN_GOOGLE);
+
+        /*AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -222,7 +227,7 @@ public class SignInActivity extends AppCompatActivity implements
                             finish();
                         }
                     }
-                });
+                });*/
     }
 
     @Override

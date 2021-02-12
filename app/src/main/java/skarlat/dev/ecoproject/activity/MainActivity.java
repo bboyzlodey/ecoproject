@@ -16,6 +16,7 @@ import skarlat.dev.ecoproject.Const;
 import skarlat.dev.ecoproject.User;
 import skarlat.dev.ecoproject.core.SettingsManager;
 import skarlat.dev.ecoproject.databinding.ActivityMainBinding;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 final Intent intent = new Intent();
                 if (user == null) {
                     intent.setClass(getBaseContext(), SignInActivity.class);
-                    Log.d(TAG, "User is null");
+                    settingsManager.clearSettings();
+                    Timber.d("User is null");
                 } else {
                     intent.setClass(getBaseContext(), HomeActivity.class);
                     User.currentUser = user;
                     assert user.name != null;
                     settingsManager.updateUserName(user.name);
-                    Log.d(TAG, "User not null: " + user.name);
+                    Timber.d("User not null: %s", user.name);
                 }
                 binding.progress.setVisibility(View.INVISIBLE);
                 startActivity(intent);
@@ -64,17 +66,5 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(user);
             }
         }.execute();
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PROGRESS_BAR) {
-            if (resultCode == RESULT_OK) {
-
-            }
-        }
     }
 }

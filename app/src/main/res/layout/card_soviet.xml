@@ -27,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="20dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="20dp"
                 android:paddingTop="17dp"
                 android:paddingBottom="16dp">
 
@@ -39,16 +39,15 @@
                     tools:text="Header"
                     tools:textAllCaps="true"
                     android:id="@+id/header_card"
-                    style="@style/nameOfSoviet" />
+                    style="@style/CardTitleText" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Big text"
-                    android:capitalize="sentences"
                     android:id="@+id/descr_card"
                     android:layout_marginTop="8dp"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </RelativeLayout>

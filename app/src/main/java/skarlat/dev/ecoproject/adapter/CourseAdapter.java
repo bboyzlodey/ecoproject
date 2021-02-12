@@ -10,11 +10,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Map;
 
-import skarlat.dev.ecoproject.includes.dataclass.Course;
-import skarlat.dev.ecoproject.includes.dataclass.Education;
 import skarlat.dev.ecoproject.R;
+import skarlat.dev.ecoproject.includes.dataclass.Course;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
     private LayoutInflater inflater;
@@ -25,11 +23,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         this.inflater = LayoutInflater.from(context);
     }
 
-    CourseAdapter(Context context, Education education) {
-    }
-
-    CourseAdapter(Context context, Map<Course.Status, Course> map) {
-    }
 
     @Override
     public CourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,8 +34,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public void onBindViewHolder(CourseAdapter.ViewHolder holder, int position) {
         Course course = courses.get(position);
-        holder.header.setText(course.getTitle());
-        holder.lvl.setText(course.getDescription());
+        holder.header.setText(course.title);
+        holder.lvl.setText(course.description);
         holder.tag.setTag(course); // присваиваем вьюхе "карточка" объект карточки(Course);
 
     }

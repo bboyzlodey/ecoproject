@@ -54,6 +54,7 @@
     <string name="google_sign_in">Продолжить с Google</string>
     <string name="left_cards_mask">Осталось %s</string>
     <string name="eco_label">ЭКО</string>
+    <string name="hello_user_mask">Привет, %s!</string>
     <plurals name="left_card_plurals">
         <item quantity="zero">%1$d карточек</item>
         <item quantity="one">%1$d карточка</item>

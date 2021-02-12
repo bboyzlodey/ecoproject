@@ -21,9 +21,6 @@ import skarlat.dev.ecoproject.includes.dataclass.EcoSoviet;
 @Dao
 public interface SovietsDao {
 
-    @Query("SELECT * FROM EcoSoviet WHERE isFavorite = 1")
-    List<EcoSoviet> getAllFavorite();
-
     @Query("SELECT * FROM EcoSoviet")
     List<EcoSoviet> getAll();
 
