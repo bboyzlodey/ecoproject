@@ -28,6 +28,7 @@ public class EcoTipsApp extends Application {
     private static AppDatabase database;
 
     private static final CompositeDisposable disposables = new CompositeDisposable();
+    private static final io.reactivex.disposables.CompositeDisposable oldRxJavaDisposables = new io.reactivex.disposables.CompositeDisposable();
 
     private final static Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
@@ -82,5 +83,9 @@ public class EcoTipsApp extends Application {
 
     public static void addDisposable(Disposable subscription) {
         disposables.add(subscription);
+    }
+
+    public static void addDisposable(io.reactivex.disposables.Disposable subscription) {
+        oldRxJavaDisposables.add(subscription);
     }
 }

@@ -60,6 +60,10 @@ fun addDisposable(disposable: Disposable) {
     EcoTipsApp.addDisposable(disposable)
 }
 
+fun addDisposable(disposable: io.reactivex.disposables.Disposable) {
+    EcoTipsApp.addDisposable(disposable)
+}
+
 fun RecyclerView.Adapter<RecyclerView.ViewHolder>.inflate(@LayoutRes layoutId: Int, parent: ViewGroup) : View {
     return LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
 }

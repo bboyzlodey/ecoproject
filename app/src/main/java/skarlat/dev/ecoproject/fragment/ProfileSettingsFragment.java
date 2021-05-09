@@ -79,7 +79,7 @@ public class ProfileSettingsFragment extends Fragment {
     }
 
     private void navigateToEditSettings(){
-        getFragmentManager().beginTransaction().add(R.id.home_layout, EditProfileSettingsFragment.newInstance()).commit();
+        getFragmentManager().beginTransaction().add(R.id.home_layout, EditProfileFragment.newInstance()).commit();
     }
 
     private void closeFragment(){

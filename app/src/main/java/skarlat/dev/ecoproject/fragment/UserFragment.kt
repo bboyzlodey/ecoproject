@@ -30,17 +30,7 @@ import java.util.*
  * create an instance of this fragment.
  */
 class UserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
     private var cards: List<EcoCard>? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
-    }
 
     var imageView: ImageView? = null
     private var binding: FragmentUserBinding? = null
@@ -108,8 +98,6 @@ class UserFragment : Fragment() {
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
         var userFragment: UserFragment? = null
 
         @JvmField
