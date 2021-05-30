@@ -15,6 +15,9 @@ import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
@@ -79,5 +82,7 @@ fun <T>List<T>.itemAfter(item : T) : T? {
     }
     return this[itemPosition + 1]
 }
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 //fun RecyclerView.ViewHolder.getColor(@ColorRes colorId: Int) = ContextCompat.getColor(itemView.context, colorId)

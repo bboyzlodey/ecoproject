@@ -1,17 +1,9 @@
-package skarlat.dev.ecoproject.network;
+package skarlat.dev.ecoproject.network
 
-import skarlat.dev.ecoproject.User;
+import android.os.Bundle
+import skarlat.dev.ecoproject.User
 
-public abstract class Authenticator<T> {
-    protected T instance;
-
-    public Authenticator(T instance) {
-        this.instance = instance;
-    }
-
-    public abstract User getCurrentUser();
-
-    T getInstance() {
-        return instance;
-    }
+abstract class Authenticator {
+    abstract val currentUser: User?
+    abstract fun authenticate(bundle: Bundle)
 }

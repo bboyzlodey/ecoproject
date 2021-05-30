@@ -1,23 +1,13 @@
 package skarlat.dev.ecoproject
 
-import android.graphics.drawable.BitmapDrawable
+import kotlinx.serialization.Serializable
 
-class User {
-    @JvmField
-    var name: String? = null
-    var email: String? = null
-    var password: String? = null
-    var progress = 0
-    var avatar: BitmapDrawable? = null
-
-    constructor() {}
-    constructor(name: String?) {
-        this.name = name
-        currentUser = this
-    }
-
+@Serializable
+data class User(
+        val name: String,
+        val email: String
+) {
     companion object {
-        @JvmField
-        var currentUser: User? = null
+        val empty = User("", "")
     }
 }

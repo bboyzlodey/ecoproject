@@ -1,24 +1,45 @@
-package skarlat.dev.ecoproject.network;
+package skarlat.dev.ecoproject.network
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import android.os.Bundle
+import com.google.firebase.auth.FirebaseAuth
+import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.User
 
-import skarlat.dev.ecoproject.User;
+class FireBaseAuthenticator() : Authenticator() {
 
-public class FireBaseAuthenticator extends Authenticator<FirebaseAuth> {
-
-    public FireBaseAuthenticator(FirebaseAuth instance) {
-        super(instance);
-    }
-
-    @Override
-    public User getCurrentUser() {
-        FirebaseUser firebaseUser = instance.getCurrentUser();
-        if (firebaseUser == null) {
-            return null;
+    private val fireBaseAuth  = FirebaseAuth.getInstance()
+    override val currentUser: User?
+        get() {
+            val firebaseUser = fireBaseAuth.currentUser ?: return null
+            val user = User(firebaseUser.displayName ?: "", firebaseUser.email ?: "")
+            return user
         }
-        User user = new User(firebaseUser.getDisplayName());
-        user.setEmail(firebaseUser.getEmail());
-        return user;
+
+    override fun authenticate(bundle: Bundle) {
+        when (bundle[Const.AUTH_METHOD] as? AuthMethod) {
+            AuthMethod.PassLogin -> authLoginPass(bundle)
+            AuthMethod.Google -> authGoogle()
+        }
     }
+
+    private fun authGoogle() {
+
+    }
+
+    private fun authLoginPass(authData: Bundle) {
+        fireBaseAuth.signInWithEmailAndPassword(authData.email, authData.password)
+    }
+
+    enum class AuthMethod {
+        PassLogin,
+        Google
+    }
+
+    private val Bundle.email : String
+        get() = this[Const.AUTH_LOGIN] as? String ?: throw invalidBundleException
+
+    private val Bundle.password : String
+        get() = this[Const.AUTH_PASS] as? String ?: throw invalidBundleException
+
+    private val invalidBundleException = Exception("Invalid bundle for auth")
 }
