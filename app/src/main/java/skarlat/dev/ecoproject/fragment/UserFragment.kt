@@ -42,13 +42,13 @@ class UserFragment : Fragment() {
         val recyclerView = binding!!.cardsByCategory
         val textView = binding!!.userName
         imageView = binding!!.profileImage
-        textView.text = User.currentUser?.name
+//        textView.text = User.currentUser?.name
         val runnable = Runnable { showUserAvatar() }
         cards = EcoTipsApp.getDatabase().cardsDao().all
         val fab = binding!!.pressBackFromFragment
         fab.setOnClickListener {
-            Objects.requireNonNull(activity)?.onBackPressed()
-            onDestroy()
+//            Objects.requireNonNull(activity)?.onBackPressed()
+//            onDestroy()
         }
         // @TODO: Заменить заполнение листа с ипользованием БД
         val adapter = CategoryAdapter(context, cards)
@@ -60,18 +60,18 @@ class UserFragment : Fragment() {
     }
 
     private fun closeFragment() {
-        fragmentManager!!.beginTransaction().remove(this).detach(this).commit()
+//        fragmentManager!!.beginTransaction().remove(this).detach(this).commit()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding!!.settingsButton.setOnClickListener {
-            assert(fragmentManager != null)
-            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
+//            assert(fragmentManager != null)
+//            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
         }
-        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
-        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
-        binding?.totalProgressBar?.progress = settingsManager.userProgress
+//        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
+//        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
+//        binding?.totalProgressBar?.progress = settingsManager.userProgress
     }
 
     override fun onStart() {
@@ -100,14 +100,14 @@ class UserFragment : Fragment() {
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         var userFragment: UserFragment? = null
 
-        @JvmField
+//        @JvmField
         var userPhotoUrl: String? = null
 
-        @JvmField
+//        @JvmField
         var userName: String? = null
 
         // TODO: Rename and change types and number of parameters
-        @JvmStatic
+//        @JvmStatic
         fun newInstance(page: Int): UserFragment {
             val args = Bundle()
             args.putInt("UserFragment", page)

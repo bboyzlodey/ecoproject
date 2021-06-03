@@ -66,8 +66,8 @@ public class ProfileSettingsFragment extends Fragment {
 
     private void initUser() {
         binding.valueName.setText(settingsManager.getUserName());
-        binding.valueEmail.setText(User.currentUser.getEmail());
-        binding.valuePassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
+//        binding.valueEmail.setText(User.currentUser.getEmail());
+//        binding.valuePassword.setText(Objects.requireNonNull(getContext()).getString(R.string.mask_user_password));
     }
 
     private void logout() {
@@ -79,7 +79,7 @@ public class ProfileSettingsFragment extends Fragment {
     }
 
     private void navigateToEditSettings(){
-        getFragmentManager().beginTransaction().add(R.id.home_layout, EditProfileFragment.newInstance()).commit();
+//        getFragmentManager().beginTransaction().add(R.id.home_layout, EditProfileFragment.newInstance()).commit();
     }
 
     private void closeFragment(){

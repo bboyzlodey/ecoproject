@@ -159,10 +159,10 @@ public class SignInActivity extends AppCompatActivity implements
                             Intent intent = new Intent();
                             intent.setClass(getBaseContext(), HomeActivity.class);
                             intent.putExtra(KEY_USENAME, task.getResult().getUser().getDisplayName());
-                            User.currentUser = new User(task.getResult().getUser().getDisplayName());
-                            User.currentUser.setEmail(task.getResult().getUser().getEmail());
-                            assert User.currentUser.name != null;
-                            settingsManager.updateUserName(User.currentUser.name);
+//                            User.currentUser = new User(task.getResult().getUser().getDisplayName());
+//                            User.currentUser.setEmail(task.getResult().getUser().getEmail());
+//                            assert User.currentUser.name != null;
+//                            settingsManager.updateUserName(User.currentUser.name);
                             Timber.d("Task " + " is successful");
                             startActivity(intent);
                             finish();

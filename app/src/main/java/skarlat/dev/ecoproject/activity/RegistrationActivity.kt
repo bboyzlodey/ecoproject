@@ -221,8 +221,8 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
                         showMessage(R.string.registration_failed)
                         finish()
                     } else {
-                        User.currentUser = User(task.result!!.user!!.displayName)
-                        startActivity(Intent(baseContext, AuthActivity::class.java))
+//                        User.currentUser = User(task.result!!.user!!.displayName)
+//                        startActivity(Intent(baseContext, AuthActivity::class.java))
                         finish()
                     }
                 }

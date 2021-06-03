@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
-import durdinapps.rxfirebase2.RxFirebaseUser
 import io.reactivex.Completable
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.R
@@ -33,11 +31,11 @@ class EditProfileFragment : Fragment() {
         settingsManager = SettingsManager(requireActivity().getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
         binding.buttonExit.setOnClickListener { closeFragment() }
         binding.buttonEditMaterial.setOnClickListener {
-            val newUser = User()
-            newUser.email = binding.userEmail.text.toString()
-            newUser.name = binding.userName.text.toString()
-            newUser.password = binding.userPassword.text.toString()
-            updateUser(newUser)
+//            val newUser = User()
+//            newUser.email = binding.userEmail.text.toString()
+//            newUser.name = binding.userName.text.toString()
+//            newUser.password = binding.userPassword.text.toString()
+//            updateUser(newUser)
         }
     }
 
@@ -48,14 +46,14 @@ class EditProfileFragment : Fragment() {
 
     private fun initUser() {
         binding.userName.setText(settingsManager!!.userName)
-        binding.userEmail.setText(User.currentUser!!.email)
+//        binding.userEmail.setText(User.currentUser!!.email)
         binding.userPassword.setText(getString(R.string.mask_user_password))
     }
 
     private val firebaseRequestQueue: Queue<Completable> = ArrayDeque(3)
     private fun updateUser(newUser: User) {
-        val currentUser = User.currentUser
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
+//        val currentUser = User.currentUser
+        /*val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (currentUser!!.email != newUser.email) {
             changeUserMail(firebaseUser, newUser.email)
         }
@@ -63,9 +61,9 @@ class EditProfileFragment : Fragment() {
             changeUserName(firebaseUser, newUser.name)
         }
         if (newUser.password != context!!.getString(R.string.mask_user_password)) {
-            changePassword(firebaseUser, newUser.password)
-        }
-        launchRequests()
+          */  //changePassword(firebaseUser, newUser.password)
+//        }
+//        launchRequests()
     }
 
     private fun launchRequests() {
@@ -94,30 +92,30 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun changePassword(firebaseUser: FirebaseUser?, newPassword: String?) {
-        firebaseRequestQueue.add(
-                RxFirebaseUser.updatePassword(firebaseUser!!, newPassword!!)
-                        .doOnError { error: Throwable? -> showSuccessfulMessageInToast("Error! Change password!") }
-                        .doOnComplete { showSuccessfulMessageInToast(getString(R.string.password_changed_success)) }
-        )
+//        firebaseRequestQueue.add(
+//                RxFirebaseUser.updatePassword(firebaseUser!!, newPassword!!)
+//                        .doOnError { error: Throwable? -> showSuccessfulMessageInToast("Error! Change password!") }
+//                        .doOnComplete { showSuccessfulMessageInToast(getString(R.string.password_changed_success)) }
+//        )
     }
 
     private fun changeUserName(firebaseUser: FirebaseUser?, newName: String?) {
-        firebaseRequestQueue.add(
-                RxFirebaseUser
-                        .updateProfile(firebaseUser!!, UserProfileChangeRequest.Builder().setDisplayName(newName).build())
-                        .doOnError { throwable: Throwable? -> showSuccessfulMessageInToast("Error! Change user name!") }
-                        .doOnComplete {
-                            settingsManager?.updateUserName(firebaseUser.displayName ?: "")
-                            showSuccessfulMessageInToast(getString(R.string.name_changed_success))
-                        }
-        )
+//        firebaseRequestQueue.add(
+//                RxFirebaseUser
+//                        .updateProfile(firebaseUser!!, UserProfileChangeRequest.Builder().setDisplayName(newName).build())
+//                        .doOnError { throwable: Throwable? -> showSuccessfulMessageInToast("Error! Change user name!") }
+//                        .doOnComplete {
+//                            settingsManager?.updateUserName(firebaseUser.displayName ?: "")
+//                            showSuccessfulMessageInToast(getString(R.string.name_changed_success))
+//                        }
+//        )
     }
 
     private fun changeUserMail(firebaseUser: FirebaseUser?, newEmail: String?) {
-        firebaseRequestQueue.add(RxFirebaseUser
-                .updateEmail(firebaseUser!!, newEmail!!)
-                .doOnError { throwable: Throwable? -> showSuccessfulMessageInToast("Error!") }
-                .doOnComplete { showSuccessfulMessageInToast(getString(R.string.mail_changed_success)) })
+//        firebaseRequestQueue.add(RxFirebaseUser
+//                .updateEmail(firebaseUser!!, newEmail!!)
+//                .doOnError { throwable: Throwable? -> showSuccessfulMessageInToast("Error!") }
+//                .doOnComplete { showSuccessfulMessageInToast(getString(R.string.mail_changed_success)) })
     }
 
     private fun showSuccessfulMessageInToast(message: String) {
@@ -126,7 +124,6 @@ class EditProfileFragment : Fragment() {
 
     private fun closeFragment() {
         settingsManager!!.updateUserName(FirebaseAuth.getInstance().currentUser!!.displayName!!)
-        fragmentManager!!.beginTransaction().remove(this).detach(this).commit()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -134,10 +131,4 @@ class EditProfileFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(): Fragment {
-            return EditProfileFragment()
-        }
-    }
 }

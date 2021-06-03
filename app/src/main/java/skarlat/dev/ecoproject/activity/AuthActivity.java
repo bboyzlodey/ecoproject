@@ -58,9 +58,9 @@ public class AuthActivity extends AppCompatActivity implements
 
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-                UserFragment.userPhotoUrl = mPhotoUrl;
+//                UserFragment.userPhotoUrl = mPhotoUrl;
             }
-            UserFragment.userName = mUsername;
+//            UserFragment.userName = mUsername;
             Bundle bundle = new Bundle();
             bundle.putString("PHOTO", mPhotoUrl);
             startActivity(new Intent(this, HomeActivity.class), bundle);

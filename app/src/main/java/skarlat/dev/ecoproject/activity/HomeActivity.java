@@ -96,11 +96,6 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void openUserFragment() {
-        fragment = UserFragment.newInstance(0);
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.home_layout, fragment)
-                .commitNow();
 //                .commit();
         binding.linearLayout.setVisibility(View.GONE);
     }
