@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CardActivity">
+    tools:context=".activity.CardActivity"
+    >
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <ImageView
                     android:id="@+id/card_picture"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/lvl_1_1" />
+                    tools:src="@drawable/lvl_1_1"
+                    />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -36,7 +41,8 @@
                     android:background="@null"
                     android:onClick="onBackBtn"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_close" />
+                    android:src="@drawable/ic_close"
+                    />
             </RelativeLayout>
 
             <TextView
@@ -48,7 +54,8 @@
                 android:capitalize="sentences"
                 android:fontFamily="@font/bellota_bold"
                 android:textSize="32sp"
-                tools:text="Сберегаем электроэнергию" />
+                tools:text="Сберегаем электроэнергию"
+                />
 
             <TextView
                 android:id="@+id/card_category"
@@ -60,7 +67,8 @@
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/colorCaptionText"
                 android:textSize="16sp"
-                tools:text="Category" />
+                tools:text="Category"
+                />
 
             <skarlat.dev.ecoproject.customView.AdviceView
                 android:id="@+id/whyItPossible"
@@ -71,19 +79,22 @@
                 android:layout_marginRight="16dp"
                 android:background="?android:selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    >
 
                     <TextView
                         android:id="@+id/card_why_const"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Почему это важно?"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        />
 
                     <TextView
                         android:id="@+id/card_why_shortDescription"
@@ -95,14 +106,16 @@
                         android:marqueeRepeatLimit="3"
                         android:maxLines="3"
                         android:text="Электроэнергия — один из поставщиков загрязнителей в почву, воду и атмосферу. Такими загрязнителями чаще всего выступают продукты сгорания топлива (уголь, нефть, газ и тд.)."
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/card_why_shortDescription"
                         android:layout_marginTop="4dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        >
 
                         <TextView
                             android:id="@+id/why_readMore_const"
@@ -111,7 +124,8 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/bellota_bold"
                             android:text="Читать дальше"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -119,7 +133,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="6dp"
                             android:background="@null"
-                            android:src="@drawable/ic_vector_4" />
+                            android:src="@drawable/ic_vector_4"
+                            />
                     </LinearLayout>
                 </RelativeLayout>
             </skarlat.dev.ecoproject.customView.AdviceView>
@@ -133,16 +148,19 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/bellota_bold"
                 android:text="Как я могу помочь?"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                />
 
             <LinearLayout
                 android:id="@+id/card_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/start_course"
+                style="@style/ButtonFillStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -155,7 +173,8 @@
                 android:text="@string/complete_btn"
                 android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                />
 
         </LinearLayout>
 
