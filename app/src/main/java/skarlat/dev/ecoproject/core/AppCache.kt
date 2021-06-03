@@ -3,20 +3,22 @@ package skarlat.dev.ecoproject.core
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.User
-import timber.log.Timber
 import javax.inject.Inject
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Const.ECO_TIPS_PREFERENCES)
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Const.ECO_TIPS_PREFERENCES)
 
 class AppCache @Inject constructor(private val context: Context) {
 
@@ -27,23 +29,49 @@ class AppCache @Inject constructor(private val context: Context) {
 
     val userFlow: Flow<User>
         get() {
-            return flow {
-                context.dataStore.data.collectLatest { value ->
-                    Timber.d("userFLow.emit new user")
-                    emit(value.user)
-                }
-            }
+            return context.dataStore.data.map { it.user }
+            /*flow {
+                    context.dataStore.data.collectLatest { value ->
+                        Timber.d("userFLow.emit new user")
+                        emit(value.user)
+                    }
+                }*/
         }
 
     val userCountFlow: Flow<Int>
         get() {
-            return flow {
-                context.dataStore.data.collectLatest { value ->
+            return context.dataStore.data.map { it.userCount }/* flow {
+                emit(0)
+                *//*context.dataStore.data.collectLatest { value ->
                     Timber.d("userCountFLow.emit new userCount")
-                    emit(value.userCount)
-                }
+                    emit(0)
+                }*//*
+            }*/
+        }
+
+    fun setUser(user: User) {
+        GlobalScope.launch {
+            context.dataStore.edit {
+                it[userKey] = Json.encodeToString(user)
             }
         }
+    }
+
+    fun setCount(count: Int) {
+        GlobalScope.launch {
+            context.dataStore.edit {
+                it[usersCount] = count
+            }
+        }
+    }
+
+    fun clear() {
+        GlobalScope.launch {
+            context.dataStore.edit {
+                it.clear()
+            }
+        }
+    }
 
     private val Preferences.user: User
         get() {
