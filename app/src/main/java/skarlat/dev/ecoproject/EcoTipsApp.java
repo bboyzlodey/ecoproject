@@ -7,8 +7,6 @@ import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import skarlat.dev.ecoproject.eitorjs.ArticleAdviceLinkData;
@@ -17,7 +15,7 @@ import skarlat.dev.ecoproject.eitorjs.ArticleImageData;
 import skarlat.dev.ecoproject.eitorjs.ArticleQuoteData;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
 import skarlat.dev.ecoproject.network.Authenticator;
-import skarlat.dev.ecoproject.network.FireBaseAuthenticator;
+import timber.log.Timber;
 import work.upstarts.editorjskit.EJKit;
 import work.upstarts.editorjskit.models.EJAbstractCustomBlock;
 
@@ -54,7 +52,6 @@ public class EcoTipsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        auth = new FireBaseAuthenticator(FirebaseAuth.getInstance());
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .createFromAsset("database")
@@ -62,6 +59,7 @@ public class EcoTipsApp extends Application {
                 .allowMainThreadQueries()
                 .build();
         registerCustomBlocks();
+        Timber.plant(new Timber.DebugTree());
     }
 
     private void registerCustomBlocks() {
