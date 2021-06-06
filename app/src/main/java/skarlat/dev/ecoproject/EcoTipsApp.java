@@ -9,6 +9,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import skarlat.dev.ecoproject.di.AppCacheModule;
+import skarlat.dev.ecoproject.di.AppComponent;
+import skarlat.dev.ecoproject.di.DaggerAppComponent;
 import skarlat.dev.ecoproject.eitorjs.ArticleAdviceLinkData;
 import skarlat.dev.ecoproject.eitorjs.ArticleEcoTipsBlocks;
 import skarlat.dev.ecoproject.eitorjs.ArticleImageData;
@@ -49,6 +52,8 @@ public class EcoTipsApp extends Application {
         }
     };
 
+    public static AppComponent appComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -60,6 +65,7 @@ public class EcoTipsApp extends Application {
                 .build();
         registerCustomBlocks();
         Timber.plant(new Timber.DebugTree());
+        appComponent = DaggerAppComponent.builder().appCacheModule(new AppCacheModule(getApplicationContext())).build();
     }
 
     private void registerCustomBlocks() {
