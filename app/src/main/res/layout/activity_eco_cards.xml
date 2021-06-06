@@ -65,7 +65,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/roboto"
-                android:textColor="@color/colorCaptionText"
+                android:textColor="@color/colorGrey"
                 android:textSize="16sp"
                 tools:text="Category"
                 />

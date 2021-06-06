@@ -4,15 +4,18 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/colorBlack</item>
-<!--        <item name="android:windowBackground">@color/colorWhite</item>-->
+        <!--        <item name="android:windowBackground">@color/colorWhite</item>-->
         <item name="android:windowBackground">@drawable/splash_drawable</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="textColorSecondary">@color/colorGrey</item>
         <item name="textAppearanceButton">@style/ButtonTextAppearance</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
     </style>
+
+    <attr name="textColorSecondary" format="color" />
 
     <style name="ButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textSize">20sp</item>
@@ -21,7 +24,7 @@
     <style name="ButtonTextAppearance.Profile">
         <item name="textAllCaps">false</item>
     </style>
-    
+
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="cornerRadius">16sp</item>
         <item name="android:padding">12dp</item>
@@ -37,12 +40,30 @@
         <item name="materialButtonStyle">@style/ButtonStyle.Profile</item>
     </style>
 
-    <style name="Button" parent="Widget.MaterialComponents.Button">
+    <style name="Button" parent="Widget.MaterialComponents.Button"></style>
+
+    <style name="Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">32sp</item>
+        <item name="fontFamily">@font/bellota_bold</item>
+        <item name="android:fontFamily">@font/bellota_bold</item>
+        <item name="android:letterSpacing">0.5</item>
+    </style>
+
+    <style name="Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/bellota_bold</item>
+        <item name="android:fontFamily">@font/bellota_bold</item>
+        <item name="android:letterSpacing">0.5</item>
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
         <item name="fontFamily">@font/bellota_bold</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/textColorSecondary</item>
     </style>
 
     <style name="ParagraphText" parent="@android:style/TextAppearance">
