@@ -4,8 +4,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/colorBlack</item>
-        <!--        <item name="android:windowBackground">@color/colorWhite</item>-->
-        <item name="android:windowBackground">@drawable/splash_drawable</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
@@ -13,6 +12,10 @@
         <item name="textColorSecondary">@color/colorGrey</item>
         <item name="textAppearanceButton">@style/ButtonTextAppearance</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <style name="AppTheme.Launch">
+        <item name="android:windowBackground">@drawable/splash_drawable</item>
     </style>
 
     <attr name="textColorSecondary" format="color" />
