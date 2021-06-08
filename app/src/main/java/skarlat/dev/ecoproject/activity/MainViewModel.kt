@@ -1,16 +1,12 @@
 package skarlat.dev.ecoproject.activity
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.EcoTipsApp
+import skarlat.dev.ecoproject.fragment.BaseViewModel
 import skarlat.dev.ecoproject.fragment.SplashFragmentDirections
 
-class MainViewModel(): ViewModel() {
-
-    val nextScreen = MutableStateFlow<NavDirections?>(null)
+class MainViewModel: BaseViewModel() {
 
     private val authManager = EcoTipsApp.appComponent.getAuthManager()
 

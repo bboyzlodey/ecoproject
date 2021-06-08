@@ -122,6 +122,11 @@ public class AuthActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not

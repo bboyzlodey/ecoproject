@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<T : ViewBinding>(@LayoutRes protected val layout: Int): Fragment() {
+abstract class BaseFragment<T : ViewBinding>: Fragment() {
 
     private var _binding: ViewBinding? = null
     protected open val binding: T get() = _binding!! as T
@@ -24,4 +25,8 @@ abstract class BaseFragment<T : ViewBinding>(@LayoutRes protected val layout: In
     }
 
     abstract fun inflateBinding() : ViewBinding
+
+    protected fun goToNextScreen(directions: NavDirections?) {
+        directions?.let { findNavController().navigate(it) }
+    }
 }

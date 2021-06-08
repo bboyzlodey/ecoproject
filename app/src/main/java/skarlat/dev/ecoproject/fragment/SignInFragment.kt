@@ -5,17 +5,14 @@ import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.databinding.FragmentSignInBinding
 
-class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
+class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
-    private val viewModel : SignInViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun inflateBinding(): ViewBinding {
         return FragmentSignInBinding.inflate(layoutInflater)
@@ -23,10 +20,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.userEmail.doAfterTextChanged {text ->  viewModel.email = text.toString() }
-        binding.userPasswd.doAfterTextChanged {text ->  viewModel.password = text.toString() }
+        binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
+        binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }
         binding.signIn.setOnClickListener { viewModel.onSignWithEmailAndPasswordClicked() }
         binding.signInGoogle.setOnClickListener { viewModel.onSignWithGoogleClicked() }
+        binding.register.setOnClickListener { viewModel.onRegistrationClicked() }
     }
 
     override fun onStart() {
@@ -47,9 +45,5 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 }
             }
         }
-    }
-
-    private fun goToNextScreen(directions: NavDirections) {
-        findNavController().navigate(directions)
     }
 }
