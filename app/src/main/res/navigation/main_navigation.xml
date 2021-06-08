@@ -27,7 +27,7 @@
 
     <activity
         android:id="@+id/signInActivity"
-        android:name="skarlat.dev.ecoproject.activity.SignInActivity"
+        android:name="skarlat.dev.ecoproject.activity.AuthActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in"
         />

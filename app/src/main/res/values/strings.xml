@@ -59,6 +59,8 @@
     <string name="registration_successful">Успешно</string>
     <string name="name_attach_error">Не получилось установить имя</string>
     <string name="remind_password"><u>Не помню пароль</u></string>
+    <string name="no_account_ask">Нет аккаунта?</string>
+    <string name="register">Зарегестрироваться</string>
     <plurals name="left_card_plurals">
         <item quantity="zero">%1$d карточек</item>
         <item quantity="one">%1$d карточка</item>

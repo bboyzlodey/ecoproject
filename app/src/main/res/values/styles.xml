@@ -1,17 +1,23 @@
-<resources>
+<resources xmlns:ns1="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:windowBackground">@color/colorWhite</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+
         <item name="textColorSecondary">@color/colorGrey</item>
         <item name="textAppearanceButton">@style/ButtonTextAppearance</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
+
+        <item name="textAppearanceCaption">@style/Caption</item>
+        <item name="textAppearanceHeadline4">@style/Headline4</item>
+        <item name="textAppearanceHeadline5">@style/Headline5</item>
     </style>
 
     <style name="AppTheme.Launch">
@@ -34,6 +40,20 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="ThemeOverlayGoogleSignIn">
+        <item name="colorOnPrimary">@color/colorBlack</item>
+        <item name="colorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="GoogleSignIn" parent="Widget.MaterialComponents.Button">
+        <item name="icon">@drawable/fui_ic_googleg_color_24dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">16sp</item>
+    </style>
+
     <style name="ButtonStyle.Profile">
         <item name="cornerRadius">8sp</item>
     </style>
@@ -43,20 +63,20 @@
         <item name="materialButtonStyle">@style/ButtonStyle.Profile</item>
     </style>
 
-    <style name="Button" parent="Widget.MaterialComponents.Button"></style>
+    <style name="Button" parent="Widget.MaterialComponents.Button" />
 
     <style name="Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textSize">32sp</item>
         <item name="fontFamily">@font/bellota_bold</item>
         <item name="android:fontFamily">@font/bellota_bold</item>
-        <item name="android:letterSpacing">0.5</item>
+        <item name="android:letterSpacing">0.0208</item>
     </style>
 
     <style name="Headline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textSize">24sp</item>
         <item name="fontFamily">@font/bellota_bold</item>
         <item name="android:fontFamily">@font/bellota_bold</item>
-        <item name="android:letterSpacing">0.5</item>
+        <item name="android:letterSpacing">0.0208</item>
     </style>
 
     <style name="HeaderText" parent="@android:style/TextAppearance">
@@ -67,6 +87,23 @@
     <style name="Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/textColorSecondary</item>
+    </style>
+
+    <style name="FabStyle" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon" />
+
+    <style name="FabStyle.NextScreen">
+        <item name="fabSize">normal</item>
+        <item name="srcCompat">@drawable/ic_arrow_back</item>
+    </style>
+
+    <style name="FabStyle.PrevScreen">
+        <item name="fabSize">mini</item>
+        <item name="srcCompat">@drawable/ic_arrow_back2</item>
+    </style>
+
+    <style name="FabStyle.Close">
+        <item name="fabSize">mini</item>
+        <item name="srcCompat">@drawable/ic_exit</item>
     </style>
 
     <style name="ParagraphText" parent="@android:style/TextAppearance">
