@@ -17,6 +17,10 @@
             android:id="@+id/action_signInFragment_to_homeActivity2"
             app:destination="@id/homeActivity2"
             />
+        <action
+            android:id="@+id/action_signInFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            />
     </fragment>
 
     <activity
@@ -24,6 +28,12 @@
         android:name="skarlat.dev.ecoproject.activity.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home"
+        />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="skarlat.dev.ecoproject.fragment.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration"
         />
 
 </navigation>
