@@ -1,116 +1,96 @@
-package skarlat.dev.ecoproject.activity;
+package skarlat.dev.ecoproject.activity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
+import kotlinx.coroutines.flow.collectLatest
+import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.EcoTipsApp
+import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.User
+import skarlat.dev.ecoproject.core.SettingsManager
+import skarlat.dev.ecoproject.databinding.ActivityHomeBinding
+import skarlat.dev.ecoproject.includes.database.DataBaseCopy
+import skarlat.dev.ecoproject.section.CourseSection
+import java.io.IOException
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleObserver;
-
-import java.io.IOException;
-import java.util.List;
-
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
-import skarlat.dev.ecoproject.Const;
-import skarlat.dev.ecoproject.EcoTipsApp;
-import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.core.SettingsManager;
-import skarlat.dev.ecoproject.databinding.ActivityHomeBinding;
-import skarlat.dev.ecoproject.fragment.UserFragment;
-import skarlat.dev.ecoproject.includes.database.DataBaseCopy;
-import skarlat.dev.ecoproject.section.CourseSection;
-
-
-public class HomeActivity extends FragmentActivity {
-    private ActivityHomeBinding binding;
-    private String TAG = "HomeActivity";
-    private FragmentManager fragmentManager;
-    private Fragment fragment;
-    private SettingsManager settingsManager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        settingsManager = new SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE));
-        getLifecycle().addObserver(new LifecycleObserver() {
-        });
-        binding.profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserFragment();
-            }
-        });
-        DataBaseCopy dataBaseCopy = new DataBaseCopy(this);
+class HomeActivity : FragmentActivity() {
+    private var binding: ActivityHomeBinding? = null
+    private val TAG = "HomeActivity"
+    private val fragmentManager: FragmentManager? = null
+    private val fragment: Fragment? = null
+    private var settingsManager: SettingsManager? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
+        settingsManager = SettingsManager(getSharedPreferences(Const.ECO_TIPS_PREFERENCES, MODE_PRIVATE))
+        binding!!.profileImage.setOnClickListener { openUserFragment() }
+        val dataBaseCopy = DataBaseCopy(this)
         try {
-            dataBaseCopy.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
+            dataBaseCopy.createDataBase()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
-    private void initUI() {
-        SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllIsActive(), getResources().getString(R.string.current_courses)));
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllNonActive(), getResources().getString(R.string.aviable_courses)));
-        sectionedRecyclerViewAdapter.addSection(new CourseSection(EcoTipsApp.getDatabase().courseDao().getAllFinished(), getResources().getString(R.string.finished_courses)));
-        binding.recycleCourses.setAdapter(sectionedRecyclerViewAdapter);
+    private fun initUI() {
+        val sectionedRecyclerViewAdapter = SectionedRecyclerViewAdapter()
+        sectionedRecyclerViewAdapter.addSection(CourseSection(EcoTipsApp.getDatabase().courseDao().allIsActive, resources.getString(R.string.current_courses)))
+        sectionedRecyclerViewAdapter.addSection(CourseSection(EcoTipsApp.getDatabase().courseDao().allNonActive, resources.getString(R.string.aviable_courses)))
+        sectionedRecyclerViewAdapter.addSection(CourseSection(EcoTipsApp.getDatabase().courseDao().allFinished, resources.getString(R.string.finished_courses)))
+        binding!!.recycleCourses.adapter = sectionedRecyclerViewAdapter
     }
 
-    public void openCourse(View v) {
-        Intent open = new Intent(this, CourseActivity.class);
-        CharSequence charSequence = v.getContentDescription();
+    fun openCourse(v: View) {
+        val open = Intent(this, CourseActivity::class.java)
+        val charSequence = v.contentDescription
         if (charSequence != null) {
-            open.putExtra("OPEN_COURSE", charSequence.toString());
-            startActivity(open);
+            open.putExtra("OPEN_COURSE", charSequence.toString())
+            startActivity(open)
         } else {
-            TextView textView = v.findViewById(R.id.current_title);
-            CharSequence str = textView.getContentDescription();
+            val textView = v.findViewById<TextView>(R.id.current_title)
+            val str = textView.contentDescription
             if (str != null) {
-                open.putExtra("OPEN_COURSE", str.toString());
-                startActivity(open);
+                open.putExtra("OPEN_COURSE", str.toString())
+                startActivity(open)
             }
         }
-
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        updateUser();
-        initUI();
-    }
-
-    private void updateUser() {
-        binding.helloUser.setText(getString(R.string.hello_user_mask, settingsManager.getUserName()));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateUser();
-    }
-
-    private void openUserFragment() {
-//                .commit();
-        binding.linearLayout.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (fragmentManager == null) {
-            super.onBackPressed();
-            return;
+    override fun onStart() {
+        super.onStart()
+        lifecycleScope.launchWhenStarted {
+            EcoTipsApp.appComponent.getAppCache().userFlow.collectLatest {
+                updateUser(it)
+            }
         }
-        List<Fragment> fragmentList = fragmentManager.getFragments();
-        if (fragmentList.size() > 0) {
-            binding.linearLayout.setVisibility(View.VISIBLE);
-            fragmentManager.beginTransaction().detach(fragment).commit();
-        } else
-            super.onBackPressed();
+        initUI()
+    }
+
+    private fun updateUser(user: User) {
+        binding!!.helloUser.text = getString(R.string.hello_user_mask, user.name)
+    }
+
+    private fun openUserFragment() {
+        binding!!.linearLayout.visibility = View.GONE
+    }
+
+    override fun onBackPressed() {
+        if (fragmentManager == null) {
+            super.onBackPressed()
+            return
+        }
+        val fragmentList = fragmentManager.fragments
+        if (fragmentList.size > 0) {
+            binding!!.linearLayout.visibility = View.VISIBLE
+            fragmentManager.beginTransaction().detach(fragment!!).commit()
+        } else super.onBackPressed()
     }
 }
