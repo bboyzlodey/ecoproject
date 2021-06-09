@@ -28,4 +28,12 @@ class AuthManager @Inject constructor(private val authenticator: Authenticator) 
     suspend fun logout() {
         authenticator.logout()
     }
+
+    suspend fun registerUser(name: String, email: String, password: String) {
+        authenticator.register(Bundle().apply {
+            putSerializable(Const.REGISTER_NAME, name)
+            putSerializable(Const.AUTH_PASS, password)
+            putSerializable(Const.AUTH_LOGIN, email)
+        })
+    }
 }

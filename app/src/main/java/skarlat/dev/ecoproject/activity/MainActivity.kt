@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        findNavController(R.id.nav_host)
         launchMainCoroutine()
     }
 

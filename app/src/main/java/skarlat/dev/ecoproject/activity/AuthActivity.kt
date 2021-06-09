@@ -1,99 +1,93 @@
-package skarlat.dev.ecoproject.activity;
+package skarlat.dev.ecoproject.activity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.flow.collectLatest
+import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.databinding.ActivitySignInBinding
+import timber.log.Timber
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+class AuthActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
+    private val TAG = "SignInActivity"
+    private val RC_SIGN_IN = 10
+    private val KEY_USENAME = "USERNAME"
+    private var mGoogleApiClient: GoogleApiClient? = null
+    private var signInClient: GoogleSignInClient? = null
+    private var mFirebaseAuth: FirebaseAuth? = null
+    var binding: ActivitySignInBinding? = null
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+    private val viewModel: AuthViewModel by viewModels()
 
-import java.util.Objects;
-
-import skarlat.dev.ecoproject.Const;
-import skarlat.dev.ecoproject.R;
-import skarlat.dev.ecoproject.User;
-import skarlat.dev.ecoproject.core.SettingsManager;
-import skarlat.dev.ecoproject.databinding.ActivitySignInBinding;
-import timber.log.Timber;
-
-public class AuthActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener {
-    private final String TAG = "SignInActivity";
-    private final int RC_SIGN_IN = 10;
-    private final String KEY_USENAME = "USERNAME";
-    private GoogleApiClient mGoogleApiClient;
-    private GoogleSignInClient signInClient;
-    private FirebaseAuth mFirebaseAuth;
-    ActivitySignInBinding binding;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivitySignInBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
+        mFirebaseAuth = FirebaseAuth.getInstance()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
-                .build();
-        signInClient = GoogleSignIn.getClient(this, gso);
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .build()
+        signInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleApiClient = GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */,
                         this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+                .build()
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Timber.d("onActivityResult");
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == Const.RC_SIGN_IN_GOOGLE) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            assert result != null;
-            if (result.isSuccess()) {
-                Timber.e("Result is Success");
-                // Google Sign-In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-            } else {
-                // Google Sign-In failed
-                Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT).show();
-                Timber.e("Google Sign-In failed." + result.getStatus().getStatusMessage());
-
+    override fun onStart() {
+        super.onStart()
+        lifecycleScope.launchWhenStarted {
+            viewModel.nextScreen.collectLatest {
+                if (it != null) {
+                    findNavController(R.id.nav_host).navigate(it)
+                    finishAfterTransition()
+                }
             }
         }
     }
 
-    private final int RC_SIGN_IN_GOOGLE = 1;
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Timber.d("onActivityResult")
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == Const.RC_SIGN_IN_GOOGLE) {
+            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)!!
+            if (result.isSuccess) {
+                Timber.e("Result is Success")
+                // Google Sign-In was successful, authenticate with Firebase
+                val account = result.signInAccount
+                firebaseAuthWithGoogle(account)
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Google Sign-In failed
+                Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT).show()
+                Timber.e("Google Sign-In failed." + result.status.statusMessage)
+            }
+        }
+    }
 
-    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
+    private val RC_SIGN_IN_GOOGLE = 1
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
+        Timber.d("firebaseAuthWithGooogle:" + acct!!.id)
         // TODO Re-implement it
-        startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN_GOOGLE);
+        startActivityForResult(signInClient!!.signInIntent, RC_SIGN_IN_GOOGLE)
 
         /*AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 
@@ -121,18 +115,16 @@ public class AuthActivity extends AppCompatActivity implements
                 });*/
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        // TODO
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
 
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
-
+        Log.d(TAG, "onConnectionFailed:$connectionResult")
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show()
     }
 }

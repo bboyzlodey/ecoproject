@@ -7,6 +7,10 @@
     app:startDestination="@id/signInFragment"
     >
 
+    <action
+        android:id="@+id/globalActionToHome"
+        app:destination="@+id/homeActivity2"/>
+
     <fragment
         android:id="@+id/signInFragment"
         android:name="skarlat.dev.ecoproject.fragment.SignInFragment"
@@ -34,6 +38,11 @@
         android:name="skarlat.dev.ecoproject.fragment.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/fragment_registration"
-        />
+        >
+        <action
+            android:id="@+id/action_registrationFragment_to_homeActivity2"
+            app:destination="@id/homeActivity2"
+            />
+    </fragment>
 
 </navigation>

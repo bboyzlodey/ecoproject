@@ -11,14 +11,19 @@ import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.fragment.SplashFragmentDirections
 
-class RegistrationViewModel(): ViewModel() {
+class RegistrationViewModel(): BaseViewModel() {
 
-    val nextScreen = MutableStateFlow<NavDirections?>(null)
-    val enableSignInButton = MutableSharedFlow<Boolean>()
+    val enableRegisterButton = MutableStateFlow<Boolean>(false)
 
     private val authManager = EcoTipsApp.appComponent.getAuthManager()
     private val isAllFieldsValid : Boolean
-        get() = email.matches(Patterns.EMAIL_ADDRESS.toRegex()) && password.length >= Const.MIN_LENGTH_PASSWORD
+        get() = email.matches(Patterns.EMAIL_ADDRESS.toRegex()) && password.length >= Const.MIN_LENGTH_PASSWORD && name.isNotBlank()
+
+    var name = ""
+        set(value) {
+            field = value
+            checkEnablingSignInButton()
+        }
 
     var email = ""
         set(value) {
@@ -38,17 +43,11 @@ class RegistrationViewModel(): ViewModel() {
 
 
     fun onSignWithEmailAndPasswordClicked() {
-
+        // TODO
     }
 
     private fun checkEnablingSignInButton() {
-        enableSignInButton.tryEmit(isAllFieldsValid)
-    }
-
-    private fun signInWithEmailAndPassword() {
-        viewModelScope.launch {
-            authManager.authenticateWithEmailAndPassword(password, email)
-        }
+        enableRegisterButton.tryEmit(isAllFieldsValid)
     }
 
     fun onSignWithGoogleClicked() {
@@ -57,7 +56,9 @@ class RegistrationViewModel(): ViewModel() {
         }
     }
 
-    fun onRegistrationClicked() {
-
+    fun onRegisterClicked() {
+        viewModelScope.launch {
+            authManager.registerUser(name, email, password)
+        }
     }
 }

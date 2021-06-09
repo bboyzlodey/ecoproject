@@ -7,4 +7,5 @@ abstract class Authenticator {
     abstract val currentUser: User?
     abstract fun authenticate(bundle: Bundle)
     abstract fun logout()
+    abstract suspend fun register(bundle: Bundle)
 }
