@@ -32,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onStart() {
         super.onStart()
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.nextScreen.collectLatest {
                     goToNextScreen(it)

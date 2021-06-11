@@ -33,10 +33,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
     }
 
     private fun launchMainCoroutine() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.nextScreen.collectLatest {
-                    it?.let { goToNextScreen(it) }
+                    it.let { goToNextScreen(it) }
                 }
             }
             launch {

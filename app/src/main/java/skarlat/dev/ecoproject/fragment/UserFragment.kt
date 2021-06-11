@@ -1,39 +1,32 @@
 package skarlat.dev.ecoproject.fragment
 
-import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import skarlat.dev.ecoproject.Const
+import androidx.viewbinding.ViewBinding
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
-import skarlat.dev.ecoproject.core.SettingsManager
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.network.FirebaseAPI
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
-import java.util.*
 
-class UserFragment : Fragment() {
+class UserFragment : BaseFragment<FragmentUserBinding>() {
     private var cards: List<EcoCard>? = null
 
     var imageView: ImageView? = null
-    private var binding: FragmentUserBinding? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentUserBinding.inflate(layoutInflater)
+    override fun inflateBinding(): ViewBinding {
+        return FragmentUserBinding.inflate(layoutInflater)
+    }
+
+    private fun initUI() {
         val recyclerView = binding!!.cardsByCategory
         val textView = binding!!.userName
         imageView = binding!!.profileImage
@@ -51,12 +44,8 @@ class UserFragment : Fragment() {
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_category))
         recyclerView.addItemDecoration(itemDecoration)
         recyclerView.adapter = adapter
-        return binding!!.root
     }
 
-    private fun closeFragment() {
-//        fragmentManager!!.beginTransaction().remove(this).detach(this).commit()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,6 +56,7 @@ class UserFragment : Fragment() {
 //        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
 //        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
 //        binding?.totalProgressBar?.progress = settingsManager.userProgress
+        initUI()
     }
 
     override fun onStart() {
