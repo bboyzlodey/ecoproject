@@ -16,11 +16,21 @@
             android:id="@+id/action_homeFragment_to_courseActivity"
             app:destination="@id/courseActivity"
             />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userFragment"
+            />
     </fragment>
     <activity
         android:id="@+id/courseActivity"
         android:name="skarlat.dev.ecoproject.activity.CourseActivity"
         android:label="activity_course_card"
         tools:layout="@layout/activity_course_card"
+        />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="skarlat.dev.ecoproject.fragment.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user"
         />
 </navigation>
