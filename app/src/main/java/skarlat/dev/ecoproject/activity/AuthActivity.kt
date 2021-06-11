@@ -54,10 +54,8 @@ class AuthActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         super.onStart()
         lifecycleScope.launchWhenStarted {
             viewModel.nextScreen.collectLatest {
-                if (it != null) {
-                    findNavController(R.id.nav_host).navigate(it)
-                    finishAfterTransition()
-                }
+                findNavController(R.id.nav_host).navigate(it)
+                finishAfterTransition()
             }
         }
     }
