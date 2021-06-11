@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
-import skarlat.dev.ecoproject.includes.dataclass.Course
-import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.EcoTipsApp
+import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.setImageFromAssets
 
 
-class CourseSection(private val listCourses: List<Course>, private val sectionName: String) : Section(SectionParameters.builder()
+class CourseSection(private val listCourses: List<Course>, private val sectionName: String, private val onCourseClicked: (Course) -> Unit) : Section(SectionParameters.builder()
         .itemResourceId(R.layout.card_course)
         .headerResourceId(R.layout.section_of_courses)
         .build()) {
@@ -25,11 +25,12 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
 
     override fun onBindItemViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val courseHolder = holder as CourseViewHolder
-        courseHolder.header.text = listCourses[position].title
-        courseHolder.smallDescriptiom.text = listCourses[position].description
-        courseHolder.header.contentDescription = listCourses[position].courseNameID
-
-        courseHolder.imageCouse.setImageFromAssets(EcoTipsApp.instance.assets, listCourses[position].pathItemCardImage())
+        val item = listCourses[position]
+        courseHolder.header.text = item.title
+        courseHolder.smallDescriptiom.text = item.description
+        courseHolder.header.contentDescription = item.courseNameID
+        courseHolder.cardView.setOnClickListener { onCourseClicked.invoke(item) }
+        courseHolder.imageCouse.setImageFromAssets(EcoTipsApp.instance.assets, item.pathItemCardImage())
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {
