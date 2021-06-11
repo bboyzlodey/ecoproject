@@ -24,11 +24,6 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserFragment : Fragment() {
     private var cards: List<EcoCard>? = null
 
@@ -96,25 +91,7 @@ class UserFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        var userFragment: UserFragment? = null
-
-//        @JvmField
         var userPhotoUrl: String? = null
 
-//        @JvmField
-        var userName: String? = null
-
-        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-        fun newInstance(page: Int): UserFragment {
-            val args = Bundle()
-            args.putInt("UserFragment", page)
-            val fragment = UserFragment()
-            fragment.arguments = args
-            userFragment = fragment
-            return fragment
-        }
     }
 }
