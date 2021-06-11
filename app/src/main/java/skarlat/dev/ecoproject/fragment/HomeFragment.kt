@@ -28,10 +28,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.profileImage.setOnClickListener { viewModel.onProfileClicked() }
+        launchCoroutines()
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun launchCoroutines() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.nextScreen.collectLatest {
@@ -44,6 +44,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
         initUI()
     }
 

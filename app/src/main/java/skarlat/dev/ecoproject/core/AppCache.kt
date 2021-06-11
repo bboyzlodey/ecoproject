@@ -25,6 +25,7 @@ class AppCache @Inject constructor(private val context: Context) {
     companion object {
         private val userKey = stringPreferencesKey("user_key")
         private val usersCount = intPreferencesKey("users_count_key")
+        private val userProgressKey = intPreferencesKey("user_progress")
     }
 
     val userFlow: Flow<User>
@@ -47,6 +48,11 @@ class AppCache @Inject constructor(private val context: Context) {
                     emit(0)
                 }*//*
             }*/
+        }
+
+    val userProgressFlow: Flow<Int>
+        get() {
+            return context.dataStore.data.map { it.userProgress }
         }
 
     fun setUser(user: User) {
@@ -73,6 +79,14 @@ class AppCache @Inject constructor(private val context: Context) {
         }
     }
 
+    fun setUserProgress(progress: Int) {
+        GlobalScope.launch {
+            context.dataStore.edit {
+                it[userProgressKey] = progress
+            }
+        }
+    }
+
     private val Preferences.user: User
         get() {
             return Json.decodeFromString(get(userKey) ?: return User.empty)
@@ -80,4 +94,7 @@ class AppCache @Inject constructor(private val context: Context) {
 
     private val Preferences.userCount: Int
         get() = this[usersCount] ?: 0
+
+    private val Preferences.userProgress: Int
+        get() = this[userProgressKey] ?: 0
 }

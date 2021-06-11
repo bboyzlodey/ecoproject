@@ -4,9 +4,12 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
@@ -27,30 +30,22 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun initUI() {
-        val recyclerView = binding!!.cardsByCategory
-        val textView = binding!!.userName
-        imageView = binding!!.profileImage
-//        textView.text = User.currentUser?.name
-        val runnable = Runnable { showUserAvatar() }
         cards = EcoTipsApp.getDatabase().cardsDao().all
-        val fab = binding!!.pressBackFromFragment
-        fab.setOnClickListener {
-//            Objects.requireNonNull(activity)?.onBackPressed()
-//            onDestroy()
+        binding.pressBackFromFragment.setOnClickListener {
+            requireActivity().onBackPressed()
         }
         // @TODO: Заменить заполнение листа с ипользованием БД
         val adapter = CategoryAdapter(context, cards)
         val itemDecoration = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_category))
-        recyclerView.addItemDecoration(itemDecoration)
-        recyclerView.adapter = adapter
+        binding.cardsByCategory.addItemDecoration(itemDecoration)
+        binding.cardsByCategory.adapter = adapter
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.settingsButton.setOnClickListener {
-//            assert(fragmentManager != null)
+        binding.openSettingsButton.setOnClickListener {
 //            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
         }
 //        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
@@ -61,10 +56,26 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
     override fun onStart() {
         super.onStart()
-        FirebaseAPI
-                .getUsersCount { count ->
-                    binding?.countUsers?.text = getString(R.string.count_users_format, count)
+        val appCache = EcoTipsApp.appComponent.getAppCache()
+        FirebaseAPI.getUsersCount { appCache.setCount(it.toInt()) }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                appCache.userProgressFlow.collectLatest {
+                    binding.percentProgress.text = "${it}%"
+                    binding.totalProgressBar.progress = it
                 }
+            }
+            launch {
+                appCache.userFlow.collectLatest {
+                    binding.userName.text = it.name
+                }
+            }
+            launch {
+                appCache.userCountFlow.collectLatest {
+                    binding.countUsers.text = getString(R.string.count_users_format, it)
+                }
+            }
+        }
     }
 
     private fun showUserAvatar() {

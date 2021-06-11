@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.internal.operators.observable.ObservableFromCallable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.addDisposable
+import skarlat.dev.ecoproject.core.AppCache
 import skarlat.dev.ecoproject.core.SettingsManager
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
@@ -20,6 +21,7 @@ class DatabaseHelper {
     private val coursesDao = db.courseDao()
     private val cardsDao = db.cardsDao()
     private val sovietsDao = db.sovietsDao()
+    private val appCache: AppCache by lazy { EcoTipsApp.appComponent.getAppCache() }
 
     /**
      * функции получения объектов Course из базы
@@ -83,6 +85,7 @@ class DatabaseHelper {
                     Observable.just(percentageOpened)
                 }
                 .subscribe {
+                    appCache.setUserProgress(it.times(100).toInt())
                     settingsManager?.updateProgress(it.times(100).toInt())
                     println("The percentage: $it")
                 }

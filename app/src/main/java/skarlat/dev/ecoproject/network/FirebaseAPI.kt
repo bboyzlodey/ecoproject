@@ -15,14 +15,14 @@ class FirebaseAPI {
 
 
         fun getUsersDocument(callback: (QuerySnapshot) -> Unit) {
-            /*Firebase
+            Firebase
                     .firestore
                     .collection(Const.ECO_TIPS_COLLECTION)
                     .get(Source.SERVER)
                     .addOnSuccessListener(callback)
                     .addOnCompleteListener {
                         Timber.tag(Const.TAG).v("FirebaseAPI.getUsersDocument successful: ${it.isSuccessful}")
-                    }*/
+                    }
         }
 
         @JvmStatic
@@ -33,22 +33,22 @@ class FirebaseAPI {
         }
 
         private fun extractCountOfUsers(querySnapshot: QuerySnapshot): Long {
-            /*val usersCountData = querySnapshot.documents[0].get(usersCountFieldName)
+            val usersCountData = querySnapshot.documents[0].get(usersCountFieldName)
             if (usersCountData is Long) {
                 return usersCountData
-            }*/
+            }
             return 0
         }
 
         fun increaseCountOfUsers() {
-            /*getUsersDocument { querySnapshot ->
+            getUsersDocument { querySnapshot ->
                 val newCount = extractCountOfUsers(querySnapshot).inc()
                 querySnapshot
                         .documents[0]
                         .reference
                         .update(hashMapOf(usersCountFieldName to newCount as Any))
                         .addOnCompleteListener { Timber.tag(Const.TAG).v("FirebaseAPI.increaseCountOfUsers successful: ${it.isSuccessful}") }
-            }*/
+            }
         }
     }
 }
