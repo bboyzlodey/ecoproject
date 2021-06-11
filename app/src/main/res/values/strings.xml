@@ -63,11 +63,12 @@
     <string name="register">Зарегестрироваться</string>
     <string name="do_you_have_account_ask">Уже есть аккаунт?</string>
     <plurals name="left_card_plurals">
-        <item quantity="zero">%1$d карточек</item>
-        <item quantity="one">%1$d карточка</item>
-        <item quantity="two">%1$d карточки</item>
-        <item quantity="few">%1$d карточки</item>
-        <item quantity="many">%1$d карточек</item>
+        <item quantity="zero">Все карточки пройдены!</item>
+        <item quantity="one">Осталось %1$d карточка</item>
+        <item quantity="two">Осталось %1$d карточки</item>
+        <item quantity="few">Осталось %1$d карточки</item>
+        <item quantity="many">Осталось %1$d карточек</item>
         <item quantity="other">%1$d карточки</item>
     </plurals>
+    <string name="no_left_cards">Все карточки пройдены!</string>
 </resources>

@@ -13,7 +13,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
+import androidx.annotation.PluralsRes
+import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -84,5 +85,13 @@ fun <T>List<T>.itemAfter(item : T) : T? {
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+fun Context.getQuantityStringZero(@PluralsRes plurals: Int, @StringRes zeroStringId: Int, quantity: Int) : String {
+    return if (quantity == 0) {
+        getString(zeroStringId, quantity)
+    } else {
+        resources.getQuantityString(plurals, quantity, quantity)
+    }
+}
 
 //fun RecyclerView.ViewHolder.getColor(@ColorRes colorId: Int) = ContextCompat.getColor(itemView.context, colorId)

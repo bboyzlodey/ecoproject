@@ -65,7 +65,7 @@ class CardsViewAdapter(private val cardClickListener: (View) -> Unit) : Recycler
         }
         holderCourseCard.cardView.tag = ecoCard
 
-        val numberDrawableId = holderCourseCard.cardView?. context?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
+        val numberDrawableId = holderCourseCard.cardView?.context?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
                 ?: R.drawable.ic_card_number
         val numberDrawable = holderCourseCard.cardView?.context?.getDrawable(numberDrawableId)
         numberDrawable?.let { holderCourseCard.numberIcon.setImageDrawable(it) }
@@ -80,9 +80,7 @@ class CardsViewAdapter(private val cardClickListener: (View) -> Unit) : Recycler
         val courseDescription = cards[position] as Course
         holder.courseTitle.text = courseDescription.title
         holder.courseDescription.text = courseDescription.fullDescription
-        holder.leftCards.text = holder.itemView.context.getString(R.string.left_cards_mask,
-                holder.itemView.context.resources.getQuantityString(R.plurals.left_card_plurals, courseDescription.leftCards, courseDescription.leftCards)
-        )
+        holder.leftCards.text = holder.itemView.context.getQuantityStringZero(R.plurals.left_card_plurals, R.string.no_left_cards, courseDescription.leftCards)
         holder.progressOfCourse.max = courseDescription.countCards
         holder.progressOfCourse.progress = courseDescription.countCards - courseDescription.leftCards
     }
