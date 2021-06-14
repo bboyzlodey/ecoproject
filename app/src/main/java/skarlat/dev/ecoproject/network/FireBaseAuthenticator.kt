@@ -55,7 +55,7 @@ class FireBaseAuthenticator @Inject constructor(private val appCache: AppCache) 
                 .addOnFailureListener { Timber.e(it, "register is fail") }
                 .addOnSuccessListener {
                     it.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(bundle.name).build())
-                    processAuthSuccess()
+                            ?.addOnSuccessListener { processAuthSuccess() }
                 }
     }
 
