@@ -48,9 +48,6 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         binding.openSettingsButton.setOnClickListener {
 //            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
         }
-//        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
-//        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
-//        binding?.totalProgressBar?.progress = settingsManager.userProgress
         initUI()
     }
 
@@ -79,6 +76,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun showUserAvatar() {
+        // TODO Use glide
         try {
             val photoURL = URL(userPhotoUrl)
             val urlConnection = photoURL.openConnection()
@@ -93,6 +91,5 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
     companion object {
         var userPhotoUrl: String? = null
-
     }
 }

@@ -1,4 +1,4 @@
-<resources xmlns:ns1="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -58,9 +58,14 @@
         <item name="cornerRadius">8sp</item>
     </style>
 
-    <style name="ProfileThemeOverlay">
+    <style name="ProfileThemeOverlay_TODO">
         <item name="textAppearanceButton">@style/ButtonTextAppearance.Profile</item>
         <item name="materialButtonStyle">@style/ButtonStyle.Profile</item>
+    </style>
+
+    <style name="ProfileThemeOverlay">
+        <item name="colorSecondary">@color/colorWhite</item>
+        <item name="colorOnSecondary">@color/colorDark</item>
     </style>
 
     <style name="Button" parent="Widget.MaterialComponents.Button" />
@@ -100,6 +105,13 @@
         <item name="fabSize">mini</item>
         <item name="srcCompat">@drawable/ic_arrow_back2</item>
     </style>
+
+    <style name="FabStyle.PrevScreen.Unelevated">
+        <item name="fabSize">mini</item>
+        <item name="srcCompat">@drawable/ic_arrow_back2</item>
+        <item name="buttonStyle">@style/Widget.MaterialComponents.Button.UnelevatedButton</item>
+    </style>
+
 
     <style name="FabStyle.Close">
         <item name="fabSize">mini</item>
