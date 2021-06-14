@@ -71,4 +71,5 @@
         <item quantity="other">%1$d карточки</item>
     </plurals>
     <string name="no_left_cards">Все карточки пройдены!</string>
+    <string name="how_i_can_help">Как я могу помочь?</string>
 </resources>
