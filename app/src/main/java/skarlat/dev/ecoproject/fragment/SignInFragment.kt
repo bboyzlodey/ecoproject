@@ -36,7 +36,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.nextScreen.collectLatest {
-                    it.let { goToNextScreen(it) }
+                    goToNextScreen(it)
                 }
             }
             launch {

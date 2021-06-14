@@ -2,7 +2,6 @@ package skarlat.dev.ecoproject.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -29,25 +28,24 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
         binding.signIn.setOnClickListener {
             navController.popBackStack()
         }
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            Toast.makeText(requireContext(), "${destination.label} ${controller.backStack.size}", Toast.LENGTH_SHORT).show()
-        }
         binding.signInGoogle.setOnClickListener {
             viewModel.onSignWithGoogleClicked()
         }
-        launchObservers()
     }
 
     private fun launchObservers() {
-        lifecycleScope.launch {
-            viewModel.enableRegisterButton.collectLatest {
-                binding.signIn.isEnabled = it
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                viewModel.enableRegisterButton.collectLatest {
+                    binding.submit.isEnabled = it
+                }
             }
         }
     }
 
     override fun onStart() {
         super.onStart()
+        launchObservers()
     }
 
     override fun inflateBinding(): ViewBinding {

@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
-            android:background="@android:color/transparent"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             >
