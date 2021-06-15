@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/signInFragment"
+    >
+
+    <action
+        android:id="@+id/globalActionToHome"
+        app:destination="@+id/homeActivity2"/>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="skarlat.dev.ecoproject.fragment.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in"
+        >
+        <action
+            android:id="@+id/action_signInFragment_to_homeActivity2"
+            app:destination="@id/homeActivity2"
+            />
+        <action
+            android:id="@+id/action_signInFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            />
+    </fragment>
+
+    <activity
+        android:id="@+id/homeActivity2"
+        android:name="skarlat.dev.ecoproject.activity.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home"
+        />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="skarlat.dev.ecoproject.fragment.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration"
+        >
+        <action
+            android:id="@+id/action_registrationFragment_to_homeActivity2"
+            app:destination="@id/homeActivity2"
+            />
+    </fragment>
+
+</navigation>

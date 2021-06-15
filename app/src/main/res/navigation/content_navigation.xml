@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_navigation"
+    app:startDestination="@id/homeFragment"
+    >
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="skarlat.dev.ecoproject.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_homeFragment_to_courseActivity"
+            app:destination="@id/courseActivity"
+            />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userFragment"
+            />
+    </fragment>
+    <activity
+        android:id="@+id/courseActivity"
+        android:name="skarlat.dev.ecoproject.activity.CourseActivity"
+        android:label="activity_course_card"
+        tools:layout="@layout/activity_course_card"
+        />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="skarlat.dev.ecoproject.fragment.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user"
+        />
+
+    <action
+        android:id="@+id/globalActionToMain"
+        app:destination="@id/mainActivity"
+        />
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="skarlat.dev.ecoproject.activity.MainActivity"
+        tools:layout="@layout/activity_launch"
+        />
+</navigation>

@@ -1,19 +1,14 @@
 package skarlat.dev.ecoproject.activity;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -85,8 +80,8 @@ public class CardActivity extends AppCompatActivity {
     private void inflateLayout(EcoSoviet ecoSoviet) {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.card_soviet, null, false);
-        ((TextView) view.findViewById(R.id.header_card)).setText(ecoSoviet.getTitle());
-        ((TextView) view.findViewById(R.id.descr_card)).setText(ecoSoviet.getDescription());
+        ((TextView) view.findViewById(R.id.header_card)).setText(ecoSoviet.title);
+        ((TextView) view.findViewById(R.id.descr_card)).setText(ecoSoviet.description);
         linearLayout.addView(view);
     }
 
@@ -95,7 +90,7 @@ public class CardActivity extends AppCompatActivity {
     } // Для дебагинга и логинга
 
     protected void initiList() {
-        ecoSoviets = db.getAllByCardName(ecoCard.getName());
+        ecoSoviets = db.getAllCards(ecoCard.getName());
     }
 
 

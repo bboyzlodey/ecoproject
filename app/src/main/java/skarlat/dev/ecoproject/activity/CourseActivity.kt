@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import skarlat.dev.ecoproject.ConnectionCardDecorator
-import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.*
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding
 import skarlat.dev.ecoproject.includes.database.DatabaseHelper
 import skarlat.dev.ecoproject.includes.dataclass.Course
+import skarlat.dev.ecoproject.includes.dataclass.Course.Status.FINISHED
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
-import skarlat.dev.ecoproject.setImageFromAssets
 
 class CourseActivity : AppCompatActivity() {
     private var courseName: String? = null
@@ -27,7 +26,7 @@ class CourseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCourseCardBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        adapter = CardsViewAdapter(this@CourseActivity) { view: View -> openCard(view) }
+        adapter = CardsViewAdapter { view: View -> openCard(view) }
         updateData()
         binding!!.recycleCards.adapter = adapter
         binding!!.courseAvatar.setImageFromAssets(assets, currentCourse!!.pathBarImage())
@@ -57,21 +56,41 @@ class CourseActivity : AppCompatActivity() {
         val currentCard = view.tag as EcoCard
         val intent = Intent(this, CardActivity::class.java)
         intent.putExtra(currentCard.javaClass.simpleName, currentCard)
-        if (currentCard.status === EcoCard.Status.WATCHED) {
+        val nextCard = ecoCards?.itemAfter(currentCard)
+
+        if (currentCard.status === EcoCard.Status.WATCHED && nextCard?.status != EcoCard.Status.CLOSED) {
             startActivityForResult(intent, REQUST)
         } else {
-            for (i in ecoCards!!.indices) {
-                if (ecoCards!![i].name === currentCard.name && i + 1 < ecoCards!!.size) {
-                    ecoCards!![i + 1].upDate(EcoCard.Status.OPENED)
-                    db.updateFirebaseProgress("Cards", ecoCards!![i + 1].name, "status", 1)
-                    break
-                }
-            }
-            currentCard.upDate(EcoCard.Status.WATCHED)
-            db.updateFirebaseProgress("Cards", currentCard.name, "status", 2)
+            currentCard.setStatus(EcoCard.Status.WATCHED)
+            nextCard?.setStatus(EcoCard.Status.OPENED)
+
+            addDisposable(
+                    EcoTipsApp.getDatabase().cardsDao().update(currentCard)
+                            .IOSchedulers
+                            .subscribe { })
             startActivityForResult(intent, REQUST)
         }
+        if (nextCard == null) {
+            markCourseAsFinished()
+        } else {
+            addDisposable(
+                    EcoTipsApp.getDatabase().cardsDao().update(nextCard)
+                            .IOSchedulers
+                            .subscribe { })
+        }
         return null
+    }
+
+    private fun markCourseAsFinished() {
+        currentCourse?.let {
+            it.isActive = FINISHED.ordinal
+            val disposable = EcoTipsApp.getDatabase().courseDao().update(it)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
     }
 
     private fun updateData() {
@@ -84,6 +103,5 @@ class CourseActivity : AppCompatActivity() {
         val adapterList = arrayListOf<Any>(currentCourse!!)
         adapterList.addAll(ecoCards!!)
         adapter!!.submitList(adapterList)
-        db.upDateIsCurrentCourse(courseName)
     }
 }

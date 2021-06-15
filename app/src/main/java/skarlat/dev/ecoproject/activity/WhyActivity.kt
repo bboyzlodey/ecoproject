@@ -49,7 +49,7 @@ class WhyActivity : AppCompatActivity() {
         rvAdapter.items = ejResponse.blocks
     }
 
-    fun readFileFromAssets(fname: String, assetsManager: AssetManager): String {
+    private fun readFileFromAssets(fname: String, assetsManager: AssetManager): String {
         return assetsManager.open(fname).readBytes().toString(Charsets.UTF_8)
     }
 

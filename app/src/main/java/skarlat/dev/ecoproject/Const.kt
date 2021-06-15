@@ -12,4 +12,9 @@ object Const {
     const val CARD_OPENED = 0x1
     const val ECO_TIPS_COLLECTION = "ecoTips"
     const val ECO_TIPS_PREFERENCES = "eco_tips_preferences"
+
+    const val AUTH_METHOD = "auth_method"
+    const val AUTH_PASS = "auth_path"
+    const val AUTH_LOGIN = "auth_login"
+    const val REGISTER_NAME = "register_name"
 }

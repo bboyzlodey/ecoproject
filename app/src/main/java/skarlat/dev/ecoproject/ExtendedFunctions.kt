@@ -7,11 +7,20 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.LayoutRes
+import androidx.annotation.PluralsRes
+import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
 
 fun Int.pxToDp(context: Context): Int = TypedValue.applyDimension(
@@ -50,3 +59,39 @@ fun ImageView.setImageFromAssets(assetManager: AssetManager, path: String) {
 
 fun RecyclerView.ViewHolder.getColor(@ColorRes colorId : Int, theme : Resources.Theme? = null)
         = ResourcesCompat.getColor(itemView.resources, colorId, theme)
+
+fun addDisposable(disposable: Disposable) {
+    EcoTipsApp.addDisposable(disposable)
+}
+
+fun addDisposable(disposable: io.reactivex.disposables.Disposable) {
+    EcoTipsApp.addDisposable(disposable)
+}
+
+fun RecyclerView.Adapter<RecyclerView.ViewHolder>.inflate(@LayoutRes layoutId: Int, parent: ViewGroup) : View {
+    return LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
+}
+
+fun RecyclerView.ViewHolder.getDrawableWithIdentifier(identifier: String) {
+    val defType = "drawable"
+}
+
+fun <T>List<T>.itemAfter(item : T) : T? {
+    val itemPosition = indexOf(item)
+    if (itemPosition + 1 >= size) {
+        return null
+    }
+    return this[itemPosition + 1]
+}
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+fun Context.getQuantityStringZero(@PluralsRes plurals: Int, @StringRes zeroStringId: Int, quantity: Int) : String {
+    return if (quantity == 0) {
+        getString(zeroStringId, quantity)
+    } else {
+        resources.getQuantityString(plurals, quantity, quantity)
+    }
+}
+
+//fun RecyclerView.ViewHolder.getColor(@ColorRes colorId: Int) = ContextCompat.getColor(itemView.context, colorId)

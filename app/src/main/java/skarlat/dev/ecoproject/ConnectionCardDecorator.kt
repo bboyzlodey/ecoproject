@@ -25,10 +25,10 @@ class ConnectionCardDecorator : RecyclerView.ItemDecoration() {
             val left = middle - partOf
             val right = middle + partOf
             val viewHolder = parent.findViewHolderForAdapterPosition(i)
-            if (viewHolder is CardsViewAdapter.CourseCardViewHolder && viewHolder.state == EcoCard.Status.OPENED) {
-                drawable.state = IntArray(1).apply { this[0] = android.R.attr.state_enabled.inv() }
+            if (viewHolder is CardsViewAdapter.CourseCardViewHolder && viewHolder.state == EcoCard.Status.WATCHED) {
+                drawable.state = IntArray(1).apply { this[0] = android.R.attr.state_enabled}
             } else {
-                drawable.state = IntArray(1).apply { this[0] = android.R.attr.state_enabled }
+                drawable.state = IntArray(1).apply { this[0] = android.R.attr.state_enabled.inv() }
             }
             drawable.setBounds(left, top, right, bottom)
             drawable.draw(c)

@@ -4,7 +4,8 @@
         <rotate
             android:fromDegrees="180"
             android:toDegrees="180"
-            android:drawable="@drawable/ic_arrow_back"></rotate>
+            android:drawable="@drawable/ic_arrow_back"
+            />
     </item>
 
 </layer-list>

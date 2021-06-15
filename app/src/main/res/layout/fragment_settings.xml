@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clipChildren="false"
-    android:theme="@style/AppTheme"
-    tools:context=".SettingsFragment">
+    android:theme="@style/AppTheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

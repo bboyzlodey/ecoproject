@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,6 +24,7 @@ import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.databinding.ActivityRegistrationBinding
 import skarlat.dev.ecoproject.network.FirebaseAPI
+import timber.log.Timber
 
 /**
  * RegistrationActivity - активность для регистрации нового юзера через FireBase
@@ -110,21 +112,16 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
             mAuth!!.createUserWithEmailAndPassword(userEmail, userPasswd)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful.also { result[0] = it }) {
-                            Toast.makeText(applicationContext, "Проверьте почту!",
+                            Toast.makeText(applicationContext, R.string.registration_successful,
                                     Toast.LENGTH_SHORT).show()
                             increaseCountOfUsers()
-                            Log.i(TAG, "createUserWithEmail: success")
                             if (setUserNameInFireBase(userName)) {
                                 finish()
-                                Log.i(TAG, "setUserNameInFireBase: true")
                             } else {
-                                Toast.makeText(applicationContext, "Не получилось установить имя", Toast.LENGTH_SHORT)
-                                Log.e(TAG, "Не получилось установить имя")
+                                showMessage(R.string.name_attach_error)
                             }
                         } else {
-                            Toast.makeText(this@RegistrationActivity, "Registration failed.",
-                                    Toast.LENGTH_SHORT).show()
-                            Log.e(TAG, "createUserWithEmail: failed")
+                            showMessage(R.string.registration_failed)
                         }
                     }
         }
@@ -165,10 +162,8 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
      */
     private fun passwordCheckerSecurity(passwd: String): Boolean {
         var security: Boolean
-        val securityRegex = ".+"
         security = passwd.length >= Const.MIN_LENGTH_PASSWORD
-        security = passwd.matches(Regex.fromLiteral(securityRegex))
-        Log.d(TAG, "passwCheckerSecurity return: $security")
+        Timber.tag(TAG).d( "passwCheckerSecurity return: $security")
         return security
     }
 
@@ -179,13 +174,19 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
 
 //        valid = (!eMail.equals("")) && eMail.matches(validPattern);
         valid = eMail != ""
-        Log.d(TAG, "eMailCheckerCorrect return: $valid $eMail")
-        Toast.makeText(this, "Неправильный email!", Toast.LENGTH_SHORT).show()
+        Timber.tag(Const.TAG).d("eMailCheckerCorrect return: $valid $eMail")
         return valid
     }
 
     private fun userDataValidation(passwd: String, eMail: String): Boolean {
         return passwordCheckerSecurity(passwd) && eMailCheckerCorrect(eMail)
+    }
+
+    private fun showMessage(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun showMessage(@StringRes stringId: Int) {
+        Toast.makeText(this, stringId, Toast.LENGTH_SHORT).show()
     }
 
     private fun signInGoogle() {
@@ -205,32 +206,23 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        Log.d(TAG, "onConnectionFailed:$connectionResult")
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show()
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
-        Log.d(TAG, "firebaseAuthWithGooogle:" + acct!!.id)
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         mFirebaseAuth!!.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful)
-
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
                     if (!task.isSuccessful) {
-                        Log.w(TAG, "signInWithCredential", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
+                        showMessage(R.string.registration_failed)
                         finish()
                     } else {
-                        Log.d(TAG, """
-     name: ${acct.displayName}
-     ${acct.email}
-     """.trimIndent())
-                        User.currentUser = User(task.result!!.user!!.displayName)
-                        startActivity(Intent(baseContext, AuthActivity::class.java))
+//                        User.currentUser = User(task.result!!.user!!.displayName)
+//                        startActivity(Intent(baseContext, AuthActivity::class.java))
                         finish()
                     }
                 }
@@ -239,19 +231,16 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
     @SuppressLint("ShowToast")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d(TAG, "onActivityResult")
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == Const.RC_SIGN_IN_GOOGLE) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result!!.isSuccess) {
-                Log.e(TAG, "Result is Success")
                 // Google Sign-In was successful, authenticate with Firebase
                 val account = result.signInAccount
                 firebaseAuthWithGoogle(account)
             } else {
                 // Google Sign-In failed
-                Toast.makeText(this, "Авторизация не удалась!", Toast.LENGTH_SHORT)
-                Log.e(TAG, "Google Sign-In failed.")
+                showMessage(R.string.errorSignInWithGoogle)
             }
         }
     }

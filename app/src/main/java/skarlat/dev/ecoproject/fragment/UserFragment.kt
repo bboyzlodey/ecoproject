@@ -1,98 +1,91 @@
 package skarlat.dev.ecoproject.fragment
 
-import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import skarlat.dev.ecoproject.Const
+import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.ContentNavigationDirections
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
-import skarlat.dev.ecoproject.core.SettingsManager
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.network.FirebaseAPI
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
-import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class UserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+class UserFragment : BaseFragment<FragmentUserBinding>() {
     private var cards: List<EcoCard>? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
-    }
 
     var imageView: ImageView? = null
-    private var binding: FragmentUserBinding? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentUserBinding.inflate(layoutInflater)
-        val recyclerView = binding!!.cardsByCategory
-        val textView = binding!!.userName
-        imageView = binding!!.profileImage
-        textView.text = User.currentUser?.name
-        val runnable = Runnable { showUserAvatar() }
+    override fun inflateBinding(): ViewBinding {
+        return FragmentUserBinding.inflate(layoutInflater)
+    }
+
+    private fun initUI() {
         cards = EcoTipsApp.getDatabase().cardsDao().all
-        val fab = binding!!.pressBackFromFragment
-        fab.setOnClickListener {
-            Objects.requireNonNull(activity)?.onBackPressed()
-            onDestroy()
+        binding.pressBackFromFragment.setOnClickListener {
+            requireActivity().onBackPressed()
         }
         // @TODO: Заменить заполнение листа с ипользованием БД
         val adapter = CategoryAdapter(context, cards)
         val itemDecoration = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_category))
-        recyclerView.addItemDecoration(itemDecoration)
-        recyclerView.adapter = adapter
-        return binding!!.root
+        binding.cardsByCategory.addItemDecoration(itemDecoration)
+        binding.cardsByCategory.adapter = adapter
+        binding.logoutButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                EcoTipsApp.appComponent.getAuthManager().logout()
+                findNavController().navigate(ContentNavigationDirections.globalActionToMain())
+                requireActivity().finishAfterTransition()
+            }
+        }
     }
 
-    private fun closeFragment() {
-        fragmentManager!!.beginTransaction().remove(this).detach(this).commit()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.settingsButton.setOnClickListener {
-            assert(fragmentManager != null)
-            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
+        binding.openSettingsButton.setOnClickListener {
+//            fragmentManager!!.beginTransaction().add(R.id.home_layout, ProfileSettingsFragment.newInstance()).commit()
         }
-        val settingsManager = SettingsManager(context!!.getSharedPreferences(Const.ECO_TIPS_PREFERENCES, Context.MODE_PRIVATE))
-        binding?.percentProgress?.text = "${settingsManager.userProgress}%"
-        binding?.totalProgressBar?.progress = settingsManager.userProgress
+        initUI()
     }
 
     override fun onStart() {
         super.onStart()
-        FirebaseAPI
-                .getUsersCount { count ->
-                    binding?.countUsers?.text = getString(R.string.count_users_format, count)
+        val appCache = EcoTipsApp.appComponent.getAppCache()
+        FirebaseAPI.getUsersCount { appCache.setCount(it.toInt()) }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                appCache.userProgressFlow.collectLatest {
+                    binding.percentProgress.text = "${it}%"
+                    binding.totalProgressBar.progress = it
                 }
+            }
+            launch {
+                appCache.userFlow.collectLatest {
+                    binding.userName.text = it.name
+                }
+            }
+            launch {
+                appCache.userCountFlow.collectLatest {
+                    binding.countUsers.text = getString(R.string.count_users_format, it)
+                }
+            }
+        }
     }
 
     private fun showUserAvatar() {
+        // TODO Use glide
         try {
             val photoURL = URL(userPhotoUrl)
             val urlConnection = photoURL.openConnection()
@@ -106,27 +99,6 @@ class UserFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
-        var userFragment: UserFragment? = null
-
-        @JvmField
         var userPhotoUrl: String? = null
-
-        @JvmField
-        var userName: String? = null
-
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(page: Int): UserFragment {
-            val args = Bundle()
-            args.putInt("UserFragment", page)
-            val fragment = UserFragment()
-            fragment.arguments = args
-            userFragment = fragment
-            return fragment
-        }
     }
 }

@@ -1,56 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
 
     >
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/current_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        tools:tag="firstStep">
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:stateListAnimator="@null"
+        app:cardCornerRadius="8dp"
+        tools:tag="firstStep"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/backgroundForSoviet">
+            android:background="@color/backgroundForSoviet"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="20dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="16dp">
+                android:paddingStart="@dimen/default_margin"
+                android:paddingTop="@dimen/default_margin"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingBottom="14dp"
+                >
 
 
                 <TextView
+                    android:id="@+id/header_card"
+                    style="@style/CardTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Header"
                     tools:textAllCaps="true"
-                    android:id="@+id/header_card"
-                    style="@style/nameOfSoviet" />
+                    />
 
                 <TextView
+                    android:id="@+id/descr_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Big text"
-                    android:capitalize="sentences"
-                    android:id="@+id/descr_card"
                     android:layout_marginTop="8dp"
-                    android:textSize="16dp" />
+                    android:textColor="#CC252723"
+                    android:textSize="16sp"
+                    tools:text="Big text"
+                    />
 
             </LinearLayout>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

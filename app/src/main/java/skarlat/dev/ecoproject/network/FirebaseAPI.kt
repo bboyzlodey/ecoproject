@@ -51,12 +51,4 @@ class FirebaseAPI {
             }
         }
     }
-
-    class Callbacks {
-        companion object {
-            fun getUsersCount() {
-
-            }
-        }
-    }
 }

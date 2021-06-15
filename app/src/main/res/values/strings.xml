@@ -12,7 +12,7 @@
     <string name="courses_done">Пройденные курсы</string>
     <string name="sign_in">Вход</string>
     <string name="complete_btn">Завершить</string>
-    <string name="hello">Добро пожаловать в EcoTips!</string>
+    <string name="welcome_to_ecotips">Добро пожаловать в EcoTips!</string>
     <string name="helloUser">Привет, </string>
     <string name="passwd">Пароль</string>
     <string name="email">Email</string>
@@ -20,7 +20,7 @@
     <string name="name">Имя</string>
     <string name="my_profile">Мой профиль</string>
     <string name="errorSignInWithEmail">Не получилось. Попробуйте еще раз!</string>
-    <string name="errorSignInWithGoogle">Не получилось.</string>
+    <string name="errorSignInWithGoogle">Ошибка</string>
     <string name="title_activity_kotlin">KotlinActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -54,12 +54,23 @@
     <string name="google_sign_in">Продолжить с Google</string>
     <string name="left_cards_mask">Осталось %s</string>
     <string name="eco_label">ЭКО</string>
+    <string name="hello_user_mask">Привет, %s!</string>
+    <string name="registration_failed">Ошибка</string>
+    <string name="registration_successful">Успешно</string>
+    <string name="name_attach_error">Не получилось установить имя</string>
+    <string name="remind_password"><u>Не помню пароль</u></string>
+    <string name="no_account_ask">Нет аккаунта?</string>
+    <string name="register">Зарегестрироваться</string>
+    <string name="do_you_have_account_ask">Уже есть аккаунт?</string>
     <plurals name="left_card_plurals">
-        <item quantity="zero">%1$d карточек</item>
-        <item quantity="one">%1$d карточка</item>
-        <item quantity="two">%1$d карточки</item>
-        <item quantity="few">%1$d карточки</item>
-        <item quantity="many">%1$d карточек</item>
+        <item quantity="zero">Все карточки пройдены!</item>
+        <item quantity="one">Осталось %1$d карточка</item>
+        <item quantity="two">Осталось %1$d карточки</item>
+        <item quantity="few">Осталось %1$d карточки</item>
+        <item quantity="many">Осталось %1$d карточек</item>
         <item quantity="other">%1$d карточки</item>
     </plurals>
+    <string name="no_left_cards">Все карточки пройдены!</string>
+    <string name="how_i_can_help">Как я могу помочь?</string>
+    <string name="logout">Выйти</string>
 </resources>

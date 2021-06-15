@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Maybe;
 import skarlat.dev.ecoproject.includes.dataclass.Course;
 
 /**
@@ -34,7 +35,7 @@ public interface CourseDao {
     List<Course> getAllFinished();
 
     @Query("SELECT * FROM Course WHERE courseNameID = :courseNameID")
-    Course getByCourseID(String courseNameID);
+    Course getCourse(String courseNameID);
 
     @Query("SELECT * FROM Course WHERE isActive = 1")
     Course getCurrentCourse();
