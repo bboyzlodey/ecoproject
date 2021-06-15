@@ -72,4 +72,5 @@
     </plurals>
     <string name="no_left_cards">Все карточки пройдены!</string>
     <string name="how_i_can_help">Как я могу помочь?</string>
+    <string name="logout">Выйти</string>
 </resources>

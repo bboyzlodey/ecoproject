@@ -33,4 +33,15 @@
         android:label="fragment_user"
         tools:layout="@layout/fragment_user"
         />
+
+    <action
+        android:id="@+id/globalActionToMain"
+        app:destination="@id/mainActivity"
+        />
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="skarlat.dev.ecoproject.activity.MainActivity"
+        tools:layout="@layout/activity_launch"
+        />
 </navigation>

@@ -113,11 +113,6 @@ class AuthActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                 });*/
     }
 
-    override fun onBackPressed() {
-//        super.onBackPressed()
-        // TODO
-    }
-
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
 
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not

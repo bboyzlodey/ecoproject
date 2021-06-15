@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.ContentNavigationDirections
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
@@ -40,6 +42,13 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_category))
         binding.cardsByCategory.addItemDecoration(itemDecoration)
         binding.cardsByCategory.adapter = adapter
+        binding.logoutButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                EcoTipsApp.appComponent.getAuthManager().logout()
+                findNavController().navigate(ContentNavigationDirections.globalActionToMain())
+                requireActivity().finishAfterTransition()
+            }
+        }
     }
 
 
