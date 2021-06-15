@@ -14,7 +14,6 @@ import skarlat.dev.ecoproject.R
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
-    @SuppressLint("StaticFieldLeak")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.nextScreen.collectLatest {
-                    it?.let { goToNextScreen(it) }
+                    goToNextScreen(it)
                 }
             }
         }

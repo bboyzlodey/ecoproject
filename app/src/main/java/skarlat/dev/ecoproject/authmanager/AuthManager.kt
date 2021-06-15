@@ -9,7 +9,7 @@ import javax.inject.Inject
 class AuthManager @Inject constructor(private val authenticator: Authenticator) {
 
     suspend fun isUserAuthored(): Boolean {
-        return authenticator.currentUser == null
+        return authenticator.currentUser != null
     }
 
     suspend fun authenticateWithGoogleAccount() {
