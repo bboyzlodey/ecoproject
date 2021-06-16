@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.activity.AuthActivity
 import skarlat.dev.ecoproject.databinding.FragmentSignInBinding
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>() {
@@ -23,7 +24,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
         binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
         binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }
         binding.signIn.setOnClickListener { viewModel.onSignWithEmailAndPasswordClicked() }
-        binding.signInGoogle.setOnClickListener { viewModel.onSignWithGoogleClicked() }
+        binding.signInGoogle.setOnClickListener {
+            (requireActivity() as? AuthActivity)?.signInWithGoogle()
+            viewModel.onSignWithGoogleClicked()
+        }
         binding.register.setOnClickListener { viewModel.onRegistrationClicked() }
     }
 

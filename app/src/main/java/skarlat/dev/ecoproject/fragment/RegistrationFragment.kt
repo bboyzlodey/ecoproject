@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.activity.AuthActivity
 import skarlat.dev.ecoproject.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
@@ -29,6 +30,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
             navController.popBackStack()
         }
         binding.signInGoogle.setOnClickListener {
+            (requireActivity() as? AuthActivity)?.signInWithGoogle()
             viewModel.onSignWithGoogleClicked()
         }
     }

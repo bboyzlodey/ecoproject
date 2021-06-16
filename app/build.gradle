@@ -82,11 +82,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //  FireBase
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'      // Google Login (Auth.)
-    // Reactive
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0' // TODO delete dependency
+    // Reactive // TODO Delete RxJava Dependency
     implementation "io.reactivex.rxjava2:rxjava:2.2.20"
     implementation "io.reactivex.rxjava3:rxjava:3.0.10"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

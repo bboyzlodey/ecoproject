@@ -198,7 +198,7 @@
                 android:layout_marginBottom="@dimen/default_margin"
                 android:text="@string/google_sign_in"
                 android:theme="@style/ThemeOverlayGoogleSignIn"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/endGuideLine"
                 app:layout_constraintStart_toStartOf="@id/startGuideLine"
