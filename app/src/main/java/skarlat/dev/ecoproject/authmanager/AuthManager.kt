@@ -8,10 +8,6 @@ import javax.inject.Inject
 
 class AuthManager @Inject constructor(private val authenticator: Authenticator) {
 
-    suspend fun isUserAuthored(): Boolean {
-        return authenticator.currentUser != null
-    }
-
     suspend fun authenticateWithGoogleAccount() {
         authenticator.authenticate(Bundle().apply { putSerializable(Const.AUTH_METHOD, FireBaseAuthenticator.AuthMethod.Google) })
     }

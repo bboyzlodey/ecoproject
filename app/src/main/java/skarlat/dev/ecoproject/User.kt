@@ -11,3 +11,5 @@ data class User(
         val empty = User("", "")
     }
 }
+
+val User.isAuthored: Boolean get() = this != User.empty
