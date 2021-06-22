@@ -5,14 +5,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.User
-import skarlat.dev.ecoproject.authmanager.strategy.GoogleSignInStrategy
+import skarlat.dev.ecoproject.authentication.strategy.GoogleSignInStrategy
 import skarlat.dev.ecoproject.databinding.ActivitySignInBinding
 import skarlat.dev.ecoproject.showSnackBar
 

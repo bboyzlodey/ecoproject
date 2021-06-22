@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.authmanager
+package skarlat.dev.ecoproject.authentication
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

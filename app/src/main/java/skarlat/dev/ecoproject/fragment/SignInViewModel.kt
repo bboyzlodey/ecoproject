@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.EcoTipsApp
-import skarlat.dev.ecoproject.authmanager.strategy.AuthStrategy
+import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
 
 class SignInViewModel : BaseViewModel() {
 

@@ -1,4 +1,4 @@
-package skarlat.dev.ecoproject.network
+package skarlat.dev.ecoproject.authentication
 
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
@@ -7,6 +7,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.serialization.Serializable
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.User
+import skarlat.dev.ecoproject.authentication.Authenticator
 import skarlat.dev.ecoproject.core.AppCache
 import timber.log.Timber
 import javax.inject.Inject

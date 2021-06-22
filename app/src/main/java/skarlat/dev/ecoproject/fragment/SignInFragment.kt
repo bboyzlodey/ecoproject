@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.activity.AuthActivity
-import skarlat.dev.ecoproject.authmanager.strategy.LoginPasswordStrategy
+import skarlat.dev.ecoproject.authentication.strategy.LoginPasswordStrategy
 import skarlat.dev.ecoproject.databinding.FragmentSignInBinding
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>() {

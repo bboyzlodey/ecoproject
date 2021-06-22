@@ -1,9 +1,7 @@
-package skarlat.dev.ecoproject.authmanager
+package skarlat.dev.ecoproject.authentication
 
 import android.os.Bundle
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.network.Authenticator
-import skarlat.dev.ecoproject.network.AppAuthenticator
 import javax.inject.Inject
 
 class AuthManager @Inject constructor(val authenticator: Authenticator) {
