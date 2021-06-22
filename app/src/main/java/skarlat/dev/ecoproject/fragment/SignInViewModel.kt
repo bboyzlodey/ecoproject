@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.EcoTipsApp
+import skarlat.dev.ecoproject.authmanager.strategy.AuthStrategy
 
 class SignInViewModel : BaseViewModel() {
 
@@ -54,5 +55,9 @@ class SignInViewModel : BaseViewModel() {
 
     fun onRegistrationClicked() {
         nextScreen.tryEmit(SignInFragmentDirections.actionSignInFragmentToRegistrationFragment())
+    }
+
+    fun setAuthStrategy(strategy: AuthStrategy) {
+        authManager.authenticator.authStrategy = strategy
     }
 }

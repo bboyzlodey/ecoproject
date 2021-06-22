@@ -4,9 +4,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.EcoTipsApp
+import skarlat.dev.ecoproject.authmanager.AuthErrorHandler
+import skarlat.dev.ecoproject.authmanager.DefaultErrorHandler
 import skarlat.dev.ecoproject.fragment.BaseViewModel
 
-class AuthViewModel : BaseViewModel() {
+class AuthViewModel : BaseViewModel(), AuthErrorHandler by DefaultErrorHandler() {
 
     private val appCache = EcoTipsApp.appComponent.getAppCache()
 

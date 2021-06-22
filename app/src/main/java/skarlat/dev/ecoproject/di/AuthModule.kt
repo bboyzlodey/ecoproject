@@ -4,13 +4,13 @@ import dagger.Module
 import dagger.Provides
 import skarlat.dev.ecoproject.authmanager.AuthManager
 import skarlat.dev.ecoproject.core.AppCache
-import skarlat.dev.ecoproject.network.FireBaseAuthenticator
+import skarlat.dev.ecoproject.network.AppAuthenticator
 
 @Module(includes = [AppCacheModule::class])
-class AuthModule(/*val appCache: AppCache*/) {
+class AuthModule {
 
     @Provides
-    fun provideAuthManager(appCache: AppCache) : AuthManager {
-        return AuthManager(FireBaseAuthenticator(appCache))
+    fun provideAuthManager(appCache: AppCache): AuthManager {
+        return AuthManager(AppAuthenticator(appCache))
     }
 }
