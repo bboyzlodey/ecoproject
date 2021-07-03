@@ -6,6 +6,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.activity.AuthActivity
@@ -25,6 +26,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
             viewModel.authManager = it
         }
         binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }
+        binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
         binding.signIn.setOnClickListener {
             viewModel.onSignWithEmailAndPasswordClicked()
         }
@@ -32,10 +34,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
             viewModel.onSignWithGoogleClicked()
         }
         binding.register.setOnClickListener { viewModel.onRegistrationClicked() }
-    }
-
-    override fun onStart() {
-        super.onStart()
         launchMainCoroutine()
     }
 
@@ -47,7 +45,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
                 }
             }
             launch {
-                viewModel.enableSignInButton.collectLatest {
+                viewModel.enableSignInButton.collect {
                     binding.signIn.isEnabled = it
                 }
             }
