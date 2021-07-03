@@ -16,7 +16,7 @@ class AuthModule {
     @Provides
     @ActivityScope
     fun provideAuthManager(appCache: AppCache, activity: AppCompatActivity): AuthManager {
-        return AuthManager(AppAuthenticator(appCache), getAuthStrategies(activity))
+        return AuthManager(AppAuthenticator(appCache, getAuthStrategies(activity)))
     }
 
     @Provides

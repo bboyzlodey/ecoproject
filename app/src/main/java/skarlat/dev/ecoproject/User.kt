@@ -1,14 +1,16 @@
 package skarlat.dev.ecoproject
 
 import kotlinx.serialization.Serializable
+import skarlat.dev.ecoproject.authentication.AppAuthenticator
 
 @Serializable
 data class User(
         val name: String,
-        val email: String
+        val email: String,
+        val authMethod: AppAuthenticator.AuthMethod
 ) {
     companion object {
-        val empty = User("", "")
+        val empty = User("", "", AppAuthenticator.AuthMethod.PassLogin)
     }
 }
 

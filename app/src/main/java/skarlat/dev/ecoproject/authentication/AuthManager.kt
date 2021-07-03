@@ -2,20 +2,17 @@ package skarlat.dev.ecoproject.authentication
 
 import android.os.Bundle
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
 import javax.inject.Inject
 
-class AuthManager @Inject constructor(private val authenticator: Authenticator, private val authStrategies: Map<AppAuthenticator.AuthMethod, AuthStrategy>) {
+class AuthManager @Inject constructor(private val authenticator: Authenticator) {
 
     suspend fun authenticateWithGoogleAccount() {
-        authenticator.authStrategy = authStrategies[AppAuthenticator.AuthMethod.Google]
-        authenticator.authenticate(Bundle().apply { putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.Google) })
+        authenticator.authenticate(Bundle().apply { putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.Google.name) })
     }
 
     suspend fun authenticateWithEmailAndPassword(password: String, email: String) {
-        authenticator.authStrategy = authStrategies[AppAuthenticator.AuthMethod.PassLogin]
         authenticator.authenticate(Bundle().apply {
-            putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.PassLogin)
+            putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.PassLogin.name)
             putSerializable(Const.AUTH_PASS, password)
             putSerializable(Const.AUTH_LOGIN, email)
         })
@@ -23,7 +20,6 @@ class AuthManager @Inject constructor(private val authenticator: Authenticator, 
     }
 
     fun logout() {
-        authenticator.authStrategy = authStrategies[AppAuthenticator.AuthMethod.Google]
         authenticator.logout()
     }
 

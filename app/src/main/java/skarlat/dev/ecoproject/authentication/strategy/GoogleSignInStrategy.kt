@@ -73,5 +73,5 @@ class GoogleSignInStrategy(activity: AppCompatActivity) : AuthStrategy() {
     }
 
     private val GoogleSignInAccount.user
-        get() = User(this.displayName?.substringBefore(" ").orEmpty(), this.email.orEmpty())
+        get() = User(this.displayName?.substringBefore(" ").orEmpty(), this.email.orEmpty(), AppAuthenticator.AuthMethod.Google)
 }

@@ -4,19 +4,23 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.User
-import skarlat.dev.ecoproject.authentication.Authenticator
+import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
 import skarlat.dev.ecoproject.core.AppCache
 import timber.log.Timber
 import javax.inject.Inject
 
-class AppAuthenticator @Inject constructor(private val appCache: AppCache) : Authenticator() {
+class AppAuthenticator @Inject constructor(private val appCache: AppCache, private val authStrategies: Map<AppAuthenticator.AuthMethod, AuthStrategy>) : Authenticator() {
 
     private val fireBaseAuth = FirebaseAuth.getInstance()
 
     override fun authenticate(bundle: Bundle) {
+        authStrategy = authStrategies[AuthMethod.valueOf(bundle.authMethod)]
         authStrategy?.authenticate(bundle)
     }
 
@@ -25,8 +29,14 @@ class AppAuthenticator @Inject constructor(private val appCache: AppCache) : Aut
     }
 
     override fun logout() {
-        authStrategy?.logout()
-        appCache.clear()
+        Timber.d("Logout")
+        GlobalScope.launch {
+            val logguedUser = appCache.userFlow.firstOrNull()
+            Timber.d("loginned user: ${logguedUser}")
+            authStrategy = authStrategies[logguedUser?.authMethod]
+            appCache.clear()
+            authStrategy?.logout()
+        }
     }
 
     override suspend fun register(bundle: Bundle) {
@@ -53,7 +63,10 @@ class AppAuthenticator @Inject constructor(private val appCache: AppCache) : Aut
     private val Bundle.name: String
         get() = this[Const.REGISTER_NAME] as? String ?: throw invalidBundleException
 
+    private val Bundle.authMethod: String
+        get() = this[Const.AUTH_METHOD] as? String ?: throw invalidBundleException
+
     private val invalidBundleException = Exception("Invalid bundle for auth")
 }
 
-val FirebaseUser.user get() = User(displayName.orEmpty(), email.orEmpty())
+val FirebaseUser.user get() = User(displayName.orEmpty(), email.orEmpty(), AppAuthenticator.AuthMethod.PassLogin)
