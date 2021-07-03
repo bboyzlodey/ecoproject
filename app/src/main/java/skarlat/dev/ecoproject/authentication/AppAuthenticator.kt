@@ -4,9 +4,7 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.User
@@ -28,15 +26,13 @@ class AppAuthenticator @Inject constructor(private val appCache: AppCache, priva
         fireBaseAuth.currentUser?.let { appCache.setUser(it.user) }
     }
 
-    override fun logout() {
+    override suspend fun logout() {
         Timber.d("Logout")
-        GlobalScope.launch {
-            val logguedUser = appCache.userFlow.firstOrNull()
-            Timber.d("loginned user: ${logguedUser}")
-            authStrategy = authStrategies[logguedUser?.authMethod]
-            appCache.clear()
-            authStrategy?.logout()
-        }
+        val logguedUser = appCache.userFlow.firstOrNull()
+        Timber.d("loginned user: ${logguedUser}")
+        authStrategy = authStrategies[logguedUser?.authMethod]
+        appCache.clear()
+        authStrategy?.logout()
     }
 
     override suspend fun register(bundle: Bundle) {

@@ -19,7 +19,7 @@ class AuthManager @Inject constructor(private val authenticator: Authenticator) 
 
     }
 
-    fun logout() {
+    suspend fun logout() {
         authenticator.logout()
     }
 
