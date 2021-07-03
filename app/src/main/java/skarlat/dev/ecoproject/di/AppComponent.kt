@@ -6,8 +6,7 @@ import skarlat.dev.ecoproject.core.AppCache
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppCacheModule::class, AuthModule::class])
+@Component(modules = [AppCacheModule::class])
 interface AppComponent {
     fun getAppCache() : AppCache
-    fun getAuthManager() : AuthManager
 }

@@ -1,22 +1,19 @@
 package skarlat.dev.ecoproject.fragment
 
 import android.util.Patterns
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.EcoTipsApp
-import skarlat.dev.ecoproject.fragment.SplashFragmentDirections
+import skarlat.dev.ecoproject.authentication.AuthManager
 
-class RegistrationViewModel(): BaseViewModel() {
+class RegistrationViewModel /*@Inject constructor(private val authManager: AuthManager)*/ : BaseViewModel() {
+
+    lateinit var authManager: AuthManager
 
     val enableRegisterButton = MutableStateFlow<Boolean>(false)
 
-    private val authManager = EcoTipsApp.appComponent.getAuthManager()
-    private val isAllFieldsValid : Boolean
+    private val isAllFieldsValid: Boolean
         get() = email.matches(Patterns.EMAIL_ADDRESS.toRegex()) && password.length >= Const.MIN_LENGTH_PASSWORD && name.isNotBlank()
 
     var name = ""
@@ -36,15 +33,6 @@ class RegistrationViewModel(): BaseViewModel() {
             field = value
             checkEnablingSignInButton()
         }
-
-    init {
-
-    }
-
-
-    fun onSignWithEmailAndPasswordClicked() {
-        // TODO
-    }
 
     private fun checkEnablingSignInButton() {
         enableRegisterButton.tryEmit(isAllFieldsValid)

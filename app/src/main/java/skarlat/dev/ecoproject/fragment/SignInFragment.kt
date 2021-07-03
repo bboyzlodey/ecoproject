@@ -9,7 +9,6 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.activity.AuthActivity
-import skarlat.dev.ecoproject.authentication.strategy.LoginPasswordStrategy
 import skarlat.dev.ecoproject.databinding.FragmentSignInBinding
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>() {
@@ -22,14 +21,14 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
+        (requireActivity() as AuthActivity).component?.authManager?.let {
+            viewModel.authManager = it
+        }
         binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }
         binding.signIn.setOnClickListener {
-            viewModel.setAuthStrategy(LoginPasswordStrategy())
             viewModel.onSignWithEmailAndPasswordClicked()
         }
         binding.signInGoogle.setOnClickListener {
-            viewModel.setAuthStrategy((requireActivity() as AuthActivity).googleSignInStrategy)
             viewModel.onSignWithGoogleClicked()
         }
         binding.register.setOnClickListener { viewModel.onRegistrationClicked() }
