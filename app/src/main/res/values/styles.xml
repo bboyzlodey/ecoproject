@@ -113,14 +113,19 @@
         <item name="theme">@style/ThemeOverlayFab.Boloto</item>
     </style>
 
+    <style name="FabStyle.NextScreen.Small">
+        <item name="fabSize">mini</item>
+        <item name="srcCompat">@drawable/arrow_small</item>
+    </style>
+
     <style name="FabStyle.PrevScreen">
         <item name="fabSize">mini</item>
-        <item name="srcCompat">@drawable/ic_arrow_back2</item>
+        <item name="srcCompat">@drawable/ic_arrow_back_small</item>
     </style>
 
     <style name="FabStyle.PrevScreen.Unelevated">
         <item name="fabSize">mini</item>
-        <item name="srcCompat">@drawable/ic_arrow_back2</item>
+        <item name="srcCompat">@drawable/ic_arrow_back_small</item>
         <item name="buttonStyle">@style/Widget.MaterialComponents.Button.UnelevatedButton</item>
     </style>
 

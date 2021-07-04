@@ -18,6 +18,7 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
         .itemResourceId(R.layout.card_course)
         .headerResourceId(R.layout.section_of_courses)
         .build()) {
+    //TODO Decorate recyclerView
 
     override fun getContentItemsTotal(): Int {
         return listCourses.size
@@ -31,6 +32,7 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
         courseHolder.header.contentDescription = item.courseNameID
         courseHolder.cardView.setOnClickListener { onCourseClicked.invoke(item) }
         courseHolder.imageCouse.setImageFromAssets(EcoTipsApp.instance.assets, item.pathItemCardImage())
+        courseHolder.fabOpenCourse.setOnClickListener { courseHolder.cardView.callOnClick() }
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {
@@ -61,12 +63,14 @@ class CourseSection(private val listCourses: List<Course>, private val sectionNa
         val smallDescriptiom: TextView
         val cardView: CardView
         val imageCouse: ImageView
+        val fabOpenCourse: View
 
         init {
             header = view.findViewById<View>(R.id.current_title) as TextView
             smallDescriptiom = view.findViewById<View>(R.id.current_small_description) as TextView
             cardView = view.findViewById(R.id.current_course) as CardView
             imageCouse = view.findViewById(R.id.imgCourse) as ImageView
+            fabOpenCourse = view.findViewById(R.id.fabOpenCourse)
         }
     }
 }
