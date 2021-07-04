@@ -117,11 +117,11 @@ dependencies {
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
     //noinspection GradleCompatible
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.jackandphantom.android:customtogglebutton:1.0.1'
     implementation "com.android.support:design:${supportLibrary}"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.material:material:1.4.0-beta01'
+    implementation 'com.google.android.material:material:1.4.0'
     // Custom TAB from https://github.com/ogaclejapan/SmartTabLayout
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     //Optional: see how to use the utility.
@@ -131,8 +131,7 @@ dependencies {
     implementation 'com.github.upstarts:ejkit:1.0.1'
     // Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.2.0'
-    implementation "androidx.core:core-ktx:1.5.0"
+    implementation "androidx.core:core-ktx:1.6.0"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
