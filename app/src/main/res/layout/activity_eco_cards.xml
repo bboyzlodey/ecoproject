@@ -47,25 +47,25 @@
 
             <TextView
                 android:id="@+id/card_title"
+                style="?attr/textAppearanceHeadline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="19dp"
                 android:layout_marginRight="16dp"
                 android:capitalize="sentences"
-                android:fontFamily="@font/bellota_bold"
                 android:textSize="32sp"
                 tools:text="Сберегаем электроэнергию"
                 />
 
             <TextView
                 android:id="@+id/card_category"
+                style="?attr/textAppearanceCaption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="16dp"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/colorGrey"
                 android:textSize="16sp"
                 tools:text="Category"
                 />
@@ -92,12 +92,14 @@
                         android:id="@+id/card_why_const"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Почему это важно?"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/why_it_possible_title"
                         android:textSize="20sp"
                         />
 
                     <TextView
                         android:id="@+id/card_why_shortDescription"
+                        style="?attr/textAppearanceCaption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/card_why_const"
@@ -105,8 +107,8 @@
                         android:ellipsize="marquee"
                         android:marqueeRepeatLimit="3"
                         android:maxLines="3"
-                        android:text="Электроэнергия — один из поставщиков загрязнителей в почву, воду и атмосферу. Такими загрязнителями чаще всего выступают продукты сгорания топлива (уголь, нефть, газ и тд.)."
                         android:textSize="14sp"
+                        tools:text="Электроэнергия — один из поставщиков загрязнителей в почву, воду и атмосферу. Такими загрязнителями чаще всего выступают продукты сгорания топлива (уголь, нефть, газ и тд.)."
                         />
 
                     <LinearLayout
@@ -119,12 +121,12 @@
 
                         <TextView
                             android:id="@+id/why_readMore_const"
+                            style="?attr/textAppearanceCaption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/bellota_bold"
                             android:text="Читать дальше"
-                            android:textSize="14sp"
+                            android:textColor="@color/colorBolotoText"
                             />
 
                         <ImageView
@@ -140,15 +142,14 @@
             </skarlat.dev.ecoproject.customView.AdviceView>
 
             <TextView
+                style="?attr/textAppearanceHeadline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="@font/bellota_bold"
                 android:text="@string/how_i_can_help"
-                android:textSize="24sp"
                 />
 
             <LinearLayout
@@ -160,20 +161,15 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/start_course"
-                style="@style/ButtonFillStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/button_boloto"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="sans-serif-medium"
                 android:onClick="onBackBtn"
                 android:text="@string/complete_btn"
-                android:textAllCaps="true"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp"
                 />
 
         </LinearLayout>
