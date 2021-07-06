@@ -14,10 +14,12 @@ import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.ContentNavigationDirections
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
+import skarlat.dev.ecoproject.activity.HomeActivity
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.network.FirebaseAPI
+import timber.log.Timber
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
@@ -44,9 +46,13 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         binding.cardsByCategory.adapter = adapter
         binding.logoutButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                EcoTipsApp.appComponent.getAuthManager().logout()
-                findNavController().navigate(ContentNavigationDirections.globalActionToMain())
-                requireActivity().finishAfterTransition()
+                try {
+                    (requireActivity() as HomeActivity).authManager.logout()
+                    findNavController().navigate(ContentNavigationDirections.globalActionToMain())
+                    requireActivity().finishAfterTransition()
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
             }
         }
     }

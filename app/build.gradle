@@ -19,8 +19,8 @@ android {
         applicationId "skarlat.dev.ecoproject"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,6 +45,10 @@ android {
 
 ext {
     supportLibrary = "27.0.2"
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
@@ -82,11 +86,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //  FireBase
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'      // Google Login (Auth.)
-    // Reactive
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0' // TODO delete dependency
+    // Reactive // TODO Delete RxJava Dependency
     implementation "io.reactivex.rxjava2:rxjava:2.2.20"
     implementation "io.reactivex.rxjava3:rxjava:3.0.10"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
@@ -100,20 +105,23 @@ dependencies {
 
 
     //Dagger
-    implementation 'com.google.dagger:dagger:2.35'
-    kapt 'com.google.dagger:dagger-compiler:2.35'
-    
+    implementation 'com.google.dagger:dagger:2.37'
+    kapt 'com.google.dagger:dagger-compiler:2.37'
+    implementation 'com.google.dagger:dagger-android:2.37'
+    kapt 'com.google.dagger:dagger-android-processor:2.37'
+
+
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
     //noinspection GradleCompatible
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.jackandphantom.android:customtogglebutton:1.0.1'
     implementation "com.android.support:design:${supportLibrary}"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.material:material:1.4.0-beta01'
+    implementation 'com.google.android.material:material:1.4.0'
     // Custom TAB from https://github.com/ogaclejapan/SmartTabLayout
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     //Optional: see how to use the utility.
@@ -123,8 +131,7 @@ dependencies {
     implementation 'com.github.upstarts:ejkit:1.0.1'
     // Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.2.0'
-    implementation "androidx.core:core-ktx:1.5.0"
+    implementation "androidx.core:core-ktx:1.6.0"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 

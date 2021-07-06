@@ -156,6 +156,7 @@
                         android:id="@+id/card_why_const"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
                         android:text="@string/no_account_ask"
                         android:textSize="16sp"
                         />
@@ -175,7 +176,7 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/bellota_bold"
                             android:text="@string/register"
-                            android:textColor="@color/colorBolotoButton"
+                            android:textColor="@color/colorBolotoText"
                             android:textSize="14sp"
                             />
 
@@ -198,7 +199,7 @@
                 android:layout_marginBottom="@dimen/default_margin"
                 android:text="@string/google_sign_in"
                 android:theme="@style/ThemeOverlayGoogleSignIn"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/endGuideLine"
                 app:layout_constraintStart_toStartOf="@id/startGuideLine"

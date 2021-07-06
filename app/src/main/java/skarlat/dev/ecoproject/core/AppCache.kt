@@ -31,23 +31,11 @@ class AppCache @Inject constructor(private val context: Context) {
     val userFlow: Flow<User>
         get() {
             return context.dataStore.data.map { it.user }
-            /*flow {
-                    context.dataStore.data.collectLatest { value ->
-                        Timber.d("userFLow.emit new user")
-                        emit(value.user)
-                    }
-                }*/
         }
 
     val userCountFlow: Flow<Int>
         get() {
-            return context.dataStore.data.map { it.userCount }/* flow {
-                emit(0)
-                *//*context.dataStore.data.collectLatest { value ->
-                    Timber.d("userCountFLow.emit new userCount")
-                    emit(0)
-                }*//*
-            }*/
+            return context.dataStore.data.map { it.userCount }
         }
 
     val userProgressFlow: Flow<Int>

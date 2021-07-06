@@ -9,112 +9,128 @@
     android:fillViewport="true"
     >
 
-    <LinearLayout
-        android:id="@+id/sign_in_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="16dp"
         >
 
-        <TextView
-            style="?attr/textAppearanceHeadline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="@string/registration"
-            />
-
-        <TextView
-            style="?attr/textAppearanceCaption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/welcome_to_ecotips"
-            />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
+            android:id="@+id/sign_in_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorBolotoButton"
-            android:hint="@string/name"
-            app:boxStrokeColor="@color/colorBolotoButton"
-            app:errorEnabled="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintTop_toTopOf="parent"
             >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_name"
-                android:layout_width="match_parent"
+            <TextView
+                style="?attr/textAppearanceHeadline5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:foregroundTint="@color/colorBolotoButton"
-                android:inputType="textCapWords"
-                android:singleLine="true"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorBolotoButton"
-            android:hint="@string/email"
-            app:boxStrokeColor="@color/colorBolotoButton"
-            app:errorEnabled="true"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:foregroundTint="@color/colorBolotoButton"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/passwd"
-            app:boxStrokeColor="@color/colorBolotoButton"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_passwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:layout_marginTop="13dp"
+                android:text="@string/registration"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                style="?attr/textAppearanceCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/welcome_to_ecotips"
+                />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/submit"
-            style="@style/FabStyle.NextScreen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/colorBolotoButton"
+                android:hint="@string/name"
+                app:boxStrokeColor="@color/colorBolotoButton"
+                app:errorEnabled="true"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foregroundTint="@color/colorBolotoButton"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/colorBolotoButton"
+                android:hint="@string/email"
+                app:boxStrokeColor="@color/colorBolotoButton"
+                app:errorEnabled="true"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foregroundTint="@color/colorBolotoButton"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/passwd"
+                app:boxStrokeColor="@color/colorBolotoButton"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_passwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/submit"
+                style="@style/FabStyle.NextScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                />
+
+
+        </LinearLayout>
 
         <skarlat.dev.ecoproject.customView.AdviceView
             android:id="@+id/sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@id/sign_in_google"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_layout"
+            app:layout_constraintVertical_bias="1"
             >
 
             <LinearLayout
@@ -128,6 +144,7 @@
                     android:id="@+id/card_why_const"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:text="@string/do_you_have_account_ask"
                     />
 
@@ -146,7 +163,7 @@
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/bellota_bold"
                         android:text="@string/fui_sign_in_default"
-                        android:textColor="@color/colorBolotoButton"
+                        android:textColor="@color/colorBolotoText"
                         android:textSize="14sp"
                         />
 
@@ -168,12 +185,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/google_sign_in"
             android:textAllCaps="false"
             android:theme="@style/ThemeOverlayGoogleSignIn"
-            android:visibility="gone"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

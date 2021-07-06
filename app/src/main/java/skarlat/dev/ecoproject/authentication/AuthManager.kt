@@ -1,24 +1,18 @@
-package skarlat.dev.ecoproject.authmanager
+package skarlat.dev.ecoproject.authentication
 
 import android.os.Bundle
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.network.Authenticator
-import skarlat.dev.ecoproject.network.FireBaseAuthenticator
 import javax.inject.Inject
 
 class AuthManager @Inject constructor(private val authenticator: Authenticator) {
 
-    suspend fun isUserAuthored(): Boolean {
-        return authenticator.currentUser != null
-    }
-
     suspend fun authenticateWithGoogleAccount() {
-        authenticator.authenticate(Bundle().apply { putSerializable(Const.AUTH_METHOD, FireBaseAuthenticator.AuthMethod.Google) })
+        authenticator.authenticate(Bundle().apply { putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.Google.name) })
     }
 
     suspend fun authenticateWithEmailAndPassword(password: String, email: String) {
         authenticator.authenticate(Bundle().apply {
-            putSerializable(Const.AUTH_METHOD, FireBaseAuthenticator.AuthMethod.PassLogin)
+            putSerializable(Const.AUTH_METHOD, AppAuthenticator.AuthMethod.PassLogin.name)
             putSerializable(Const.AUTH_PASS, password)
             putSerializable(Const.AUTH_LOGIN, email)
         })

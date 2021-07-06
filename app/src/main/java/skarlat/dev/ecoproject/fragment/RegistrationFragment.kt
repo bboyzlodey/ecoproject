@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.activity.AuthActivity
 import skarlat.dev.ecoproject.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
@@ -21,6 +22,9 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AuthActivity).component?.authManager?.let {
+            viewModel.authManager = it
+        }
         binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
         binding.userName.doAfterTextChanged { text -> viewModel.name = text.toString() }
         binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }

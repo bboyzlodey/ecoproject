@@ -17,7 +17,7 @@ import skarlat.dev.ecoproject.eitorjs.ArticleEcoTipsBlocks;
 import skarlat.dev.ecoproject.eitorjs.ArticleImageData;
 import skarlat.dev.ecoproject.eitorjs.ArticleQuoteData;
 import skarlat.dev.ecoproject.includes.database.AppDatabase;
-import skarlat.dev.ecoproject.network.Authenticator;
+import skarlat.dev.ecoproject.authentication.Authenticator;
 import timber.log.Timber;
 import work.upstarts.editorjskit.EJKit;
 import work.upstarts.editorjskit.models.EJAbstractCustomBlock;

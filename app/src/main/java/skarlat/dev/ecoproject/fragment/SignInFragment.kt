@@ -6,8 +6,10 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.activity.AuthActivity
 import skarlat.dev.ecoproject.databinding.FragmentSignInBinding
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>() {
@@ -20,15 +22,18 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
+        (requireActivity() as AuthActivity).component?.authManager?.let {
+            viewModel.authManager = it
+        }
         binding.userPasswd.doAfterTextChanged { text -> viewModel.password = text.toString() }
-        binding.signIn.setOnClickListener { viewModel.onSignWithEmailAndPasswordClicked() }
-        binding.signInGoogle.setOnClickListener { viewModel.onSignWithGoogleClicked() }
+        binding.userEmail.doAfterTextChanged { text -> viewModel.email = text.toString() }
+        binding.signIn.setOnClickListener {
+            viewModel.onSignWithEmailAndPasswordClicked()
+        }
+        binding.signInGoogle.setOnClickListener {
+            viewModel.onSignWithGoogleClicked()
+        }
         binding.register.setOnClickListener { viewModel.onRegistrationClicked() }
-    }
-
-    override fun onStart() {
-        super.onStart()
         launchMainCoroutine()
     }
 
@@ -40,7 +45,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
                 }
             }
             launch {
-                viewModel.enableSignInButton.collectLatest {
+                viewModel.enableSignInButton.collect {
                     binding.signIn.isEnabled = it
                 }
             }

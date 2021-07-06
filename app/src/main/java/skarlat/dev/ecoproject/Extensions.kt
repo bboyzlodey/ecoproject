@@ -15,11 +15,14 @@ import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
 
@@ -94,4 +97,6 @@ fun Context.getQuantityStringZero(@PluralsRes plurals: Int, @StringRes zeroStrin
     }
 }
 
-//fun RecyclerView.ViewHolder.getColor(@ColorRes colorId: Int) = ContextCompat.getColor(itemView.context, colorId)
+fun ViewBinding.showSnackBar(message: String) {
+    Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show()
+}
