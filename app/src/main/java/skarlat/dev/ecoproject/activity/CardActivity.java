@@ -62,6 +62,8 @@ public class CardActivity extends AppCompatActivity {
         textView.setText(capitalize(ecoCard.title));
         textView = findViewById(R.id.card_category);
         textView.setText(ecoCard.description);
+        binding.cardWhyShortDescription.setText(ecoCard.fullDescription);
+        binding.cardWhyShortDescription.setSelected(true);
         initiList();
         linearLayout = findViewById(R.id.card_linear_layout);
         Iterator iterator = ecoSoviets.iterator();
