@@ -10,6 +10,7 @@ import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
 import skarlat.dev.ecoproject.core.AppCache
+import skarlat.dev.ecoproject.network.FirebaseAPI
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,7 +24,10 @@ class AppAuthenticator @Inject constructor(private val appCache: AppCache, priva
     }
 
     private fun processRegistrationSuccess() {
-        fireBaseAuth.currentUser?.let { appCache.setUser(it.user) }
+        fireBaseAuth.currentUser?.let {
+            FirebaseAPI.increaseCountOfUsers()
+            appCache.setUser(it.user)
+        }
     }
 
     override suspend fun logout() {
