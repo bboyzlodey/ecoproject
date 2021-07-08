@@ -88,7 +88,7 @@ public class CardActivity extends AppCompatActivity {
     }
 
     private void log(String message) {
-        Log.d(TAG, message);
+        Log.i(TAG, message);
     } // Для дебагинга и логинга
 
     protected void initiList() {

@@ -190,7 +190,7 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
     }
 
     private fun signInGoogle() {
-        Log.d(TAG, "signInGoogle")
+        Log.i(TAG, "signInGoogle")
         mFirebaseAuth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -213,7 +213,7 @@ class RegistrationActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFa
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         mFirebaseAuth!!.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
-                    Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful)
+                    Log.i(TAG, "signInWithCredential:onComplete:" + task.isSuccessful)
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.

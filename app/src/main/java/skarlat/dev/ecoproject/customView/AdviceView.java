@@ -62,12 +62,12 @@ public class AdviceView extends FrameLayout {
 
     private void logs() {
 //		Log.d("CustomView", "canvas weight: " + canvas.getWidth() + " high: " + canvas.getHeight());
-        Log.d("CustomView", "getX: " + getX() + " getY()" + getY());
-        Log.d("CustomView", "getPivotX: " + getPivotX() + "getPivotY: " + getPivotY());
-        Log.d("CustomView", "width: " + getWidth() + "\nheight: " + getHeight());
-        Log.d("CustomView", "Measured width: " + getMeasuredWidth() + "\nMeasured height: "
-                + getMeasuredHeight());
-        Log.d("CustomView", "pxFromDp(8) : " + pxFromDp(8));
+//        Log.d("CustomView", "getX: " + getX() + " getY()" + getY());
+//        Log.d("CustomView", "getPivotX: " + getPivotX() + "getPivotY: " + getPivotY());
+//        Log.d("CustomView", "width: " + getWidth() + "\nheight: " + getHeight());
+//        Log.d("CustomView", "Measured width: " + getMeasuredWidth() + "\nMeasured height: "
+//                + getMeasuredHeight());
+//        Log.d("CustomView", "pxFromDp(8) : " + pxFromDp(8));
     }
 
     /**

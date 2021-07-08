@@ -15,9 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
+        android:debuggable="false"
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl"
-        tools:targetApi="m">
+        tools:targetApi="m"
+        tools:ignore="HardcodedDebugMode">
         <activity android:name=".activity.WhyActivity" />
         <activity
             android:name=".activity.RemindPasswordActivity"
