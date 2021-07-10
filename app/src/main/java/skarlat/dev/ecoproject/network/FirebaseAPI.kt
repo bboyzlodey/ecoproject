@@ -14,7 +14,7 @@ class FirebaseAPI {
         private const val usersCountFieldName = "countUsers"
 
 
-        fun getUsersDocument(callback: (QuerySnapshot) -> Unit) {
+        private fun getUsersDocument(callback: (QuerySnapshot) -> Unit) {
             Firebase
                     .firestore
                     .collection(Const.ECO_TIPS_COLLECTION)
@@ -40,6 +40,7 @@ class FirebaseAPI {
             return 0
         }
 
+        @JvmStatic
         fun increaseCountOfUsers() {
             getUsersDocument { querySnapshot ->
                 val newCount = extractCountOfUsers(querySnapshot).inc()
