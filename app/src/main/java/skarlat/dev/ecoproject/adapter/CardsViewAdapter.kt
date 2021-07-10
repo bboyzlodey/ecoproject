@@ -65,7 +65,7 @@ class CardsViewAdapter(private val cardClickListener: (View) -> Unit) : Recycler
         }
         holderCourseCard.cardView.tag = ecoCard
 
-        val numberDrawableId = holderCourseCard.cardView?.context?.resources?.getIdentifier("ic_card_number_${position + 1}", "drawable", "skarlat.dev.ecoproject")
+        val numberDrawableId = holderCourseCard.cardView?.context?.resources?.getIdentifier("ic_card_number_${position}", "drawable", "skarlat.dev.ecoproject")
                 ?: R.drawable.ic_card_number
         val numberDrawable = holderCourseCard.cardView?.context?.getDrawable(numberDrawableId)
         numberDrawable?.let { holderCourseCard.numberIcon.setImageDrawable(it) }
