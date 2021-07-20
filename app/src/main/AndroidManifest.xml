@@ -5,6 +5,11 @@
     package="skarlat.dev.ecoproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+        </intent>
+    </queries>
 
     <application
         android:name=".EcoTipsApp"
