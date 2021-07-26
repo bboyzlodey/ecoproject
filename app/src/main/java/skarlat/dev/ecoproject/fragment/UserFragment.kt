@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import skarlat.dev.ecoproject.BuildConfig
 import skarlat.dev.ecoproject.ContentNavigationDirections
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
@@ -19,6 +20,7 @@ import skarlat.dev.ecoproject.adapter.CategoryAdapter
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
 import skarlat.dev.ecoproject.network.FirebaseAPI
+import skarlat.dev.ecoproject.utils.IntentHelper
 import timber.log.Timber
 import java.io.IOException
 import java.net.MalformedURLException
@@ -42,18 +44,28 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         val adapter = CategoryAdapter(context, cards)
         val itemDecoration = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_category))
+        binding.feedback.setOnClickListener { openSendIntent() }
         binding.cardsByCategory.addItemDecoration(itemDecoration)
         binding.cardsByCategory.adapter = adapter
         binding.logoutButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    (requireActivity() as HomeActivity).authManager.logout()
+                    (requireActivity()  as HomeActivity).authManager.logout()
                     findNavController().navigate(ContentNavigationDirections.globalActionToMain())
                     requireActivity().finishAfterTransition()
                 } catch (e: Exception) {
                     Timber.e(e)
                 }
             }
+        }
+    }
+
+    private fun openSendIntent() {
+        val sendIntent = IntentHelper.writeFromTo("${binding.userName.text} из EcoTips ${BuildConfig.VERSION_NAME}", getString(R.string.contact_person_email))
+        if (sendIntent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(sendIntent)
+        } else {
+            // TODO: Show alert
         }
     }
 

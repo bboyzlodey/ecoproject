@@ -66,7 +66,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val items = mutableListOf<Item>()
         EcoTipsApp.getDatabase().courseDao().allIsActive.run {
             if (isNotEmpty()) {
-                items.add(Item.Header(resources.getString(R.string.current_courses)))
+                if (size > 1) {
+                    items.add(Item.Header(resources.getString(R.string.current_courses)))
+                } else {
+                    items.add(Item.Header(resources.getString(R.string.current_course)))
+                }
                 items.addAll(map { Item.Card(it) })
             }
         }

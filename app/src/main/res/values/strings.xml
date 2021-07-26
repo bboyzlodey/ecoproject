@@ -28,7 +28,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="aviable_courses">Доступные курсы</string>
-    <string name="current_courses">Текущий курс</string>
+    <string name="current_course">Текущий курс</string>
+    <string name="current_courses">Текущий курсы</string>
     <string name="finished_courses">Пройденные курсы</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
@@ -75,4 +76,6 @@
     <string name="logout">Выйти</string>
     <string name="positive_text_for_user">Отличный день для того, чтобы узнать что-то новое!</string>
     <string name="why_it_possible_title">Почему это важно?</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="contact_person_email">bboyzlodey@gmail.com</string>
 </resources>

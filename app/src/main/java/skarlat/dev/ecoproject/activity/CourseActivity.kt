@@ -31,7 +31,9 @@ class CourseActivity : AppCompatActivity() {
         binding!!.recycleCards.adapter = adapter
         binding!!.courseAvatar.setImageFromAssets(assets, currentCourse!!.pathBarImage())
         binding!!.recycleCards.addItemDecoration(ConnectionCardDecorator())
-
+        if (currentCourse?.isActive == Course.Status.CLOSED.ordinal) {
+            markCourseAsCurrent()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,6 +86,13 @@ class CourseActivity : AppCompatActivity() {
     private fun markCourseAsFinished() {
         currentCourse?.let {
             it.isActive = FINISHED.ordinal
+            val disposable = EcoTipsApp.getDatabase().courseDao().update(it)
+        }
+    }
+
+    private fun markCourseAsCurrent() {
+        currentCourse?.let {
+            it.isActive = Course.Status.CURRENT.ordinal
             val disposable = EcoTipsApp.getDatabase().courseDao().update(it)
         }
     }

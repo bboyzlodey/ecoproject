@@ -282,6 +282,19 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/feedback"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:text="@string/feedback"
+        android:theme="@style/ProfileThemeOverlay"
+        app:layout_constraintBottom_toTopOf="@id/logoutButton"
+        app:layout_constraintEnd_toEndOf="@id/guideLineEnd"
+        app:layout_constraintStart_toStartOf="@id/guideLineStart"
+        />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
