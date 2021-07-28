@@ -7,9 +7,9 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.serialization.Serializable
 import skarlat.dev.ecoproject.Const
-import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
-import skarlat.dev.ecoproject.core.AppCache
+import skarlat.dev.ecoproject.data.AppCache
+import skarlat.dev.ecoproject.data.User
 import skarlat.dev.ecoproject.network.FirebaseAPI
 import timber.log.Timber
 import javax.inject.Inject

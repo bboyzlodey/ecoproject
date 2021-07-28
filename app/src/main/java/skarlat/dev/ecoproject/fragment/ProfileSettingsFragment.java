@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import skarlat.dev.ecoproject.Const;
-import skarlat.dev.ecoproject.activity.AuthActivity;
-import skarlat.dev.ecoproject.core.SettingsManager;
+import skarlat.dev.ecoproject.presentation.auth.AuthActivity;
+import skarlat.dev.ecoproject.data.SettingsManager;
 import skarlat.dev.ecoproject.databinding.FragmentSettingsBinding;
 
 public class ProfileSettingsFragment extends Fragment {

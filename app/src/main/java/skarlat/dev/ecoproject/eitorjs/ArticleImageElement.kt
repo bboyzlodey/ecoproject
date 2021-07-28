@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.article_image.view.*
 import kotlinx.android.synthetic.main.article_quote.view.*
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.show
+import skarlat.dev.ecoproject.utils.show
 import work.upstarts.editorjskit.environment.inflate
 import work.upstarts.editorjskit.models.EJCustomBlock
 import work.upstarts.editorjskit.models.data.EJData

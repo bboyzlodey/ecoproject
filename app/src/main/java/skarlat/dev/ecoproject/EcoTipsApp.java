@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import skarlat.dev.ecoproject.di.AppCacheModule;
+import skarlat.dev.ecoproject.di.modules.AppCacheModule;
 import skarlat.dev.ecoproject.di.AppComponent;
 import skarlat.dev.ecoproject.di.DaggerAppComponent;
 import skarlat.dev.ecoproject.eitorjs.ArticleAdviceLinkData;

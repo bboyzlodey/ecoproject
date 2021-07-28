@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/splash"
-        android:name="skarlat.dev.ecoproject.fragment.SplashFragment"
+        android:name="skarlat.dev.ecoproject.presentation.launch.SplashFragment"
         tools:layout="@layout/fragment_splash"
         >
         <action
@@ -27,13 +27,13 @@
 
     <activity
         android:id="@+id/signInActivity"
-        android:name="skarlat.dev.ecoproject.activity.AuthActivity"
+        android:name="skarlat.dev.ecoproject.presentation.auth.AuthActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in"
         />
     <activity
         android:id="@+id/homeActivity"
-        android:name="skarlat.dev.ecoproject.activity.HomeActivity"
+        android:name="skarlat.dev.ecoproject.presentation.home.HomeActivity"
         android:label="activity_home"
         app:popUpToInclusive="true"
         tools:layout="@layout/activity_home"

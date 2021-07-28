@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="skarlat.dev.ecoproject.fragment.SignInFragment"
+        android:name="skarlat.dev.ecoproject.presentation.auth.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in"
         >
@@ -29,13 +29,13 @@
 
     <activity
         android:id="@+id/homeActivity2"
-        android:name="skarlat.dev.ecoproject.activity.HomeActivity"
+        android:name="skarlat.dev.ecoproject.presentation.home.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home"
         />
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="skarlat.dev.ecoproject.fragment.RegistrationFragment"
+        android:name="skarlat.dev.ecoproject.presentation.auth.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/fragment_registration"
         >

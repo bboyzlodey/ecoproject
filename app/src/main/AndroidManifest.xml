@@ -29,28 +29,25 @@
         tools:ignore="HardcodedDebugMode"
         tools:replace="android:supportsRtl"
         tools:targetApi="m">
-        <activity android:name=".activity.WhyActivity" />
+        <activity android:name=".presentation.card_verbose.WhyActivity" />
         <activity
             android:name=".activity.RemindPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RegistrationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.AuthActivity"
+            android:name=".presentation.auth.AuthActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activity.CardActivity"
+            android:name=".presentation.card.CardActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".presentation.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.CourseActivity"
+            android:name=".presentation.course.CourseActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".presentation.launch.MainActivity"
             android:theme="@style/AppTheme.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

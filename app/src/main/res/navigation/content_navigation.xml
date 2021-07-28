@@ -8,7 +8,7 @@
     >
     <fragment
         android:id="@+id/homeFragment"
-        android:name="skarlat.dev.ecoproject.fragment.HomeFragment"
+        android:name="skarlat.dev.ecoproject.presentation.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"
         >
@@ -23,13 +23,13 @@
     </fragment>
     <activity
         android:id="@+id/courseActivity"
-        android:name="skarlat.dev.ecoproject.activity.CourseActivity"
+        android:name="skarlat.dev.ecoproject.presentation.course.CourseActivity"
         android:label="activity_course_card"
         tools:layout="@layout/activity_course_card"
         />
     <fragment
         android:id="@+id/userFragment"
-        android:name="skarlat.dev.ecoproject.fragment.UserFragment"
+        android:name="skarlat.dev.ecoproject.presentation.profile.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user"
         />
@@ -41,7 +41,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="skarlat.dev.ecoproject.activity.MainActivity"
+        android:name="skarlat.dev.ecoproject.presentation.launch.MainActivity"
         tools:layout="@layout/activity_launch"
         />
 </navigation>

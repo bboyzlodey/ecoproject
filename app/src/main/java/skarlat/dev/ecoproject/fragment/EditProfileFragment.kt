@@ -13,9 +13,9 @@ import com.google.firebase.auth.FirebaseUser
 import io.reactivex.Completable
 import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.R
-import skarlat.dev.ecoproject.User
-import skarlat.dev.ecoproject.addDisposable
-import skarlat.dev.ecoproject.core.SettingsManager
+import skarlat.dev.ecoproject.utils.addDisposable
+import skarlat.dev.ecoproject.data.SettingsManager
+import skarlat.dev.ecoproject.data.User
 import skarlat.dev.ecoproject.databinding.FragmentEditProfileBinding
 import java.util.*
 import java.util.concurrent.TimeUnit

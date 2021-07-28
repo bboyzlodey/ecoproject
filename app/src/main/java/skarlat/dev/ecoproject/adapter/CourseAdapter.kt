@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.includes.dataclass.Course
-import skarlat.dev.ecoproject.inflate
-import skarlat.dev.ecoproject.setImageFromAssets
+import skarlat.dev.ecoproject.utils.inflate
+import skarlat.dev.ecoproject.utils.setImageFromAssets
 
 class CourseAdapter(private val onCourseClicked: (Course) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

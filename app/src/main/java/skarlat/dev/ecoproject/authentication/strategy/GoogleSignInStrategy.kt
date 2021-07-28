@@ -13,9 +13,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.EcoTipsApp
-import skarlat.dev.ecoproject.User
 import skarlat.dev.ecoproject.authentication.AppAuthenticator
 import skarlat.dev.ecoproject.authentication.AuthError
+import skarlat.dev.ecoproject.data.User
 import timber.log.Timber
 
 class GoogleSignInStrategy(activity: AppCompatActivity) : AuthStrategy() {

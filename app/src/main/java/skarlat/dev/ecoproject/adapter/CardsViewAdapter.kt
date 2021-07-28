@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import skarlat.dev.ecoproject.*
 import skarlat.dev.ecoproject.includes.dataclass.Course
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
+import skarlat.dev.ecoproject.utils.*
 
 
 class CardsViewAdapter(private val cardClickListener: (View) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
