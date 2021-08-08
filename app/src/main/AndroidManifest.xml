@@ -31,9 +31,6 @@
         tools:targetApi="m">
         <activity android:name=".presentation.card_verbose.WhyActivity" />
         <activity
-            android:name=".activity.RemindPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.auth.AuthActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

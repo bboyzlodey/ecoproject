@@ -19,7 +19,7 @@ import skarlat.dev.ecoproject.presentation.home.HomeActivity
 import skarlat.dev.ecoproject.adapter.CategoryAdapter
 import skarlat.dev.ecoproject.databinding.FragmentUserBinding
 import skarlat.dev.ecoproject.includes.dataclass.EcoCard
-import skarlat.dev.ecoproject.network.FirebaseAPI
+import skarlat.dev.ecoproject.data.FirebaseAPI
 import skarlat.dev.ecoproject.presentation.base.BaseFragment
 import skarlat.dev.ecoproject.utils.IntentHelper
 import timber.log.Timber

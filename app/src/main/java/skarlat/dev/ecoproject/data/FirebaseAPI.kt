@@ -1,5 +1,5 @@
 
-package skarlat.dev.ecoproject.network
+package skarlat.dev.ecoproject.data
 
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.Source
@@ -12,7 +12,6 @@ class FirebaseAPI {
 
     companion object {
         private const val usersCountFieldName = "countUsers"
-
 
         private fun getUsersDocument(callback: (QuerySnapshot) -> Unit) {
             Firebase

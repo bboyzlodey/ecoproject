@@ -10,7 +10,7 @@ import skarlat.dev.ecoproject.Const
 import skarlat.dev.ecoproject.authentication.strategy.AuthStrategy
 import skarlat.dev.ecoproject.data.AppCache
 import skarlat.dev.ecoproject.data.User
-import skarlat.dev.ecoproject.network.FirebaseAPI
+import skarlat.dev.ecoproject.data.FirebaseAPI
 import timber.log.Timber
 import javax.inject.Inject
 

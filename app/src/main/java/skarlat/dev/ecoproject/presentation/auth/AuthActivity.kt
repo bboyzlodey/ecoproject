@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.R
 import skarlat.dev.ecoproject.databinding.ActivitySignInBinding
 import skarlat.dev.ecoproject.di.delegates.provideComponent
+import skarlat.dev.ecoproject.utils.DebugCoroutine
 import skarlat.dev.ecoproject.utils.showSnackBar
 import timber.log.Timber
 
@@ -29,7 +30,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         lifecycleScope.launchWhenStarted {
-            launch {
+            launch(DebugCoroutine) {
                 viewModel.nextScreen.collectLatest {
                     findNavController(R.id.nav_host).navigate(it)
                     finishAfterTransition()

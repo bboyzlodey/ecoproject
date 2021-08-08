@@ -11,10 +11,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import skarlat.dev.ecoproject.Const
+import skarlat.dev.ecoproject.utils.DebugCoroutine
 import javax.inject.Inject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Const.ECO_TIPS_PREFERENCES)
@@ -43,9 +42,10 @@ class AppCache @Inject constructor(private val context: Context) {
         }
 
     fun setUser(user: User) {
-        GlobalScope.launch {
+        GlobalScope.launch(DebugCoroutine) {
             context.dataStore.edit {
-                it[userKey] = Json.encodeToString(user)
+                it[userKey] =
+                    Json { ignoreUnknownKeys = true }.encodeToString<User>(User.serializer(), user)
             }
         }
     }
@@ -76,7 +76,7 @@ class AppCache @Inject constructor(private val context: Context) {
 
     private val Preferences.user: User
         get() {
-            return Json.decodeFromString(get(userKey) ?: return User.empty)
+            return Json.decodeFromString(User.serializer(), get(userKey) ?: return User.empty)
         }
 
     private val Preferences.userCount: Int

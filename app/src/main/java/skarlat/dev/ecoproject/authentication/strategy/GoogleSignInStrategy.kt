@@ -16,40 +16,41 @@ import skarlat.dev.ecoproject.EcoTipsApp
 import skarlat.dev.ecoproject.authentication.AppAuthenticator
 import skarlat.dev.ecoproject.authentication.AuthError
 import skarlat.dev.ecoproject.data.User
+import skarlat.dev.ecoproject.utils.DebugCoroutine
 import timber.log.Timber
 
 class GoogleSignInStrategy(activity: AppCompatActivity) : AuthStrategy() {
 
     private val gso
         get() = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestProfile()
-                .requestEmail()
-                .build()
+            .requestProfile()
+            .requestEmail()
+            .build()
 
     private val googleSignInClient by lazy { GoogleSignIn.getClient(activity, gso) }
 
     private val signInResultApi = activity.registerForActivityResult(
-            object : ActivityResultContract<Unit, User?>() {
-                override fun createIntent(context: Context, input: Unit?): Intent {
-                    return googleSignInClient.signInIntent
-                }
-
-                override fun parseResult(resultCode: Int, intent: Intent?): User? {
-                    if (Activity.RESULT_OK == resultCode) {
-                        try {
-                            val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
-                            if (!task.isSuccessful) {
-                                errorHandler?.onError(AuthError.Default())
-                            }
-                            return task.result?.user
-                        } catch (e: ApiException) {
-                            errorHandler?.onError(e)
-                        }
-                    }
-                    return null
-                }
-
+        object : ActivityResultContract<Unit, User?>() {
+            override fun createIntent(context: Context, input: Unit?): Intent {
+                return googleSignInClient.signInIntent
             }
+
+            override fun parseResult(resultCode: Int, intent: Intent?): User? {
+                if (Activity.RESULT_OK == resultCode) {
+                    try {
+                        val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
+                        if (!task.isSuccessful) {
+                            errorHandler?.onError(AuthError.Default())
+                        }
+                        return task.result?.user
+                    } catch (e: ApiException) {
+                        errorHandler?.onError(e)
+                    }
+                }
+                return null
+            }
+
+        }
     ) { result ->
         Timber.d("onActivityResult $result")
         result?.let { emmitUserToCache(it) }
@@ -67,11 +68,15 @@ class GoogleSignInStrategy(activity: AppCompatActivity) : AuthStrategy() {
 
 
     private fun emmitUserToCache(user: User) {
-        coroutineScope.launch {
+        coroutineScope.launch(DebugCoroutine) {
             EcoTipsApp.appComponent.getAppCache().setUser(user)
         }
     }
 
     private val GoogleSignInAccount.user
-        get() = User(this.displayName?.substringBefore(" ").orEmpty(), this.email.orEmpty(), AppAuthenticator.AuthMethod.Google)
+        get() = User(
+            this.displayName?.substringBefore(" ").orEmpty(),
+            this.email.orEmpty(),
+            AppAuthenticator.AuthMethod.Google
+        )
 }
