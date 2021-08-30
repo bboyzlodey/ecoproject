@@ -21,7 +21,7 @@ The content, layout and app (Android OS) were created by our [team](#team).
         * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - perform an action when lifecycle state changes
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
         * [Room](https://developer.android.com/jetpack/androidx/releases/room) - store offline cache
-    * [Dagger](https://medium.com/androiddevelopers/dependency-injection-on-android-with-hilt-67b6031e62d) - dependency injection
+    * [Dagger 2](https://dagger.dev/) - dependency injection
     * [KotlinX Serialization](https://github.com/square/moshi) - JSON converter
 * Architecture
     * Some activities architecture: authorization, launch, main, etc. ( with [Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started))
