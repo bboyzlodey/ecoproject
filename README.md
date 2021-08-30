@@ -5,7 +5,7 @@
 
 Application contains tips, which helps to planet. For example, aerator nozzle saves up to 50% of water consumption. This advice is very beneficial for a person, because water consumption is paid by the meter. On the other hand, less resource consumption is a concern for our planet.
 
-The content, layout and app (Android OS) were created by our team.
+The content, layout and app (Android OS) were created by our [team](#team).
 
 ## Project characteristics and tech-stack
 
