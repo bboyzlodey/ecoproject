@@ -1,7 +1,6 @@
 package skarlat.dev.ecoproject.di.delegates
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -18,7 +17,10 @@ fun AppCompatActivity.provideComponent(): ActivityComponentHandler {
 }
 
 class ActivityComponentHandler(activity: AppCompatActivity) : LifecycleObserver {
-    private var component: ActivityComponent? = DaggerActivityComponent.builder().activityModule(ActivityModule(activity)).appComponent(EcoTipsApp.appComponent).build()
+    private var component: ActivityComponent? =
+        DaggerActivityComponent.builder().activityModule(ActivityModule(activity))
+            .appComponent(EcoTipsApp.appComponent).build()
+            .apply { inject(activity) }
 
     init {
         activity.lifecycle.addObserver(this)
