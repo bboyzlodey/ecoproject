@@ -1,4 +1,3 @@
-
 package skarlat.dev.ecoproject.network
 
 import com.google.firebase.firestore.QuerySnapshot
@@ -16,13 +15,14 @@ class FirebaseAPI {
 
         private fun getUsersDocument(callback: (QuerySnapshot) -> Unit) {
             Firebase
-                    .firestore
-                    .collection(Const.ECO_TIPS_COLLECTION)
-                    .get(Source.SERVER)
-                    .addOnSuccessListener(callback)
-                    .addOnCompleteListener {
-                        Timber.tag(Const.TAG).v("FirebaseAPI.getUsersDocument successful: ${it.isSuccessful}")
-                    }
+                .firestore
+                .collection(Const.ECO_TIPS_COLLECTION)
+                .get(Source.SERVER)
+                .addOnSuccessListener(callback)
+                .addOnCompleteListener {
+                    Timber.tag(Const.TAG)
+                        .v("FirebaseAPI.getUsersDocument successful: ${it.isSuccessful}")
+                }
         }
 
         @JvmStatic
@@ -45,10 +45,13 @@ class FirebaseAPI {
             getUsersDocument { querySnapshot ->
                 val newCount = extractCountOfUsers(querySnapshot).inc()
                 querySnapshot
-                        .documents[0]
-                        .reference
-                        .update(hashMapOf(usersCountFieldName to newCount as Any))
-                        .addOnCompleteListener { Timber.tag(Const.TAG).v("FirebaseAPI.increaseCountOfUsers successful: ${it.isSuccessful}") }
+                    .documents[0]
+                    .reference
+                    .update(hashMapOf(usersCountFieldName to newCount as Any))
+                    .addOnCompleteListener {
+                        Timber.tag(Const.TAG)
+                            .v("FirebaseAPI.increaseCountOfUsers successful: ${it.isSuccessful}")
+                    }
             }
         }
     }

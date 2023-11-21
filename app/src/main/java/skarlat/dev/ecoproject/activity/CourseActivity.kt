@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import skarlat.dev.ecoproject.*
 import skarlat.dev.ecoproject.adapter.CardsViewAdapter
 import skarlat.dev.ecoproject.databinding.ActivityCourseCardBinding
@@ -18,14 +22,13 @@ class CourseActivity : AppCompatActivity() {
     private var ecoCards: List<EcoCard>? = null
     private var currentCourse: Course? = null
     private val REQUST = 1
-    private var binding: ActivityCourseCardBinding? = null
+    private val binding: ActivityCourseCardBinding by viewBinding()
     private var adapter: CardsViewAdapter? = null
 
     // TODO Refactor it
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCourseCardBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         adapter = CardsViewAdapter { view: View -> openCard(view) }
         updateData()
         binding!!.recycleCards.adapter = adapter
@@ -65,35 +68,38 @@ class CourseActivity : AppCompatActivity() {
         } else {
             currentCard.setStatus(EcoCard.Status.WATCHED)
             nextCard?.setStatus(EcoCard.Status.OPENED)
-
-            addDisposable(
-                    EcoTipsApp.getDatabase().cardsDao().update(currentCard)
-                            .IOSchedulers
-                            .subscribe { })
+            updateCard(currentCard)
             startActivityForResult(intent, REQUST)
         }
         if (nextCard == null) {
             markCourseAsFinished()
         } else {
-            addDisposable(
-                    EcoTipsApp.getDatabase().cardsDao().update(nextCard)
-                            .IOSchedulers
-                            .subscribe { })
+            updateCard(nextCard)
         }
         return null
     }
 
+    private fun updateCard(card: EcoCard?) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            EcoTipsApp.getDatabase().cardsDao().update(card)
+        }
+    }
+
     private fun markCourseAsFinished() {
         currentCourse?.let {
-            it.isActive = FINISHED.ordinal
-            val disposable = EcoTipsApp.getDatabase().courseDao().update(it)
+            lifecycleScope.launch {
+                it.isActive = FINISHED.ordinal
+                EcoTipsApp.getDatabase().courseDao().update(it)
+            }
         }
     }
 
     private fun markCourseAsCurrent() {
         currentCourse?.let {
-            it.isActive = Course.Status.CURRENT.ordinal
-            val disposable = EcoTipsApp.getDatabase().courseDao().update(it)
+            lifecycleScope.launch {
+                it.isActive = Course.Status.CURRENT.ordinal
+                EcoTipsApp.getDatabase().courseDao().update(it)
+            }
         }
     }
 
